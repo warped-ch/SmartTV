@@ -9,6 +9,11 @@
     <string name="menu_bouquets">Bouquets</string>
     <string name="menu_settings">Settings</string>
 
+    <string name="pref_category_title_receiver">Receiver</string>
+    <string name="pref_title_receiver_type">Receiver type</string>
+    <string name="pref_title_receiver_host_ip">Hostname or IP</string>
+    <string name="pref_summary_empty">empty</string>
+
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="receiver_type">
+        <item>Dreambox 7025(+)</item>
+        <item>Dreambox 500 HD (v2)</item>
+        <item>Dreambox 800 HD PVR</item>
+        <item>Dreambox 800 HD se (v2)</item>
+        <item>Dreambox 820 HD</item>
+        <item>Dreambox 8000 HD PVR</item>
+        <item>Dreambox 7020 HD (v2)</item>
+        <item>Dreambox 7080 HD</item>
+    </string-array>
+
+    <string-array name="receiver_type_values">
+        <item>Dreambox7025</item>
+        <item>Dreambox500HD</item>
+        <item>Dreambox800HDPVR</item>
+        <item>Dreambox800HDse</item>
+        <item>Dreambox820HD</item>
+        <item>Dreambox8000HDPVR</item>
+        <item>Dreambox7020HD</item>
+        <item>Dreambox7080HD</item>
+    </string-array>
+</resources>

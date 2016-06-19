@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_category_title_receiver"
+        android:key="pref_key_receiver">
+        <ListPreference
+            android:key="pref_key_receiver_type"
+            android:title="@string/pref_title_receiver_type"
+            android:entries="@array/receiver_type"
+            android:entryValues="@array/receiver_type_values" />
+        <EditTextPreference
+            android:key="pref_key_receiver_host_ip"
+            android:title="@string/pref_title_receiver_host_ip"
+            android:inputType="text"/>
+    </PreferenceCategory>
+</PreferenceScreen>

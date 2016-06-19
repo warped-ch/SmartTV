@@ -1,6 +1,8 @@
 package org.dev.warped.smarttv;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +18,8 @@ import static timber.log.Timber.DebugTree;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String FRAGMENT_TAG_SETTINGS = "FRAGMENT_TAG_SETTINGS";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,9 @@ public class MainActivity extends AppCompatActivity
         if (BuildConfig.DEBUG) {
             Timber.plant(new DebugTree());
         }
+
+        // Ensures that the application is properly initialized with default settings
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -85,7 +92,7 @@ public class MainActivity extends AppCompatActivity
             // TODO, anwi
         } else if (id == R.id.nav_settings) {
             Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_settings));
-            // TODO, anwi
+            showSettings();
         } else {
             Timber.w("onNavigationItemSelected: invalid item %d selected.", id);
         }
@@ -93,5 +100,13 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showSettings() {
+        SettingsFragment fragment = new SettingsFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_SETTINGS);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
