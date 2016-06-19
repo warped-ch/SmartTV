@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import timber.log.Timber;
+
+import static timber.log.Timber.DebugTree;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -19,6 +22,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initialize Timber
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new DebugTree());
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,7 +77,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Timber.d("onOptionsItemSelected: item %s selected.", getResources().getString(R.string.action_settings));
             return true;
+        }
+        else {
+            Timber.w("onOptionsItemSelected: invalid item %d selected.", id);
         }
 
         return super.onOptionsItemSelected(item);
@@ -80,9 +93,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_bouquets) {
+            Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_bouquets));
             // TODO, anwi
         } else if (id == R.id.nav_settings) {
+            Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_settings));
             // TODO, anwi
+        } else {
+            Timber.w("onNavigationItemSelected: invalid item %d selected.", id);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
