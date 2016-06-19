@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Timber.d("onOptionsItemSelected: item %s selected.", getResources().getString(R.string.action_settings));
+        if (id == R.id.action_todo) {
+            Timber.d("onOptionsItemSelected: item %s selected.", getResources().getString(R.string.action_todo));
             return true;
         }
         else {
