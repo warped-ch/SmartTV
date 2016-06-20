@@ -11,13 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.dev.warped.smarttv.dummy.DummyContent;
+
 import timber.log.Timber;
 
 import static timber.log.Timber.DebugTree;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener {
 
+    private static final String FRAGMENT_TAG_BOUQUETS = "FRAGMENT_TAG_BOUQUETS";
     private static final String FRAGMENT_TAG_SETTINGS = "FRAGMENT_TAG_SETTINGS";
 
     @Override
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_bouquets) {
             Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_bouquets));
-            // TODO, anwi
+            showBouquets();
         } else if (id == R.id.nav_settings) {
             Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_settings));
             showSettings();
@@ -102,11 +106,24 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void showBouquets() {
+        BouquetListFragment fragment = new BouquetListFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUETS);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     private void showSettings() {
         SettingsFragment fragment = new SettingsFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_SETTINGS);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onBouquetListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }

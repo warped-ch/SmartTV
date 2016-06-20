@@ -6,22 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.dev.warped.smarttv.ItemFragment.OnListFragmentInteractionListener;
+import org.dev.warped.smarttv.BouquetListFragment.OnBouquetListFragmentInteractionListener;
 import org.dev.warped.smarttv.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link OnBouquetListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class BouquetListAdapter extends RecyclerView.Adapter<BouquetListAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final OnBouquetListFragmentInteractionListener mListener;
 
-    public BouquetListAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public BouquetListAdapter(List<DummyItem> items, OnBouquetListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -29,7 +29,7 @@ public class BouquetListAdapter extends RecyclerView.Adapter<BouquetListAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.bouquet_list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,7 +45,7 @@ public class BouquetListAdapter extends RecyclerView.Adapter<BouquetListAdapter.
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onBouquetListFragmentInteraction(holder.mItem);
                 }
             }
         });
