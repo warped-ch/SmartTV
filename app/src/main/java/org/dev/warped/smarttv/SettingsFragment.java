@@ -15,10 +15,14 @@ import timber.log.Timber;
 /**
  * A simple {@link PreferenceFragment} subclass.
  */
-public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
+public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public static final String PREF_KEY_RECEIVER_TYPE = "pref_key_receiver_type";
-    public static final String PREF_KEY_RECEIVER_HOST_IP = "pref_key_receiver_host_ip";
+    // Accurate regex to check for an IPv4 address:
+    // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
+    private static final String RegEx_Matches_IPv4Address = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+    // Accurate regex to check for an IPv6 address:s
+    // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s17.html
+    private static final String RegEx_Matches_IPv6Address = "^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$";
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -32,8 +36,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         addPreferencesFromResource(R.xml.preferences);
 
         // Set preference summaries
-        setPreferenceSummary(PREF_KEY_RECEIVER_TYPE);
-        setPreferenceSummary(PREF_KEY_RECEIVER_HOST_IP);
+        setPreferenceSummary(SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE);
+        setPreferenceSummary(SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS);
     }
 
     @Override
@@ -62,7 +66,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     private void setPreferenceSummary(String key) {
         switch (key) {
-            case PREF_KEY_RECEIVER_TYPE:
+            case SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE:
                 ListPreference prefReceiverType = (ListPreference) findPreference(key);
                 CharSequence receiverType = prefReceiverType.getEntry();
                 if (null != receiverType && 0 < receiverType.length()) {
@@ -70,18 +74,21 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 } else {
                     prefReceiverType.setSummary(getString(R.string.pref_summary_empty));
                 }
+                Timber.v("setPreferenceSummary: set summary for key \"%s\" to \"%s\".", SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE, (null != receiverType) ? receiverType.toString() : "null");
                 break;
-            case PREF_KEY_RECEIVER_HOST_IP:
-                EditTextPreference prefHostIP = (EditTextPreference) findPreference(key);
-                String hostIP = prefHostIP.getText();
-                if (null != hostIP && !hostIP.isEmpty()) {
-                    prefHostIP.setSummary(hostIP);
+            case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
+                EditTextPreference prefReceiverAddress = (EditTextPreference) findPreference(key);
+                // TODO, anwi: check for valid IPv4, IPv6 or hostname and deny otherwise
+                String receiverAddress = prefReceiverAddress.getText();
+                if (null != receiverAddress && !receiverAddress.isEmpty()) {
+                    prefReceiverAddress.setSummary(receiverAddress);
                 } else {
-                    prefHostIP.setSummary(getString(R.string.pref_summary_empty));
+                    prefReceiverAddress.setSummary(getString(R.string.pref_summary_empty));
                 }
+                Timber.v("setPreferenceSummary: set summary for key \"%s\" to \"%s\".", SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS, (null != receiverAddress) ? receiverAddress : "null");
                 break;
             default:
-                Timber.w("setPreferenceSummary: switch to default for key \"%s\")", key);
+                Timber.e("setPreferenceSummary: switch to default for key \"%s\".)", key);
                 break;
         }
     }

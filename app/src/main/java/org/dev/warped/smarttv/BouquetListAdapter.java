@@ -4,74 +4,53 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import org.dev.warped.smarttv.BouquetListFragment.OnBouquetListFragmentInteractionListener;
-import org.dev.warped.smarttv.dummy.DummyContent.DummyItem;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import timber.log.Timber;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Bouquet} and makes a call to the
  * specified {@link OnBouquetListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
-public class BouquetListAdapter extends RecyclerView.Adapter<BouquetListAdapter.ViewHolder> {
+public class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnBouquetListFragmentInteractionListener mListener;
+    private final OnBouquetListFragmentInteractionListener m_Listener;
+    private ArrayList<Bouquet> m_Bouquets;
 
-    public BouquetListAdapter(List<DummyItem> items, OnBouquetListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    public BouquetListAdapter(OnBouquetListFragmentInteractionListener listener) {
+        m_Bouquets = new ArrayList<>();
+        m_Listener = listener;
+    }
+
+    public BouquetListAdapter(ArrayList<Bouquet> bouquets, OnBouquetListFragmentInteractionListener listener) {
+        m_Bouquets = bouquets;
+        m_Listener = listener;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BouquetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.bouquet_list_item, parent, false);
-        return new ViewHolder(view);
+        return new BouquetViewHolder(view, m_Listener);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onBouquetListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+    public void onBindViewHolder(final BouquetViewHolder holder, int position) {
+        Timber.d("onBindViewHolder: bouquet \"%s\" at position %d.",
+                m_Bouquets.get(position).getName(), position);
+        holder.bindBouquet(m_Bouquets.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return m_Bouquets.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
-
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
+    public void setBouquets(ArrayList<Bouquet> bouquets) {
+        m_Bouquets = bouquets;
+        notifyDataSetChanged();
     }
 }

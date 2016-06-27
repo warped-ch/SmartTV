@@ -1,17 +1,15 @@
 package org.dev.warped.smarttv;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.dev.warped.smarttv.dummy.DummyContent;
-import org.dev.warped.smarttv.dummy.DummyContent.DummyItem;
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -21,11 +19,10 @@ import org.dev.warped.smarttv.dummy.DummyContent.DummyItem;
  */
 public class BouquetListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
-    private OnBouquetListFragmentInteractionListener mListener;
+    private static final String ARG_BOUQUET_LIST = "bouquet-list";
+
+    private OnBouquetListFragmentInteractionListener m_Listener;
+    private BouquetListAdapter m_Adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -34,12 +31,10 @@ public class BouquetListFragment extends Fragment {
     public BouquetListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static BouquetListFragment newInstance(int columnCount) {
+    public static BouquetListFragment newInstance(ArrayList<Bouquet> bouquets) {
         BouquetListFragment fragment = new BouquetListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putParcelableArrayList(ARG_BOUQUET_LIST, bouquets);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,7 +44,11 @@ public class BouquetListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            ArrayList<Bouquet> bouquetList = getArguments().getParcelableArrayList(ARG_BOUQUET_LIST);
+            m_Adapter = new BouquetListAdapter(bouquetList, m_Listener);
+        } else
+        {
+            m_Adapter =  new BouquetListAdapter(m_Listener);
         }
     }
 
@@ -62,32 +61,33 @@ public class BouquetListFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new BouquetListAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setAdapter(m_Adapter);
         }
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnBouquetListFragmentInteractionListener) {
-            mListener = (OnBouquetListFragmentInteractionListener) context;
+            m_Listener = (OnBouquetListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnBouquetListFragmentInteractionListener");
         }
+        m_Listener.onRefreshBouquets();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        m_Adapter = null;
+        m_Listener = null;
+    }
+
+    public void setBouquets(ArrayList<Bouquet> bouquets) {
+        m_Adapter.setBouquets(bouquets);
     }
 
     /**
@@ -101,7 +101,7 @@ public class BouquetListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnBouquetListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onBouquetListFragmentInteraction(DummyItem item);
+        void onShowBouquet(Bouquet bouquet);
+        void onRefreshBouquets();
     }
 }

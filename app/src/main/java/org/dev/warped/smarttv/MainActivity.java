@@ -1,6 +1,7 @@
 package org.dev.warped.smarttv;
 
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -12,17 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.dev.warped.smarttv.dummy.DummyContent;
+import java.net.InetAddress;
+import java.util.ArrayList;
 
 import timber.log.Timber;
 
 import static timber.log.Timber.DebugTree;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, IReceiver.IReceiverCallback, BouquetListFragment.OnBouquetListFragmentInteractionListener, SharedPreferences.OnSharedPreferenceChangeListener{
 
     private static final String FRAGMENT_TAG_BOUQUETS = "FRAGMENT_TAG_BOUQUETS";
     private static final String FRAGMENT_TAG_SETTINGS = "FRAGMENT_TAG_SETTINGS";
+
+    private IReceiver m_Receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        IReceiver.EReceiverType type = SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(this));
+        InetAddress address = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(this));
+        m_Receiver = ReceiverFactory.newInstance(this, type, address);
     }
 
     @Override
@@ -106,6 +114,30 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        switch (key) {
+            case SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE:
+            case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
+                IReceiver.EReceiverType type = SharedPreferencesManager.getReceiverType(sharedPreferences);
+                InetAddress address = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
+                m_Receiver = ReceiverFactory.newInstance(this, type, address);
+                break;
+        }
+    }
+
     private void showBouquets() {
         BouquetListFragment fragment = new BouquetListFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -123,7 +155,26 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBouquetListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onShowBouquet(Bouquet bouquet) {
+        Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
+    }
 
+    @Override
+    public void onRefreshBouquets() {
+        if(null != m_Receiver) {
+            m_Receiver.refreshBouquets();
+        } else {
+            Timber.w("onRefreshBouquets: m_Receiver is null.");
+        }
+    }
+
+    @Override
+    public void onRefreshBouquetsDone(ArrayList<Bouquet> bouquets) {
+        BouquetListFragment fragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_BOUQUETS);
+        if (null != fragment) {
+            fragment.setBouquets(bouquets);
+        } else {
+            Timber.w("onRefreshBouquetsDone: fragment is null.");
+        }
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="receiver_type">
+    <string-array name="receiver_types">
         <item>Dreambox 7025(+)</item>
         <item>Dreambox 500 HD (v2)</item>
         <item>Dreambox 800 HD PVR</item>

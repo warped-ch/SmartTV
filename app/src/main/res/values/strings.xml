@@ -11,7 +11,7 @@
 
     <string name="pref_category_title_receiver">Receiver</string>
     <string name="pref_title_receiver_type">Receiver type</string>
-    <string name="pref_title_receiver_host_ip">Hostname or IP</string>
+    <string name="pref_title_receiver_address">Hostname or IP</string>
     <string name="pref_summary_empty">empty</string>
 
 <!-- TODO: Remove or change this placeholder text -->
