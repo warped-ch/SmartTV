@@ -32,13 +32,15 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize Timber
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new DebugTree());
-        }
+        if (null == savedInstanceState) {
+            // Initialize Timber
+            if (BuildConfig.DEBUG) {
+                Timber.plant(new DebugTree());
+            }
 
-        // Ensures that the application is properly initialized with default settings
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+            // Ensures that the application is properly initialized with default settings
+            PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
