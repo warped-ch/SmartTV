@@ -162,15 +162,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRefreshBouquets() {
-        if(null != m_Receiver) {
-            m_Receiver.refreshBouquets();
-        } else {
-            Timber.w("onRefreshBouquets: m_Receiver is null.");
-        }
-    }
-
-    @Override
     public void onRefreshBouquetsDone(ArrayList<Bouquet> bouquets) {
         BouquetListFragment fragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_BOUQUETS);
         if (null != fragment) {

@@ -11,6 +11,11 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import timber.log.Timber;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -18,8 +23,6 @@ import java.util.ArrayList;
  * interface.
  */
 public class BouquetListFragment extends Fragment {
-
-    private static final String ARG_BOUQUET_LIST = "bouquet-list";
 
     private OnBouquetListFragmentInteractionListener m_Listener;
     private BouquetListAdapter m_Adapter;
@@ -31,25 +34,11 @@ public class BouquetListFragment extends Fragment {
     public BouquetListFragment() {
     }
 
-    public static BouquetListFragment newInstance(ArrayList<Bouquet> bouquets) {
-        BouquetListFragment fragment = new BouquetListFragment();
-        Bundle args = new Bundle();
-        args.putParcelableArrayList(ARG_BOUQUET_LIST, bouquets);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            ArrayList<Bouquet> bouquetList = getArguments().getParcelableArrayList(ARG_BOUQUET_LIST);
-            m_Adapter = new BouquetListAdapter(bouquetList, m_Listener);
-        } else
-        {
-            m_Adapter =  new BouquetListAdapter(m_Listener);
-        }
+        m_Adapter =  new BouquetListAdapter(m_Listener);
     }
 
     @Override
@@ -76,7 +65,23 @@ public class BouquetListFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnBouquetListFragmentInteractionListener");
         }
-        m_Listener.onRefreshBouquets();
+
+        // TODO, anwi: refresh bouquet list
+        Enigma2Client e2Client = new Enigma2Client();
+        final Call<Enigma2Abouts> call = e2Client.getApiService().getAbout();
+        call.enqueue(new Callback<Enigma2Abouts>() {
+            @Override
+            public void onResponse(Call<Enigma2Abouts> call, Response<Enigma2Abouts> response) {
+                Timber.d("onResponse: \"%s\".", response.body());
+                Timber.d("onResponse: aboutList.size=%d.", response.body().aboutList.size());
+                Timber.d("onResponse: enigma2Version=%s.", response.body().aboutList.get(0).enigma2Version);
+                Timber.d("onResponse: imageVersion=%s.", response.body().aboutList.get(0).imageVersion);
+            }
+            @Override
+            public void onFailure(Call<Enigma2Abouts> call, Throwable t) {
+                Timber.w("onFailure: something went wrong");
+            }
+        });
     }
 
     @Override
@@ -102,6 +107,5 @@ public class BouquetListFragment extends Fragment {
      */
     public interface OnBouquetListFragmentInteractionListener {
         void onShowBouquet(Bouquet bouquet);
-        void onRefreshBouquets();
     }
 }
