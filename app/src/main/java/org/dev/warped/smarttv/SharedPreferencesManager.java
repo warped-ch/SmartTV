@@ -15,15 +15,19 @@ public class SharedPreferencesManager {
     public static final String PREF_KEY_RECEIVER_TYPE = "pref_key_receiver_type";
     public static final String PREF_KEY_RECEIVER_ADDRESS = "pref_key_receiver_address";
 
-    public static IReceiver.EReceiverType getReceiverType(SharedPreferences sharedPreferences) {
-        IReceiver.EReceiverType type = null;
+    enum EReceiverType {
+        eEnigma2
+    }
+
+    public static EReceiverType getReceiverType(SharedPreferences sharedPreferences) {
+        EReceiverType type = null;
         if (sharedPreferences.contains(PREF_KEY_RECEIVER_TYPE)) {
             String receiverType = sharedPreferences.getString(PREF_KEY_RECEIVER_TYPE, "");
             if (!receiverType.isEmpty()) {
                 // TODO, anwi: make this safer, values defined in array.receiver_type_values
                 switch (receiverType) {
                     case "Dreambox800HDse":
-                        type = IReceiver.EReceiverType.eEnigma2;
+                        type = EReceiverType.eEnigma2;
                         break;
                     default:
                         Timber.e("getReceiverType: unknown receiver type \"%s\".", receiverType);

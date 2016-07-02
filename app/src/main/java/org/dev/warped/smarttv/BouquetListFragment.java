@@ -1,15 +1,20 @@
 package org.dev.warped.smarttv;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import org.dev.warped.smarttv.model.E2ServiceList;
+
+import java.net.InetAddress;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,10 +27,11 @@ import timber.log.Timber;
  * Activities containing this fragment MUST implement the {@link OnBouquetListFragmentInteractionListener}
  * interface.
  */
-public class BouquetListFragment extends Fragment {
+public class BouquetListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private OnBouquetListFragmentInteractionListener m_Listener;
-    private BouquetListAdapter m_Adapter;
+    private OnBouquetListFragmentInteractionListener mListener;
+    private BouquetListAdapter mAdapter;
+    private Enigma2Client mEnigma2Client;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -38,7 +44,7 @@ public class BouquetListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        m_Adapter =  new BouquetListAdapter(m_Listener);
+        mAdapter =  new BouquetListAdapter(mListener);
     }
 
     @Override
@@ -51,48 +57,79 @@ public class BouquetListFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(m_Adapter);
+            recyclerView.setAdapter(mAdapter);
         }
         return view;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnBouquetListFragmentInteractionListener) {
-            m_Listener = (OnBouquetListFragmentInteractionListener) context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnBouquetListFragmentInteractionListener) {
+            mListener = (OnBouquetListFragmentInteractionListener) activity;
         } else {
-            throw new RuntimeException(context.toString()
+            throw new RuntimeException(activity.toString()
                     + " must implement OnBouquetListFragmentInteractionListener");
         }
 
-        // TODO, anwi: refresh bouquet list
-        Enigma2Client e2Client = new Enigma2Client();
-        final Call<Enigma2Abouts> call = e2Client.getApiService().getAbout();
-        call.enqueue(new Callback<Enigma2Abouts>() {
-            @Override
-            public void onResponse(Call<Enigma2Abouts> call, Response<Enigma2Abouts> response) {
-                Timber.d("onResponse: \"%s\".", response.body());
-                Timber.d("onResponse: aboutList.size=%d.", response.body().aboutList.size());
-                Timber.d("onResponse: enigma2Version=%s.", response.body().aboutList.get(0).enigma2Version);
-                Timber.d("onResponse: imageVersion=%s.", response.body().aboutList.get(0).imageVersion);
-            }
-            @Override
-            public void onFailure(Call<Enigma2Abouts> call, Throwable t) {
-                Timber.w("onFailure: something went wrong");
-            }
-        });
+        SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(activity));
+        if(SharedPreferencesManager.EReceiverType.eEnigma2 == receiverType) {
+            InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(activity));
+            mEnigma2Client = new Enigma2Client(receiverAddress);
+        }
+        updateBouquets();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        m_Adapter = null;
-        m_Listener = null;
+        mAdapter = null;
+        mListener = null;
     }
 
-    public void setBouquets(ArrayList<Bouquet> bouquets) {
-        m_Adapter.setBouquets(bouquets);
+    @Override
+    public void onPause() {
+        super.onPause();
+        PreferenceManager.getDefaultSharedPreferences(this.getActivity()).unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        switch (key) {
+            case SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE:
+            case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
+                SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
+                if(SharedPreferencesManager.EReceiverType.eEnigma2 == receiverType) {
+                    InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
+                    mEnigma2Client = new Enigma2Client(receiverAddress);
+                }
+                break;
+        }
+    }
+
+    protected void updateBouquets() {
+        if(mEnigma2Client != null) {
+            final Call<E2ServiceList> call = mEnigma2Client.getApiService().getServices();
+            call.enqueue(new Callback<E2ServiceList>() {
+                @Override
+                public void onResponse(Call<E2ServiceList> call, Response<E2ServiceList> response) {
+                    Timber.d("updateBouquets: onResponse: \"%s\".", response.body());
+                    mAdapter.setBouquets(Bouquet.buildBouquetList(response.body().getServiceList()));
+                }
+                @Override
+                public void onFailure(Call<E2ServiceList> call, Throwable t) {
+                    Timber.w("updateBouquets: onFailure: something went wrong.");
+                }
+            });
+        } else {
+            Timber.w("updateBouquets: mEnigma2Client is null.");
+        }
     }
 
     /**

@@ -1,28 +1,31 @@
 package org.dev.warped.smarttv;
 
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
+import java.net.InetAddress;
+
 import retrofit2.Retrofit;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 /**
  * Created by Andreas Wiedmer on 29.06.2016.
  */
 public class Enigma2Client {
 
-    private static final String BASE_URL = "http://192.168.1.10/";
-    private IApiServiceEnigma2 apiService;
+    private final String mBaseUrl;
+    private final ApiServiceEnigma2 mApiService;
 
-    public Enigma2Client()
+    public Enigma2Client(InetAddress address)
     {
+        mBaseUrl = "http://" + address.getHostAddress() + "/";
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(mBaseUrl)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .build();
 
-        apiService = retrofit.create(IApiServiceEnigma2.class);
+        mApiService = retrofit.create(ApiServiceEnigma2.class);
     }
 
-    public IApiServiceEnigma2 getApiService()
+    public ApiServiceEnigma2 getApiService()
     {
-        return apiService;
+        return mApiService;
     }
 }
