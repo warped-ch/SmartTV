@@ -25,11 +25,6 @@ public class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> 
         m_Listener = listener;
     }
 
-    public BouquetListAdapter(ArrayList<Bouquet> bouquets, OnBouquetListFragmentInteractionListener listener) {
-        m_Bouquets = bouquets;
-        m_Listener = listener;
-    }
-
     @Override
     public BouquetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
