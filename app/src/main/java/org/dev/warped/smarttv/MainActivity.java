@@ -27,16 +27,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (null == savedInstanceState) {
-            // Initialize Timber
-            if (BuildConfig.DEBUG) {
-                Timber.plant(new DebugTree());
-            }
-
-            // Ensures that the application is properly initialized with default settings
-            PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        }
-
         getFragmentManager().addOnBackStackChangedListener(this);
 
         setContentView(R.layout.activity_main);
@@ -51,6 +41,23 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (null == savedInstanceState) {
+            // Initialize Timber
+            if (BuildConfig.DEBUG) {
+                Timber.plant(new DebugTree());
+            }
+
+            // Ensures that the application is properly initialized with default settings
+            PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+            // show bouquet list fragment on initial startup
+            navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+            BouquetListFragment fragment = new BouquetListFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUETS);
+            transaction.commit();
+        }
     }
 
     @Override
