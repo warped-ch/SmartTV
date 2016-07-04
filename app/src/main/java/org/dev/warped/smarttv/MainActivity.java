@@ -1,5 +1,6 @@
 package org.dev.warped.smarttv;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -17,7 +18,7 @@ import timber.log.Timber;
 import static timber.log.Timber.DebugTree;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener {
+        implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener {
 
     private static final String FRAGMENT_TAG_BOUQUETS = "FRAGMENT_TAG_BOUQUETS";
     private static final String FRAGMENT_TAG_SETTINGS = "FRAGMENT_TAG_SETTINGS";
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity
             // Ensures that the application is properly initialized with default settings
             PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         }
+
+        getFragmentManager().addOnBackStackChangedListener(this);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,6 +60,21 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (null != navigationView) {
+            BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_BOUQUETS);
+            if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
+                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+            }
+            SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_SETTINGS);
+            if (null != settingsFragment && settingsFragment.isVisible()) {
+                navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
+            }
         }
     }
 
