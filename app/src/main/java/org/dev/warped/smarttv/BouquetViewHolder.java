@@ -13,32 +13,31 @@ import timber.log.Timber;
  */
 public class BouquetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    private final BouquetListFragment.OnBouquetListFragmentInteractionListener m_Listener;
+    private final BouquetListFragment.OnBouquetListFragmentInteractionListener mListener;
+    private final TextView mTextViewTitle;
 
-    private Bouquet m_Bouquet;
-
-    private final TextView m_TextViewTitle;
+    private Bouquet mBouquet;
 
     public BouquetViewHolder(View v, OnBouquetListFragmentInteractionListener listener) {
         super(v);
 
-        m_Listener = listener;
+        mListener = listener;
 
         // Define click listener for the ViewHolder's View.
         v.setOnClickListener(this);
 
-        m_TextViewTitle = (TextView) v.findViewById(R.id.textViewBouquetTitle);
+        mTextViewTitle = (TextView) v.findViewById(R.id.textViewBouquetTitle);
     }
 
     public void bindBouquet(Bouquet bouquet) {
-        m_Bouquet = bouquet;
+        mBouquet = bouquet;
 
-        m_TextViewTitle.setText(bouquet.getName());
+        mTextViewTitle.setText(bouquet.getName());
     }
 
     @Override
     public void onClick(View v) {
-        Timber.d("onClick: show bouquet details for bouquet \"%s\".", m_Bouquet.getName());
-        m_Listener.onShowBouquet(m_Bouquet);
+        Timber.d("onClick: show details for bouquet \"%s\".", mBouquet.getName());
+        mListener.onShowBouquet(mBouquet);
     }
 }

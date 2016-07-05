@@ -17,35 +17,35 @@ import timber.log.Timber;
  */
 public class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> {
 
-    private final OnBouquetListFragmentInteractionListener m_Listener;
-    private ArrayList<Bouquet> m_Bouquets;
+    private final OnBouquetListFragmentInteractionListener mListener;
+    private ArrayList<Bouquet> mBouquets;
 
     public BouquetListAdapter(OnBouquetListFragmentInteractionListener listener) {
-        m_Bouquets = new ArrayList<>();
-        m_Listener = listener;
+        mListener = listener;
+        mBouquets = new ArrayList<>();
     }
 
     @Override
     public BouquetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.bouquet_list_item, parent, false);
-        return new BouquetViewHolder(view, m_Listener);
+        return new BouquetViewHolder(view, mListener);
     }
 
     @Override
     public void onBindViewHolder(final BouquetViewHolder holder, int position) {
         Timber.d("onBindViewHolder: bouquet \"%s\" at position %d.",
-                m_Bouquets.get(position).getName(), position);
-        holder.bindBouquet(m_Bouquets.get(position));
+                mBouquets.get(position).getName(), position);
+        holder.bindBouquet(mBouquets.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return m_Bouquets.size();
+        return mBouquets.size();
     }
 
     public void setBouquets(ArrayList<Bouquet> bouquets) {
-        m_Bouquets = bouquets;
+        mBouquets = bouquets;
         notifyDataSetChanged();
     }
 }

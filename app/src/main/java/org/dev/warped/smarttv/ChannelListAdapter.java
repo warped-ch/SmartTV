@@ -4,74 +4,49 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import org.dev.warped.smarttv.ItemFragment.OnListFragmentInteractionListener;
-import org.dev.warped.smarttv.dummy.DummyContent.DummyItem;
+import org.dev.warped.smarttv.ChannelListFragment.OnChannelListFragmentInteractionListener;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import timber.log.Timber;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * {@link RecyclerView.Adapter} that can display a {@link Channel} and makes a call to the
+ * specified {@link OnChannelListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.ViewHolder> {
+public class ChannelListAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final OnChannelListFragmentInteractionListener mListener;
+    private ArrayList<Channel> mChannels;
 
-    public ChannelListAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public ChannelListAdapter(OnChannelListFragmentInteractionListener listener) {
         mListener = listener;
+        mChannels = new ArrayList<>();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChannelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
-        return new ViewHolder(view);
+                .inflate(R.layout.channel_list_item, parent, false);
+        return new ChannelViewHolder(view, mListener);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+    public void onBindViewHolder(final ChannelViewHolder holder, int position) {
+        Timber.d("onBindViewHolder: channel \"%s\" at position %d.",
+                mChannels.get(position).getName(), position);
+        holder.bindChannel(mChannels.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mChannels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
-
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
+    public void setChannels(ArrayList<Channel> channels) {
+        mChannels = channels;
+        notifyDataSetChanged();
     }
 }

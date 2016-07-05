@@ -18,9 +18,10 @@ import timber.log.Timber;
 import static timber.log.Timber.DebugTree;
 
 public class MainActivity extends AppCompatActivity
-        implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener {
+        implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener, ChannelListFragment.OnChannelListFragmentInteractionListener {
 
-    private static final String FRAGMENT_TAG_BOUQUETS = "FRAGMENT_TAG_BOUQUETS";
+    private static final String FRAGMENT_TAG_BOUQUET_LIST = "FRAGMENT_TAG_BOUQUET_LIST";
+    private static final String FRAGMENT_TAG_CHANNEL_LIST = "FRAGMENT_TAG_CHANNEL_LIST";
     private static final String FRAGMENT_TAG_SETTINGS = "FRAGMENT_TAG_SETTINGS";
 
     @Override
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
             BouquetListFragment fragment = new BouquetListFragment();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUETS);
+            transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUET_LIST);
             transaction.commit();
         }
     }
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity
     public void onBackStackChanged() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (null != navigationView) {
-            BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_BOUQUETS);
+            BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_BOUQUET_LIST);
             if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
                 navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
             }
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity
     private void showBouquets() {
         BouquetListFragment fragment = new BouquetListFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUETS);
+        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUET_LIST);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -150,5 +151,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
+
+        ChannelListFragment fragment = ChannelListFragment.newInstance(bouquet.getReference());
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_CHANNEL_LIST);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onShowChannel(Channel channel) {
+        Timber.d("onShowChannel: \"%s\".", channel.getName());
+
+        // TODO: implement
     }
 }

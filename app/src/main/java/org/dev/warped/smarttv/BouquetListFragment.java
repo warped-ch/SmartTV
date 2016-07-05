@@ -45,6 +45,7 @@ public class BouquetListFragment extends Fragment implements SharedPreferences.O
         super.onCreate(savedInstanceState);
 
         mAdapter =  new BouquetListAdapter(mListener);
+        updateBouquets();
     }
 
     @Override
@@ -68,6 +69,7 @@ public class BouquetListFragment extends Fragment implements SharedPreferences.O
         if (activity instanceof OnBouquetListFragmentInteractionListener) {
             mListener = (OnBouquetListFragmentInteractionListener) activity;
         } else {
+            Timber.e("onAttach: %s must implement OnBouquetListFragmentInteractionListener.", activity.toString());
             throw new RuntimeException(activity.toString()
                     + " must implement OnBouquetListFragmentInteractionListener");
         }
@@ -77,14 +79,15 @@ public class BouquetListFragment extends Fragment implements SharedPreferences.O
             InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(activity));
             mEnigma2Client = new Enigma2Client(receiverAddress);
         }
-        updateBouquets();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+
         mAdapter = null;
         mListener = null;
+        mEnigma2Client = null;
     }
 
     @Override
