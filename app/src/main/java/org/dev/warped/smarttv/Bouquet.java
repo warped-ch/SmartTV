@@ -14,6 +14,7 @@ import java.util.List;
 public class Bouquet implements Parcelable {
 
     private final String mName;
+    private final String mReference;
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Bouquet createFromParcel(Parcel parcel) {
@@ -35,10 +36,12 @@ public class Bouquet implements Parcelable {
 
     public Bouquet(Parcel parcel) {
         mName = parcel.readString();
+        mReference = parcel.readString();
     }
 
     public Bouquet(E2Service e2Service) {
         mName = e2Service.getServiceName();
+        mReference = e2Service.getServiceReference();
     }
 
     @Override
@@ -49,9 +52,14 @@ public class Bouquet implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(mName);
+        parcel.writeString(mReference);
     }
 
     String getName() {
         return mName;
+    }
+
+    String getReference() {
+        return mReference;
     }
 }
