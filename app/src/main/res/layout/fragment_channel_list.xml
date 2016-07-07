@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="org.dev.warped.smarttv.ChannelListFragment"
-    tools:listitem="@layout/channel_list_item" />
+    tools:context=".ChannelEpgListFragment"
+    tools:listitem="@layout/channel_epg_list_item" />

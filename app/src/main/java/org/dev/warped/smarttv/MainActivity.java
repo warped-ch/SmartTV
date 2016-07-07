@@ -18,10 +18,10 @@ import timber.log.Timber;
 import static timber.log.Timber.DebugTree;
 
 public class MainActivity extends AppCompatActivity
-        implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener, ChannelListFragment.OnChannelListFragmentInteractionListener {
+        implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener, ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener {
 
     private static final String FRAGMENT_TAG_BOUQUET_LIST = "FRAGMENT_TAG_BOUQUET_LIST";
-    private static final String FRAGMENT_TAG_CHANNEL_LIST = "FRAGMENT_TAG_CHANNEL_LIST";
+    private static final String FRAGMENT_TAG_CHANNEL_EPG_LIST = "FRAGMENT_TAG_CHANNEL_EPG_LIST";
     private static final String FRAGMENT_TAG_SETTINGS = "FRAGMENT_TAG_SETTINGS";
 
     @Override
@@ -152,15 +152,15 @@ public class MainActivity extends AppCompatActivity
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
 
-        ChannelListFragment fragment = ChannelListFragment.newInstance(bouquet.getReference());
+        ChannelEpgListFragment fragment = ChannelEpgListFragment.newInstance(bouquet.getReference());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_CHANNEL_LIST);
+        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_CHANNEL_EPG_LIST);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     @Override
-    public void onShowChannel(Channel channel) {
+    public void onShowChannel(ChannelEpg channel) {
         Timber.d("onShowChannel: \"%s\".", channel.getName());
 
         // TODO: implement

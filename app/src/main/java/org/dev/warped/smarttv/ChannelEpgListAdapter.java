@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.dev.warped.smarttv.ChannelListFragment.OnChannelListFragmentInteractionListener;
+import org.dev.warped.smarttv.ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener;
 
 import java.util.ArrayList;
 
@@ -13,28 +13,28 @@ import timber.log.Timber;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Channel} and makes a call to the
- * specified {@link OnChannelListFragmentInteractionListener}.
+ * specified {@link OnChannelEpgListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class ChannelListAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
+public class ChannelEpgListAdapter extends RecyclerView.Adapter<ChannelEpgViewHolder> {
 
-    private final OnChannelListFragmentInteractionListener mListener;
-    private ArrayList<Channel> mChannels;
+    private final OnChannelEpgListFragmentInteractionListener mListener;
+    private ArrayList<ChannelEpg> mChannels;
 
-    public ChannelListAdapter(OnChannelListFragmentInteractionListener listener) {
+    public ChannelEpgListAdapter(OnChannelEpgListFragmentInteractionListener listener) {
         mListener = listener;
         mChannels = new ArrayList<>();
     }
 
     @Override
-    public ChannelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChannelEpgViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.channel_list_item, parent, false);
-        return new ChannelViewHolder(view, mListener);
+                .inflate(R.layout.channel_epg_list_item, parent, false);
+        return new ChannelEpgViewHolder(view, mListener);
     }
 
     @Override
-    public void onBindViewHolder(final ChannelViewHolder holder, int position) {
+    public void onBindViewHolder(final ChannelEpgViewHolder holder, int position) {
         Timber.d("onBindViewHolder: channel \"%s\" at position %d.",
                 mChannels.get(position).getName(), position);
         holder.bindChannel(mChannels.get(position));
@@ -45,8 +45,8 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelViewHolder> 
         return mChannels.size();
     }
 
-    public void setChannels(ArrayList<Channel> channels) {
-        mChannels = channels;
+    public void setChannels(ArrayList<ChannelEpg> channelsEpg) {
+        mChannels = channelsEpg;
         notifyDataSetChanged();
     }
 }

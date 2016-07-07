@@ -8,6 +8,16 @@ import org.simpleframework.xml.Root;
  */
 @Root(name="e2service")
 public class E2Service {
+
+    public E2Service() {
+        // required nullary constructor
+    }
+
+    public E2Service(E2Event event) {
+        this.mServiceReference = getServiceReference();
+        this.mServiceName = event.getEventServiceName();
+    }
+
     public String getServiceReference() {
         return mServiceReference;
     }

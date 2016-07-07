@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.dev.warped.smarttv.model.E2ServiceList;
+import org.dev.warped.smarttv.model.E2EventList;
 
 import java.net.InetAddress;
 
@@ -24,27 +24,27 @@ import timber.log.Timber;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnChannelListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnChannelEpgListFragmentInteractionListener}
  * interface.
  */
-public class ChannelListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class ChannelEpgListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private static final String ARG_BOUQUET_REFERENCE = "column-count";
+    private static final String ARG_BOUQUET_REFERENCE = "arg-bouquet-reference";
 
     private String mBouquetReference;
     private Enigma2Client mEnigma2Client;
-    private ChannelListAdapter mAdapter;
-    private OnChannelListFragmentInteractionListener mListener;
+    private ChannelEpgListAdapter mAdapter;
+    private OnChannelEpgListFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ChannelListFragment() {
+    public ChannelEpgListFragment() {
     }
 
-    public static ChannelListFragment newInstance(String bouquetReference) {
-        ChannelListFragment fragment = new ChannelListFragment();
+    public static ChannelEpgListFragment newInstance(String bouquetReference) {
+        ChannelEpgListFragment fragment = new ChannelEpgListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_BOUQUET_REFERENCE, bouquetReference);
         fragment.setArguments(args);
@@ -59,7 +59,7 @@ public class ChannelListFragment extends Fragment implements SharedPreferences.O
             mBouquetReference = getArguments().getString(ARG_BOUQUET_REFERENCE);
         }
 
-        mAdapter = new ChannelListAdapter(mListener);
+        mAdapter = new ChannelEpgListAdapter(mListener);
         updateChannels();
     }
 
@@ -81,12 +81,12 @@ public class ChannelListFragment extends Fragment implements SharedPreferences.O
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof OnChannelListFragmentInteractionListener) {
-            mListener = (OnChannelListFragmentInteractionListener) activity;
+        if (activity instanceof OnChannelEpgListFragmentInteractionListener) {
+            mListener = (OnChannelEpgListFragmentInteractionListener) activity;
         } else {
-            Timber.e("onAttach: %s must implement OnChannelListFragmentInteractionListener.", activity.toString());
+            Timber.e("onAttach: %s must implement OnChannelEpgListFragmentInteractionListener.", activity.toString());
             throw new RuntimeException(activity.toString()
-                    + " must implement OnChannelListFragmentInteractionListener");
+                    + " must implement OnChannelEpgListFragmentInteractionListener");
         }
 
         SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(activity));
@@ -141,15 +141,15 @@ public class ChannelListFragment extends Fragment implements SharedPreferences.O
             return;
         }
 
-        final Call<E2ServiceList> call = mEnigma2Client.getApiService().getServices(mBouquetReference);
-        call.enqueue(new Callback<E2ServiceList>() {
+        final Call<E2EventList> call = mEnigma2Client.getApiService().getEpgNow(mBouquetReference);
+        call.enqueue(new Callback<E2EventList>() {
             @Override
-            public void onResponse(Call<E2ServiceList> call, Response<E2ServiceList> response) {
+            public void onResponse(Call<E2EventList> call, Response<E2EventList> response) {
                 Timber.d("updateChannels: onResponse: \"%s\".", response.body());
-                mAdapter.setChannels(Channel.buildChannelList(response.body().getServiceList()));
+                mAdapter.setChannels(ChannelEpg.buildChannelEpgList(response.body().getEventList()));
             }
             @Override
-            public void onFailure(Call<E2ServiceList> call, Throwable t) {
+            public void onFailure(Call<E2EventList> call, Throwable t) {
                 Timber.w("updateChannels: onFailure: something went wrong.");
             }
         });
@@ -165,7 +165,7 @@ public class ChannelListFragment extends Fragment implements SharedPreferences.O
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnChannelListFragmentInteractionListener {
-        void onShowChannel(Channel channel);
+    public interface OnChannelEpgListFragmentInteractionListener {
+        void onShowChannel(ChannelEpg channel);
     }
 }

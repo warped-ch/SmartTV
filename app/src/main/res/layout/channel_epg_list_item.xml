@@ -30,14 +30,27 @@
                 android:id="@+id/textViewChannelTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_alignParentTop="true"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="@dimen/text_margin"
-                android:layout_marginTop="@dimen/text_margin"
-                android:layout_marginBottom="@dimen/text_margin"
                 android:layout_toRightOf="@+id/imageViewPicon"
-                android:layout_toEndOf="@+id/imageViewPicon" />
+                android:layout_toEndOf="@+id/imageViewPicon"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textViewEventTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imageViewPicon" />
+
+            <TextView
+                android:id="@+id/textViewEventDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/textViewEventTitle" />
 
         </RelativeLayout>
 
