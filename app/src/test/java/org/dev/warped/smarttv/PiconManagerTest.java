@@ -25,7 +25,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_3sathd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_3sathd;
+        int piconResourceId = R.drawable.picon_3sathd;
         assertEquals(piconResourceId, PiconManager.getPicon("3sat HD")); // original e2servicename
     }
 
@@ -38,37 +38,37 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_adultchannel() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_adultchannel;
+        int piconResourceId = R.drawable.picon_adultchannel;
         assertEquals(piconResourceId, PiconManager.getPicon("Adult Channel")); // original e2servicename
     }
 
     @Test
     public void getPicon_aljazeeraenglish() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_aljazeeraenglish;
+        int piconResourceId = R.drawable.picon_aljazeeraenglish;
         assertEquals(piconResourceId, PiconManager.getPicon("Al Jazeera English")); // original e2servicename
     }
 
     @Test
     public void getPicon_animalplanethd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_animalplanethd;
+        int piconResourceId = R.drawable.picon_animalplanethd;
         assertEquals(piconResourceId, PiconManager.getPicon("Animal Planet HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_ardalpha() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_ardalpha;
+        int piconResourceId = R.drawable.picon_ardalpha;
         assertEquals(piconResourceId, PiconManager.getPicon("ARD-alpha")); // original e2servicename
     }
 
     @Test
     public void getPicon_atvavrupa() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_atvavrupa;
+        int piconResourceId = R.drawable.picon_atvavrupa;
         assertEquals(piconResourceId, PiconManager.getPicon("atv Avrupa")); // original e2servicename
     }
 
     @Test
     public void getPicon_axnhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_axnhd;
+        int piconResourceId = R.drawable.picon_axnhd;
         assertEquals(piconResourceId, PiconManager.getPicon("AXN HD")); // original e2servicename
     }
 
@@ -81,13 +81,13 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_bbcone() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_bbcone;
+        int piconResourceId = R.drawable.picon_bbcone;
         assertEquals(piconResourceId, PiconManager.getPicon("BBC One")); // original e2servicename
     }
 
     @Test
     public void getPicon_bbconehd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_bbconehd;
+        int piconResourceId = R.drawable.picon_bbconehd;
         assertEquals(piconResourceId, PiconManager.getPicon("BBC One HD")); // original e2servicename
     }
 
@@ -100,19 +100,19 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_bbctwohd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_bbctwohd;
+        int piconResourceId = R.drawable.picon_bbctwohd;
         assertEquals(piconResourceId, PiconManager.getPicon("BBC Two HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_bbcworldnews() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_bbcworldnews;
+        int piconResourceId = R.drawable.picon_bbcworldnews;
         assertEquals(piconResourceId, PiconManager.getPicon("BBC World News")); // original e2servicename
     }
 
     @Test
     public void getPicon_bibeltv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_bibeltv;
+        int piconResourceId = R.drawable.picon_bibeltv;
         assertEquals(piconResourceId, PiconManager.getPicon("Bibel TV")); // original e2servicename
     }
 
@@ -125,7 +125,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_bluehustler() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_bluehustler;
+        int piconResourceId = R.drawable.picon_bluehustler;
         assertEquals(piconResourceId, PiconManager.getPicon("Blue Hustler")); // original e2servicename
     }
 
@@ -138,25 +138,25 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_bongustohd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_bongustohd;
+        int piconResourceId = R.drawable.picon_bongustohd;
         assertEquals(piconResourceId, PiconManager.getPicon("Bon Gusto HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_brsudhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_brsudhd;
+        int piconResourceId = R.drawable.picon_brsudhd;
         assertEquals(piconResourceId, PiconManager.getPicon("BR Süd HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_bvntv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_bvntv;
+        int piconResourceId = R.drawable.picon_bvntv;
         assertEquals(piconResourceId, PiconManager.getPicon("BVN TV")); // original e2servicename
     }
 
     @Test
     public void getPicon_canale5hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_canale5hd;
+        int piconResourceId = R.drawable.picon_canale5hd;
         assertEquals(piconResourceId, PiconManager.getPicon("Canale 5 HD")); // original e2servicename
     }
 
@@ -169,37 +169,37 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_cctv4() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_cctv4;
+        int piconResourceId = R.drawable.picon_cctv4;
         assertEquals(piconResourceId, PiconManager.getPicon("CCTV 4")); // original e2servicename
     }
 
     @Test
     public void getPicon_cctvnews() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_cctvnews;
+        int piconResourceId = R.drawable.picon_cctvnews;
         assertEquals(piconResourceId, PiconManager.getPicon("CCTV News")); // original e2servicename
     }
 
     @Test
     public void getPicon_channel5() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_channel5;
+        int piconResourceId = R.drawable.picon_channel5;
         assertEquals(piconResourceId, PiconManager.getPicon("Channel 5")); // original e2servicename
     }
 
     @Test
     public void getPicon_classicahd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_classicahd;
+        int piconResourceId = R.drawable.picon_classicahd;
         assertEquals(piconResourceId, PiconManager.getPicon("Classica HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_cnbc() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_cnbc;
+        int piconResourceId = R.drawable.picon_cnbc;
         assertEquals(piconResourceId, PiconManager.getPicon("CNBC")); // original e2servicename
     }
 
     @Test
     public void getPicon_cnnint() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_cnnint;
+        int piconResourceId = R.drawable.picon_cnnint;
         assertEquals(piconResourceId, PiconManager.getPicon("CNN Int.")); // original e2servicename
     }
 
@@ -226,37 +226,37 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_dmaxhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_dmaxhd;
+        int piconResourceId = R.drawable.picon_dmaxhd;
         assertEquals(piconResourceId, PiconManager.getPicon("DMAX HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_dorceltv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_dorceltv;
+        int piconResourceId = R.drawable.picon_dorceltv;
         assertEquals(piconResourceId, PiconManager.getPicon("Dorcel TV")); // original e2servicename
     }
 
     @Test
     public void getPicon_ehd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_ehd;
+        int piconResourceId = R.drawable.picon_ehd;
         assertEquals(piconResourceId, PiconManager.getPicon("E! HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_e4() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_e4;
+        int piconResourceId = R.drawable.picon_e4;
         assertEquals(piconResourceId, PiconManager.getPicon("E4")); // original e2servicename
     }
 
     @Test
     public void getPicon_einsfestivalhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_einsfestivalhd;
+        int piconResourceId = R.drawable.picon_einsfestivalhd;
         assertEquals(piconResourceId, PiconManager.getPicon("Einsfestival HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_einsplus() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_einsplus;
+        int piconResourceId = R.drawable.picon_einsplus;
         assertEquals(piconResourceId, PiconManager.getPicon("EinsPlus")); // original e2servicename
     }
 
@@ -269,20 +269,20 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_euronews() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_euronews;
+        int piconResourceId = R.drawable.picon_euronews;
         assertEquals(piconResourceId, PiconManager.getPicon("euronews")); // original e2servicename
     }
 
     @Test
     public void getPicon_eurosport1() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_eurosport1;
+        int piconResourceId = R.drawable.picon_eurosport1;
         assertEquals(piconResourceId, PiconManager.getPicon("Eurosport 1")); // original e2servicename
         assertEquals(piconResourceId, PiconManager.getPicon("Eurosport 1 I")); // original e2servicename
     }
 
     @Test
     public void getPicon_eurosport2hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_eurosport2hd;
+        int piconResourceId = R.drawable.picon_eurosport2hd;
         assertEquals(piconResourceId, PiconManager.getPicon("Eurosport 2 HD")); // original e2servicename
         assertEquals(piconResourceId, PiconManager.getPicon("Eurosport 2 I HD")); // original e2servicename
     }
@@ -296,38 +296,38 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_extremesports() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_extremesports;
+        int piconResourceId = R.drawable.picon_extremesports;
         assertEquals(piconResourceId, PiconManager.getPicon("Extreme Sports")); // original e2servicename
     }
 
     @Test
     public void getPicon_fashiontv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_fashiontv;
+        int piconResourceId = R.drawable.picon_fashiontv;
         assertEquals(piconResourceId, PiconManager.getPicon("Fashion TV")); // original e2servicename
     }
 
     @Test
     public void getPicon_film4() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_film4;
+        int piconResourceId = R.drawable.picon_film4;
         assertEquals(piconResourceId, PiconManager.getPicon("Film 4")); // original e2servicename
     }
 
     @Test
     public void getPicon_foxhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_foxhd;
+        int piconResourceId = R.drawable.picon_foxhd;
         assertEquals(piconResourceId, PiconManager.getPicon("Fox HD")); // original e2servicename
         assertEquals(piconResourceId, PiconManager.getPicon("Fox HD (TC)")); // original e2servicename
     }
 
     @Test
     public void getPicon_france2hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_france2hd;
+        int piconResourceId = R.drawable.picon_france2hd;
         assertEquals(piconResourceId, PiconManager.getPicon("France 2 HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_france24() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_france24;
+        int piconResourceId = R.drawable.picon_france24;
         assertEquals(piconResourceId, PiconManager.getPicon("France 24")); // original e2servicename
     }
 
@@ -340,19 +340,19 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_france4() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_france4;
+        int piconResourceId = R.drawable.picon_france4;
         assertEquals(piconResourceId, PiconManager.getPicon("France 4")); // original e2servicename
     }
 
     @Test
     public void getPicon_france5() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_france5;
+        int piconResourceId = R.drawable.picon_france5;
         assertEquals(piconResourceId, PiconManager.getPicon("France 5")); // original e2servicename
     }
 
     @Test
     public void getPicon_gotv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_gotv;
+        int piconResourceId = R.drawable.picon_gotv;
         assertEquals(piconResourceId, PiconManager.getPicon("gotv")); // original e2servicename
     }
 
@@ -365,7 +365,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_gulli() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_gulli;
+        int piconResourceId = R.drawable.picon_gulli;
         assertEquals(piconResourceId, PiconManager.getPicon("Gulli")); // original e2servicename
     }
 
@@ -399,13 +399,13 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_hse24() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_hse24;
+        int piconResourceId = R.drawable.picon_hse24;
         assertEquals(piconResourceId, PiconManager.getPicon("HSE24")); // original e2servicename
     }
 
     @Test
     public void getPicon_hse24extra() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_hse24extra;
+        int piconResourceId = R.drawable.picon_hse24extra;
         assertEquals(piconResourceId, PiconManager.getPicon("HSE24 Extra")); // original e2servicename
     }
 
@@ -425,55 +425,55 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_italia1hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_italia1hd;
+        int piconResourceId = R.drawable.picon_italia1hd;
         assertEquals(piconResourceId, PiconManager.getPicon("Italia 1 HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_itv2() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_itv2;
+        int piconResourceId = R.drawable.picon_itv2;
         assertEquals(piconResourceId, PiconManager.getPicon("ITV 2")); // original e2servicename
     }
 
     @Test
     public void getPicon_itv3() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_itv3;
+        int piconResourceId = R.drawable.picon_itv3;
         assertEquals(piconResourceId, PiconManager.getPicon("ITV 3")); // original e2servicename
     }
 
     @Test
     public void getPicon_itv4() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_itv4;
+        int piconResourceId = R.drawable.picon_itv4;
         assertEquals(piconResourceId, PiconManager.getPicon("ITV 4")); // original e2servicename
     }
 
     @Test
     public void getPicon_jimjam() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_jimjam;
+        int piconResourceId = R.drawable.picon_jimjam;
         assertEquals(piconResourceId, PiconManager.getPicon("JimJam")); // original e2servicename
     }
 
     @Test
     public void getPicon_ktv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_ktv;
+        int piconResourceId = R.drawable.picon_ktv;
         assertEquals(piconResourceId, PiconManager.getPicon("K-TV")); // original e2servicename
     }
 
     @Test
     public void getPicon_kabeleins() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_kabeleins;
+        int piconResourceId = R.drawable.picon_kabeleins;
         assertEquals(piconResourceId, PiconManager.getPicon("kabel eins")); // original e2servicename
     }
 
     @Test
     public void getPicon_kabeleinsclassichd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_kabeleinsclassicshd;
+        int piconResourceId = R.drawable.picon_kabeleinsclassicshd;
         assertEquals(piconResourceId, PiconManager.getPicon("kabel eins classics HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_kabeleinshd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_kabeleinshd;
+        int piconResourceId = R.drawable.picon_kabeleinshd;
         assertEquals(piconResourceId, PiconManager.getPicon("kabel eins HD")); // original e2servicename
     }
 
@@ -486,7 +486,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_kikahd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_kikahd;
+        int piconResourceId = R.drawable.picon_kikahd;
         assertEquals(piconResourceId, PiconManager.getPicon("KiKA HD")); // original e2servicename
     }
 
@@ -499,19 +499,19 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_kurdsattv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_kurdsattv;
+        int piconResourceId = R.drawable.picon_kurdsattv;
         assertEquals(piconResourceId, PiconManager.getPicon("Kurdsat TV")); // original e2servicename
     }
 
     @Test
     public void getPicon_la7() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_la7;
+        int piconResourceId = R.drawable.picon_la7;
         assertEquals(piconResourceId, PiconManager.getPicon("La 7")); // original e2servicename
     }
 
     @Test
     public void getPicon_m6hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_m6hd;
+        int piconResourceId = R.drawable.picon_m6hd;
         assertEquals(piconResourceId, PiconManager.getPicon("M6 HD")); // original e2servicename
     }
 
@@ -524,55 +524,55 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_more4() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_more4;
+        int piconResourceId = R.drawable.picon_more4;
         assertEquals(piconResourceId, PiconManager.getPicon("More 4")); // original e2servicename
     }
 
     @Test
     public void getPicon_motorstv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_motorstv;
+        int piconResourceId = R.drawable.picon_motorstv;
         assertEquals(piconResourceId, PiconManager.getPicon("Motors TV")); // original e2servicename
     }
 
     @Test
     public void getPicon_mtvbrandnew() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_mtvbrandnew;
+        int piconResourceId = R.drawable.picon_mtvbrandnew;
         assertEquals(piconResourceId, PiconManager.getPicon("MTV Brand New")); // original e2servicename
     }
 
     @Test
     public void getPicon_mtvdance() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_mtvdance;
+        int piconResourceId = R.drawable.picon_mtvdance;
         assertEquals(piconResourceId, PiconManager.getPicon("MTV Dance")); // original e2servicename
     }
 
     @Test
     public void getPicon_mtvhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_mtvhd;
+        int piconResourceId = R.drawable.picon_mtvhd;
         assertEquals(piconResourceId, PiconManager.getPicon("MTV HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_mtvlivehd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_mtvlivehd;
+        int piconResourceId = R.drawable.picon_mtvlivehd;
         assertEquals(piconResourceId, PiconManager.getPicon("MTV Live HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_mtvmusic() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_mtvmusic;
+        int piconResourceId = R.drawable.picon_mtvmusic;
         assertEquals(piconResourceId, PiconManager.getPicon("MTV Music")); // original e2servicename
     }
 
     @Test
     public void getPicon_ntvhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_ntvhd;
+        int piconResourceId = R.drawable.picon_ntvhd;
         assertEquals(piconResourceId, PiconManager.getPicon("n-tv HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_n24hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_n24hd;
+        int piconResourceId = R.drawable.picon_n24hd;
         assertEquals(piconResourceId, PiconManager.getPicon("N24 HD")); // original e2servicename
     }
 
@@ -585,13 +585,13 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_natgeohd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_natgeohd;
+        int piconResourceId = R.drawable.picon_natgeohd;
         assertEquals(piconResourceId, PiconManager.getPicon("Nat Geo HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_natgeowildhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_natgeowildhd;
+        int piconResourceId = R.drawable.picon_natgeowildhd;
         assertEquals(piconResourceId, PiconManager.getPicon("Nat Geo Wild HD")); // original e2servicename
         assertEquals(piconResourceId, PiconManager.getPicon("Nat Geo Wild HD (TC)")); // original e2servicename
     }
@@ -605,25 +605,25 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_ndrfsndshd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_ndrfsndshd;
+        int piconResourceId = R.drawable.picon_ndrfsndshd;
         assertEquals(piconResourceId, PiconManager.getPicon("NDR FS NDS HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_nickjr() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_nickjr;
+        int piconResourceId = R.drawable.picon_nickjr;
         assertEquals(piconResourceId, PiconManager.getPicon("Nick Jr.")); // original e2servicename
     }
 
     @Test
     public void getPicon_nickelodeonhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_nickelodeonhd;
+        int piconResourceId = R.drawable.picon_nickelodeonhd;
         assertEquals(piconResourceId, PiconManager.getPicon("nickelodeon HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_nt1() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_nt1;
+        int piconResourceId = R.drawable.picon_nt1;
         assertEquals(piconResourceId, PiconManager.getPicon("NT1")); // original e2servicename
     }
 
@@ -636,13 +636,13 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_orf2() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_orf2;
+        int piconResourceId = R.drawable.picon_orf2;
         assertEquals(piconResourceId, PiconManager.getPicon("ORF 2")); // original e2servicename
     }
 
     @Test
     public void getPicon_orf2hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_orf2hd;
+        int piconResourceId = R.drawable.picon_orf2hd;
         assertEquals(piconResourceId, PiconManager.getPicon("ORF 2 HD")); // original e2servicename
     }
 
@@ -655,7 +655,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_phoenixhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_phoenixhd;
+        int piconResourceId = R.drawable.picon_phoenixhd;
         assertEquals(piconResourceId, PiconManager.getPicon("PHOENIX HD")); // original e2servicename
     }
 
@@ -675,7 +675,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_planethd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_planethd;
+        int piconResourceId = R.drawable.picon_planethd;
         assertEquals(piconResourceId, PiconManager.getPicon("Planet HD")); // original e2servicename
     }
 
@@ -688,13 +688,13 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_privatetv() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_privatetv;
+        int piconResourceId = R.drawable.picon_privatetv;
         assertEquals(piconResourceId, PiconManager.getPicon("Private TV")); // original e2servicename
     }
 
     @Test
     public void getPicon_prosieben() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_prosieben;
+        int piconResourceId = R.drawable.picon_prosieben;
         assertEquals(piconResourceId, PiconManager.getPicon("ProSieben")); // original e2servicename
     }
 
@@ -707,7 +707,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_prosiebenhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_prosiebenhd;
+        int piconResourceId = R.drawable.picon_prosiebenhd;
         assertEquals(piconResourceId, PiconManager.getPicon("ProSieben HD")); // original e2servicename
     }
 
@@ -720,37 +720,37 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_rai1() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rai1;
+        int piconResourceId = R.drawable.picon_rai1;
         assertEquals(piconResourceId, PiconManager.getPicon("Rai 1")); // original e2servicename
     }
 
     @Test
     public void getPicon_rai2() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rai2;
+        int piconResourceId = R.drawable.picon_rai2;
         assertEquals(piconResourceId, PiconManager.getPicon("Rai 2")); // original e2servicename
     }
 
     @Test
     public void getPicon_rai3() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rai3;
+        int piconResourceId = R.drawable.picon_rai3;
         assertEquals(piconResourceId, PiconManager.getPicon("Rai 3")); // original e2servicename
     }
 
     @Test
     public void getPicon_rai4() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rai4;
+        int piconResourceId = R.drawable.picon_rai4;
         assertEquals(piconResourceId, PiconManager.getPicon("Rai 4")); // original e2servicename
     }
 
     @Test
     public void getPicon_rainews24() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rainews24;
+        int piconResourceId = R.drawable.picon_rainews24;
         assertEquals(piconResourceId, PiconManager.getPicon("Rai News 24")); // original e2servicename
     }
 
     @Test
     public void getPicon_raisport1() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_raisport1;
+        int piconResourceId = R.drawable.picon_raisport1;
         assertEquals(piconResourceId, PiconManager.getPicon("Rai Sport 1")); // original e2servicename
     }
 
@@ -763,37 +763,37 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_rete4hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rete4hd;
+        int piconResourceId = R.drawable.picon_rete4hd;
         assertEquals(piconResourceId, PiconManager.getPicon("Rete 4 HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_romancetvhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_romancetvhd;
+        int piconResourceId = R.drawable.picon_romancetvhd;
         assertEquals(piconResourceId, PiconManager.getPicon("Romance TV HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_rsila1() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rsila1;
+        int piconResourceId = R.drawable.picon_rsila1;
         assertEquals(piconResourceId, PiconManager.getPicon("RSI LA 1")); // original e2servicename
     }
 
     @Test
     public void getPicon_rsila1hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rsila1hd;
+        int piconResourceId = R.drawable.picon_rsila1hd;
         assertEquals(piconResourceId, PiconManager.getPicon("RSI LA 1 HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_rsila2() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rsila2;
+        int piconResourceId = R.drawable.picon_rsila2;
         assertEquals(piconResourceId, PiconManager.getPicon("RSI LA 2")); // original e2servicename
     }
 
     @Test
     public void getPicon_rsila2hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rsila2hd;
+        int piconResourceId = R.drawable.picon_rsila2hd;
         assertEquals(piconResourceId, PiconManager.getPicon("RSI LA 2 HD")); // original e2servicename
     }
 
@@ -813,37 +813,37 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_rtl2() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtl2;
+        int piconResourceId = R.drawable.picon_rtl2;
         assertEquals(piconResourceId, PiconManager.getPicon("RTL ")); // original e2servicename
     }
 
     @Test
     public void getPicon_rtl2hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtl2hd;
+        int piconResourceId = R.drawable.picon_rtl2hd;
         assertEquals(piconResourceId, PiconManager.getPicon("RTL 2 HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_rtlhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtlhd;
+        int piconResourceId = R.drawable.picon_rtlhd;
         assertEquals(piconResourceId, PiconManager.getPicon("RTL HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_rtllivinghd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtllivinghd;
+        int piconResourceId = R.drawable.picon_rtllivinghd;
         assertEquals(piconResourceId, PiconManager.getPicon("RTL Living HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_rtlnitrohd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtlnitrohd;
+        int piconResourceId = R.drawable.picon_rtlnitrohd;
         assertEquals(piconResourceId, PiconManager.getPicon("RTL Nitro HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_rtlpassionhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtlpassionhd;
+        int piconResourceId = R.drawable.picon_rtlpassionhd;
         assertEquals(piconResourceId, PiconManager.getPicon("RTL Passion HD")); // original e2servicename
     }
 
@@ -856,13 +856,13 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_rtsdeux() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtsdeux;
+        int piconResourceId = R.drawable.picon_rtsdeux;
         assertEquals(piconResourceId, PiconManager.getPicon("RTS Deux")); // original e2servicename
     }
 
     @Test
     public void getPicon_rtsdeuxhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtsdeuxhd;
+        int piconResourceId = R.drawable.picon_rtsdeuxhd;
         assertEquals(piconResourceId, PiconManager.getPicon("RTS Deux HD")); // original e2servicename
     }
 
@@ -875,19 +875,19 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_rtsun() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtsun;
+        int piconResourceId = R.drawable.picon_rtsun;
         assertEquals(piconResourceId, PiconManager.getPicon("RTS Un")); // original e2servicename
     }
 
     @Test
     public void getPicon_rtsunhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_rtsunhd;
+        int piconResourceId = R.drawable.picon_rtsunhd;
         assertEquals(piconResourceId, PiconManager.getPicon("RTS Un HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_russiotoday() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_russiatoday;
+        int piconResourceId = R.drawable.picon_russiatoday;
         assertEquals(piconResourceId, PiconManager.getPicon("Russia Today")); // original e2servicename
     }
 
@@ -900,13 +900,13 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_sat1() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_sat1;
+        int piconResourceId = R.drawable.picon_sat1;
         assertEquals(piconResourceId, PiconManager.getPicon("SAT.1")); // original e2servicename
     }
 
     @Test
     public void getPicon_sat1hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_sat1hd;
+        int piconResourceId = R.drawable.picon_sat1hd;
         assertEquals(piconResourceId, PiconManager.getPicon("SAT.1 HD")); // original e2servicename
     }
 
@@ -919,7 +919,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_servustvhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_servustvhd;
+        int piconResourceId = R.drawable.picon_servustvhd;
         assertEquals(piconResourceId, PiconManager.getPicon("Servus TV HD")); // original e2servicename
     }
 
@@ -946,49 +946,49 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_sixxhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_sixxhd;
+        int piconResourceId = R.drawable.picon_sixxhd;
         assertEquals(piconResourceId, PiconManager.getPicon("Sixx HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_sport1ushd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_sport1ushd;
+        int piconResourceId = R.drawable.picon_sport1ushd;
         assertEquals(piconResourceId, PiconManager.getPicon("SPORT1 US HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_sportdigitalhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_sportdigitalhd;
+        int piconResourceId = R.drawable.picon_sportdigitalhd;
         assertEquals(piconResourceId, PiconManager.getPicon("sportdigital HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_srf1() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_srf1;
+        int piconResourceId = R.drawable.picon_srf1;
         assertEquals(piconResourceId, PiconManager.getPicon("SRF 1")); // original e2servicename
     }
 
     @Test
     public void getPicon_srf1hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_srf1hd;
+        int piconResourceId = R.drawable.picon_srf1hd;
         assertEquals(piconResourceId, PiconManager.getPicon("SRF 1 HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_srfinfohd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_srfinfohd;
+        int piconResourceId = R.drawable.picon_srfinfohd;
         assertEquals(piconResourceId, PiconManager.getPicon("SRF info HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_srfzwei() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_srfzwei;
+        int piconResourceId = R.drawable.picon_srfzwei;
         assertEquals(piconResourceId, PiconManager.getPicon("SRF zwei")); // original e2servicename
     }
 
     @Test
     public void getPicon_srfzweihd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_srfzweihd;
+        int piconResourceId = R.drawable.picon_srfzweihd;
         assertEquals(piconResourceId, PiconManager.getPicon("SRF zwei HD")); // original e2servicename
     }
 
@@ -1008,25 +1008,25 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_superrtl() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_superrtl;
+        int piconResourceId = R.drawable.picon_superrtl;
         assertEquals(piconResourceId, PiconManager.getPicon("Super RTL")); // original e2servicename
     }
 
     @Test
     public void getPicon_superrtlhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_superrtlhd;
+        int piconResourceId = R.drawable.picon_superrtlhd;
         assertEquals(piconResourceId, PiconManager.getPicon("Super RTL HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_swrbwhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_swrbwhd;
+        int piconResourceId = R.drawable.picon_swrbwhd;
         assertEquals(piconResourceId, PiconManager.getPicon("SWR BW HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_tagesschau24hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_tagesschau24hd;
+        int piconResourceId = R.drawable.picon_tagesschau24hd;
         assertEquals(piconResourceId, PiconManager.getPicon("tagesschau24 HD")); // original e2servicename
     }
 
@@ -1039,7 +1039,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_tele5() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_tele5;
+        int piconResourceId = R.drawable.picon_tele5;
         assertEquals(piconResourceId, PiconManager.getPicon("Tele 5")); // original e2servicename
     }
 
@@ -1101,7 +1101,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_tf1hd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_tf1hd;
+        int piconResourceId = R.drawable.picon_tf1hd;
         assertEquals(piconResourceId, PiconManager.getPicon("TF 1 HD")); // original e2servicename
     }
 
@@ -1129,19 +1129,19 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_travelchannelhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_travelchannelhd;
+        int piconResourceId = R.drawable.picon_travelchannelhd;
         assertEquals(piconResourceId, PiconManager.getPicon("Travel Channel HD")); // original e2servicename
     }
 
     @Test
     public void getPicon_trtturk() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_trtturk;
+        int piconResourceId = R.drawable.picon_trtturk;
         assertEquals(piconResourceId, PiconManager.getPicon("TRT-TÜRK")); // original e2servicename
     }
 
     @Test
     public void getPicon_tv8() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_tv8;
+        int piconResourceId = R.drawable.picon_tv8;
         assertEquals(piconResourceId, PiconManager.getPicon("TV 8")); // original e2servicename
     }
 
@@ -1168,7 +1168,7 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_tv5monde() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_tv5monde;
+        int piconResourceId = R.drawable.picon_tv5monde;
         assertEquals(piconResourceId, PiconManager.getPicon("TV5MONDE")); // original e2servicename
     }
 
@@ -1188,25 +1188,25 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_ukrainetoday() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_ukrainetoday;
+        int piconResourceId = R.drawable.picon_ukrainetoday;
         assertEquals(piconResourceId, PiconManager.getPicon("Ukraine Today")); // original e2servicename
     }
 
     @Test
     public void getPicon_vh1classic() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_vh1classic;
+        int piconResourceId = R.drawable.picon_vh1classic;
         assertEquals(piconResourceId, PiconManager.getPicon("VH1-Classic")); // original e2servicename
     }
 
     @Test
     public void getPicon_vox() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_vox;
+        int piconResourceId = R.drawable.picon_vox;
         assertEquals(piconResourceId, PiconManager.getPicon("VOX")); // original e2servicename
     }
 
     @Test
     public void getPicon_voxhd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_voxhd;
+        int piconResourceId = R.drawable.picon_voxhd;
         assertEquals(piconResourceId, PiconManager.getPicon("VOX HD")); // original e2servicename
     }
 
@@ -1219,13 +1219,13 @@ public class PiconManagerTest {
 
     @Test
     public void getPicon_zdfkultur() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_zdfkultur;
+        int piconResourceId = R.drawable.picon_zdfkultur;
         assertEquals(piconResourceId, PiconManager.getPicon("zdf.kultur")); // original e2servicename
     }
 
     @Test
     public void getPicon_zdfneohd() throws Exception {
-        int piconResourceId = R.drawable.picon_dark_zdfneohd;
+        int piconResourceId = R.drawable.picon_zdfneohd;
         assertEquals(piconResourceId, PiconManager.getPicon("zdf_neo HD")); // original e2servicename
     }
 }

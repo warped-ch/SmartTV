@@ -32,24 +32,24 @@ public class PiconManager {
             piconResourceId = R.drawable.ic_tv;
         } else if (channelName.matches(PATTERN_3_PLUS_HD)) {
             // TODO: add missing picon resource
-            //piconResourceId = R.drawable.picon_dark_3plushd;
+            //piconResourceId = R.drawable.picon_3plushd;
         } else if (channelName.matches(PATTERN_3_SAT_HD)) {
-            piconResourceId = R.drawable.picon_dark_3sathd;
+            piconResourceId = R.drawable.picon_3sathd;
         } else if (channelName.matches(PATTERN_AE_HD)) {
             // TODO: add missing picon resource
-            //piconResourceId = R.drawable.picon_dark_aehd;
+            //piconResourceId = R.drawable.picon_aehd;
         } else if (channelName.matches(PATTERN_ADULT_CHANNEL)) {
-            piconResourceId = R.drawable.picon_dark_adultchannel;
+            piconResourceId = R.drawable.picon_adultchannel;
         } else if (channelName.matches(PATTERN_AL_JAZEERA_ENGLISH)) {
-            piconResourceId = R.drawable.picon_dark_aljazeeraenglish;
+            piconResourceId = R.drawable.picon_aljazeeraenglish;
         } else if (channelName.matches(PATTERN_ANIMAL_PLANET_HD)) {
-            piconResourceId = R.drawable.picon_dark_animalplanethd;
+            piconResourceId = R.drawable.picon_animalplanethd;
         } else if (channelName.matches(PATTERN_ARD_ALPHA)) {
-            piconResourceId = R.drawable.picon_dark_ardalpha;
+            piconResourceId = R.drawable.picon_ardalpha;
         } else if (channelName.matches(PATTERN_ATV_AVRUPA)) {
-            piconResourceId = R.drawable.picon_dark_atvavrupa;
+            piconResourceId = R.drawable.picon_atvavrupa;
         } else if (channelName.matches(PATTERN_AXN_HD)) {
-            piconResourceId = R.drawable.picon_dark_axnhd;
+            piconResourceId = R.drawable.picon_axnhd;
         }
 
 
@@ -57,17 +57,17 @@ public class PiconManager {
 
 
         else if (channelName.matches(PATTERN_SRF_INFO_HD)) {
-            piconResourceId = R.drawable.picon_dark_srfinfohd;
+            piconResourceId = R.drawable.picon_srfinfohd;
         } else if (channelName.matches(PATTERN_SRF_1_HD)) {
-            piconResourceId = R.drawable.picon_dark_srf1hd;
+            piconResourceId = R.drawable.picon_srf1hd;
         } else if (channelName.matches(PATTERN_SRF_2_HD)) {
-            piconResourceId = R.drawable.picon_dark_srfzweihd;
+            piconResourceId = R.drawable.picon_srfzweihd;
         } else if (channelName.matches(PATTERN_PRO_SIEBEN_HD)) {
-            piconResourceId = R.drawable.picon_dark_prosiebenhd;
+            piconResourceId = R.drawable.picon_prosiebenhd;
         } else if (channelName.matches(PATTERN_SAT_1_HD)) {
-            piconResourceId = R.drawable.picon_dark_sat1hd;
+            piconResourceId = R.drawable.picon_sat1hd;
         } else if (channelName.matches(PATTERN_RTL_HD)) {
-            piconResourceId = R.drawable.picon_dark_rtlhd;
+            piconResourceId = R.drawable.picon_rtlhd;
         }
 
         return piconResourceId;
