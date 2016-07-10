@@ -31,8 +31,7 @@ public class PiconManager {
         if (null == channelName || channelName.isEmpty()) {
             piconResourceId = R.drawable.ic_tv;
         } else if (channelName.matches(PATTERN_3_PLUS_HD)) {
-            // TODO: add missing picon resource
-            //piconResourceId = R.drawable.picon_3plushd;
+            piconResourceId = R.drawable.picon_3plushd;
         } else if (channelName.matches(PATTERN_3_SAT_HD)) {
             piconResourceId = R.drawable.picon_3sathd;
         } else if (channelName.matches(PATTERN_AE_HD)) {
