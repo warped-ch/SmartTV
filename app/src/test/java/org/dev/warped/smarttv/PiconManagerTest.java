@@ -772,7 +772,7 @@ public class PiconManagerTest {
     @Test
     public void getPicon_rtl2() throws Exception {
         int piconResourceId = R.drawable.picon_rtl2;
-        assertEquals(piconResourceId, PiconManager.getPicon("RTL ")); // original e2servicename
+        assertEquals(piconResourceId, PiconManager.getPicon("RTL 2")); // original e2servicename
     }
 
     @Test
