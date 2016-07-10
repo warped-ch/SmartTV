@@ -699,7 +699,7 @@ public class PiconManagerTest {
     }
 
     @Test
-    public void getPicon_prosiebefunhd() throws Exception {
+    public void getPicon_prosiebenfunhd() throws Exception {
         // TODO: use correct picon
         int piconResourceId = R.drawable.ic_tv;
         assertEquals(piconResourceId, PiconManager.getPicon("ProSieben FUN HD")); // original e2servicename
@@ -712,7 +712,7 @@ public class PiconManagerTest {
     }
 
     @Test
-    public void getPicon_plus8hd() throws Exception {
+    public void getPicon_puls8hd() throws Exception {
         // TODO: use correct picon
         int piconResourceId = R.drawable.ic_tv;
         assertEquals(piconResourceId, PiconManager.getPicon("Puls 8 HD")); // original e2servicename
