@@ -33,7 +33,7 @@ public class PiconManager {
                     new PiconResource(R.drawable.picon_brsudhd, "(?i)((br)(\\s*\\S*)((süd)|(sud)|(sued))(\\s*\\S*)(hd))"),
                     new PiconResource(R.drawable.picon_bvntv, "(?i)((bvn)(\\s*\\S*)(tv))"),
                     new PiconResource(R.drawable.picon_canale5hd, "(?i)((canale)(\\s*\\S*)(5)(\\s*\\S*)(hd))"),
-                    new PiconResource(R.drawable.picon_cartoonnetworkhdtc, "(?i)((cartoon)(\\s*\\S*)(network)(\\s*\\S*)(hd))"),
+                    new PiconResource(R.drawable.picon_cartoonnetworkhdtc, "(?i)(.*cartoon.*network.*hd.*)"),
                     new PiconResource(R.drawable.picon_cctv4, "(?i)((cctv)(\\s*\\S*)((4)|(four)))"),
                     new PiconResource(R.drawable.picon_cctvnews, "(?i)((cctv)(\\s*\\S*)(news))"),
                     new PiconResource(R.drawable.picon_channel5, "(?i)((channel)(\\s*\\S*)(5))"),
@@ -50,13 +50,13 @@ public class PiconManager {
                     new PiconResource(R.drawable.picon_einsplus, "(?i)(einsplus)"),
                     new PiconResource(R.drawable.picon_eurod, "(?i)((euro)(\\s*\\S*)(d))"),
                     new PiconResource(R.drawable.picon_euronews, "(?i)(euronews)"),
-                    new PiconResource(R.drawable.picon_eurosport1, "(?i)((eurosport)(\\s*\\S*)(1))"),
-                    new PiconResource(R.drawable.picon_eurosport2hd, "(?i)((eurosport)(\\s*\\S*)(2)(\\s*\\S*)(hd))"),
+                    new PiconResource(R.drawable.picon_eurosport1, "(?i)(.*eurosport.*1.*)"),
+                    new PiconResource(R.drawable.picon_eurosport2hd, "(?i)(.*eurosport.*2.*hd.*)"),
                     new PiconResource(R.drawable.picon_eurostar, "(?i)(eurostar)"),
                     new PiconResource(R.drawable.picon_extremesports, "(?i)((extreme)(\\s*\\S*)(sports))"),
                     new PiconResource(R.drawable.picon_fashiontv, "(?i)((fashion)(\\s*\\S*)(tv))"),
                     new PiconResource(R.drawable.picon_film4, "(?i)((film)(\\s*\\S*)(4))"),
-                    new PiconResource(R.drawable.picon_foxhd, "(?i)((fox)(\\s*\\S*)(hd))"),
+                    new PiconResource(R.drawable.picon_foxhd, "(?i)(.*fox.*hd.*)"),
                     new PiconResource(R.drawable.picon_france2hd, "(?i)((france)(\\s*\\S*)(2)(\\s*\\S*)(hd))"),
                     new PiconResource(R.drawable.picon_france24, "(?i)((france)(\\s*\\S*)(24))"),
                     new PiconResource(R.drawable.ic_tv, "(?i)((france)(\\s*\\S*)(3)(\\s*\\S*)(alsace))"), // TODO
@@ -98,7 +98,7 @@ public class PiconManager {
                     new PiconResource(R.drawable.picon_n24hd, "(?i)((n)(\\s*\\S*)(24)(\\s*\\S*)(hd))"),
                     new PiconResource(R.drawable.picon_natgeoi, "(?i)((nat)(\\s*\\S*)(geo)(\\s*\\S*)(i))"), // TODO: nat geo i?
                     new PiconResource(R.drawable.picon_natgeohd, "(?i)((nat)(\\s*\\S*)(geo)(\\s*\\S*)(hd))"),
-                    new PiconResource(R.drawable.picon_natgeowildhd, "(?i)((nat)(\\s*\\S*)(geo)(\\s*\\S*)(wild)(\\s*\\S*)(hd))"),
+                    new PiconResource(R.drawable.picon_natgeowildhd, "(?i)(.*nat.*geo.*wild.*hd.*)"),
                     new PiconResource(R.drawable.picon_nauticalchannelhd, "(?i)((nautical)(\\s*\\S*)(channel)(\\s*\\S*)(hd))"),
                     new PiconResource(R.drawable.picon_ndrfsndshd, "(?i)((ndr)(\\s*\\S*)(fs)(\\s*\\S*)(nds)(\\s*\\S*)(hd))"),
                     new PiconResource(R.drawable.picon_nickjr, "(?i)((nick)(\\s*\\S*)(jr)\\W+)"),
@@ -188,30 +188,26 @@ public class PiconManager {
                     new PiconResource(R.drawable.picon_tvcg, "(?i)((tv)(\\s*\\S*)(cg))"),
                     new PiconResource(R.drawable.ic_tv, "(?i)((tv)(\\s*\\S*)(globo)(\\s*\\S*)(int))\\W+"), // TODO
                     new PiconResource(R.drawable.ic_tv, "(?i)((tv)(\\s*\\S*)|((sudostschweiz)|(südostschweiz))(\\s*\\S*)(hd))"), // TODO
-                    new PiconResource(R.drawable.picon_tv5monde, "(?i)(tv5monde)"),
+                    new PiconResource(R.drawable.picon_tv5monde, "(?i)(.*tv.*5.*monde.*)"),
                     new PiconResource(R.drawable.ic_tv, "(?i)(tvo)"), // TODO
                     new PiconResource(R.drawable.ic_tv, "(?i)(tvsh)"), // TODO
                     new PiconResource(R.drawable.picon_ukrainetoday, "(?i)((ukraine)(\\s*\\S*)(today))"),
                     new PiconResource(R.drawable.picon_vh1classic, "(?i)((vh1)(\\s*\\S*)(classic))"),
                     new PiconResource(R.drawable.picon_vox, "(?i)(vox)"),
                     new PiconResource(R.drawable.picon_voxhd, "(?i)((vox)(\\s*\\S*)(hd))"),
-                    new PiconResource(R.drawable.picon_wdrfernsehenhd, "(?i)((wdr)(\\s*\\S*)(hd))"),
+                    new PiconResource(R.drawable.picon_wdrfernsehenhd, "(?i)(.*wdr.*hd.*)"),
                     new PiconResource(R.drawable.picon_zdfkultur, "(?i)((zdf)(\\s*\\S*)(kultur))"),
                     new PiconResource(R.drawable.picon_zdfneohd, "(?i)((zdf)(\\s*\\S*)(neo)(\\s*\\S*)(hd))")
             ));
 
     public static int getPicon(String channelName) {
-        int piconResourceId = R.drawable.ic_tv;
-
         if (null != channelName && !channelName.isEmpty()) {
             for (PiconResource piconResource : mPiconResources) {
                 if (channelName.matches(piconResource.getRegex())) {
-                    piconResourceId = piconResource.getResourceId();
-                    break;
+                    return piconResource.getResourceId();
                 }
             }
         }
-
-        return piconResourceId;
+        return R.drawable.ic_tv;
     }
 }
