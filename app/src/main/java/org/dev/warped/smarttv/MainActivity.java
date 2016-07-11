@@ -18,7 +18,10 @@ import timber.log.Timber;
 import static timber.log.Timber.DebugTree;
 
 public class MainActivity extends AppCompatActivity
-        implements FragmentManager.OnBackStackChangedListener, NavigationView.OnNavigationItemSelectedListener, BouquetListFragment.OnBouquetListFragmentInteractionListener, ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener {
+        implements FragmentManager.OnBackStackChangedListener,
+        NavigationView.OnNavigationItemSelectedListener,
+        BouquetListFragment.OnBouquetListFragmentInteractionListener,
+        ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener {
 
     private static final String FRAGMENT_TAG_BOUQUET_LIST = "FRAGMENT_TAG_BOUQUET_LIST";
     private static final String FRAGMENT_TAG_CHANNEL_EPG_LIST = "FRAGMENT_TAG_CHANNEL_EPG_LIST";
@@ -104,8 +107,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_todo) {
             Timber.d("onOptionsItemSelected: item %s selected.", getResources().getString(R.string.action_todo));
             return true;
-        }
-        else {
+        } else {
             Timber.w("onOptionsItemSelected: invalid item %d selected.", id);
         }
 
