@@ -190,8 +190,8 @@ public class PiconResourceManager {
                     new PiconResource(R.drawable.picon_tv8, "(?i)((tv)(\\s*\\S*)(8))"),
                     new PiconResource(R.drawable.picon_tvcg, "(?i)((tv)(\\s*\\S*)(cg))"),
                     new PiconResource(R.drawable.ic_tv, "(?i)((tv)(\\s*\\S*)(globo)(\\s*\\S*)(int))\\W+"), // TODO
-                    new PiconResource(R.drawable.ic_tv, "(?i)((tv)(\\s*\\S*)|((sudostschweiz)|(südostschweiz))(\\s*\\S*)(hd))"), // TODO
-                    new PiconResource(R.drawable.picon_tv5monde, "(?i)(.*tv.*5.*monde.*)"),
+                    new PiconResource(R.drawable.ic_tv, "tv", "(südostschweiz|sudostschweiz)", "hd"),
+                    new PiconResource(R.drawable.picon_tv5monde, "tv", "5", "monde"),
                     new PiconResource(R.drawable.ic_tv, "(?i)(tvo)"), // TODO
                     new PiconResource(R.drawable.ic_tv, "(?i)(tvsh)"), // TODO
                     new PiconResource(R.drawable.picon_ukrainetoday, "(?i)((ukraine)(\\s*\\S*)(today))"),
