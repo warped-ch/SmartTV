@@ -34,7 +34,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/imageViewPicon"
                 android:layout_toEndOf="@+id/imageViewPicon"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_above="@+id/textViewEventTitle"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/textViewEventTitle"
