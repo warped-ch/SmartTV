@@ -2,11 +2,14 @@ package org.dev.warped.smarttv;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by Andreas Wiedmer on 05.07.2016.
  */
 public class PiconManager {
+
+    private static HashMap<String, Integer> mHashMap = new HashMap<>();
 
     private static final ArrayList<PiconResource> mPiconResources = new ArrayList<PiconResource>(
             Arrays.asList(
@@ -201,13 +204,21 @@ public class PiconManager {
             ));
 
     public static int getPicon(String channelName) {
+
         if (null != channelName && !channelName.isEmpty()) {
+
+            if (mHashMap.containsKey(channelName)) {
+                return mHashMap.get(channelName);
+            }
+
             for (PiconResource piconResource : mPiconResources) {
                 if (channelName.matches(piconResource.getRegex())) {
+                    mHashMap.put(channelName, piconResource.getResourceId());
                     return piconResource.getResourceId();
                 }
             }
         }
+
         return R.drawable.ic_tv;
     }
 }
