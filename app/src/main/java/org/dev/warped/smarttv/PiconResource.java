@@ -12,6 +12,15 @@ public class PiconResource {
         mRegex = regex;
     }
 
+    PiconResource(int resourceId, String... substrings) {
+        mResourceId = resourceId;
+        String regEx = "(?i).*";
+        for (String s : substrings) {
+            regEx += (s + ".*");
+        }
+        mRegex = regEx;
+    }
+
     public int getResourceId() {
         return mResourceId;
     }

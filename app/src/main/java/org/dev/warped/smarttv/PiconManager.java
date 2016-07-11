@@ -10,8 +10,8 @@ public class PiconManager {
 
     private static final ArrayList<PiconResource> mPiconResources = new ArrayList<PiconResource>(
             Arrays.asList(
-                    new PiconResource(R.drawable.picon_3plushd, "(?i)((3)(\\s*\\S*)((\\+)|(plus))(\\s*\\S*)(hd))"),
-                    new PiconResource(R.drawable.picon_3sathd, "(?i)(((drei)|(3))(\\s*\\S*)(sat)(\\s*\\S*)(hd))"),
+                    new PiconResource(R.drawable.picon_3plushd, "(3|drei)", "(\\+|plus)", "hd"),
+                    new PiconResource(R.drawable.picon_3sathd, "(3|drei)", "sat", "hd"),
                     new PiconResource(R.drawable.ic_tv, "(?i)((a&e)(\\s*\\S*)(hd))"), // TODO
                     new PiconResource(R.drawable.picon_adultchannel, "(?i)((adult)(\\s*\\S*)(channel))"),
                     new PiconResource(R.drawable.picon_aljazeeraenglish, "(?i)((al)(\\s*\\S*)(jazeera)(\\s*\\S*)(english))"),
@@ -56,7 +56,7 @@ public class PiconManager {
                     new PiconResource(R.drawable.picon_extremesports, "(?i)((extreme)(\\s*\\S*)(sports))"),
                     new PiconResource(R.drawable.picon_fashiontv, "(?i)((fashion)(\\s*\\S*)(tv))"),
                     new PiconResource(R.drawable.picon_film4, "(?i)((film)(\\s*\\S*)(4))"),
-                    new PiconResource(R.drawable.picon_foxhd, "(?i)(.*fox.*hd.*)"),
+                    new PiconResource(R.drawable.picon_foxhd, "fox", "hd"),
                     new PiconResource(R.drawable.picon_france2hd, "(?i)((france)(\\s*\\S*)(2)(\\s*\\S*)(hd))"),
                     new PiconResource(R.drawable.picon_france24, "(?i)((france)(\\s*\\S*)(24))"),
                     new PiconResource(R.drawable.ic_tv, "(?i)((france)(\\s*\\S*)(3)(\\s*\\S*)(alsace))"), // TODO
