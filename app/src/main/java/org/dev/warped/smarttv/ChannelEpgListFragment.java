@@ -167,5 +167,6 @@ public class ChannelEpgListFragment extends Fragment implements SharedPreference
      */
     public interface OnChannelEpgListFragmentInteractionListener {
         void onShowChannel(ChannelEpg channel);
+        void onZapChannel(ChannelEpg channel);
     }
 }

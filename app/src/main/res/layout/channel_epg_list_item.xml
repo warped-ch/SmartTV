@@ -24,7 +24,8 @@
                 android:layout_width="100dp"
                 android:layout_height="60dp"
                 android:id="@+id/imageViewPicon"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_tv" />
 
             <TextView
                 android:id="@+id/textViewChannelTitle"
@@ -32,11 +33,27 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/imageViewPicon"
-                android:layout_toEndOf="@+id/imageViewPicon"
                 android:textAlignment="center"
                 android:layout_above="@+id/textViewEventTitle"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_toLeftOf="@+id/imageButtonZap"
+                android:layout_toRightOf="@+id/imageViewPicon"
+                android:layout_toEndOf="@+id/imageViewPicon"
+                android:layout_toStartOf="@+id/imageButtonZap" />
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="zap"
+                android:id="@+id/imageButtonZap"
+                android:layout_above="@+id/textViewEventTitle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_play_circle_filled"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent" />
 
             <TextView
                 android:id="@+id/textViewEventTitle"

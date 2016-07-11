@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import timber.log.Timber;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link Channel} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link ChannelEpg} and makes a call to the
  * specified {@link OnChannelEpgListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */

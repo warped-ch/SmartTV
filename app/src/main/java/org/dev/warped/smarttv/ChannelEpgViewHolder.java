@@ -2,6 +2,7 @@ package org.dev.warped.smarttv;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
     private final ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener mListener;
     private final ImageView mImageViewPicon;
     private final TextView mTextViewChannelName;
+    private final ImageButton mImageButtonZap;
     private final TextView mTextViewEventTitle;
     private final TextView mTextViewEventDescription;
 
@@ -30,6 +32,8 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
 
         mImageViewPicon = (ImageView) v.findViewById(R.id.imageViewPicon);
         mTextViewChannelName = (TextView) v.findViewById(R.id.textViewChannelTitle);
+        mImageButtonZap = (ImageButton) v.findViewById(R.id.imageButtonZap);
+        mImageButtonZap.setOnClickListener(this);
         mTextViewEventTitle = (TextView) v.findViewById(R.id.textViewEventTitle);
         mTextViewEventDescription = (TextView) v.findViewById(R.id.textViewEventDescription);
     }
@@ -50,7 +54,14 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
 
     @Override
     public void onClick(View v) {
-        Timber.d("onClick: show details for channel \"%s\".", mChannelEpg.getName());
-        mListener.onShowChannel(mChannelEpg);
+        Timber.d("onClick: adapter position %d", getAdapterPosition());
+
+        if (v.getId() == mImageButtonZap.getId()) {
+            Timber.d("onClick: zap to channel \"%s\"", mChannelEpg.getName());
+            mListener.onZapChannel(mChannelEpg);
+        } else {
+            Timber.d("onClick: show details for channel \"%s\".", mChannelEpg.getName());
+            mListener.onShowChannel(mChannelEpg);
+        }
     }
 }
