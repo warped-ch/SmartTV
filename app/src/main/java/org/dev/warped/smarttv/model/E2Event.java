@@ -3,6 +3,8 @@ package org.dev.warped.smarttv.model;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import timber.log.Timber;
+
 /**
  * Created by Andreas Wiedmer on 07.07.2016.
  */
@@ -10,19 +12,39 @@ import org.simpleframework.xml.Root;
 public class E2Event {
 
     public int getEventId() {
-        return mEventId;
+        try {
+            return Integer.parseInt(mEventId);
+        } catch (NumberFormatException e) {
+            Timber.w("getEventId: NumberFormatException caught, returning 0.");
+            return 0;
+        }
     }
 
     public int getEventStart() {
-        return mEventStart;
+        try {
+            return Integer.parseInt(mEventStart);
+        } catch (NumberFormatException e) {
+            Timber.w("getEventStart: NumberFormatException caught, returning 0.");
+            return 0;
+        }
     }
 
     public int getEventDuration() {
-        return mEventDuration;
+        try {
+            return Integer.parseInt(mEventDuration);
+        } catch (NumberFormatException e) {
+            Timber.w("getEventDuration: NumberFormatException caught, returning 0.");
+            return 0;
+        }
     }
 
     public int getEventCurrentTime() {
-        return mEventCurrentTime;
+        try {
+            return Integer.parseInt(mEventCurrentTime);
+        } catch (NumberFormatException e) {
+            Timber.w("getEventCurrentTime: NumberFormatException caught, returning 0.");
+            return 0;
+        }
     }
 
     public String getEventTitle() {
@@ -45,19 +67,35 @@ public class E2Event {
         return mEventServiceName;
     }
 
+    /**
+     * The event id.
+     * Must be of type String because value might be "None".
+     */
     @Element(name = "e2eventid")
-    private int mEventId;
+    private String mEventId;
+    /**
+     * The event start time in Unix time format.
+     * Must be of type String because value might be "None".
+     */
     @Element(name = "e2eventstart")
-    private int mEventStart;    // Unix time
+    private String mEventStart;    // Unix time
+    /**
+     * The event duration in seconds [s].
+     * Must be of type String because value might be "None".
+     */
     @Element(name = "e2eventduration")
-    private int mEventDuration; // [s]
+    private String mEventDuration;
+    /**
+     * The current time in Unix time format.
+     * Must be of type String because value might be "None".
+     */
     @Element(name = "e2eventcurrenttime")
-    private int mEventCurrentTime;  // Unix time
+    private String mEventCurrentTime;
     @Element(name = "e2eventtitle")
     private String mEventTitle;
     @Element(name = "e2eventdescription", required = false)
     private String mEventDescription;
-    @Element(name = "e2eventdescriptionextended")
+    @Element(name = "e2eventdescriptionextended", required = false)
     private String mEventDescriptionExtended;
     @Element(name = "e2eventservicereference")
     private String mEventServiceReference;
