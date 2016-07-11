@@ -7,9 +7,9 @@ import java.util.HashMap;
 /**
  * Created by Andreas Wiedmer on 05.07.2016.
  */
-public class PiconManager {
+public class PiconResourceManager {
 
-    private static HashMap<String, Integer> mHashMap = new HashMap<>();
+    private static HashMap<String, Integer> mPiconResourceIdHashMap = new HashMap<>();
 
     private static final ArrayList<PiconResource> mPiconResources = new ArrayList<PiconResource>(
             Arrays.asList(
@@ -203,18 +203,19 @@ public class PiconManager {
                     new PiconResource(R.drawable.picon_zdfneohd, "(?i)((zdf)(\\s*\\S*)(neo)(\\s*\\S*)(hd))")
             ));
 
-    public static int getPicon(String channelName) {
+    public static int getPiconResourceId(String channelName) {
 
         if (null != channelName && !channelName.isEmpty()) {
 
-            if (mHashMap.containsKey(channelName)) {
-                return mHashMap.get(channelName);
+            if (mPiconResourceIdHashMap.containsKey(channelName)) {
+                return mPiconResourceIdHashMap.get(channelName);
             }
 
             for (PiconResource piconResource : mPiconResources) {
                 if (channelName.matches(piconResource.getRegex())) {
-                    mHashMap.put(channelName, piconResource.getResourceId());
-                    return piconResource.getResourceId();
+                    int piconResourceId = piconResource.getResourceId();
+                    mPiconResourceIdHashMap.put(channelName, piconResourceId);
+                    return piconResourceId;
                 }
             }
         }

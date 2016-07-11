@@ -37,7 +37,7 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
     public void bindChannel(ChannelEpg channelEpg) {
         mChannelEpg = channelEpg;
 
-        mImageViewPicon.setImageResource(PiconManager.getPicon(channelEpg.getName()));
+        mImageViewPicon.setImageResource(PiconResourceManager.getPiconResourceId(channelEpg.getName()));
         mTextViewChannelName.setText(channelEpg.getName());
         EpgEvent event = channelEpg.getEpgEvents().get(0);
         if(null != event) {
