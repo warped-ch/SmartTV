@@ -167,11 +167,4 @@ public class MainActivity extends AppCompatActivity
 
         // TODO: implement
     }
-
-    @Override
-    public void onZapChannel(ChannelEpg channel) {
-        Timber.d("onZapChannel: \"%s\".", channel.getName());
-
-        // TODO: implement
-    }
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.dev.warped.smarttv.model.E2EventList;
+import org.dev.warped.smarttv.model.E2SimpleXmlResult;
 
 import java.net.InetAddress;
 
@@ -27,7 +28,9 @@ import timber.log.Timber;
  * Activities containing this fragment MUST implement the {@link OnChannelEpgListFragmentInteractionListener}
  * interface.
  */
-public class ChannelEpgListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class ChannelEpgListFragment extends Fragment implements
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        OnChannelEpgClickedListener {
 
     private static final String ARG_BOUQUET_REFERENCE = "arg-bouquet-reference";
 
@@ -59,7 +62,7 @@ public class ChannelEpgListFragment extends Fragment implements SharedPreference
             mBouquetReference = getArguments().getString(ARG_BOUQUET_REFERENCE);
         }
 
-        mAdapter = new ChannelEpgListAdapter(mListener);
+        mAdapter = new ChannelEpgListAdapter(this);
         updateChannels();
     }
 
@@ -131,6 +134,34 @@ public class ChannelEpgListFragment extends Fragment implements SharedPreference
         }
     }
 
+    @Override
+    public void onClickZap(ChannelEpg channel) {
+        Timber.d("onClickZap: \"%s\".", channel.getName());
+
+        if (mEnigma2Client == null) {
+            Timber.w("updateChannels: mEnigma2Client is null.");
+            return;
+        }
+
+        final Call<E2SimpleXmlResult> call = mEnigma2Client.getApiService().getZap(channel.getReference());
+        call.enqueue(new Callback<E2SimpleXmlResult>() {
+            @Override
+            public void onResponse(Call<E2SimpleXmlResult> call, Response<E2SimpleXmlResult> response) {
+                Timber.d("updateChannels: onResponse: \"%s\".", response.body());
+                // TODO: handle zap response and check if ok
+            }
+            @Override
+            public void onFailure(Call<E2SimpleXmlResult> call, Throwable t) {
+                Timber.w("updateChannels: onFailure: something went wrong.");
+            }
+        });
+    }
+
+    @Override
+    public void onClick(ChannelEpg channel) {
+        mListener.onShowChannel(channel);
+    }
+
     protected void updateChannels() {
         if (mEnigma2Client == null) {
             Timber.w("updateChannels: mEnigma2Client is null.");
@@ -167,6 +198,5 @@ public class ChannelEpgListFragment extends Fragment implements SharedPreference
      */
     public interface OnChannelEpgListFragmentInteractionListener {
         void onShowChannel(ChannelEpg channel);
-        void onZapChannel(ChannelEpg channel);
     }
 }

@@ -3,6 +3,7 @@ package org.dev.warped.smarttv;
 import org.dev.warped.smarttv.model.E2Event;
 import org.dev.warped.smarttv.model.E2EventList;
 import org.dev.warped.smarttv.model.E2ServiceList;
+import org.dev.warped.smarttv.model.E2SimpleXmlResult;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -20,4 +21,7 @@ public interface ApiServiceEnigma2 {
 
     @GET("web/epgnow")
     Call<E2EventList> getEpgNow(@Query("bRef") String bRef);
+
+    @GET("web/zap")
+    Call<E2SimpleXmlResult> getZap(@Query("sRef") String sRef);
 }

@@ -14,7 +14,7 @@ public class E2Service {
     }
 
     public E2Service(E2Event event) {
-        this.mServiceReference = getServiceReference();
+        this.mServiceReference = event.getEventServiceReference();
         this.mServiceName = event.getEventServiceName();
     }
 

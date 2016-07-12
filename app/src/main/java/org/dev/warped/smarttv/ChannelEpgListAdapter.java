@@ -18,10 +18,10 @@ import timber.log.Timber;
  */
 public class ChannelEpgListAdapter extends RecyclerView.Adapter<ChannelEpgViewHolder> {
 
-    private final OnChannelEpgListFragmentInteractionListener mListener;
+    private final OnChannelEpgClickedListener mListener;
     private ArrayList<ChannelEpg> mChannels;
 
-    public ChannelEpgListAdapter(OnChannelEpgListFragmentInteractionListener listener) {
+    public ChannelEpgListAdapter(OnChannelEpgClickedListener listener) {
         mListener = listener;
         mChannels = new ArrayList<>();
     }

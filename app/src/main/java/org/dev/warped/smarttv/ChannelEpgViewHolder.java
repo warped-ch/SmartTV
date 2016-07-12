@@ -13,7 +13,7 @@ import timber.log.Timber;
  */
 public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    private final ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener mListener;
+    private final OnChannelEpgClickedListener mListener;
     private final ImageView mImageViewPicon;
     private final TextView mTextViewChannelName;
     private final ImageButton mImageButtonZap;
@@ -22,7 +22,7 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
 
     private ChannelEpg mChannelEpg;
 
-    public ChannelEpgViewHolder(View v, ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener listener) {
+    public ChannelEpgViewHolder(View v, OnChannelEpgClickedListener listener) {
         super(v);
 
         mListener = listener;
@@ -57,11 +57,11 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
         Timber.d("onClick: adapter position %d", getAdapterPosition());
 
         if (v.getId() == mImageButtonZap.getId()) {
-            Timber.d("onClick: zap to channel \"%s\"", mChannelEpg.getName());
-            mListener.onZapChannel(mChannelEpg);
+            Timber.d("onClick: zap button clicked for channel \"%s\"", mChannelEpg.getName());
+            mListener.onClickZap(mChannelEpg);
         } else {
-            Timber.d("onClick: show details for channel \"%s\".", mChannelEpg.getName());
-            mListener.onShowChannel(mChannelEpg);
+            Timber.d("onClick: clicked channel \"%s\".", mChannelEpg.getName());
+            mListener.onClick(mChannelEpg);
         }
     }
 }
