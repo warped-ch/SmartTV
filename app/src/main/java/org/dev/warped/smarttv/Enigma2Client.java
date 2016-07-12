@@ -2,6 +2,8 @@ package org.dev.warped.smarttv;
 
 import java.net.InetAddress;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
@@ -10,16 +12,29 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
  */
 public class Enigma2Client {
 
-    private final String mBaseUrl;
     private final ApiServiceEnigma2 mApiService;
 
     public Enigma2Client(InetAddress address)
     {
-        mBaseUrl = "http://" + address.getHostAddress() + "/";
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(mBaseUrl)
-                .addConverterFactory(SimpleXmlConverterFactory.create())
-                .build();
+        String baseUrl = "http://" + address.getHostAddress() + "/";
+
+        Retrofit retrofit;
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .client(client)
+                    .addConverterFactory(SimpleXmlConverterFactory.create())
+                    .build();
+        } else {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(SimpleXmlConverterFactory.create())
+                    .build();
+        }
 
         mApiService = retrofit.create(ApiServiceEnigma2.class);
     }
