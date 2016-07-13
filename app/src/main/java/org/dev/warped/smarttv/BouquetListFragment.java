@@ -60,6 +60,9 @@ public class BouquetListFragment extends Fragment implements SharedPreferences.O
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(mAdapter);
         }
+
+        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_bouquets));
+
         return view;
     }
 

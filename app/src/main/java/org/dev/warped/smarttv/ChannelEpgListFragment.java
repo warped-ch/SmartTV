@@ -32,9 +32,9 @@ public class ChannelEpgListFragment extends Fragment implements
         SharedPreferences.OnSharedPreferenceChangeListener,
         OnChannelEpgClickedListener {
 
-    private static final String ARG_BOUQUET_REFERENCE = "arg-bouquet-reference";
+    private static final String ARG_BOUQUET = "arg-bouquet";
 
-    private String mBouquetReference;
+    private Bouquet mBouquet;
     private Enigma2Client mEnigma2Client;
     private ChannelEpgListAdapter mAdapter;
     private OnChannelEpgListFragmentInteractionListener mListener;
@@ -46,10 +46,10 @@ public class ChannelEpgListFragment extends Fragment implements
     public ChannelEpgListFragment() {
     }
 
-    public static ChannelEpgListFragment newInstance(String bouquetReference) {
+    public static ChannelEpgListFragment newInstance(Bouquet bouquet) {
         ChannelEpgListFragment fragment = new ChannelEpgListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_BOUQUET_REFERENCE, bouquetReference);
+        args.putParcelable(ARG_BOUQUET, bouquet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,7 +59,7 @@ public class ChannelEpgListFragment extends Fragment implements
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mBouquetReference = getArguments().getString(ARG_BOUQUET_REFERENCE);
+            mBouquet = getArguments().getParcelable(ARG_BOUQUET);
         }
 
         mAdapter = new ChannelEpgListAdapter(this);
@@ -78,6 +78,13 @@ public class ChannelEpgListFragment extends Fragment implements
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(mAdapter);
         }
+
+        if(null != mBouquet && null != mBouquet.getName()) {
+            ((MainActivity) getActivity()).setActionBarTitle(mBouquet.getName());
+        } else {
+            ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_bouquet));
+        }
+
         return view;
     }
 
@@ -167,12 +174,12 @@ public class ChannelEpgListFragment extends Fragment implements
             Timber.w("updateChannels: mEnigma2Client is null.");
             return;
         }
-        if (mBouquetReference == null) {
-            Timber.w("updateChannels: mBouquetReference is null.");
+        if (mBouquet == null) {
+            Timber.w("updateChannels: mBouquet is null.");
             return;
         }
 
-        final Call<E2EventList> call = mEnigma2Client.getApiService().getEpgNow(mBouquetReference);
+        final Call<E2EventList> call = mEnigma2Client.getApiService().getEpgNow(mBouquet.getReference());
         call.enqueue(new Callback<E2EventList>() {
             @Override
             public void onResponse(Call<E2EventList> call, Response<E2EventList> response) {

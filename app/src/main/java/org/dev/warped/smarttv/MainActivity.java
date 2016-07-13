@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
 
-        ChannelEpgListFragment fragment = ChannelEpgListFragment.newInstance(bouquet.getReference());
+        ChannelEpgListFragment fragment = ChannelEpgListFragment.newInstance(bouquet);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_CHANNEL_EPG_LIST);
         transaction.addToBackStack(null);
@@ -166,5 +166,13 @@ public class MainActivity extends AppCompatActivity
         Timber.d("onShowChannel: \"%s\".", channel.getName());
 
         // TODO: implement
+    }
+
+    public void setActionBarTitle(String title) {
+        try {
+            getSupportActionBar().setTitle(title);
+        } catch(NullPointerException e) {
+            Timber.e("setActionBarTitle: getSupportActionBar returned null.");
+        }
     }
 }

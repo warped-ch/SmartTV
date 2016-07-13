@@ -4,6 +4,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="action_bar_title_bouquet">Bouquet</string>
+    <string name="action_bar_title_bouquets">Bouquets</string>
+
     <string name="action_todo">Todo</string>
 
     <string name="menu_bouquets">Bouquets</string>
