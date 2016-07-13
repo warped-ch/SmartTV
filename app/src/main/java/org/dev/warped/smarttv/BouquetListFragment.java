@@ -2,10 +2,10 @@ package org.dev.warped.smarttv;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,8 +27,11 @@ import timber.log.Timber;
  * Activities containing this fragment MUST implement the {@link OnBouquetListFragmentInteractionListener}
  * interface.
  */
-public class BouquetListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class BouquetListFragment extends Fragment implements
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        SwipeRefreshLayout.OnRefreshListener {
 
+    private SwipeRefreshLayout mSwipeRefresh;
     private OnBouquetListFragmentInteractionListener mListener;
     private BouquetListAdapter mAdapter;
     private Enigma2Client mEnigma2Client;
@@ -41,26 +44,18 @@ public class BouquetListFragment extends Fragment implements SharedPreferences.O
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mAdapter =  new BouquetListAdapter(mListener);
-        updateBouquets();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bouquet_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(mAdapter);
-        }
+        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshBouquetList);
+        mSwipeRefresh.setOnRefreshListener(this);
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewBouquets);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mAdapter =  new BouquetListAdapter(mListener);
+        recyclerView.setAdapter(mAdapter);
 
         ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_bouquets));
 
@@ -104,6 +99,7 @@ public class BouquetListFragment extends Fragment implements SharedPreferences.O
     public void onResume() {
         super.onResume();
         PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
+        onRefresh();
     }
 
     @Override
@@ -120,6 +116,12 @@ public class BouquetListFragment extends Fragment implements SharedPreferences.O
         }
     }
 
+
+    @Override
+    public void onRefresh() {
+        updateBouquets();
+    }
+
     protected void updateBouquets() {
         if(mEnigma2Client != null) {
             final Call<E2ServiceList> call = mEnigma2Client.getApiService().getServices();
@@ -128,15 +130,18 @@ public class BouquetListFragment extends Fragment implements SharedPreferences.O
                 public void onResponse(Call<E2ServiceList> call, Response<E2ServiceList> response) {
                     Timber.d("updateBouquets: onResponse: \"%s\".", response.body());
                     mAdapter.setBouquets(Bouquet.buildBouquetList(response.body().getServiceList()));
+                    mSwipeRefresh.setRefreshing(false);
                 }
                 @Override
                 public void onFailure(Call<E2ServiceList> call, Throwable t) {
                     Timber.w("updateBouquets: onFailure: something went wrong.");
+                    mSwipeRefresh.setRefreshing(false);
                 }
             });
         } else {
             Timber.w("updateBouquets: mEnigma2Client is null.");
         }
+        mSwipeRefresh.setRefreshing(false);
     }
 
     /**
