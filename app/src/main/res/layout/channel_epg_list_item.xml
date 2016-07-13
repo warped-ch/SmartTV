@@ -58,7 +58,8 @@
                 android:background="@android:color/transparent"
                 android:padding="4dp"
                 android:tint="@color/colorCyanAccent700"
-                android:layout_marginRight="@dimen/fab_margin" />
+                android:layout_marginRight="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"/>
 
             <TextView
                 android:id="@+id/textViewEventTitle"
@@ -68,7 +69,21 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/imageViewPicon"
-                android:layout_margin="@dimen/text_margin" />
+                android:layout_marginLeft="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_marginRight="@dimen/text_margin" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBarEventDuration"
+                android:layout_below="@+id/textViewEventTitle"
+                android:layout_alignLeft="@+id/textViewEventTitle"
+                android:layout_alignStart="@+id/textViewEventTitle"
+                android:layout_alignRight="@+id/textViewEventTitle"
+                android:layout_alignEnd="@+id/textViewEventTitle"
+                android:progressTint="@color/colorCyanAccent700" />
 
             <TextView
                 android:id="@+id/textViewEventDescription"
@@ -77,9 +92,11 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/textViewEventTitle"
-                android:layout_marginLeft="@dimen/text_margin"
-                android:layout_marginRight="@dimen/text_margin"
+                android:layout_below="@+id/progressBarEventDuration"
+                android:layout_alignLeft="@+id/textViewEventTitle"
+                android:layout_alignStart="@+id/textViewEventTitle"
+                android:layout_alignRight="@+id/textViewEventTitle"
+                android:layout_alignEnd="@+id/textViewEventTitle"
                 android:layout_marginBottom="@dimen/text_margin" />
 
         </RelativeLayout>
