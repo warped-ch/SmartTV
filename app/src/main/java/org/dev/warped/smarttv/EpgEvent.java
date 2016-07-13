@@ -19,9 +19,9 @@ public class EpgEvent {
 
     public EpgEvent(E2Event event) {
         this.mId = event.getEventId();
-        this.mStart = new Date(1000 * event.getEventStart());
+        this.mStart = event.getEventStart();
         this.mDuration = event.getEventDuration();
-        this.mCurrentTime = new Date(1000 * event.getEventCurrentTime());
+        this.mCurrentTime = event.getEventCurrentTime();
         this.mTitle = event.getEventTitle();
         this.mDescription = event.getEventDescription();
         this.mDescriptionExtended = event.getEventDescriptionExtended();
@@ -53,5 +53,9 @@ public class EpgEvent {
 
     public String getDescriptionExtended() {
         return mDescriptionExtended;
+    }
+
+    public int calcProgress() {
+        return (int) ((100.0 / mDuration) * ((mCurrentTime.getTime() - mStart.getTime()) / 1000));
     }
 }

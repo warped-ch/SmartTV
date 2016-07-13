@@ -3,6 +3,8 @@ package org.dev.warped.smarttv.model;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import java.util.Date;
+
 import timber.log.Timber;
 
 /**
@@ -20,12 +22,12 @@ public class E2Event {
         }
     }
 
-    public int getEventStart() {
+    public Date getEventStart() {
         try {
-            return Integer.parseInt(mEventStart);
+            return new Date(1000 * (long)Integer.parseInt(mEventStart));
         } catch (NumberFormatException e) {
             Timber.w("getEventStart: NumberFormatException caught, returning 0.");
-            return 0;
+            return new Date();
         }
     }
 
@@ -38,12 +40,12 @@ public class E2Event {
         }
     }
 
-    public int getEventCurrentTime() {
+    public Date getEventCurrentTime() {
         try {
-            return Integer.parseInt(mEventCurrentTime);
+            return new Date(1000 * (long)Integer.parseInt(mEventCurrentTime));
         } catch (NumberFormatException e) {
             Timber.w("getEventCurrentTime: NumberFormatException caught, returning 0.");
-            return 0;
+            return new Date();
         }
     }
 

@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import timber.log.Timber;
@@ -18,6 +19,7 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
     private final TextView mTextViewChannelName;
     private final ImageButton mImageButtonZap;
     private final TextView mTextViewEventTitle;
+    private final ProgressBar mProgressBarEventDuration;
     private final TextView mTextViewEventDescription;
 
     private ChannelEpg mChannelEpg;
@@ -35,6 +37,7 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
         mImageButtonZap = (ImageButton) v.findViewById(R.id.imageButtonZap);
         mImageButtonZap.setOnClickListener(this);
         mTextViewEventTitle = (TextView) v.findViewById(R.id.textViewEventTitle);
+        mProgressBarEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEventDuration);
         mTextViewEventDescription = (TextView) v.findViewById(R.id.textViewEventDescription);
     }
 
@@ -46,6 +49,7 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
         EpgEvent event = channelEpg.getEpgEvents().get(0);
         if(null != event) {
             mTextViewEventTitle.setText(event.getTitle());
+            mProgressBarEventDuration.setProgress(event.calcProgress());
             mTextViewEventDescription.setText(event.getDescriptionExtended());
         } else {
             Timber.d("bindChannel: event for channel\"%s\" is null.", channelEpg.getName());
