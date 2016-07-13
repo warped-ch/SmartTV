@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Blue primary -->
-    <color name="colorBlue500">#2196F3</color>
-    <color name="colorBlue100">#BBDEFB</color>
-    <color name="colorBlue700">#1976D2</color>
-    <color name="colorBlue900">#0D47A1</color>
-    <!-- Blue accent -->
-    <color name="colorBlueAccent700">#2962FF</color>
+    <!-- Cyan primary -->
+    <color name="colorCyan500">#00BCD4</color>
+    <color name="colorCyan100">#B2EBF2</color>
+    <color name="colorCyan700">#0097A7</color>
+    <color name="colorCyan900">#006064</color>
+    <!-- Cyan accent -->
+    <color name="colorCyanAccent700">#00b8d4</color>
 
     <!-- Grey primary -->
     <color name="colorGrey500">#9E9E9E</color>
