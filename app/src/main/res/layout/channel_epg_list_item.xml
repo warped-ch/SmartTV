@@ -35,11 +35,13 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_alignParentTop="true"
                 android:layout_above="@+id/textViewEventTitle"
-                android:gravity="center"
+                android:gravity="left|bottom|start"
                 android:layout_toLeftOf="@+id/imageButtonZap"
                 android:layout_toRightOf="@+id/imageViewPicon"
                 android:layout_toEndOf="@+id/imageViewPicon"
-                android:layout_toStartOf="@+id/imageButtonZap" />
+                android:layout_toStartOf="@+id/imageButtonZap"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_marginLeft="@dimen/text_margin" />
 
             <ImageButton
                 android:id="@+id/imageButtonZap"
@@ -55,7 +57,8 @@
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:padding="4dp"
-                android:tint="@color/colorCyanAccent700" />
+                android:tint="@color/colorCyanAccent700"
+                android:layout_marginRight="@dimen/fab_margin" />
 
             <TextView
                 android:id="@+id/textViewEventTitle"
@@ -64,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/imageViewPicon" />
+                android:layout_below="@+id/imageViewPicon"
+                android:layout_margin="@dimen/text_margin" />
 
             <TextView
                 android:id="@+id/textViewEventDescription"
@@ -73,7 +77,10 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/textViewEventTitle" />
+                android:layout_below="@+id/textViewEventTitle"
+                android:layout_marginLeft="@dimen/text_margin"
+                android:layout_marginRight="@dimen/text_margin"
+                android:layout_marginBottom="@dimen/text_margin" />
 
         </RelativeLayout>
 
