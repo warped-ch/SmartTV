@@ -131,22 +131,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void showBouquets() {
-        BouquetListFragment fragment = new BouquetListFragment();
-        getFragmentManager().popBackStack();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUET_LIST);
-        transaction.commit();
-    }
-
-    private void showSettings() {
-        SettingsFragment fragment = new SettingsFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_SETTINGS);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
     @Override
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
@@ -171,5 +155,21 @@ public class MainActivity extends AppCompatActivity
         } catch(NullPointerException e) {
             Timber.e("setActionBarTitle: getSupportActionBar returned null.");
         }
+    }
+
+    protected void showBouquets() {
+        BouquetListFragment fragment = new BouquetListFragment();
+        getFragmentManager().popBackStack();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUET_LIST);
+        transaction.commit();
+    }
+
+    protected void showSettings() {
+        SettingsFragment fragment = new SettingsFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_SETTINGS);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
