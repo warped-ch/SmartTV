@@ -44,7 +44,11 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_settings));
+
+        return view;
     }
 
     @Override
