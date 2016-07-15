@@ -57,10 +57,7 @@ public class MainActivity extends AppCompatActivity
 
             // show bouquet list fragment on initial startup
             navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-            BouquetListFragment fragment = new BouquetListFragment();
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUET_LIST);
-            transaction.commit();
+            showBouquets();
         }
     }
 
@@ -136,9 +133,9 @@ public class MainActivity extends AppCompatActivity
 
     private void showBouquets() {
         BouquetListFragment fragment = new BouquetListFragment();
+        getFragmentManager().popBackStack();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUET_LIST);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
