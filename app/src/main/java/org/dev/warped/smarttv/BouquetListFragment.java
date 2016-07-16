@@ -49,7 +49,7 @@ public class BouquetListFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_bouquet_list, container, false);
 
         mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshBouquetList);
-        mSwipeRefresh.setColorSchemeResources(R.color.colorCyan700);
+        mSwipeRefresh.setColorSchemeResources(R.color.colorCyanAccent700);
         mSwipeRefresh.setOnRefreshListener(this);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewBouquets);
@@ -85,6 +85,7 @@ public class BouquetListFragment extends Fragment implements
     public void onDetach() {
         super.onDetach();
 
+        mSwipeRefresh = null;
         mAdapter = null;
         mListener = null;
         mEnigma2Client = null;

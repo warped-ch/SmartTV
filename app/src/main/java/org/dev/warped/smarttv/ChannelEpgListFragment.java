@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,10 +31,12 @@ import timber.log.Timber;
  */
 public class ChannelEpgListFragment extends Fragment implements
         SharedPreferences.OnSharedPreferenceChangeListener,
+        SwipeRefreshLayout.OnRefreshListener,
         OnChannelEpgClickedListener {
 
     private static final String ARG_BOUQUET = "arg-bouquet";
 
+    private SwipeRefreshLayout mSwipeRefresh;
     private Bouquet mBouquet;
     private Enigma2Client mEnigma2Client;
     private ChannelEpgListAdapter mAdapter;
@@ -61,26 +64,24 @@ public class ChannelEpgListFragment extends Fragment implements
         if (getArguments() != null) {
             mBouquet = getArguments().getParcelable(ARG_BOUQUET);
         }
-
-        mAdapter = new ChannelEpgListAdapter(this);
-        updateChannels();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_channel_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_channel_epg_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(mAdapter);
-        }
+        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshChannelEpgList);
+        mSwipeRefresh.setColorSchemeResources(R.color.colorCyanAccent700);
+        mSwipeRefresh.setOnRefreshListener(this);
 
-        if(null != mBouquet && null != mBouquet.getName()) {
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewChannelEpgList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mAdapter = new ChannelEpgListAdapter(this);
+        recyclerView.setAdapter(mAdapter);
+
+        if(null != mBouquet) {
             ((MainActivity) getActivity()).setActionBarTitle(mBouquet.getName());
         } else {
             ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_bouquet));
@@ -111,6 +112,8 @@ public class ChannelEpgListFragment extends Fragment implements
     public void onDetach() {
         super.onDetach();
 
+        mSwipeRefresh = null;
+        mBouquet = null;
         mAdapter = null;
         mListener = null;
         mEnigma2Client = null;
@@ -126,6 +129,7 @@ public class ChannelEpgListFragment extends Fragment implements
     public void onResume() {
         super.onResume();
         PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
+        onRefresh();
     }
 
     @Override
@@ -140,6 +144,11 @@ public class ChannelEpgListFragment extends Fragment implements
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        updateChannels();
     }
 
     @Override
@@ -173,10 +182,12 @@ public class ChannelEpgListFragment extends Fragment implements
     protected void updateChannels() {
         if (mEnigma2Client == null) {
             Timber.w("updateChannels: mEnigma2Client is null.");
+            mSwipeRefresh.setRefreshing(false);
             return;
         }
         if (mBouquet == null) {
             Timber.w("updateChannels: mBouquet is null.");
+            mSwipeRefresh.setRefreshing(false);
             return;
         }
 
@@ -186,10 +197,12 @@ public class ChannelEpgListFragment extends Fragment implements
             public void onResponse(Call<E2EventList> call, Response<E2EventList> response) {
                 Timber.d("updateChannels: onResponse: \"%s\".", response.body());
                 mAdapter.setChannels(ChannelEpg.buildChannelEpgList(response.body().getEventList()));
+                mSwipeRefresh.setRefreshing(false);
             }
             @Override
             public void onFailure(Call<E2EventList> call, Throwable t) {
                 Timber.w("updateChannels: onFailure: something went wrong.");
+                mSwipeRefresh.setRefreshing(false);
             }
         });
     }
