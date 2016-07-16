@@ -13,6 +13,9 @@ import retrofit2.http.Query;
  * Created by Andreas Wiedmer on 29.06.2016.
  */
 public interface ApiServiceEnigma2 {
+    @GET("web/getallservices")
+    Call<E2ServiceList> getAllServices();
+
     @GET("web/getservices")
     Call<E2ServiceList> getServices();
 
