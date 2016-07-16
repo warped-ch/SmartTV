@@ -1,5 +1,6 @@
 package org.dev.warped.smarttv;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -22,10 +23,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView.OnNavigationItemSelectedListener,
         BouquetListFragment.OnBouquetListFragmentInteractionListener,
         ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener {
-
-    private static final String FRAGMENT_TAG_BOUQUET_LIST = "FRAGMENT_TAG_BOUQUET_LIST";
-    private static final String FRAGMENT_TAG_CHANNEL_EPG_LIST = "FRAGMENT_TAG_CHANNEL_EPG_LIST";
-    private static final String FRAGMENT_TAG_SETTINGS = "FRAGMENT_TAG_SETTINGS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +54,10 @@ public class MainActivity extends AppCompatActivity
 
             // show bouquet list fragment on initial startup
             navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-            showBouquets();
+            BouquetListFragment fragment = new BouquetListFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
+            transaction.commit();
         }
     }
 
@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity
     public void onBackStackChanged() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (null != navigationView) {
-            BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_BOUQUET_LIST);
+            BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(BouquetListFragment.class.getName());
             if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
                 navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
             }
-            SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG_SETTINGS);
+            SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(SettingsFragment.class.getName());
             if (null != settingsFragment && settingsFragment.isVisible()) {
                 navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
             }
@@ -118,10 +118,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_bouquets) {
             Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_bouquets));
-            showBouquets();
+            replaceFragment(new BouquetListFragment());
         } else if (id == R.id.nav_settings) {
             Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_settings));
-            showSettings();
+            replaceFragment(new SettingsFragment());
         } else {
             Timber.w("onNavigationItemSelected: invalid item %d selected.", id);
         }
@@ -134,12 +134,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
-
-        ChannelEpgListFragment fragment = ChannelEpgListFragment.newInstance(bouquet);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_CHANNEL_EPG_LIST);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        replaceFragment(ChannelEpgListFragment.newInstance(bouquet));
     }
 
     @Override
@@ -152,24 +147,20 @@ public class MainActivity extends AppCompatActivity
     public void setActionBarTitle(String title) {
         try {
             getSupportActionBar().setTitle(title);
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             Timber.e("setActionBarTitle: getSupportActionBar returned null.");
         }
     }
 
-    protected void showBouquets() {
-        BouquetListFragment fragment = new BouquetListFragment();
-        getFragmentManager().popBackStack();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_BOUQUET_LIST);
-        transaction.commit();
-    }
-
-    protected void showSettings() {
-        SettingsFragment fragment = new SettingsFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, FRAGMENT_TAG_SETTINGS);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    private void replaceFragment(Fragment fragment) {
+        String fragmentTag = fragment.getClass().getName();
+        boolean fragmentPopped = getFragmentManager().popBackStackImmediate(fragmentTag, 0);
+        if (!fragmentPopped) {
+            // Fragment not in back stack, create it
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, fragment, fragmentTag);
+            ft.addToBackStack(fragmentTag);
+            ft.commit();
+        }
     }
 }

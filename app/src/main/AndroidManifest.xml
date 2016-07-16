@@ -13,7 +13,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/SmartTvTheme">
+            android:theme="@style/SmartTvTheme"
+            android:parentActivityName="org.dev.warped.smarttv.MainActivity" >
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.dev.warped.smarttv.MainActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
