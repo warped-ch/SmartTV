@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeRefreshBouquetList"
+    android:id="@+id/swipeRefreshChannelEpgList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="org.dev.warped.smarttv.BouquetListFragment"
-    tools:context="org.dev.warped.smarttv.BouquetListFragment">
+    android:name="org.dev.warped.smarttv.ChannelEpgListFragment"
+    tools:context="org.dev.warped.smarttv.ChannelEpgListFragment">
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/recyclerViewBouquets"
+        android:id="@+id/recyclerViewChannelEpgList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/bouquet_list_item" />
+        tools:listitem="@layout/channel_epg_list_item" />
 
 </android.support.v4.widget.SwipeRefreshLayout>
