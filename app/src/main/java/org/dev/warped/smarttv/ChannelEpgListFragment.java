@@ -2,10 +2,9 @@ package org.dev.warped.smarttv;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.dev.warped.smarttv.model.E2EventList;
-import org.dev.warped.smarttv.model.E2SimpleXmlResult;
+import com.squareup.otto.Subscribe;
 
-import java.net.InetAddress;
+import org.dev.warped.smarttv.events.EpgNowLoadedEvent;
+import org.dev.warped.smarttv.events.LoadEpgNowErrorEvent;
+import org.dev.warped.smarttv.events.LoadEpgNowEvent;
+import org.dev.warped.smarttv.events.ZapDoneEvent;
+import org.dev.warped.smarttv.events.ZapErrorEvent;
+import org.dev.warped.smarttv.events.ZapEvent;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import timber.log.Timber;
 
 /**
@@ -30,7 +30,6 @@ import timber.log.Timber;
  * interface.
  */
 public class ChannelEpgListFragment extends Fragment implements
-        SharedPreferences.OnSharedPreferenceChangeListener,
         SwipeRefreshLayout.OnRefreshListener,
         OnChannelEpgClickedListener {
 
@@ -38,7 +37,6 @@ public class ChannelEpgListFragment extends Fragment implements
 
     private SwipeRefreshLayout mSwipeRefresh;
     private Bouquet mBouquet;
-    private Enigma2Client mEnigma2Client;
     private ChannelEpgListAdapter mAdapter;
     private OnChannelEpgListFragmentInteractionListener mListener;
 
@@ -100,12 +98,6 @@ public class ChannelEpgListFragment extends Fragment implements
             throw new RuntimeException(activity.toString()
                     + " must implement OnChannelEpgListFragmentInteractionListener");
         }
-
-        SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(activity));
-        if(SharedPreferencesManager.EReceiverType.eEnigma2 == receiverType) {
-            InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(activity));
-            mEnigma2Client = new Enigma2Client(receiverAddress);
-        }
     }
 
     @Override
@@ -116,62 +108,32 @@ public class ChannelEpgListFragment extends Fragment implements
         mBouquet = null;
         mAdapter = null;
         mListener = null;
-        mEnigma2Client = null;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        PreferenceManager.getDefaultSharedPreferences(this.getActivity()).unregisterOnSharedPreferenceChangeListener(this);
+
+        BusProvider.getBus().unregister(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
+
+        BusProvider.getBus().register(this);
         onRefresh();
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        switch (key) {
-            case SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE:
-            case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
-                SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
-                if(SharedPreferencesManager.EReceiverType.eEnigma2 == receiverType) {
-                    InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
-                    mEnigma2Client = new Enigma2Client(receiverAddress);
-                }
-                break;
-        }
-    }
-
-    @Override
     public void onRefresh() {
-        updateChannels();
+        BusProvider.getBus().post(new LoadEpgNowEvent(mBouquet));
     }
 
     @Override
     public void onClickZap(ChannelEpg channel) {
         Timber.d("onClickZap: \"%s\".", channel.getName());
-
-        if (mEnigma2Client == null) {
-            Timber.w("updateChannels: mEnigma2Client is null.");
-            return;
-        }
-
-        final Call<E2SimpleXmlResult> call = mEnigma2Client.getApiService().getZap(channel.getReference());
-        call.enqueue(new Callback<E2SimpleXmlResult>() {
-            @Override
-            public void onResponse(Call<E2SimpleXmlResult> call, Response<E2SimpleXmlResult> response) {
-                Timber.d("updateChannels: onResponse: \"%s\".", response.body());
-                // TODO: handle zap response and check if ok
-            }
-            @Override
-            public void onFailure(Call<E2SimpleXmlResult> call, Throwable t) {
-                Timber.w("updateChannels: onFailure: something went wrong.");
-            }
-        });
+        BusProvider.getBus().post(new ZapEvent(channel));
     }
 
     @Override
@@ -179,32 +141,39 @@ public class ChannelEpgListFragment extends Fragment implements
         mListener.onShowChannel(channel);
     }
 
-    protected void updateChannels() {
-        if (mEnigma2Client == null) {
-            Timber.w("updateChannels: mEnigma2Client is null.");
-            mSwipeRefresh.setRefreshing(false);
-            return;
-        }
-        if (mBouquet == null) {
-            Timber.w("updateChannels: mBouquet is null.");
-            mSwipeRefresh.setRefreshing(false);
-            return;
-        }
+    @Subscribe
+    public void OnEpgNowLoaded(EpgNowLoadedEvent event) {
+        mAdapter.setChannels(event.getChannels());
+        mSwipeRefresh.setRefreshing(false);
+    }
 
-        final Call<E2EventList> call = mEnigma2Client.getApiService().getEpgNow(mBouquet.getReference());
-        call.enqueue(new Callback<E2EventList>() {
-            @Override
-            public void onResponse(Call<E2EventList> call, Response<E2EventList> response) {
-                Timber.d("updateChannels: onResponse: \"%s\".", response.body());
-                mAdapter.setChannels(ChannelEpg.buildChannelEpgList(response.body().getEventList()));
-                mSwipeRefresh.setRefreshing(false);
-            }
-            @Override
-            public void onFailure(Call<E2EventList> call, Throwable t) {
-                Timber.w("updateChannels: onFailure: something went wrong.");
-                mSwipeRefresh.setRefreshing(false);
-            }
-        });
+    @Subscribe
+    public void onLoadEpgNowError(LoadEpgNowErrorEvent event) {
+        mSwipeRefresh.setRefreshing(false);
+        showSnackBar(R.string.snackbar_load_channels_failed);
+    }
+
+    @Subscribe
+    public void OnZapDone(ZapDoneEvent event) {
+        if (!event.getSuccess()) {
+            Timber.d("OnZapDone: zap was not successful.");
+            showSnackBar(R.string.snackbar_zap_failed);
+        }
+    }
+
+    @Subscribe
+    public void onZapError(ZapErrorEvent event) {
+        showSnackBar(R.string.snackbar_zap_failed);
+    }
+
+    private void showSnackBar(@StringRes int resId) {
+        View v = getView();
+        if (null != v) {
+            Snackbar snackbar = Snackbar.make(v, resId, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        } else {
+            Timber.w("showSnackBar: view is null.");
+        }
     }
 
     /**

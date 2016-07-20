@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import org.dev.warped.smarttv.model.E2Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Andreas Wiedmer on 22.06.2016.
  */
@@ -25,14 +22,6 @@ public class Bouquet implements Parcelable {
             return new Bouquet[size];
         }
     };
-
-    public static ArrayList<Bouquet> buildBouquetList(List<E2Service> e2Services) {
-        ArrayList<Bouquet> bouquets = new ArrayList<>();
-        for(E2Service s : e2Services) {
-            bouquets.add(new Bouquet(s));
-        }
-        return bouquets;
-    }
 
     public Bouquet(Parcel parcel) {
         mName = parcel.readString();

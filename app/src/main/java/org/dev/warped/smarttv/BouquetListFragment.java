@@ -2,9 +2,8 @@ package org.dev.warped.smarttv;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,13 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.dev.warped.smarttv.model.E2ServiceList;
+import com.squareup.otto.Subscribe;
 
-import java.net.InetAddress;
+import org.dev.warped.smarttv.events.BouquetsLoadedEvent;
+import org.dev.warped.smarttv.events.LoadBouquetsErrorEvent;
+import org.dev.warped.smarttv.events.LoadBouquetsEvent;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import timber.log.Timber;
 
 /**
@@ -28,13 +26,11 @@ import timber.log.Timber;
  * interface.
  */
 public class BouquetListFragment extends Fragment implements
-        SharedPreferences.OnSharedPreferenceChangeListener,
         SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout mSwipeRefresh;
     private OnBouquetListFragmentInteractionListener mListener;
     private BouquetListAdapter mAdapter;
-    private Enigma2Client mEnigma2Client;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -73,12 +69,6 @@ public class BouquetListFragment extends Fragment implements
             throw new RuntimeException(activity.toString()
                     + " must implement OnBouquetListFragmentInteractionListener");
         }
-
-        SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(activity));
-        if(SharedPreferencesManager.EReceiverType.eEnigma2 == receiverType) {
-            InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(activity));
-            mEnigma2Client = new Enigma2Client(receiverAddress);
-        }
     }
 
     @Override
@@ -88,62 +78,45 @@ public class BouquetListFragment extends Fragment implements
         mSwipeRefresh = null;
         mAdapter = null;
         mListener = null;
-        mEnigma2Client = null;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        PreferenceManager.getDefaultSharedPreferences(this.getActivity()).unregisterOnSharedPreferenceChangeListener(this);
+
+        BusProvider.getBus().unregister(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        PreferenceManager.getDefaultSharedPreferences(this.getActivity()).registerOnSharedPreferenceChangeListener(this);
+
+        BusProvider.getBus().register(this);
         onRefresh();
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        switch (key) {
-            case SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE:
-            case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
-                SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
-                if(SharedPreferencesManager.EReceiverType.eEnigma2 == receiverType) {
-                    InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
-                    mEnigma2Client = new Enigma2Client(receiverAddress);
-                }
-                break;
-        }
-    }
-
-
-    @Override
     public void onRefresh() {
-        updateBouquets();
+        BusProvider.getBus().post(new LoadBouquetsEvent());
     }
 
-    protected void updateBouquets() {
-        if(mEnigma2Client != null) {
-            final Call<E2ServiceList> call = mEnigma2Client.getApiService().getServices();
-            call.enqueue(new Callback<E2ServiceList>() {
-                @Override
-                public void onResponse(Call<E2ServiceList> call, Response<E2ServiceList> response) {
-                    Timber.d("updateBouquets: onResponse: \"%s\".", response.body());
-                    mAdapter.setBouquets(Bouquet.buildBouquetList(response.body().getServiceList()));
-                    mSwipeRefresh.setRefreshing(false);
-                }
-                @Override
-                public void onFailure(Call<E2ServiceList> call, Throwable t) {
-                    Timber.w("updateBouquets: onFailure: something went wrong.");
-                    mSwipeRefresh.setRefreshing(false);
-                }
-            });
-        } else {
-            Timber.w("updateBouquets: mEnigma2Client is null.");
-        }
+    @Subscribe
+    public void onBouquetsLoaded(BouquetsLoadedEvent event) {
+        mAdapter.setBouquets(event.getBouquets());
         mSwipeRefresh.setRefreshing(false);
+    }
+
+    @Subscribe
+    public void onLoadBouquetsError(LoadBouquetsErrorEvent event) {
+        mSwipeRefresh.setRefreshing(false);
+
+        View v = getView();
+        if (null != v) {
+            Snackbar snackbar = Snackbar.make(v, R.string.snackbar_load_bouquets_failed, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        } else {
+            Timber.w("onLoadBouquetsError: view is null.");
+        }
     }
 
     /**

@@ -16,8 +16,6 @@ import android.view.MenuItem;
 
 import timber.log.Timber;
 
-import static timber.log.Timber.DebugTree;
-
 public class MainActivity extends AppCompatActivity
         implements FragmentManager.OnBackStackChangedListener,
         NavigationView.OnNavigationItemSelectedListener,
@@ -44,11 +42,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
-            // Initialize Timber
-            if (BuildConfig.DEBUG) {
-                Timber.plant(new DebugTree());
-            }
-
             // Ensures that the application is properly initialized with default settings
             PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 

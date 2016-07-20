@@ -17,4 +17,9 @@
     <string name="pref_title_receiver_type">Receiver type</string>
     <string name="pref_title_receiver_address">Hostname or IP</string>
     <string name="pref_summary_empty">empty</string>
+
+    <!-- Snackbar -->
+    <string name="snackbar_load_bouquets_failed">Loading bouquets failed.</string>
+    <string name="snackbar_load_channels_failed">Loading channels failed.</string>
+    <string name="snackbar_zap_failed">Zap failed.</string>
 </resources>
