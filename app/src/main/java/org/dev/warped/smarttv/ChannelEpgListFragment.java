@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -62,6 +63,8 @@ public class ChannelEpgListFragment extends Fragment implements
         if (getArguments() != null) {
             mBouquet = getArguments().getParcelable(ARG_BOUQUET);
         }
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -108,6 +111,19 @@ public class ChannelEpgListFragment extends Fragment implements
         mBouquet = null;
         mAdapter = null;
         mListener = null;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.action_refresh:
+                Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.action_refresh));
+                onRefresh();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
