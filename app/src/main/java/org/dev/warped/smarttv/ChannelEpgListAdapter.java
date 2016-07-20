@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import org.dev.warped.smarttv.ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -19,7 +20,7 @@ import timber.log.Timber;
 public class ChannelEpgListAdapter extends RecyclerView.Adapter<ChannelEpgViewHolder> {
 
     private final OnChannelEpgClickedListener mListener;
-    private ArrayList<ChannelEpg> mChannels;
+    private List<ChannelEpg> mChannels;
 
     public ChannelEpgListAdapter(OnChannelEpgClickedListener listener) {
         mListener = listener;
@@ -45,7 +46,7 @@ public class ChannelEpgListAdapter extends RecyclerView.Adapter<ChannelEpgViewHo
         return mChannels.size();
     }
 
-    public void setChannels(ArrayList<ChannelEpg> channelsEpg) {
+    public void setChannels(List<ChannelEpg> channelsEpg) {
         mChannels = channelsEpg;
         notifyDataSetChanged();
     }

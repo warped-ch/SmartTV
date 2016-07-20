@@ -115,7 +115,7 @@ public class BouquetListFragment extends Fragment implements
             Snackbar snackbar = Snackbar.make(v, R.string.snackbar_load_bouquets_failed, Snackbar.LENGTH_LONG);
             snackbar.show();
         } else {
-            Timber.w("onLoadBouquetsError: view is null");
+            Timber.w("onLoadBouquetsError: view is null.");
         }
     }
 
