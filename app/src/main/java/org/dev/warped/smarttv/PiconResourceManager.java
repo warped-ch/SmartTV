@@ -1,5 +1,8 @@
 package org.dev.warped.smarttv;
 
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -203,6 +206,7 @@ public class PiconResourceManager {
                     new PiconResource(R.drawable.picon_zdfneohd, "(?i)((zdf)(\\s*\\S*)(neo)(\\s*\\S*)(hd))")
             ));
 
+    @DrawableRes
     public static int getPiconResourceId(String channelName) {
 
         if (null != channelName && !channelName.isEmpty()) {
