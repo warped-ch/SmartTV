@@ -1,6 +1,5 @@
 package org.dev.warped.smarttv;
 
-import org.dev.warped.smarttv.model.E2Event;
 import org.dev.warped.smarttv.model.E2EventList;
 import org.dev.warped.smarttv.model.E2ServiceList;
 import org.dev.warped.smarttv.model.E2SimpleXmlResult;

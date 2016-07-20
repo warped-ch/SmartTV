@@ -43,4 +43,8 @@ public class Enigma2Client {
     {
         return mApiService;
     }
+
+    public void setAddress(InetAddress address) {
+        // TODO
+    }
 }

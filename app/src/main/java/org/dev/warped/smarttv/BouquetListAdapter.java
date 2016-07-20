@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import org.dev.warped.smarttv.BouquetListFragment.OnBouquetListFragmentInteractionListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -18,7 +19,7 @@ import timber.log.Timber;
 public class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> {
 
     private final OnBouquetListFragmentInteractionListener mListener;
-    private ArrayList<Bouquet> mBouquets;
+    private List<Bouquet> mBouquets;
 
     public BouquetListAdapter(OnBouquetListFragmentInteractionListener listener) {
         mListener = listener;
@@ -44,7 +45,7 @@ public class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> 
         return mBouquets.size();
     }
 
-    public void setBouquets(ArrayList<Bouquet> bouquets) {
+    public void setBouquets(List<Bouquet> bouquets) {
         mBouquets = bouquets;
         notifyDataSetChanged();
     }
