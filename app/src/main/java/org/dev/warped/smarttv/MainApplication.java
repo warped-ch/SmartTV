@@ -32,6 +32,14 @@ public class MainApplication extends Application implements SharedPreferences.On
         SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         mReceiverClient = new ReceiverClient(mBus, receiverType, receiverAddress);
+        BusProvider.getBus().register(mReceiverClient);
+    }
+
+    @Override
+    public void onTerminate() {
+        BusProvider.getBus().unregister(mReceiverClient);
+
+        super.onTerminate();
     }
 
     @Override

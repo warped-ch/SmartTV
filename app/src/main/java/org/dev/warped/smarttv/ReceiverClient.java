@@ -25,7 +25,6 @@ public class ReceiverClient {
 
     public ReceiverClient(Bus bus, SharedPreferencesManager.EReceiverType type, InetAddress address) {
         mBus = bus;
-        mBus.register(this);
 
         mEnigma2Client = new Enigma2Client(address);
     }
