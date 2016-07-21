@@ -25,7 +25,8 @@
                 android:layout_height="60dp"
                 android:id="@+id/imageViewPicon"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_tv" />
+                android:src="@drawable/ic_tv"
+                android:padding="6dp" />
 
             <TextView
                 android:id="@+id/textViewChannelTitle"
