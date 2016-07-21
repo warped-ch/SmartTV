@@ -15,7 +15,7 @@ import timber.log.Timber;
  */
 public class MainApplication extends Application implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private Bus mBus = BusProvider.getBus();
+    private final Bus mBus = BusProvider.getBus();
     private ReceiverClient mReceiverClient;
 
     @Override

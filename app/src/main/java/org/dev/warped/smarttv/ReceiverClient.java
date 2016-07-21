@@ -26,7 +26,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 20.07.2016.
  */
-public class ReceiverClient {
+class ReceiverClient {
     private final Bus mBus;
     // TODO handle multiple clients
     private Enigma2Client mEnigma2Client;

@@ -16,7 +16,7 @@ import timber.log.Timber;
  * {@link RecyclerView.Adapter} that can display a {@link Bouquet} and makes a call to the
  * specified {@link OnBouquetListFragmentInteractionListener}.
  */
-public class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> {
+class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> {
 
     private final OnBouquetListFragmentInteractionListener mListener;
     private List<Bouquet> mBouquets;

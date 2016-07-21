@@ -10,7 +10,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 23.06.2016.
  */
-public class InetAddressTask extends AsyncTask<String, Integer, InetAddress> {
+class InetAddressTask extends AsyncTask<String, Integer, InetAddress> {
     protected InetAddress doInBackground(String... params) {
         InetAddress address = null;
         try {

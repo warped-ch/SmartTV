@@ -36,7 +36,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_alignParentTop="true"
                 android:layout_above="@+id/textViewEventTitle"
-                android:gravity="left|bottom|start"
+                android:gravity="bottom|start"
                 android:layout_toLeftOf="@+id/imageButtonZap"
                 android:layout_toRightOf="@+id/imageViewPicon"
                 android:layout_toEndOf="@+id/imageViewPicon"

@@ -17,7 +17,7 @@ import timber.log.Timber;
  * specified {@link OnChannelEpgListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class ChannelEpgListAdapter extends RecyclerView.Adapter<ChannelEpgViewHolder> {
+class ChannelEpgListAdapter extends RecyclerView.Adapter<ChannelEpgViewHolder> {
 
     private final OnChannelEpgClickedListener mListener;
     private List<ChannelEpg> mChannels;
