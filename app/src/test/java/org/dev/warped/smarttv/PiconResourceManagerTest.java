@@ -266,6 +266,7 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_eurosport2hd() throws Exception {
         int piconResourceId = R.drawable.picon_eurosport2hd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Eurosport 2 HD")); // original e2servicename
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Eurosport 2 I HD")); // original e2servicename
     }
 
     @Test

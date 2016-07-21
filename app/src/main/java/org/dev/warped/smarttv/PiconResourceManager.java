@@ -57,6 +57,7 @@ class PiconResourceManager {
         HashMapUPC.put("Eurosport 1 HD", R.drawable.picon_eurosport1hd);
         HashMapUPC.put("Eurosport 1 I", R.drawable.picon_eurosport1);
         HashMapUPC.put("Eurosport 2 HD", R.drawable.picon_eurosport2hd);
+        HashMapUPC.put("Eurosport 2 I HD", R.drawable.picon_eurosport2hd);
         HashMapUPC.put("EuroStar", R.drawable.picon_eurostar);
         HashMapUPC.put("Extreme Sports", R.drawable.picon_extremesports);
         HashMapUPC.put("Film 4", R.drawable.picon_film4);
