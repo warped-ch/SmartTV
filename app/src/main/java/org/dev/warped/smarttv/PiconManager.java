@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by Andreas Wiedmer on 05.07.2016.
  */
-class PiconResourceManager {
+class PiconManager {
 
     private static final Map<String, Integer> mPiconResourceIdHashMap;
     static {
