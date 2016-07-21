@@ -1,14 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="SmartTvTheme" parent="Theme.AppCompat" >
+    <style name="SmartTvTheme" parent="Theme.AppCompat.NoActionBar" >
         <!-- Customize your theme here. -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorGrey900</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
         <item name="colorAccent">@color/colorCyanAccent700</item>
     </style>
 
-    <style name="SmartTvTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar"/>
+    <style name="SmartTvTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="SmartTvTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
