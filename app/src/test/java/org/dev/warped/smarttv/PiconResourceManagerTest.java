@@ -28,19 +28,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_aehd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("A&E HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_adultchannel() throws Exception {
-        int piconResourceId = R.drawable.picon_adultchannel;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Adult Channel")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_aljazeeraenglish() throws Exception {
         int piconResourceId = R.drawable.picon_aljazeeraenglish;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Al Jazeera English")); // original e2servicename
@@ -59,6 +46,12 @@ public class PiconResourceManagerTest {
     }
 
     @Test
+    public void getPiconResourceId_artehd() throws Exception {
+        int piconResourceId = R.drawable.picon_artehd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("arte HD")); // original e2servicename
+    }
+
+    @Test
     public void getPiconResourceId_atvavrupa() throws Exception {
         int piconResourceId = R.drawable.picon_atvavrupa;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("atv Avrupa")); // original e2servicename
@@ -71,13 +64,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_bbcfour_ceebies() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("BBC Four/Cbeebies")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_bbcone() throws Exception {
         int piconResourceId = R.drawable.picon_bbcone;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("BBC One")); // original e2servicename
@@ -87,13 +73,6 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_bbconehd() throws Exception {
         int piconResourceId = R.drawable.picon_bbconehd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("BBC One HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_bbcthree() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("BBC Three/CBBC")); // original e2servicename
     }
 
     @Test
@@ -139,9 +118,9 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_brsudhd() throws Exception {
-        int piconResourceId = R.drawable.picon_brsudhd;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("BR Süd HD")); // original e2servicename
+    public void getPiconResourceId_brfernsehensudhd() throws Exception {
+        int piconResourceId = R.drawable.picon_brfernsehensudhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("BR Fernsehen Süd HD")); // original e2servicename
     }
 
     @Test
@@ -163,6 +142,12 @@ public class PiconResourceManagerTest {
     }
 
     @Test
+    public void getPiconResourceId_cbbchd() throws Exception {
+        int piconResourceId = R.drawable.picon_cbbchd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("CBBC HD")); // original e2servicename
+    }
+
+    @Test
     public void getPiconResourceId_cctv4() throws Exception {
         int piconResourceId = R.drawable.picon_cctv4;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("CCTV 4")); // original e2servicename
@@ -172,6 +157,12 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_cctvnews() throws Exception {
         int piconResourceId = R.drawable.picon_cctvnews;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("CCTV News")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_channel4hd() throws Exception {
+        int piconResourceId = R.drawable.picon_channel4hd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Channel 4 HD")); // original e2servicename
     }
 
     @Test
@@ -199,17 +190,15 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_comedyhd_vivahd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Comedy HD/VIVA HD")); // original e2servicename
+    public void getPiconResourceId_daserstehd() throws Exception {
+        int piconResourceId = R.drawable.picon_daserstehd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Das Erste HD")); // original e2servicename
     }
 
     @Test
-    public void getPiconResourceId_d4accl() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("D4aCCL")); // original e2servicename
+    public void getPiconResourceId_disneycinemagichd() throws Exception {
+        int piconResourceId = R.drawable.picon_disneycinemagichd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Disney Cinemagic HD")); // original e2servicename
     }
 
     @Test
@@ -219,21 +208,21 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_dorceltv() throws Exception {
-        int piconResourceId = R.drawable.picon_dorceltv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Dorcel TV")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_ehd() throws Exception {
-        int piconResourceId = R.drawable.picon_ehd;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("E! HD")); // original e2servicename
+    public void getPiconResourceId_dorcelxxxhd() throws Exception {
+        int piconResourceId = R.drawable.picon_dorcelxxxhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Dorcel XXX HD")); // original e2servicename
     }
 
     @Test
     public void getPiconResourceId_e4() throws Exception {
         int piconResourceId = R.drawable.picon_e4;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("E4")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_ehd() throws Exception {
+        int piconResourceId = R.drawable.picon_ehd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("E! HD")); // original e2servicename
     }
 
     @Test
@@ -268,10 +257,15 @@ public class PiconResourceManagerTest {
     }
 
     @Test
+    public void getPiconResourceId_eurosport1hd() throws Exception {
+        int piconResourceId = R.drawable.picon_eurosport1hd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Eurosport 1 HD")); // original e2servicename
+    }
+
+    @Test
     public void getPiconResourceId_eurosport2hd() throws Exception {
         int piconResourceId = R.drawable.picon_eurosport2hd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Eurosport 2 HD")); // original e2servicename
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Eurosport 2 I HD")); // original e2servicename
     }
 
     @Test
@@ -287,12 +281,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_fashiontv() throws Exception {
-        int piconResourceId = R.drawable.picon_fashiontv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Fashion TV")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_film4() throws Exception {
         int piconResourceId = R.drawable.picon_film4;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Film 4")); // original e2servicename
@@ -302,13 +290,7 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_foxhd() throws Exception {
         int piconResourceId = R.drawable.picon_foxhd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Fox HD")); // original e2servicename
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Fox HD (TC)")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_france2hd() throws Exception {
-        int piconResourceId = R.drawable.picon_france2hd;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("France 2 HD")); // original e2servicename
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("FOX HD (TC)")); // original e2servicename
     }
 
     @Test
@@ -318,22 +300,21 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_france3() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("France 3 (Alsace)")); // original e2servicename
+    public void getPiconResourceId_france2hd() throws Exception {
+        int piconResourceId = R.drawable.picon_france2hd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("France 2 HD")); // original e2servicename
     }
 
     @Test
-    public void getPiconResourceId_france4() throws Exception {
-        int piconResourceId = R.drawable.picon_france4;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("France 4")); // original e2servicename
+    public void getPiconResourceId_france4hd() throws Exception {
+        int piconResourceId = R.drawable.picon_france4hd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("France 4 HD")); // original e2servicename
     }
 
     @Test
-    public void getPiconResourceId_france5() throws Exception {
-        int piconResourceId = R.drawable.picon_france5;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("France 5")); // original e2servicename
+    public void getPiconResourceId_france5hd() throws Exception {
+        int piconResourceId = R.drawable.picon_france5hd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("France 5 HD")); // original e2servicename
     }
 
     @Test
@@ -343,16 +324,9 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_gtv() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("GTV")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_gulli() throws Exception {
-        int piconResourceId = R.drawable.picon_gulli;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Gulli")); // original e2servicename
+    public void getPiconResourceId_gullihd() throws Exception {
+        int piconResourceId = R.drawable.picon_gullihd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Gulli HD")); // original e2servicename
     }
 
     @Test
@@ -365,6 +339,12 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_hayatplus() throws Exception {
         int piconResourceId = R.drawable.picon_hayatplus;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Hayat Plus")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_hrfernsehenhd() throws Exception {
+        int piconResourceId = R.drawable.picon_hrfernsehenhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("hr-fernsehen HD")); // original e2servicename
     }
 
     @Test
@@ -416,15 +396,15 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_jimjam() throws Exception {
-        int piconResourceId = R.drawable.picon_jimjam;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("JimJam")); // original e2servicename
+    public void getPiconResourceId_itvhd() throws Exception {
+        int piconResourceId = R.drawable.picon_itvhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("ITV HD")); // original e2servicename
     }
 
     @Test
-    public void getPiconResourceId_ktv() throws Exception {
-        int piconResourceId = R.drawable.picon_ktv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("K-TV")); // original e2servicename
+    public void getPiconResourceId_jimjam() throws Exception {
+        int piconResourceId = R.drawable.picon_jimjam;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("JimJam")); // original e2servicename
     }
 
     @Test
@@ -446,13 +426,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_kanal7int() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Kanal 7 Int.")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_kikahd() throws Exception {
         int piconResourceId = R.drawable.picon_kikahd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("KiKA HD")); // original e2servicename
@@ -462,6 +435,12 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_kinowelthd() throws Exception {
         int piconResourceId = R.drawable.picon_kinowelthd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Kinowelt HD")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_ktv() throws Exception {
+        int piconResourceId = R.drawable.picon_ktv;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("K-TV")); // original e2servicename
     }
 
     @Test
@@ -483,21 +462,27 @@ public class PiconResourceManagerTest {
     }
 
     @Test
+    public void getPiconResourceId_mdrsachsenhd() throws Exception {
+        int piconResourceId = R.drawable.picon_mdrsachsenhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("MDR Sachsen HD")); // original e2servicename
+    }
+
+    @Test
     public void getPiconResourceId_mediasetitalia() throws Exception {
         int piconResourceId = R.drawable.picon_mediasetitalia;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Mediaset Italia")); // original e2servicename
     }
 
     @Test
-    public void getPiconResourceId_more4() throws Exception {
-        int piconResourceId = R.drawable.picon_more4;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("More 4")); // original e2servicename
+    public void getPiconResourceId_mgm() throws Exception {
+        int piconResourceId = R.drawable.picon_mgm;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("MGM")); // original e2servicename
     }
 
     @Test
-    public void getPiconResourceId_motorstv() throws Exception {
-        int piconResourceId = R.drawable.picon_motorstv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Motors TV")); // original e2servicename
+    public void getPiconResourceId_more4() throws Exception {
+        int piconResourceId = R.drawable.picon_more4;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("More 4")); // original e2servicename
     }
 
     @Test
@@ -531,12 +516,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_ntvhd() throws Exception {
-        int piconResourceId = R.drawable.picon_ntvhd;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("n-tv HD")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_n24hd() throws Exception {
         int piconResourceId = R.drawable.picon_n24hd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("N24 HD")); // original e2servicename
@@ -544,7 +523,7 @@ public class PiconResourceManagerTest {
 
     @Test
     public void getPiconResourceId_natgeo() throws Exception {
-        int piconResourceId = R.drawable.picon_natgeoi;
+        int piconResourceId = R.drawable.picon_natgeo;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Nat Geo I")); // original e2servicename
     }
 
@@ -562,27 +541,21 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_nauticalchannelhd() throws Exception {
-        int piconResourceId = R.drawable.picon_nauticalchannelhd;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Nautical Channel HD")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_ndrfsndshd() throws Exception {
         int piconResourceId = R.drawable.picon_ndrfsndshd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("NDR FS NDS HD")); // original e2servicename
     }
 
     @Test
-    public void getPiconResourceId_nickjr() throws Exception {
-        int piconResourceId = R.drawable.picon_nickjr;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Nick Jr.")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_nickelodeonhd() throws Exception {
         int piconResourceId = R.drawable.picon_nickelodeonhd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("nickelodeon HD")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_nickjr() throws Exception {
+        int piconResourceId = R.drawable.picon_nickjr;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Nick Jr.")); // original e2servicename
     }
 
     @Test
@@ -595,6 +568,12 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_ntvavrupa() throws Exception {
         int piconResourceId = R.drawable.picon_ntvavrupa;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("NTV Avrupa")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_ntvhd() throws Exception {
+        int piconResourceId = R.drawable.picon_ntvhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("n-tv HD")); // original e2servicename
     }
 
     @Test
@@ -616,23 +595,15 @@ public class PiconResourceManagerTest {
     }
 
     @Test
+    public void getPiconResourceId_pbsamerica() throws Exception {
+        int piconResourceId = R.drawable.picon_pbsamerica;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("PBS America")); // original e2servicename
+    }
+
+    @Test
     public void getPiconResourceId_phoenixhd() throws Exception {
         int piconResourceId = R.drawable.picon_phoenixhd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("PHOENIX HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_pinkextra() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Pink Extra")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_pinkplus() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Pink Plus")); // original e2servicename
     }
 
     @Test
@@ -645,12 +616,6 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_powerturk() throws Exception {
         int piconResourceId = R.drawable.picon_powerturk;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Power Türk")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_privatetv() throws Exception {
-        int piconResourceId = R.drawable.picon_privatetv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Private TV")); // original e2servicename
     }
 
     @Test
@@ -669,13 +634,6 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_prosiebenhd() throws Exception {
         int piconResourceId = R.drawable.picon_prosiebenhd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("ProSieben HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_puls8hd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Puls 8 HD")); // original e2servicename
     }
 
     @Test
@@ -703,6 +661,12 @@ public class PiconResourceManagerTest {
     }
 
     @Test
+    public void getPiconResourceId_raihd() throws Exception {
+        int piconResourceId = R.drawable.picon_raihd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Rai HD")); // original e2servicename
+    }
+
+    @Test
     public void getPiconResourceId_rainews24() throws Exception {
         int piconResourceId = R.drawable.picon_rainews24;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Rai News 24")); // original e2servicename
@@ -712,6 +676,12 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_raisport1() throws Exception {
         int piconResourceId = R.drawable.picon_raisport1;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Rai Sport 1")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_rbbberlinhd() throws Exception {
+        int piconResourceId = R.drawable.picon_rbbberlinhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("rbb Berlin HD")); // original e2servicename
     }
 
     @Test
@@ -733,21 +703,9 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_rsila1() throws Exception {
-        int piconResourceId = R.drawable.picon_rsila1;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RSI LA 1")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_rsila1hd() throws Exception {
         int piconResourceId = R.drawable.picon_rsila1hd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RSI LA 1 HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_rsila2() throws Exception {
-        int piconResourceId = R.drawable.picon_rsila2;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RSI LA 2")); // original e2servicename
     }
 
     @Test
@@ -763,12 +721,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_rtl() throws Exception {
-        int piconResourceId = R.drawable.picon_rtl;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RTL")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_rtl2() throws Exception {
         int piconResourceId = R.drawable.picon_rtl2;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RTL 2")); // original e2servicename
@@ -778,6 +730,12 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_rtl2hd() throws Exception {
         int piconResourceId = R.drawable.picon_rtl2hd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RTL 2 HD")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_rtl9hd() throws Exception {
+        int piconResourceId = R.drawable.picon_rtl9hd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RTL 9 HD")); // original e2servicename
     }
 
     @Test
@@ -811,12 +769,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_rtsdeux() throws Exception {
-        int piconResourceId = R.drawable.picon_rtsdeux;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RTS Deux")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_rtsdeuxhd() throws Exception {
         int piconResourceId = R.drawable.picon_rtsdeuxhd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RTS Deux HD")); // original e2servicename
@@ -826,12 +778,6 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_rtssat() throws Exception {
         int piconResourceId = R.drawable.picon_rtssat;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RTS Sat")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_rtsun() throws Exception {
-        int piconResourceId = R.drawable.picon_rtsun;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("RTS Un")); // original e2servicename
     }
 
     @Test
@@ -847,13 +793,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_s1hd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("S1 HD")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_sat1() throws Exception {
         int piconResourceId = R.drawable.picon_sat1;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SAT.1")); // original e2servicename
@@ -863,13 +802,6 @@ public class PiconResourceManagerTest {
     public void getPiconResourceId_sat1hd() throws Exception {
         int piconResourceId = R.drawable.picon_sat1hd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SAT.1 HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_schweiz5() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SCHWEIZ5")); // original e2servicename
     }
 
     @Test
@@ -885,23 +817,27 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_sicint() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SIC Int.")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_sicnoticias() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SIC Noticias")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_sixxhd() throws Exception {
         int piconResourceId = R.drawable.picon_sixxhd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Sixx HD")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_skybundesligahd1() throws Exception {
+        int piconResourceId = R.drawable.picon_skybundesligahd1;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Sky Bundesliga HD 1")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_skysport1() throws Exception {
+        int piconResourceId = R.drawable.picon_skysport1;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Sky Sport 1")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_sport1hd() throws Exception {
+        int piconResourceId = R.drawable.picon_sport1hd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SPORT1 HD")); // original e2servicename
     }
 
     @Test
@@ -917,12 +853,6 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_srf1() throws Exception {
-        int piconResourceId = R.drawable.picon_srf1;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SRF 1")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_srf1hd() throws Exception {
         int piconResourceId = R.drawable.picon_srf1hd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SRF 1 HD")); // original e2servicename
@@ -935,29 +865,9 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_srfzwei() throws Exception {
-        int piconResourceId = R.drawable.picon_srfzwei;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SRF zwei")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_srfzweihd() throws Exception {
         int piconResourceId = R.drawable.picon_srfzweihd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("SRF zwei HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_startvhd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Star TV HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_stvavrupa() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("STV Avrupa")); // original e2servicename
     }
 
     @Test
@@ -985,72 +895,21 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_tele1hd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Tele 1 HD")); // original e2servicename
+    public void getPiconResourceId_tcskysport2() throws Exception {
+        int piconResourceId = R.drawable.picon_tcskysport2;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TC Sky Sport 2")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_tcsport1() throws Exception {
+        int piconResourceId = R.drawable.picon_tcsport1;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TC Sport 1")); // original e2servicename
     }
 
     @Test
     public void getPiconResourceId_tele5() throws Exception {
         int piconResourceId = R.drawable.picon_tele5;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Tele 5")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_telebarnhd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Tele Bärn HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_teled() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Tele D")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_telem1hd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Tele M1 HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_teletophd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Tele Top HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_telez() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Tele Z")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_telebaselhd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Telebasel HD")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_telebielingue() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TeleBielingue")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_teleticinohd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TeleTicino HD")); // original e2servicename
     }
 
     @Test
@@ -1072,11 +931,9 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_tntglitzhd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TNT Glitz HD")); // original e2servicename
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TNT Glitz HD (TC)")); // original e2servicename
+    public void getPiconResourceId_tntcomedyhd() throws Exception {
+        int piconResourceId = R.drawable.picon_tntcomedyhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TNT Comedy HD (TC)")); // original e2servicename
     }
 
     @Test
@@ -1092,55 +949,15 @@ public class PiconResourceManagerTest {
     }
 
     @Test
-    public void getPiconResourceId_tv8() throws Exception {
-        int piconResourceId = R.drawable.picon_tv8;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TV 8")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_tvcg() throws Exception {
-        int piconResourceId = R.drawable.picon_tvcg;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TV CG")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_tvgloboint() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TV Globo Int.")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_tvsudostschweizhd() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TV Südostschweiz HD")); // original e2servicename
-    }
-
-    @Test
     public void getPiconResourceId_tv5monde() throws Exception {
         int piconResourceId = R.drawable.picon_tv5monde;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TV5MONDE")); // original e2servicename
     }
 
     @Test
-    public void getPiconResourceId_tvo() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TVO")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_tvsh() throws Exception {
-        // TODO: use correct picon
-        int piconResourceId = R.drawable.ic_tv;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TVSH")); // original e2servicename
-    }
-
-    @Test
-    public void getPiconResourceId_ukrainetoday() throws Exception {
-        int piconResourceId = R.drawable.picon_ukrainetoday;
-        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("Ukraine Today")); // original e2servicename
+    public void getPiconResourceId_tvcg() throws Exception {
+        int piconResourceId = R.drawable.picon_tvcg;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("TV CG")); // original e2servicename
     }
 
     @Test
@@ -1162,10 +979,27 @@ public class PiconResourceManagerTest {
     }
 
     @Test
+    public void getPiconResourceId_w9hd() throws Exception {
+        int piconResourceId = R.drawable.picon_w9hd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("W9 HD")); // original e2servicename
+    }
+
+    @Test
     public void getPiconResourceId_wdrfernsehenhd() throws Exception {
-        // TODO: use correct picon
         int piconResourceId = R.drawable.picon_wdrfernsehenhd;
         assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("WDR Fernsehen HD")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_zdfhd() throws Exception {
+        int piconResourceId = R.drawable.picon_zdfhd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("ZDF HD")); // original e2servicename
+    }
+
+    @Test
+    public void getPiconResourceId_zdfinfohd() throws Exception {
+        int piconResourceId = R.drawable.picon_zdfinfohd;
+        assertEquals(piconResourceId, PiconResourceManager.getPiconResourceId("ZDFinfo HD")); // original e2servicename
     }
 
     @Test
