@@ -29,15 +29,14 @@ public class MainApplication extends Application implements SharedPreferences.On
 
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).registerOnSharedPreferenceChangeListener(this);
 
-        SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
-        InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
-        mReceiverClient = new ReceiverClient(mBus, receiverType, receiverAddress);
-        BusProvider.getBus().register(mReceiverClient);
+        createReceiverClient(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
     }
 
     @Override
     public void onTerminate() {
-        BusProvider.getBus().unregister(mReceiverClient);
+        if (null != mReceiverClient) {
+            BusProvider.getBus().unregister(mReceiverClient);
+        }
 
         super.onTerminate();
     }
@@ -46,13 +45,22 @@ public class MainApplication extends Application implements SharedPreferences.On
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
             case SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE:
-                SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
-                mReceiverClient.setType(receiverType);
-                break;
             case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
-                InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
-                mReceiverClient.setAddress(receiverAddress);
+                createReceiverClient(sharedPreferences);
                 break;
+        }
+    }
+
+    private void createReceiverClient(SharedPreferences sharedPreferences) {
+        if (null != mReceiverClient) {
+            BusProvider.getBus().unregister(mReceiverClient);
+            mReceiverClient = null;
+        }
+        SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
+        InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
+        if (null != receiverType && null != receiverAddress) {
+            mReceiverClient = new ReceiverClient(mBus, receiverType, receiverAddress);
+            BusProvider.getBus().register(mReceiverClient);
         }
     }
 }

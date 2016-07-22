@@ -37,14 +37,6 @@ class ReceiverClient {
         mEnigma2Client = new Enigma2Client(address);
     }
 
-    public void setType(SharedPreferencesManager.EReceiverType type) {
-        // TODO: handle receiver types
-    }
-
-    public void setAddress(InetAddress address) {
-        mEnigma2Client = new Enigma2Client(address);
-    }
-
     @Subscribe
     public void onLoadBouquets(LoadBouquetsEvent event) {
         final Call<E2ServiceList> call = mEnigma2Client.getApiService().getServices();

@@ -19,6 +19,10 @@ public class SharedPreferencesManager {
         eEnigma2
     }
 
+    public static boolean areSettingsDefined(SharedPreferences sharedPreferences) {
+        return ((null != getReceiverType(sharedPreferences)) && (null != getReceiverAddress(sharedPreferences)));
+    }
+
     public static EReceiverType getReceiverType(SharedPreferences sharedPreferences) {
         EReceiverType type = null;
         if (sharedPreferences.contains(PREF_KEY_RECEIVER_TYPE)) {

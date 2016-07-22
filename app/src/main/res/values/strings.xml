@@ -19,6 +19,7 @@
     <string name="pref_summary_empty">empty</string>
 
     <!-- Snackbar -->
+    <string name="snackbar_please_define_settings">Please define settings.</string>
     <string name="snackbar_load_bouquets_failed">Loading bouquets failed.</string>
     <string name="snackbar_load_channels_failed">Loading channels failed.</string>
     <string name="snackbar_zap_failed">Zap failed.</string>
