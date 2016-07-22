@@ -58,7 +58,6 @@ public class SharedPreferencesManager {
                 } catch (InterruptedException e) {
                     Timber.e(e, "getReceiverAddress: IllegalStateException exception caught.");
                 }
-
             }
         } else {
             Timber.e("getReceiverType: SharedPreferences do not contain \"%s\".", PREF_KEY_RECEIVER_ADDRESS);
