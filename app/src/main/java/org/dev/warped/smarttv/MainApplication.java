@@ -56,7 +56,7 @@ public class MainApplication extends Application implements SharedPreferences.On
             BusProvider.getBus().unregister(mReceiverClient);
             mReceiverClient = null;
         }
-        SharedPreferencesManager.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
+        ReceiverClient.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
         InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
         if (null != receiverType && null != receiverAddress) {
             mReceiverClient = new ReceiverClient(mBus, receiverType, receiverAddress);

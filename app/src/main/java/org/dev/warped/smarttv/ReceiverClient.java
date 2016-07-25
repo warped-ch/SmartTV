@@ -27,11 +27,16 @@ import timber.log.Timber;
  * Created by Andreas Wiedmer on 20.07.2016.
  */
 class ReceiverClient {
+    public enum EReceiverType {
+        eUnknown,
+        eEnigma2
+    }
+
     private final Bus mBus;
     // TODO handle multiple clients
     private Enigma2Client mEnigma2Client;
 
-    public ReceiverClient(Bus bus, SharedPreferencesManager.EReceiverType type, InetAddress address) {
+    public ReceiverClient(Bus bus, EReceiverType type, InetAddress address) {
         mBus = bus;
 
         mEnigma2Client = new Enigma2Client(address);
