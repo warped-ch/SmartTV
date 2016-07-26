@@ -1,5 +1,6 @@
 package org.dev.warped.smarttv;
 
+import org.dev.warped.smarttv.model.E2Event;
 import org.dev.warped.smarttv.model.E2Service;
 
 import java.util.ArrayList;
@@ -12,18 +13,19 @@ public class Channel {
 
     private final String mName;
     private final String mReference;
-
-    public static ArrayList<Channel> buildChannelList(List<E2Service> e2Services) {
-        ArrayList<Channel> channels = new ArrayList<>();
-        for(E2Service s : e2Services) {
-            channels.add(new Channel(s));
-        }
-        return channels;
-    }
+    private final ArrayList<EpgEvent> mEpgEvents;
 
     public Channel(E2Service e2Service) {
         mName = e2Service.getServiceName();
         mReference = e2Service.getServiceReference();
+        mEpgEvents = new ArrayList<>();
+    }
+
+    public Channel(E2Event e2Event) {
+        mName = e2Event.getEventServiceName();
+        mReference = e2Event.getEventServiceReference();
+        mEpgEvents = new ArrayList<>();
+        mEpgEvents.add(new EpgEvent(e2Event));
     }
 
     String getName() {
@@ -32,5 +34,9 @@ public class Channel {
 
     String getReference() {
         return mReference;
+    }
+
+    public List<EpgEvent> getEpgEvents() {
+        return mEpgEvents;
     }
 }

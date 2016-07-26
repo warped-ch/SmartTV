@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity
         implements FragmentManager.OnBackStackChangedListener,
         NavigationView.OnNavigationItemSelectedListener,
         BouquetListFragment.OnBouquetListFragmentInteractionListener,
-        ChannelEpgListFragment.OnChannelEpgListFragmentInteractionListener {
+        ChannelListFragment.OnChannelListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,11 +117,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
-        replaceFragment(ChannelEpgListFragment.newInstance(bouquet));
+        replaceFragment(ChannelListFragment.newInstance(bouquet));
     }
 
     @Override
-    public void onShowChannel(ChannelEpg channel) {
+    public void onShowChannel(Channel channel) {
         Timber.d("onShowChannel: \"%s\".", channel.getName());
 
         // TODO: implement

@@ -27,29 +27,29 @@ import timber.log.Timber;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnChannelEpgListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnChannelListFragmentInteractionListener}
  * interface.
  */
-public class ChannelEpgListFragment extends Fragment implements
+public class ChannelListFragment extends Fragment implements
         SwipeRefreshLayout.OnRefreshListener,
-        OnChannelEpgClickedListener {
+        OnChannelClickedListener {
 
     private static final String ARG_BOUQUET = "arg-bouquet";
 
     private SwipeRefreshLayout mSwipeRefresh;
     private Bouquet mBouquet;
-    private ChannelEpgListAdapter mAdapter;
-    private OnChannelEpgListFragmentInteractionListener mListener;
+    private ChannelListAdapter mAdapter;
+    private OnChannelListFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ChannelEpgListFragment() {
+    public ChannelListFragment() {
     }
 
-    public static ChannelEpgListFragment newInstance(Bouquet bouquet) {
-        ChannelEpgListFragment fragment = new ChannelEpgListFragment();
+    public static ChannelListFragment newInstance(Bouquet bouquet) {
+        ChannelListFragment fragment = new ChannelListFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_BOUQUET, bouquet);
         fragment.setArguments(args);
@@ -70,16 +70,16 @@ public class ChannelEpgListFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_channel_epg_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_channel_list, container, false);
 
-        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshChannelEpgList);
+        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshChannelList);
         mSwipeRefresh.setColorSchemeResources(R.color.colorCyanAccent700);
         mSwipeRefresh.setOnRefreshListener(this);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewChannelEpgList);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewChannelList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        mAdapter = new ChannelEpgListAdapter(this);
+        mAdapter = new ChannelListAdapter(this);
         recyclerView.setAdapter(mAdapter);
 
         if(null != mBouquet) {
@@ -94,12 +94,12 @@ public class ChannelEpgListFragment extends Fragment implements
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof OnChannelEpgListFragmentInteractionListener) {
-            mListener = (OnChannelEpgListFragmentInteractionListener) activity;
+        if (activity instanceof OnChannelListFragmentInteractionListener) {
+            mListener = (OnChannelListFragmentInteractionListener) activity;
         } else {
-            Timber.e("onAttach: %s must implement OnChannelEpgListFragmentInteractionListener.", activity.toString());
+            Timber.e("onAttach: %s must implement OnChannelListFragmentInteractionListener.", activity.toString());
             throw new RuntimeException(activity.toString()
-                    + " must implement OnChannelEpgListFragmentInteractionListener");
+                    + " must implement OnChannelListFragmentInteractionListener");
         }
     }
 
@@ -147,13 +147,13 @@ public class ChannelEpgListFragment extends Fragment implements
     }
 
     @Override
-    public void onClickZap(ChannelEpg channel) {
+    public void onClickZap(Channel channel) {
         Timber.d("onClickZap: \"%s\".", channel.getName());
         BusProvider.getBus().post(new ZapEvent(channel));
     }
 
     @Override
-    public void onClick(ChannelEpg channel) {
+    public void onClick(Channel channel) {
         mListener.onShowChannel(channel);
     }
 
@@ -202,7 +202,7 @@ public class ChannelEpgListFragment extends Fragment implements
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnChannelEpgListFragmentInteractionListener {
-        void onShowChannel(ChannelEpg channel);
+    public interface OnChannelListFragmentInteractionListener {
+        void onShowChannel(Channel channel);
     }
 }

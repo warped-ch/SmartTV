@@ -12,9 +12,9 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 05.07.2016.
  */
-public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    private final OnChannelEpgClickedListener mListener;
+    private final OnChannelClickedListener mListener;
     private final ImageView mImageViewPicon;
     private final TextView mTextViewChannelName;
     private final ImageButton mImageButtonZap;
@@ -22,9 +22,9 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
     private final ProgressBar mProgressBarEventDuration;
     private final TextView mTextViewEventDescription;
 
-    private ChannelEpg mChannelEpg;
+    private Channel mChannel;
 
-    public ChannelEpgViewHolder(View v, OnChannelEpgClickedListener listener) {
+    public ChannelViewHolder(View v, OnChannelClickedListener listener) {
         super(v);
 
         mListener = listener;
@@ -41,18 +41,18 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
         mTextViewEventDescription = (TextView) v.findViewById(R.id.textViewEventDescription);
     }
 
-    public void bindChannel(ChannelEpg channelEpg) {
-        mChannelEpg = channelEpg;
+    public void bindChannel(Channel channel) {
+        mChannel = channel;
 
-        mImageViewPicon.setImageResource(PiconManager.getPiconResourceId(channelEpg.getName()));
-        mTextViewChannelName.setText(channelEpg.getName());
-        EpgEvent event = channelEpg.getEpgEvents().get(0);
-        if(null != event) {
+        mImageViewPicon.setImageResource(PiconManager.getPiconResourceId(channel.getName()));
+        mTextViewChannelName.setText(channel.getName());
+        if(!channel.getEpgEvents().isEmpty()) {
+            EpgEvent event = channel.getEpgEvents().get(0);
             mTextViewEventTitle.setText(event.getTitle());
             mProgressBarEventDuration.setProgress(event.calcProgress());
             mTextViewEventDescription.setText(event.getDescriptionExtended());
         } else {
-            Timber.d("bindChannel: event for channel\"%s\" is null.", channelEpg.getName());
+            Timber.d("bindChannel: epg event list for channel \"%s\" is empty.", channel.getName());
         }
     }
 
@@ -61,11 +61,11 @@ public class ChannelEpgViewHolder extends RecyclerView.ViewHolder implements Vie
         Timber.d("onClick: adapter position %d", getAdapterPosition());
 
         if (v.getId() == mImageButtonZap.getId()) {
-            Timber.d("onClick: zap button clicked for channel \"%s\"", mChannelEpg.getName());
-            mListener.onClickZap(mChannelEpg);
+            Timber.d("onClick: zap button clicked for channel \"%s\"", mChannel.getName());
+            mListener.onClickZap(mChannel);
         } else {
-            Timber.d("onClick: clicked channel \"%s\".", mChannelEpg.getName());
-            mListener.onClick(mChannelEpg);
+            Timber.d("onClick: clicked channel \"%s\".", mChannel.getName());
+            mListener.onClick(mChannel);
         }
     }
 }

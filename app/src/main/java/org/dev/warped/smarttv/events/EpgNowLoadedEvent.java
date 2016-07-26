@@ -1,6 +1,6 @@
 package org.dev.warped.smarttv.events;
 
-import org.dev.warped.smarttv.ChannelEpg;
+import org.dev.warped.smarttv.Channel;
 import org.dev.warped.smarttv.model.E2Event;
 
 import java.util.ArrayList;
@@ -11,16 +11,16 @@ import java.util.List;
  */
 public class EpgNowLoadedEvent {
 
-    private final List<ChannelEpg> mChannels;
+    private final List<Channel> mChannels;
 
     public EpgNowLoadedEvent(List<E2Event> events) {
         mChannels = new ArrayList<>();
         for(E2Event e : events) {
-            mChannels.add(new ChannelEpg(e));
+            mChannels.add(new Channel(e));
         }
     }
 
-    public List<ChannelEpg> getChannels() {
+    public List<Channel> getChannels() {
         return  mChannels;
     }
 }
