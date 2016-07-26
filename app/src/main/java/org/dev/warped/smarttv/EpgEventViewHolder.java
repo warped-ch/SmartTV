@@ -12,7 +12,8 @@ import timber.log.Timber;
 public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final EpgEventListFragment.OnEpgEventListFragmentInteractionListener mListener;
-    private final TextView mTextViewTitle;
+    private final TextView mTextViewEpgEventTitle;
+    private final TextView mTextViewEpgEventDescription;
 
     private EpgEvent mEpgEvent;
 
@@ -24,13 +25,15 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         // Define click listener for the ViewHolder's View.
         v.setOnClickListener(this);
 
-        mTextViewTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
+        mTextViewEpgEventTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
+        mTextViewEpgEventDescription = (TextView) v.findViewById(R.id.textViewEpgEventDescription);
     }
 
     public void bindEpgEvent(EpgEvent epgEvent) {
         mEpgEvent = epgEvent;
 
-        mTextViewTitle.setText(epgEvent.getTitle());
+        mTextViewEpgEventTitle.setText(epgEvent.getTitle());
+        mTextViewEpgEventDescription.setText(epgEvent.getDescriptionExtended());
     }
 
     @Override

@@ -144,14 +144,12 @@ public class EpgEventListFragment extends Fragment implements
     }
 
     @Subscribe
-    @SuppressWarnings("unused")
     public void OnEpgEventsLoaded(EpgEventsLoadedEvent event) {
         mAdapter.setEpgEvents(event.getEpgEvents());
         mSwipeRefresh.setRefreshing(false);
     }
 
     @Subscribe
-    @SuppressWarnings("unused")
     public void onLoadEpgEventsError(LoadEpgEventsErrorEvent event) {
         mSwipeRefresh.setRefreshing(false);
         showSnackBar(R.string.snackbar_load_epg_events_failed);
