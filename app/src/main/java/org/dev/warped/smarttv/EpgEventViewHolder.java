@@ -2,6 +2,7 @@ package org.dev.warped.smarttv;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import timber.log.Timber;
@@ -13,6 +14,9 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
 
     private final EpgEventListFragment.OnEpgEventListFragmentInteractionListener mListener;
     private final TextView mTextViewEpgEventTitle;
+    private final TextView mTextViewEpgEventStartTime;
+    private final TextView mTextViewEpgEventEndTime;
+    private final ProgressBar mProgressBarEventDuration;
     private final TextView mTextViewEpgEventDescription;
 
     private EpgEvent mEpgEvent;
@@ -26,6 +30,9 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         v.setOnClickListener(this);
 
         mTextViewEpgEventTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
+        mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
+        mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);
+        mProgressBarEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEpgEventDuration);
         mTextViewEpgEventDescription = (TextView) v.findViewById(R.id.textViewEpgEventDescription);
     }
 
@@ -33,6 +40,9 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         mEpgEvent = epgEvent;
 
         mTextViewEpgEventTitle.setText(epgEvent.getTitle());
+        mTextViewEpgEventStartTime.setText(epgEvent.getStartTime());
+        mTextViewEpgEventEndTime.setText(epgEvent.getEndTime());
+        mProgressBarEventDuration.setProgress(epgEvent.calcProgress());
         mTextViewEpgEventDescription.setText(epgEvent.getDescriptionExtended());
     }
 

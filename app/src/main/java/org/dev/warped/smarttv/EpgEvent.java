@@ -2,7 +2,9 @@ package org.dev.warped.smarttv;
 
 import org.dev.warped.smarttv.model.E2Event;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Andreas Wiedmer on 07.07.2016.
@@ -10,37 +12,44 @@ import java.util.Date;
 public class EpgEvent {
 
     private final int mId;
-    private final Date mStart;
-    private final int mDuration;
+    private final Date mStartTime;
+    private final Date mEndTime;
     private final Date mCurrentTime;
     private final String mTitle;
     private final String mDescription;
     private final String mDescriptionExtended;
 
     public EpgEvent(E2Event event) {
-        this.mId = event.getEventId();
-        this.mStart = event.getEventStart();
-        this.mDuration = event.getEventDuration();
-        this.mCurrentTime = event.getEventCurrentTime();
-        this.mTitle = event.getEventTitle();
-        this.mDescription = event.getEventDescription();
-        this.mDescriptionExtended = event.getEventDescriptionExtended();
+        mId = event.getEventId();
+        mStartTime = event.getEventStart();
+        mEndTime = new Date(event.getEventStart().getTime() + event.getEventDuration() * 1000);
+        mCurrentTime = event.getEventCurrentTime();
+        mTitle = event.getEventTitle();
+        mDescription = event.getEventDescription();
+        mDescriptionExtended = event.getEventDescriptionExtended();
     }
 
     public int getId() {
         return mId;
     }
 
-    public Date getStart() {
-        return mStart;
+    public String getStartTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        TimeZone timeZone = TimeZone.getDefault();
+        sdf.setTimeZone(timeZone);
+        return sdf.format(mStartTime);
     }
 
-    public int getDuration() {
-        return mDuration;
+    public String getEndTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        sdf.setTimeZone(TimeZone.getDefault());
+        return sdf.format(mEndTime);
     }
 
-    public Date getCurrentTime() {
-        return mCurrentTime;
+    public String getCurrentTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        sdf.setTimeZone(TimeZone.getDefault());
+        return sdf.format(mCurrentTime);
     }
 
     public String getTitle() {
@@ -56,6 +65,6 @@ public class EpgEvent {
     }
 
     public int calcProgress() {
-        return (int) ((100.0 / mDuration) * ((mCurrentTime.getTime() - mStart.getTime()) / 1000));
+        return (int) ((100.0 / (mEndTime.getTime() - mStartTime.getTime())) * (mCurrentTime.getTime() - mStartTime.getTime()));
     }
 }

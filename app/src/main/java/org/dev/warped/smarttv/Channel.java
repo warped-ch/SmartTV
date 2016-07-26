@@ -44,9 +44,8 @@ public class Channel implements Parcelable {
     public Channel(Parcel parcel) {
         mName = parcel.readString();
         mReference = parcel.readString();
-        // TODO: implement
+        // TODO: read mEpgEvents from parcel
         mEpgEvents = new ArrayList<>();
-        //mEpgEvents = parcel.readArrayList();
     }
 
     @Override
@@ -58,7 +57,7 @@ public class Channel implements Parcelable {
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(mName);
         parcel.writeString(mReference);
-        parcel.writeArray(mEpgEvents.toArray());
+        // TODO: write mEpgEvents to parcel
     }
 
     String getName() {
