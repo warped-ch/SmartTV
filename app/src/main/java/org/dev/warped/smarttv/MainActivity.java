@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity
         implements FragmentManager.OnBackStackChangedListener,
         NavigationView.OnNavigationItemSelectedListener,
         BouquetListFragment.OnBouquetListFragmentInteractionListener,
-        ChannelListFragment.OnChannelListFragmentInteractionListener {
+        ChannelListFragment.OnChannelListFragmentInteractionListener,
+        EpgEventListFragment.OnEpgEventListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +124,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onShowChannel(Channel channel) {
         Timber.d("onShowChannel: \"%s\".", channel.getName());
-
-        // TODO: implement
+        replaceFragment(EpgEventListFragment.newInstance(channel));
     }
 
     public void setActionBarTitle(String title) {

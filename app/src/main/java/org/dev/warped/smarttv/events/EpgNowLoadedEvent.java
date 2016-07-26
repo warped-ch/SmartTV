@@ -13,9 +13,9 @@ public class EpgNowLoadedEvent {
 
     private final List<Channel> mChannels;
 
-    public EpgNowLoadedEvent(List<E2Event> events) {
+    public EpgNowLoadedEvent(List<E2Event> e2Events) {
         mChannels = new ArrayList<>();
-        for(E2Event e : events) {
+        for(E2Event e : e2Events) {
             mChannels.add(new Channel(e));
         }
     }

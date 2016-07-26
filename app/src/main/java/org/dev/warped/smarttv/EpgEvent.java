@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by Andreas Wiedmer on 07.07.2016.
  */
-class EpgEvent {
+public class EpgEvent {
 
     private final int mId;
     private final Date mStart;

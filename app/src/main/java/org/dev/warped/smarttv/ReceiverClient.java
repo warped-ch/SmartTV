@@ -4,9 +4,12 @@ import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import org.dev.warped.smarttv.events.BouquetsLoadedEvent;
+import org.dev.warped.smarttv.events.EpgEventsLoadedEvent;
 import org.dev.warped.smarttv.events.EpgNowLoadedEvent;
 import org.dev.warped.smarttv.events.LoadBouquetsErrorEvent;
 import org.dev.warped.smarttv.events.LoadBouquetsEvent;
+import org.dev.warped.smarttv.events.LoadEpgEventsErrorEvent;
+import org.dev.warped.smarttv.events.LoadEpgEventsEvent;
 import org.dev.warped.smarttv.events.LoadEpgNowErrorEvent;
 import org.dev.warped.smarttv.events.LoadEpgNowEvent;
 import org.dev.warped.smarttv.events.ZapDoneEvent;
@@ -82,6 +85,28 @@ class ReceiverClient {
             public void onFailure(Call<E2EventList> call, Throwable t) {
                 Timber.w("onLoadEpgNow: onFailure: something went wrong.");
                 mBus.post(new LoadEpgNowErrorEvent(t));
+            }
+        });
+    }
+
+    @Subscribe
+    public void onLoadEpgEvents(LoadEpgEventsEvent event) {
+        final Call<E2EventList> call = mEnigma2Client.getApiService().getEpgService(event.getChannel().getReference());
+        call.enqueue(new Callback<E2EventList>() {
+            @Override
+            public void onResponse(Call<E2EventList> call, Response<E2EventList> response) {
+                if (null != response.body()) {
+                    Timber.d("onLoadEpgEvents: onResponse: \"%s\".", response.body());
+                    mBus.post(new EpgEventsLoadedEvent(response.body().getEventList()));
+                } else {
+                    Timber.w("onLoadEpgEvents: onResponse: response body is null.");
+                    mBus.post(new LoadEpgEventsErrorEvent(new NullPointerException()));
+                }
+            }
+            @Override
+            public void onFailure(Call<E2EventList> call, Throwable t) {
+                Timber.w("onLoadEpgEvents: onFailure: something went wrong.");
+                mBus.post(new LoadEpgEventsErrorEvent(t));
             }
         });
     }

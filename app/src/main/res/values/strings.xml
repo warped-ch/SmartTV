@@ -6,6 +6,7 @@
 
     <string name="action_bar_title_bouquet">Bouquet</string>
     <string name="action_bar_title_bouquets">Bouquets</string>
+    <string name="action_bar_title_epgevents">EPG events</string>
     <string name="action_bar_title_settings">Settings</string>
 
     <string name="action_refresh">Refresh</string>
@@ -22,5 +23,6 @@
     <string name="snackbar_please_define_settings">Please define settings.</string>
     <string name="snackbar_load_bouquets_failed">Loading bouquets failed.</string>
     <string name="snackbar_load_channels_failed">Loading channels failed.</string>
+    <string name="snackbar_load_epg_events_failed">Loading EPG events failed.</string>
     <string name="snackbar_zap_failed">Zap failed.</string>
 </resources>

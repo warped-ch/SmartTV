@@ -25,7 +25,7 @@ import org.dev.warped.smarttv.events.ZapEvent;
 import timber.log.Timber;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of Channel items.
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnChannelListFragmentInteractionListener}
  * interface.

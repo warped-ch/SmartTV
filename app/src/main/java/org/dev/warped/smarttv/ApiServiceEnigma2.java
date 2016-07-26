@@ -24,6 +24,9 @@ public interface ApiServiceEnigma2 {
     @GET("web/epgnow")
     Call<E2EventList> getEpgNow(@Query("bRef") String bRef);
 
+    @GET("web/epgservice")
+    Call<E2EventList> getEpgService(@Query("sRef") String sRef);
+
     @GET("web/zap")
     Call<E2SimpleXmlResult> getZap(@Query("sRef") String sRef);
 }

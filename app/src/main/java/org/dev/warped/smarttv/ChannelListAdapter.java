@@ -15,7 +15,6 @@ import timber.log.Timber;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Channel} and makes a call to the
  * specified {@link OnChannelListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 class ChannelListAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
 
