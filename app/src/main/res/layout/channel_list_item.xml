@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_alignParentTop="true"
-                android:layout_above="@+id/textViewEventTitle"
+                android:layout_above="@+id/textViewEpgEventTitle"
                 android:gravity="bottom|start"
                 android:layout_toLeftOf="@+id/imageButtonZap"
                 android:layout_toRightOf="@+id/imageViewPicon"
@@ -49,19 +49,19 @@
                 android:text="zap"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_above="@+id/textViewEventTitle"
+                android:layout_above="@+id/textViewEpgEventTitle"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_play_circle_filled"
                 android:scaleType="fitEnd"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:tint="@color/colorCyanAccent700"
-                android:layout_alignRight="@+id/textViewEventTitle"
-                android:layout_alignEnd="@+id/textViewEventTitle"
+                android:layout_alignRight="@+id/textViewEpgEventTitle"
+                android:layout_alignEnd="@+id/textViewEpgEventTitle"
                 android:paddingTop="6dp" />
 
             <TextView
-                android:id="@+id/textViewEventTitle"
+                android:id="@+id/textViewEpgEventTitle"
                 android:text="Event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,30 +72,66 @@
                 android:layout_marginTop="@dimen/text_margin"
                 android:layout_marginRight="@dimen/text_margin" />
 
+            <ImageButton
+                android:id="@+id/imageButtonTrailer"
+                android:text="trailer"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/textViewEpgEventTitle"
+                android:layout_alignParentTop="false"
+                android:src="@drawable/ic_movie"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/textViewEpgEventStartTime"
+                android:text="HH:MM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imageButtonTrailer"
+                android:layout_alignLeft="@+id/textViewEpgEventTitle"
+                android:layout_alignStart="@+id/textViewEpgEventTitle"/>
+
+            <TextView
+                android:id="@+id/textViewEpgEventEndTime"
+                android:text="HH:MM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imageButtonTrailer"
+                android:layout_alignRight="@+id/textViewEpgEventTitle"
+                android:layout_alignEnd="@+id/textViewEpgEventTitle"/>
+
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/progressBarEventDuration"
-                android:layout_below="@+id/textViewEventTitle"
-                android:layout_alignLeft="@+id/textViewEventTitle"
-                android:layout_alignStart="@+id/textViewEventTitle"
-                android:layout_alignRight="@+id/textViewEventTitle"
-                android:layout_alignEnd="@+id/textViewEventTitle"
-                android:progressTint="@color/colorCyanAccent700" />
+                android:id="@+id/progressBarEpgEventDuration"
+                android:progressTint="@color/colorCyanAccent700"
+                android:layout_alignLeft="@+id/textViewEpgEventStartTime"
+                android:layout_alignStart="@+id/textViewEpgEventStartTime"
+                android:layout_alignRight="@+id/textViewEpgEventEndTime"
+                android:layout_alignEnd="@+id/textViewEpgEventEndTime"
+                android:layout_below="@+id/textViewEpgEventStartTime" />
 
             <TextView
-                android:id="@+id/textViewEventDescription"
-                android:text="Event description"
+                android:id="@+id/textViewEpgEventDescription"
+                android:text="EPG event description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/progressBarEventDuration"
-                android:layout_alignLeft="@+id/textViewEventTitle"
-                android:layout_alignStart="@+id/textViewEventTitle"
-                android:layout_alignRight="@+id/textViewEventTitle"
-                android:layout_alignEnd="@+id/textViewEventTitle"
+                android:layout_below="@+id/progressBarEpgEventDuration"
+                android:layout_alignLeft="@+id/textViewEpgEventTitle"
+                android:layout_alignStart="@+id/textViewEpgEventTitle"
+                android:layout_alignRight="@+id/textViewEpgEventTitle"
+                android:layout_alignEnd="@+id/textViewEpgEventTitle"
                 android:layout_marginBottom="@dimen/text_margin" />
 
         </RelativeLayout>

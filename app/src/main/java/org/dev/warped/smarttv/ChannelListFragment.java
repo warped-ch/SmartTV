@@ -2,6 +2,8 @@ package org.dev.warped.smarttv;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
@@ -144,6 +146,29 @@ public class ChannelListFragment extends Fragment implements
     @Override
     public void onRefresh() {
         BusProvider.getBus().post(new LoadEpgNowEvent(mBouquet));
+    }
+
+    @Override
+    public void onClickTrailer(Channel channel) {
+        if (!channel.getEpgEvents().isEmpty()) {
+            EpgEvent epgEvent = channel.getEpgEvents().get(0);
+            Timber.d("onClickTrailer: \"%s\".", epgEvent.getTitle());
+
+            PackageManager packageManager = getActivity().getPackageManager();
+            try {
+                packageManager.getPackageInfo(getResources().getString(R.string.package_name_youtube), PackageManager.GET_ACTIVITIES);
+                Intent intent = new Intent(Intent.ACTION_SEARCH);
+                intent.setPackage("com.google.android.youtube");
+                intent.putExtra("query", epgEvent.getTitle() + " trailer");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } catch (PackageManager.NameNotFoundException e) {
+                Timber.w("onClickTrailer: YouTube not available.");
+                showSnackBar(R.string.snackbar_youtube_app_not_available);
+            }
+        } else {
+            Timber.w("onClickTrailer: no epg events available for channel \"%s\".", channel.getName());
+        }
     }
 
     @Override

@@ -19,7 +19,7 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
     private final ImageButton mImageButtonTrailer;
     private final TextView mTextViewEpgEventStartTime;
     private final TextView mTextViewEpgEventEndTime;
-    private final ProgressBar mProgressBarEventDuration;
+    private final ProgressBar mProgressBarEpgEventDuration;
     private final TextView mTextViewEpgEventDescription;
 
     private EpgEvent mEpgEvent;
@@ -36,7 +36,7 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         mImageButtonTrailer = (ImageButton) v.findViewById(R.id.imageButtonTrailer);
         mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
         mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);
-        mProgressBarEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEpgEventDuration);
+        mProgressBarEpgEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEpgEventDuration);
         mTextViewEpgEventDescription = (TextView) v.findViewById(R.id.textViewEpgEventDescription);
     }
 
@@ -52,7 +52,7 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         }
         mTextViewEpgEventStartTime.setText(epgEvent.getStartTime());
         mTextViewEpgEventEndTime.setText(epgEvent.getEndTime());
-        mProgressBarEventDuration.setProgress(epgEvent.calcProgress());
+        mProgressBarEpgEventDuration.setProgress(epgEvent.calcProgress());
         mTextViewEpgEventDescription.setText(epgEvent.getDescriptionExtended());
     }
 
