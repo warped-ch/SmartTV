@@ -3,7 +3,6 @@ package org.dev.warped.smarttv;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -130,14 +129,7 @@ public class BouquetListFragment extends Fragment implements
     @Subscribe
     public void onLoadBouquetsError(LoadBouquetsErrorEvent event) {
         mSwipeRefresh.setRefreshing(false);
-
-        View v = getView();
-        if (null != v) {
-            Snackbar snackbar = Snackbar.make(v, R.string.snackbar_load_bouquets_failed, Snackbar.LENGTH_LONG);
-            snackbar.show();
-        } else {
-            Timber.w("onLoadBouquetsError: view is null.");
-        }
+        SnackBarCreator.showSnackBar(getView(), R.string.snackbar_load_bouquets_failed);
     }
 
     /**

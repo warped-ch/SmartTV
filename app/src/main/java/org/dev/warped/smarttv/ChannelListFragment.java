@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -164,7 +162,7 @@ public class ChannelListFragment extends Fragment implements
                 startActivity(intent);
             } catch (PackageManager.NameNotFoundException e) {
                 Timber.w("onClickTrailer: YouTube not available.");
-                showSnackBar(R.string.snackbar_youtube_app_not_available);
+                SnackBarCreator.showSnackBar(getView(), R.string.snackbar_youtube_app_not_available);
             }
         } else {
             Timber.w("onClickTrailer: no epg events available for channel \"%s\".", channel.getName());
@@ -191,30 +189,20 @@ public class ChannelListFragment extends Fragment implements
     @Subscribe
     public void onLoadEpgNowError(LoadEpgNowErrorEvent event) {
         mSwipeRefresh.setRefreshing(false);
-        showSnackBar(R.string.snackbar_load_channels_failed);
+        SnackBarCreator.showSnackBar(getView(), R.string.snackbar_load_channels_failed);
     }
 
     @Subscribe
     public void OnZapDone(ZapDoneEvent event) {
         if (!event.getSuccess()) {
             Timber.d("OnZapDone: zap was not successful.");
-            showSnackBar(R.string.snackbar_zap_failed);
+            SnackBarCreator.showSnackBar(getView(), R.string.snackbar_zap_failed);
         }
     }
 
     @Subscribe
     public void onZapError(ZapErrorEvent event) {
-        showSnackBar(R.string.snackbar_zap_failed);
-    }
-
-    private void showSnackBar(@StringRes int resId) {
-        View v = getView();
-        if (null != v) {
-            Snackbar snackbar = Snackbar.make(v, resId, Snackbar.LENGTH_LONG);
-            snackbar.show();
-        } else {
-            Timber.w("showSnackBar: view is null.");
-        }
+        SnackBarCreator.showSnackBar(getView(), R.string.snackbar_zap_failed);
     }
 
     /**

@@ -5,9 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import timber.log.Timber;
 
@@ -58,7 +55,7 @@ public class MainActivity extends AppCompatActivity
 
             if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
                 replaceFragment(new SettingsFragment());
-                showSnackbar(R.string.snackbar_please_define_settings);
+                SnackBarCreator.showSnackBar(findViewById(android.R.id.content), R.string.snackbar_please_define_settings);
             }
         }
     }
@@ -144,16 +141,6 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.fragment_container, fragment, fragmentTag);
             ft.addToBackStack(fragmentTag);
             ft.commit();
-        }
-    }
-
-    private void showSnackbar(@StringRes int resId) {
-        View v = findViewById(android.R.id.content);
-        if (null != v) {
-            Snackbar snackbar = Snackbar.make(v, resId, Snackbar.LENGTH_LONG);
-            snackbar.show();
-        } else {
-            Timber.w("showSnackBar: view is null.");
         }
     }
 }
