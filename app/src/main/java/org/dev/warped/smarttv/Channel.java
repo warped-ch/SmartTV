@@ -16,11 +16,11 @@ public class Channel implements Parcelable {
 
     private final String mName;
     private final String mReference;
-    private final ArrayList<EpgEvent> mEpgEvents;
+    private final List<EpgEvent> mEpgEvents;
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Channel createFromParcel(Parcel parcel) {
-            return new Channel(parcel);
+    public static final Parcelable.Creator<Channel> CREATOR = new Parcelable.Creator<Channel>() {
+        public Channel createFromParcel(Parcel in) {
+            return new Channel(in);
         }
 
         public Channel[] newArray(int size) {
@@ -41,23 +41,16 @@ public class Channel implements Parcelable {
         mEpgEvents.add(new EpgEvent(e2Event));
     }
 
-    public Channel(Parcel parcel) {
-        mName = parcel.readString();
-        mReference = parcel.readString();
-        // TODO: read mEpgEvents from parcel
-        mEpgEvents = new ArrayList<>();
-    }
-
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(mName);
-        parcel.writeString(mReference);
-        // TODO: write mEpgEvents to parcel
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(mName);
+        out.writeString(mReference);
+        out.writeList(mEpgEvents);
     }
 
     String getName() {
@@ -70,5 +63,12 @@ public class Channel implements Parcelable {
 
     public List<EpgEvent> getEpgEvents() {
         return mEpgEvents;
+    }
+
+    private Channel(Parcel in) {
+        mName = in.readString();
+        mReference = in.readString();
+        mEpgEvents = new ArrayList<>();
+        in.readList(mEpgEvents, List.class.getClassLoader());
     }
 }
