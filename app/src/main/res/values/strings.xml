@@ -24,5 +24,9 @@
     <string name="snackbar_load_bouquets_failed">Loading bouquets failed.</string>
     <string name="snackbar_load_channels_failed">Loading channels failed.</string>
     <string name="snackbar_load_epg_events_failed">Loading EPG events failed.</string>
+    <string name="snackbar_youtube_app_not_available">YouTube app not available.</string>
     <string name="snackbar_zap_failed">Zap failed.</string>
+
+    <!-- Package names -->
+    <string name="package_name_youtube">com.google.android.youtube</string>
 </resources>

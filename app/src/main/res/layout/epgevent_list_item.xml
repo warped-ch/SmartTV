@@ -34,6 +34,20 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginBottom="6dp" />
 
+            <ImageButton
+                android:id="@+id/imageButtonTrailer"
+                android:text="trailer"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/textViewEpgEventTitle"
+                android:layout_alignParentTop="false"
+                android:src="@drawable/ic_movie"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="true" />
+
             <TextView
                 android:id="@+id/textViewEpgEventStartTime"
                 android:text="HH:MM"
@@ -41,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/textViewEpgEventTitle"
+                android:layout_below="@+id/imageButtonTrailer"
                 android:layout_alignLeft="@+id/textViewEpgEventTitle"
                 android:layout_alignStart="@+id/textViewEpgEventTitle"/>
 
@@ -52,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/textViewEpgEventTitle"
+                android:layout_below="@+id/imageButtonTrailer"
                 android:layout_alignRight="@+id/textViewEpgEventTitle"
                 android:layout_alignEnd="@+id/textViewEpgEventTitle"/>
 

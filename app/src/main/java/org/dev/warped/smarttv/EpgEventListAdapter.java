@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.dev.warped.smarttv.EpgEventListFragment.OnEpgEventListFragmentInteractionListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +12,14 @@ import timber.log.Timber;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link EpgEvent} and makes a call to the
- * specified {@link OnEpgEventListFragmentInteractionListener}.
+ * specified {@link OnEpgEventClickedListener}.
  */
 public class EpgEventListAdapter extends RecyclerView.Adapter<EpgEventViewHolder> {
 
-    private final OnEpgEventListFragmentInteractionListener mListener;
+    private final OnEpgEventClickedListener mListener;
     private List<EpgEvent> mEpgEvents;
 
-    public EpgEventListAdapter(OnEpgEventListFragmentInteractionListener listener) {
+    public EpgEventListAdapter(OnEpgEventClickedListener listener) {
         mListener = listener;
         mEpgEvents = new ArrayList<>();
     }
