@@ -2,8 +2,6 @@ package org.dev.warped.smarttv;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -151,7 +149,7 @@ public class ChannelListFragment extends Fragment implements
         if (!channel.getEpgEvents().isEmpty()) {
             EpgEvent epgEvent = channel.getEpgEvents().get(0);
             Timber.d("onClickTrailer: \"%s\".", epgEvent.getTitle());
-            IntentCreator.createYouTubeQueryIntent(getActivity(), getView(), epgEvent.getTitle() + " trailer");
+            IntentFactory.createYouTubeQueryIntent(getActivity(), getView(), epgEvent.getTitle() + " trailer");
         } else {
             Timber.w("onClickTrailer: no epg events available for channel \"%s\".", channel.getName());
         }
@@ -177,20 +175,20 @@ public class ChannelListFragment extends Fragment implements
     @Subscribe
     public void onLoadEpgNowError(LoadEpgNowErrorEvent event) {
         mSwipeRefresh.setRefreshing(false);
-        SnackBarCreator.showSnackBar(getView(), R.string.snackbar_load_channels_failed);
+        SnackBarFactory.showSnackBar(this, R.string.snackbar_load_channels_failed);
     }
 
     @Subscribe
     public void OnZapDone(ZapDoneEvent event) {
         if (!event.getSuccess()) {
             Timber.d("OnZapDone: zap was not successful.");
-            SnackBarCreator.showSnackBar(getView(), R.string.snackbar_zap_failed);
+            SnackBarFactory.showSnackBar(this, R.string.snackbar_zap_failed);
         }
     }
 
     @Subscribe
     public void onZapError(ZapErrorEvent event) {
-        SnackBarCreator.showSnackBar(getView(), R.string.snackbar_zap_failed);
+        SnackBarFactory.showSnackBar(this, R.string.snackbar_zap_failed);
     }
 
     /**

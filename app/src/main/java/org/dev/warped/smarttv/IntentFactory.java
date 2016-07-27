@@ -11,7 +11,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 27.07.2016.
  */
-public class IntentCreator {
+public class IntentFactory {
 
     public static void createYouTubeQueryIntent(Context context, View view, String query) {
         PackageManager packageManager = context.getPackageManager();
@@ -24,10 +24,10 @@ public class IntentCreator {
             context.startActivity(intent);
         } catch (PackageManager.NameNotFoundException e) {
             Timber.w("createYouTubeQueryIntent: YouTube not available.");
-            SnackBarCreator.showSnackBar(view, R.string.snackbar_youtube_app_not_available);
+            SnackBarFactory.showSnackBar(view, R.string.snackbar_youtube_app_not_available);
         }
     }
 
-    private IntentCreator() {
+    private IntentFactory() {
     }
 }

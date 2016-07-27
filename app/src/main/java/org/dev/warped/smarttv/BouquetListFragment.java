@@ -129,7 +129,7 @@ public class BouquetListFragment extends Fragment implements
     @Subscribe
     public void onLoadBouquetsError(LoadBouquetsErrorEvent event) {
         mSwipeRefresh.setRefreshing(false);
-        SnackBarCreator.showSnackBar(getView(), R.string.snackbar_load_bouquets_failed);
+        SnackBarFactory.showSnackBar(this, R.string.snackbar_load_bouquets_failed);
     }
 
     /**

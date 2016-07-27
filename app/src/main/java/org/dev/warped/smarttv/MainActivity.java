@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
 
             if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
                 replaceFragment(new SettingsFragment());
-                SnackBarCreator.showSnackBar(findViewById(android.R.id.content), R.string.snackbar_please_define_settings);
+                SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
             }
         }
     }

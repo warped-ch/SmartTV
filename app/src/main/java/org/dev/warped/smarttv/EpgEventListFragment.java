@@ -2,8 +2,6 @@ package org.dev.warped.smarttv;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -147,7 +145,7 @@ public class EpgEventListFragment extends Fragment implements
     @Override
     public void onClickTrailer(EpgEvent epgEvent) {
         Timber.d("onClickTrailer: \"%s\".", epgEvent.getTitle());
-        IntentCreator.createYouTubeQueryIntent(getActivity(), getView(), epgEvent.getTitle() + " trailer");
+        IntentFactory.createYouTubeQueryIntent(getActivity(), getView(), epgEvent.getTitle() + " trailer");
     }
 
     @Subscribe
@@ -159,7 +157,7 @@ public class EpgEventListFragment extends Fragment implements
     @Subscribe
     public void onLoadEpgEventsError(LoadEpgEventsErrorEvent event) {
         mSwipeRefresh.setRefreshing(false);
-        SnackBarCreator.showSnackBar(getView(), R.string.snackbar_load_epg_events_failed);
+        SnackBarFactory.showSnackBar(this, R.string.snackbar_load_epg_events_failed);
     }
 
     /**
