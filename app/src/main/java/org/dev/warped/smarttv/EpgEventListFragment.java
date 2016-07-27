@@ -147,19 +147,7 @@ public class EpgEventListFragment extends Fragment implements
     @Override
     public void onClickTrailer(EpgEvent epgEvent) {
         Timber.d("onClickTrailer: \"%s\".", epgEvent.getTitle());
-
-        PackageManager packageManager = getActivity().getPackageManager();
-        try {
-            packageManager.getPackageInfo(getResources().getString(R.string.package_name_youtube), PackageManager.GET_ACTIVITIES);
-            Intent intent = new Intent(Intent.ACTION_SEARCH);
-            intent.setPackage("com.google.android.youtube");
-            intent.putExtra("query", epgEvent.getTitle() + " trailer");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } catch (PackageManager.NameNotFoundException e) {
-            Timber.w("onClickTrailer: YouTube not available.");
-            SnackBarCreator.showSnackBar(getView(), R.string.snackbar_youtube_app_not_available);
-        }
+        IntentCreator.createYouTubeQueryIntent(getActivity(), getView(), epgEvent.getTitle() + " trailer");
     }
 
     @Subscribe
