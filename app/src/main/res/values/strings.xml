@@ -19,6 +19,8 @@
     <string name="pref_title_receiver_address">Hostname or IP</string>
     <string name="pref_summary_empty">empty</string>
 
+    <string name="imdb">IMDb</string>
+
     <!-- Snackbar -->
     <string name="snackbar_app_not_available_imdb">IMDb app not available.</string>
     <string name="snackbar_app_not_available_chrome">Chrome app not available.</string>
