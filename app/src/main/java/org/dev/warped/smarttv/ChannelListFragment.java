@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 
 import com.squareup.otto.Subscribe;
 
-import org.dev.warped.smarttv.events.EpgNowLoadedEvent;
-import org.dev.warped.smarttv.events.LoadEpgNowErrorEvent;
 import org.dev.warped.smarttv.events.LoadEpgNowEvent;
-import org.dev.warped.smarttv.events.ZapDoneEvent;
-import org.dev.warped.smarttv.events.ZapErrorEvent;
+import org.dev.warped.smarttv.events.LoadEpgNowEventDone;
+import org.dev.warped.smarttv.events.LoadEpgNowEventError;
 import org.dev.warped.smarttv.events.ZapEvent;
+import org.dev.warped.smarttv.events.ZapEventDone;
+import org.dev.warped.smarttv.events.ZapEventError;
 
 import timber.log.Timber;
 
@@ -167,19 +167,19 @@ public class ChannelListFragment extends Fragment implements
     }
 
     @Subscribe
-    public void OnEpgNowLoaded(EpgNowLoadedEvent event) {
+    public void onLoadEpgNowEventDone(LoadEpgNowEventDone event) {
         mAdapter.setChannels(event.getChannels());
         mSwipeRefresh.setRefreshing(false);
     }
 
     @Subscribe
-    public void onLoadEpgNowError(LoadEpgNowErrorEvent event) {
+    public void onLoadEpgNowEventError(LoadEpgNowEventError event) {
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_channels_failed);
     }
 
     @Subscribe
-    public void OnZapDone(ZapDoneEvent event) {
+    public void onZapEventDone(ZapEventDone event) {
         if (!event.getSuccess()) {
             Timber.d("OnZapDone: zap was not successful.");
             SnackBarFactory.showSnackBar(this, R.string.snackbar_zap_failed);
@@ -187,7 +187,7 @@ public class ChannelListFragment extends Fragment implements
     }
 
     @Subscribe
-    public void onZapError(ZapErrorEvent event) {
+    public void onZapEventError(ZapEventError event) {
         SnackBarFactory.showSnackBar(this, R.string.snackbar_zap_failed);
     }
 

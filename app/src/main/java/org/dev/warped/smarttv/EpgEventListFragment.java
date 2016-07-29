@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 
 import com.squareup.otto.Subscribe;
 
-import org.dev.warped.smarttv.events.EpgEventsLoadedEvent;
-import org.dev.warped.smarttv.events.LoadEpgEventsErrorEvent;
 import org.dev.warped.smarttv.events.LoadEpgEventsEvent;
+import org.dev.warped.smarttv.events.LoadEpgEventsEventDone;
+import org.dev.warped.smarttv.events.LoadEpgEventsEventError;
 
 import timber.log.Timber;
 
@@ -149,13 +149,13 @@ public class EpgEventListFragment extends Fragment implements
     }
 
     @Subscribe
-    public void OnEpgEventsLoaded(EpgEventsLoadedEvent event) {
+    public void onLoadEpgEventsEventDone(LoadEpgEventsEventDone event) {
         mAdapter.setEpgEvents(event.getEpgEvents());
         mSwipeRefresh.setRefreshing(false);
     }
 
     @Subscribe
-    public void onLoadEpgEventsError(LoadEpgEventsErrorEvent event) {
+    public void onLoadEpgEventsEventError(LoadEpgEventsEventError event) {
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_epg_events_failed);
     }

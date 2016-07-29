@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 
 import com.squareup.otto.Subscribe;
 
-import org.dev.warped.smarttv.events.BouquetsLoadedEvent;
-import org.dev.warped.smarttv.events.LoadBouquetsErrorEvent;
 import org.dev.warped.smarttv.events.LoadBouquetsEvent;
+import org.dev.warped.smarttv.events.LoadBouquetsEventDone;
+import org.dev.warped.smarttv.events.LoadBouquetsEventError;
 
 import timber.log.Timber;
 
@@ -121,13 +121,13 @@ public class BouquetListFragment extends Fragment implements
     }
 
     @Subscribe
-    public void onBouquetsLoaded(BouquetsLoadedEvent event) {
+    public void onLoadBouquetsEventDone(LoadBouquetsEventDone event) {
         mAdapter.setBouquets(event.getBouquets());
         mSwipeRefresh.setRefreshing(false);
     }
 
     @Subscribe
-    public void onLoadBouquetsError(LoadBouquetsErrorEvent event) {
+    public void onLoadBouquetsEventError(LoadBouquetsEventError event) {
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_bouquets_failed);
     }

@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Created by Andreas Wiedmer on 26.07.2016.
  */
-public class EpgEventsLoadedEvent {
+public class LoadEpgEventsEventDone {
 
     private final List<EpgEvent> mEpgEvents;
 
-    public EpgEventsLoadedEvent(List<E2Event> e2Events) {
+    public LoadEpgEventsEventDone(List<E2Event> e2Events) {
         mEpgEvents = new ArrayList<>();
         for(E2Event e : e2Events) {
             mEpgEvents.add(new EpgEvent(e));

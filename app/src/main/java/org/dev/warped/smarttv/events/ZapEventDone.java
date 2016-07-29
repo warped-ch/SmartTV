@@ -5,11 +5,11 @@ import org.dev.warped.smarttv.model.E2SimpleXmlResult;
 /**
  * Created by Andreas Wiedmer on 20.07.2016.
  */
-public class ZapDoneEvent {
+public class ZapEventDone {
 
     private final boolean mSuccess;
 
-    public ZapDoneEvent(E2SimpleXmlResult result) {
+    public ZapEventDone(E2SimpleXmlResult result) {
         mSuccess = result.getState().toLowerCase().contains("true");
     }
 

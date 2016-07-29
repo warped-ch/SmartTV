@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Created by Andreas Wiedmer on 20.07.2016.
  */
-public class BouquetsLoadedEvent {
+public class LoadBouquetsEventDone {
 
     private final List<Bouquet> mBouquets;
 
-    public BouquetsLoadedEvent(List<E2Service> e2Services) {
+    public LoadBouquetsEventDone(List<E2Service> e2Services) {
         mBouquets = new ArrayList<>();
         for(E2Service s : e2Services) {
             mBouquets.add(new Bouquet(s));

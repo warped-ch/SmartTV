@@ -3,10 +3,10 @@ package org.dev.warped.smarttv.events;
 /**
  * Created by Andreas Wiedmer on 20.07.2016.
  */
-abstract class ErrorEvent {
+abstract class EventError {
     private final Throwable mThrowable;
 
-    public ErrorEvent(Throwable throwable) {
+    public EventError(Throwable throwable) {
         mThrowable = throwable;
     }
 
