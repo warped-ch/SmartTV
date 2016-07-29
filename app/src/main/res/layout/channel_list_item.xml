@@ -73,19 +73,38 @@
                 android:layout_marginRight="@dimen/text_margin"
                 android:layout_marginBottom="6dp" />
 
-            <ImageButton
-                android:id="@+id/imageButtonTrailer"
-                android:text="trailer"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+            <LinearLayout
+                android:id="@+id/linearLayoutAdditionalContent"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewEpgEventTitle"
                 android:layout_alignParentTop="false"
-                android:src="@drawable/ic_movie"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:background="@android:color/transparent"
                 android:layout_alignParentBottom="false"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true">
+
+                <ImageButton
+                    android:id="@+id/imageButtonTrailer"
+                    android:text="trailer"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_movie"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:background="@android:color/transparent" />
+
+                <TextView
+                    android:id="@+id/textViewIMDbLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="IMDb"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textViewEpgEventStartTime"
@@ -94,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/imageButtonTrailer"
+                android:layout_below="@+id/linearLayoutAdditionalContent"
                 android:layout_alignLeft="@+id/textViewEpgEventTitle"
                 android:layout_alignStart="@+id/textViewEpgEventTitle"/>
 
@@ -105,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/imageButtonTrailer"
+                android:layout_below="@+id/linearLayoutAdditionalContent"
                 android:layout_alignRight="@+id/textViewEpgEventTitle"
                 android:layout_alignEnd="@+id/textViewEpgEventTitle"/>
 

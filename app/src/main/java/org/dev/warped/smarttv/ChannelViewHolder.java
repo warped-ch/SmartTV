@@ -21,6 +21,7 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
     private final ImageButton mImageButtonZap;
     private final TextView mTextViewEpgEventTitle;
     private final ImageButton mImageButtonTrailer;
+    private final TextView mTextViewIMDbLink;
     private final TextView mTextViewEpgEventStartTime;
     private final TextView mTextViewEpgEventEndTime;
     private final ProgressBar mProgressBarEpgEventDuration;
@@ -42,6 +43,7 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
         mImageButtonZap.setOnClickListener(this);
         mTextViewEpgEventTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
         mImageButtonTrailer = (ImageButton) v.findViewById(R.id.imageButtonTrailer);
+        mTextViewIMDbLink = (TextView) v.findViewById(R.id.textViewIMDbLink);
         mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
         mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);
         mProgressBarEpgEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEpgEventDuration);
@@ -59,8 +61,11 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
             if (epgEvent.getDescriptionExtended().toLowerCase().contains("imdb")) {
                 mImageButtonTrailer.getDrawable().setColorFilter(mImageButtonTrailer.getResources().getColor(R.color.colorCyanAccent700), PorterDuff.Mode.SRC_ATOP);
                 mImageButtonTrailer.setOnClickListener(this);
+                mTextViewIMDbLink.setTextColor(mTextViewIMDbLink.getResources().getColor(R.color.colorCyanAccent700));
+                mTextViewIMDbLink.setOnClickListener(this);
             } else {
                 mImageButtonTrailer.getDrawable().setColorFilter(mImageButtonTrailer.getResources().getColor(R.color.colorBlack), PorterDuff.Mode.SRC_ATOP);
+                mTextViewIMDbLink.setTextColor(mTextViewIMDbLink.getResources().getColor(R.color.colorBlack));
             }
             mTextViewEpgEventStartTime.setText(epgEvent.getStartTime());
             mTextViewEpgEventEndTime.setText(epgEvent.getEndTime());
@@ -81,6 +86,9 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
         } else if (v.getId() == mImageButtonTrailer.getId()) {
             Timber.d("onClick: trailer button clicked for channel \"%s\"", mChannel.getName());
             mListener.onClickTrailer(mChannel);
+        } else if (v.getId() == mTextViewIMDbLink.getId()) {
+            Timber.d("onClick: IMDb link clicked for channel \"%s\"", mChannel.getName());
+            mListener.onClickIMDb(mChannel);
         } else {
             Timber.d("onClick: clicked channel \"%s\".", mChannel.getName());
             mListener.onClick(mChannel);

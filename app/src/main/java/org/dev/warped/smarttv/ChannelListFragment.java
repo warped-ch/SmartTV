@@ -145,11 +145,27 @@ public class ChannelListFragment extends Fragment implements
     }
 
     @Override
+    public void onClick(Channel channel) {
+        mListener.onShowChannel(channel);
+    }
+
+    @Override
+    public void onClickIMDb(Channel channel) {
+        if (!channel.getEpgEvents().isEmpty()) {
+            EpgEvent epgEvent = channel.getEpgEvents().get(0);
+            Timber.d("onClickIMDb: \"%s\".", epgEvent.getTitle());
+            IntentFactory.createIMDbFindIntent(getActivity(), getView(), epgEvent);
+        } else {
+            Timber.w("onClickTrailer: no epg events available for channel \"%s\".", channel.getName());
+        }
+    }
+
+    @Override
     public void onClickTrailer(Channel channel) {
         if (!channel.getEpgEvents().isEmpty()) {
             EpgEvent epgEvent = channel.getEpgEvents().get(0);
             Timber.d("onClickTrailer: \"%s\".", epgEvent.getTitle());
-            IntentFactory.createYouTubeQueryIntent(getActivity(), getView(), epgEvent.getTitle() + " trailer");
+            IntentFactory.createYouTubeQueryIntent(getActivity(), getView(), epgEvent);
         } else {
             Timber.w("onClickTrailer: no epg events available for channel \"%s\".", channel.getName());
         }
@@ -161,10 +177,6 @@ public class ChannelListFragment extends Fragment implements
         BusProvider.getBus().post(new ZapEvent(channel));
     }
 
-    @Override
-    public void onClick(Channel channel) {
-        mListener.onShowChannel(channel);
-    }
 
     @Subscribe
     public void onLoadEpgNowEventDone(LoadEpgNowEventDone event) {

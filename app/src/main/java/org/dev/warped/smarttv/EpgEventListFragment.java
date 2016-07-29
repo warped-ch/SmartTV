@@ -145,7 +145,7 @@ public class EpgEventListFragment extends Fragment implements
     @Override
     public void onClickTrailer(EpgEvent epgEvent) {
         Timber.d("onClickTrailer: \"%s\".", epgEvent.getTitle());
-        IntentFactory.createYouTubeQueryIntent(getActivity(), getView(), epgEvent.getTitle() + " trailer");
+        IntentFactory.createYouTubeQueryIntent(getActivity(), getView(), epgEvent);
     }
 
     @Subscribe

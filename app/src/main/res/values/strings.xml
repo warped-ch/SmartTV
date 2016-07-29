@@ -20,13 +20,17 @@
     <string name="pref_summary_empty">empty</string>
 
     <!-- Snackbar -->
+    <string name="snackbar_app_not_available_imdb">IMDb app not available.</string>
+    <string name="snackbar_app_not_available_chrome">Chrome app not available.</string>
+    <string name="snackbar_app_not_available_youtube">YouTube app not available.</string>
     <string name="snackbar_please_define_settings">Please define settings.</string>
     <string name="snackbar_load_bouquets_failed">Loading bouquets failed.</string>
     <string name="snackbar_load_channels_failed">Loading channels failed.</string>
     <string name="snackbar_load_epg_events_failed">Loading EPG events failed.</string>
-    <string name="snackbar_youtube_app_not_available">YouTube app not available.</string>
     <string name="snackbar_zap_failed">Zap failed.</string>
 
     <!-- Package names -->
+    <string name="package_name_imdb">com.imdb.mobile</string>
+    <string name="package_name_chrome">com.android.chrome</string>
     <string name="package_name_youtube">com.google.android.youtube</string>
 </resources>
