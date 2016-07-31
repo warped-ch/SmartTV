@@ -1,9 +1,9 @@
 package org.dev.warped.smarttv;
 
 import android.graphics.PorterDuff;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,7 +16,7 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
 
     private final OnEpgEventClickedListener mListener;
     private final TextView mTextViewEpgEventTitle;
-    private final ImageButton mImageButtonTrailer;
+    private final AppCompatImageButton mImageButtonTrailer;
     private final TextView mTextViewIMDbLink;
     private final TextView mTextViewEpgEventStartTime;
     private final TextView mTextViewEpgEventEndTime;
@@ -34,7 +34,7 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         v.setOnClickListener(this);
 
         mTextViewEpgEventTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
-        mImageButtonTrailer = (ImageButton) v.findViewById(R.id.imageButtonTrailer);
+        mImageButtonTrailer = (AppCompatImageButton) v.findViewById(R.id.imageButtonTrailer);
         mTextViewIMDbLink = (TextView) v.findViewById(R.id.textViewIMDbLink);
         mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
         mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);

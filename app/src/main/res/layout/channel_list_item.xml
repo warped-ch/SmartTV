@@ -44,7 +44,7 @@
                 android:layout_marginStart="@dimen/text_margin"
                 android:layout_marginLeft="@dimen/text_margin" />
 
-            <ImageButton
+            <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/imageButtonZap"
                 android:text="zap"
                 android:layout_width="60dp"
@@ -83,7 +83,7 @@
                 android:layout_alignParentBottom="false"
                 android:layout_centerHorizontal="true">
 
-                <ImageButton
+                <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/imageButtonTrailer"
                     android:text="trailer"
                     android:layout_width="24dp"
