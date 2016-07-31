@@ -22,7 +22,7 @@
 
             <TextView
                 android:id="@+id/textViewEpgEventTitle"
-                android:text="EPG event title"
+                android:text="@string/event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -46,7 +46,7 @@
 
                 <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/imageButtonTrailer"
-                    android:text="trailer"
+                    android:text="@string/trailer"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_movie"
@@ -56,10 +56,10 @@
 
                 <TextView
                     android:id="@+id/textViewIMDbLink"
+                    android:text="@string/imdb"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="IMDb"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
                     android:layout_marginStart="24dp"
@@ -103,7 +103,7 @@
 
             <TextView
                 android:id="@+id/textViewEpgEventDescription"
-                android:text="EPG event description"
+                android:text="@string/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"

@@ -46,7 +46,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_settings));
+        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.settings));
 
         return view;
     }
@@ -76,7 +76,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 if (null != receiverType && 0 < receiverType.length()) {
                     prefReceiverType.setSummary(receiverType.toString());
                 } else {
-                    prefReceiverType.setSummary(getString(R.string.pref_summary_empty));
+                    prefReceiverType.setSummary(getString(R.string.empty));
                 }
                 Timber.v("setPreferenceSummary: set summary for key \"%s\" to \"%s\".", SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE, (null != receiverType) ? receiverType.toString() : "null");
                 break;
@@ -87,7 +87,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 if (null != receiverAddress && !receiverAddress.isEmpty()) {
                     prefReceiverAddress.setSummary(receiverAddress);
                 } else {
-                    prefReceiverAddress.setSummary(getString(R.string.pref_summary_empty));
+                    prefReceiverAddress.setSummary(getString(R.string.empty));
                 }
                 Timber.v("setPreferenceSummary: set summary for key \"%s\" to \"%s\".", SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS, (null != receiverAddress) ? receiverAddress : "null");
                 break;

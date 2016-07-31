@@ -12,7 +12,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 27.07.2016.
  */
-public class IntentFactory {
+class IntentFactory {
 
     public static void createIMDbFindIntent(Context context, View view, EpgEvent epgEvent) {
         PackageManager packageManager = context.getPackageManager();

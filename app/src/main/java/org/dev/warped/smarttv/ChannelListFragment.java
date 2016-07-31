@@ -83,7 +83,7 @@ public class ChannelListFragment extends Fragment implements
         if(null != mBouquet) {
             ((MainActivity) getActivity()).setActionBarTitle(mBouquet.getName());
         } else {
-            ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_bouquet));
+            ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.bouquet));
         }
 
         return view;
@@ -116,7 +116,7 @@ public class ChannelListFragment extends Fragment implements
         switch (item.getItemId())
         {
             case R.id.action_refresh:
-                Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.action_refresh));
+                Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.refresh));
                 onRefresh();
                 return true;
             default:

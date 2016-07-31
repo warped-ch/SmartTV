@@ -23,11 +23,6 @@ public class Bouquet implements Parcelable {
         }
     };
 
-    public Bouquet(Parcel parcel) {
-        mName = parcel.readString();
-        mReference = parcel.readString();
-    }
-
     public Bouquet(E2Service e2Service) {
         mName = e2Service.getServiceName();
         mReference = e2Service.getServiceReference();
@@ -50,5 +45,10 @@ public class Bouquet implements Parcelable {
 
     String getReference() {
         return mReference;
+    }
+
+    private Bouquet(Parcel parcel) {
+        mName = parcel.readString();
+        mReference = parcel.readString();
     }
 }

@@ -21,16 +21,17 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/imageViewPicon"
+                android:contentDescription="@string/picon"
                 android:layout_width="100dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageViewPicon"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_tv"
                 android:padding="6dp" />
 
             <TextView
                 android:id="@+id/textViewChannelTitle"
-                android:text="Channel"
+                android:text="@string/channel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -46,7 +47,7 @@
 
             <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/imageButtonZap"
-                android:text="zap"
+                android:text="@string/zap"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_above="@+id/textViewEpgEventTitle"
@@ -62,7 +63,7 @@
 
             <TextView
                 android:id="@+id/textViewEpgEventTitle"
-                android:text="Event"
+                android:text="@string/event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -85,7 +86,7 @@
 
                 <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/imageButtonTrailer"
-                    android:text="trailer"
+                    android:text="@string/trailer"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_movie"
@@ -95,10 +96,10 @@
 
                 <TextView
                     android:id="@+id/textViewIMDbLink"
+                    android:text="@string/imdb"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="IMDb"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
                     android:layout_marginStart="24dp"
@@ -142,7 +143,7 @@
 
             <TextView
                 android:id="@+id/textViewEpgEventDescription"
-                android:text="EPG event description"
+                android:text="@string/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"

@@ -14,7 +14,7 @@ import timber.log.Timber;
  * {@link RecyclerView.Adapter} that can display a {@link EpgEvent} and makes a call to the
  * specified {@link OnEpgEventClickedListener}.
  */
-public class EpgEventListAdapter extends RecyclerView.Adapter<EpgEventViewHolder> {
+class EpgEventListAdapter extends RecyclerView.Adapter<EpgEventViewHolder> {
 
     private final OnEpgEventClickedListener mListener;
     private List<EpgEvent> mEpgEvents;
