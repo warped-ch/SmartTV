@@ -195,6 +195,7 @@ public class EpgEventListFragment extends Fragment implements
 
     @Subscribe
     public void onLoadEpgEventsEventError(LoadEpgEventsEventError event) {
+        mAdapter.setEpgEvents(new ArrayList<EpgEvent>());
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_epg_events_failed);
     }

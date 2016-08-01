@@ -210,7 +210,6 @@ public class ChannelListFragment extends Fragment implements
         BusProvider.getBus().post(new ZapEvent(channel));
     }
 
-
     @Subscribe
     public void onLoadEpgNowEventDone(LoadEpgNowEventDone event) {
         mAdapter.setChannels(event.getChannels());
