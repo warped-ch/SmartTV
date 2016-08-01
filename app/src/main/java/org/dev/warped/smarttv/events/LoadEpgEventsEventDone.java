@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class LoadEpgEventsEventDone {
 
-    private final List<EpgEvent> mEpgEvents;
+    private final ArrayList<EpgEvent> mEpgEvents;
 
     public LoadEpgEventsEventDone(List<E2Event> e2Events) {
         mEpgEvents = new ArrayList<>();
@@ -20,7 +20,7 @@ public class LoadEpgEventsEventDone {
         }
     }
 
-    public List<EpgEvent> getEpgEvents() {
+    public ArrayList<EpgEvent> getEpgEvents() {
         return  mEpgEvents;
     }
 }

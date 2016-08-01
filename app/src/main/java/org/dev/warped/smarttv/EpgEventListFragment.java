@@ -17,6 +17,8 @@ import org.dev.warped.smarttv.events.LoadEpgEventsEvent;
 import org.dev.warped.smarttv.events.LoadEpgEventsEventDone;
 import org.dev.warped.smarttv.events.LoadEpgEventsEventError;
 
+import java.util.ArrayList;
+
 import timber.log.Timber;
 
 /**
@@ -30,10 +32,15 @@ public class EpgEventListFragment extends Fragment implements
         OnEpgEventClickedListener {
 
     private static final String ARG_CHANNEL = "arg-channel";
+    private static final String STATE_EPGEVENTS = "state-epgevents";
+    private static final String STATE_POSITIONINDEX = "state-positionindex";
+    private static final String STATE_POSITIONOFFSET = "state-positionoffset";
 
     private SwipeRefreshLayout mSwipeRefresh;
     private Channel mChannel;
     private EpgEventListAdapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView;
     private OnEpgEventListFragmentInteractionListener mListener;
 
     /**
@@ -60,7 +67,11 @@ public class EpgEventListFragment extends Fragment implements
             mChannel = getArguments().getParcelable(ARG_CHANNEL);
         }
 
-        mAdapter = new EpgEventListAdapter(this);
+        ArrayList<EpgEvent> epgEvents = new ArrayList<>();
+        if (savedInstanceState != null) {
+            epgEvents = savedInstanceState.getParcelableArrayList(STATE_EPGEVENTS);
+        }
+        mAdapter = new EpgEventListAdapter(epgEvents, this);
 
         setHasOptionsMenu(true);
     }
@@ -74,10 +85,16 @@ public class EpgEventListFragment extends Fragment implements
         mSwipeRefresh.setColorSchemeResources(R.color.colorCyanAccent700);
         mSwipeRefresh.setOnRefreshListener(this);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewEpgEventList);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(mAdapter);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewEpgEventList);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(view.getContext());
+        if (savedInstanceState != null) {
+            int positionIndex = savedInstanceState.getInt(STATE_POSITIONINDEX, 0);
+            int positionOffset = savedInstanceState.getInt(STATE_POSITIONOFFSET, 0);
+            mLayoutManager.scrollToPositionWithOffset(positionIndex, positionOffset);
+        }
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
         if(null != mChannel) {
             ((MainActivity) getActivity()).setActionBarTitle(mChannel.getName());
@@ -141,6 +158,21 @@ public class EpgEventListFragment extends Fragment implements
     @Override
     public void onRefresh() {
         BusProvider.getBus().post(new LoadEpgEventsEvent(mChannel));
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelableArrayList(STATE_EPGEVENTS, mAdapter.getEpgEvents());
+
+        if(mLayoutManager != null && mLayoutManager instanceof LinearLayoutManager && mRecyclerView != null){
+            int positionIndex = mLayoutManager.findFirstVisibleItemPosition();
+            View view = mRecyclerView.getChildAt(positionIndex);
+            int positionOffset = (view != null) ? (view.getTop() - mRecyclerView.getPaddingTop()) : 0;
+            outState.putInt(STATE_POSITIONINDEX, positionIndex);
+            outState.putInt(STATE_POSITIONOFFSET, positionOffset);
+        }
     }
 
     @Override

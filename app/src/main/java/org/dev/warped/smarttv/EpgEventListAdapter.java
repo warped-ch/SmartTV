@@ -17,11 +17,11 @@ import timber.log.Timber;
 class EpgEventListAdapter extends RecyclerView.Adapter<EpgEventViewHolder> {
 
     private final OnEpgEventClickedListener mListener;
-    private List<EpgEvent> mEpgEvents;
+    private ArrayList<EpgEvent> mEpgEvents;
 
-    public EpgEventListAdapter(OnEpgEventClickedListener listener) {
+    public EpgEventListAdapter(ArrayList<EpgEvent> epgEvents, OnEpgEventClickedListener listener) {
+        mEpgEvents = epgEvents;
         mListener = listener;
-        mEpgEvents = new ArrayList<>();
     }
 
     @Override
@@ -43,7 +43,11 @@ class EpgEventListAdapter extends RecyclerView.Adapter<EpgEventViewHolder> {
         return mEpgEvents.size();
     }
 
-    public void setEpgEvents(List<EpgEvent> epgEvents) {
+    public ArrayList<EpgEvent> getEpgEvents() {
+        return mEpgEvents;
+    }
+
+    public void setEpgEvents(ArrayList<EpgEvent> epgEvents) {
         mEpgEvents = epgEvents;
         notifyDataSetChanged();
     }
