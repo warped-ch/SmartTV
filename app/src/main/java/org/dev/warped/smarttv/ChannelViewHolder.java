@@ -54,7 +54,7 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
         mChannel = channel;
 
         mImageViewPicon.setImageResource(PiconManager.getPiconResourceId(channel.getName()));
-        // TODO: should not be necessary since app:srcCompat="@drawable/ic_play_circle_filled" is defined in xml?
+        // TODO: no image displayed on API 19, should not be necessary since defined in xml: app:srcCompat="@drawable/ic_play_circle_filled"?
         mImageButtonZap.setImageResource(R.drawable.ic_play_circle_filled);
         mTextViewChannelName.setText(channel.getName());
         if(!channel.getEpgEvents().isEmpty()) {
