@@ -54,14 +54,10 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
         mChannel = channel;
 
         mImageViewPicon.setImageResource(PiconManager.getPiconResourceId(channel.getName()));
-        // TODO: no image displayed on API 19, should not be necessary since defined in xml: app:srcCompat="@drawable/ic_play_circle_filled"?
-        mImageButtonZap.setImageResource(R.drawable.ic_play_circle_filled);
         mTextViewChannelName.setText(channel.getName());
         if(!channel.getEpgEvents().isEmpty()) {
             EpgEvent epgEvent = channel.getEpgEvents().get(0);
             mTextViewEpgEventTitle.setText(epgEvent.getTitle());
-            // TODO: no image displayed on API 19, should not be necessary since defined in xml: app:srcCompat="@drawable/ic_movie"?
-            mImageButtonTrailer.setImageResource(R.drawable.ic_movie);
             if (epgEvent.getDescriptionExtended().toLowerCase().contains("imdb")) {
                 mImageButtonTrailer.setColorFilter(mImageButtonTrailer.getResources().getColor(R.color.colorCyanAccent700), PorterDuff.Mode.SRC_ATOP);
                 mImageButtonTrailer.setOnClickListener(this);

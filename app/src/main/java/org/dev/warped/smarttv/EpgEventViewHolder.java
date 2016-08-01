@@ -46,8 +46,6 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         mEpgEvent = epgEvent;
 
         mTextViewEpgEventTitle.setText(epgEvent.getTitle());
-        // TODO: no image displayed on API 19, should not be necessary since defined in xml: app:srcCompat="@drawable/ic_movie"?
-        mImageButtonTrailer.setImageResource(R.drawable.ic_movie);
         if (epgEvent.getDescriptionExtended().toLowerCase().contains("imdb")) {
             mImageButtonTrailer.setColorFilter(mImageButtonTrailer.getResources().getColor(R.color.colorCyanAccent700), PorterDuff.Mode.SRC_ATOP);
             mImageButtonTrailer.setOnClickListener(this);
