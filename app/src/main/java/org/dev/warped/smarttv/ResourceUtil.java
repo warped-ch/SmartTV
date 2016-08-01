@@ -3,7 +3,7 @@ package org.dev.warped.smarttv;
 /**
  * Created by Andreas Wiedmer on 25.07.2016.
  */
-public class ResourceUtil {
+class ResourceUtil {
 
     public static ReceiverClient.EReceiverType getReceiverType(String receiverTypeValue) {
         if (null != receiverTypeValue) {

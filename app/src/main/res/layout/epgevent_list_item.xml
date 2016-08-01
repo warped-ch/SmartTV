@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
 
             <TextView
                 android:id="@+id/textViewEpgEventTitle"
-                android:text="EPG event title"
+                android:text="@string/event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -44,22 +44,23 @@
                 android:layout_alignParentBottom="false"
                 android:layout_centerHorizontal="true">
 
-                <ImageButton
+                <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/imageButtonTrailer"
-                    android:text="trailer"
+                    android:text="@string/trailer"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_movie"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:tint="@color/colorBlack"
+                    app:srcCompat="@drawable/ic_movie"/>
 
                 <TextView
                     android:id="@+id/textViewIMDbLink"
+                    android:text="@string/imdb"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="IMDb"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
                     android:layout_marginStart="24dp"
@@ -103,7 +104,7 @@
 
             <TextView
                 android:id="@+id/textViewEpgEventDescription"
-                android:text="EPG event description"
+                android:text="@string/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"

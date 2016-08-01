@@ -61,7 +61,7 @@ public class BouquetListFragment extends Fragment implements
         mAdapter =  new BouquetListAdapter(mListener);
         recyclerView.setAdapter(mAdapter);
 
-        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_bouquets));
+        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.bouquets));
 
         return view;
     }
@@ -92,7 +92,7 @@ public class BouquetListFragment extends Fragment implements
         switch (item.getItemId())
         {
             case R.id.action_refresh:
-                Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.action_refresh));
+                Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.refresh));
                 onRefresh();
                 return true;
             default:

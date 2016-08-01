@@ -81,7 +81,7 @@ public class EpgEventListFragment extends Fragment implements
         if(null != mChannel) {
             ((MainActivity) getActivity()).setActionBarTitle(mChannel.getName());
         } else {
-            ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.action_bar_title_epgevents));
+            ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.epg_events));
         }
 
         return view;
@@ -114,7 +114,7 @@ public class EpgEventListFragment extends Fragment implements
         switch (item.getItemId())
         {
             case R.id.action_refresh:
-                Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.action_refresh));
+                Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.refresh));
                 onRefresh();
                 return true;
             default:

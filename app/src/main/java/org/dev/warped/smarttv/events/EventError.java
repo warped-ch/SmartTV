@@ -6,7 +6,7 @@ package org.dev.warped.smarttv.events;
 abstract class EventError {
     private final Throwable mThrowable;
 
-    public EventError(Throwable throwable) {
+    EventError(Throwable throwable) {
         mThrowable = throwable;
     }
 

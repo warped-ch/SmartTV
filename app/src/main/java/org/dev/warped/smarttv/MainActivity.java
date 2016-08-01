@@ -98,10 +98,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_bouquets) {
-            Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_bouquets));
+            Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.bouquets));
             replaceFragment(new BouquetListFragment());
         } else if (id == R.id.nav_settings) {
-            Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.menu_settings));
+            Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.settings));
             replaceFragment(new SettingsFragment());
         } else {
             Timber.w("onNavigationItemSelected: invalid item %d selected.", id);

@@ -29,7 +29,7 @@
                 android:layout_margin="@dimen/text_margin"
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:layout_alignParentLeft="true"
-                android:text="Bouquet" />
+                android:text="@string/bouquets" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

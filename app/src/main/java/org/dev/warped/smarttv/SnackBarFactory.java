@@ -11,7 +11,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 27.07.2016.
  */
-public class SnackBarFactory {
+class SnackBarFactory {
 
     public static void showSnackBar(Activity activity, @StringRes int resId) {
         showSnackBar(activity.findViewById(android.R.id.content), resId);
