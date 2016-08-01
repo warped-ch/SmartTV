@@ -52,7 +52,7 @@ public class BouquetListFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_bouquet_list, container, false);
 
         mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshBouquetList);
-        mSwipeRefresh.setColorSchemeResources(R.color.colorCyanAccent700);
+        mSwipeRefresh.setColorSchemeResources(R.color.accent);
         mSwipeRefresh.setOnRefreshListener(this);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewBouquets);

@@ -47,17 +47,17 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
 
         mTextViewEpgEventTitle.setText(epgEvent.getTitle());
         if (epgEvent.getDescriptionExtended().toLowerCase().contains("imdb")) {
-            mImageButtonTrailer.setColorFilter(mImageButtonTrailer.getResources().getColor(R.color.colorCyanAccent700), PorterDuff.Mode.SRC_ATOP);
+            mImageButtonTrailer.setEnabled(true);
             mImageButtonTrailer.setOnClickListener(this);
 
+            mTextViewIMDbLink.setEnabled(true);
             mTextViewIMDbLink.setText(RegExParser.getIMDbRating(epgEvent.getDescriptionExtended(), mTextViewIMDbLink.getResources().getString(R.string.imdb)));
-            mTextViewIMDbLink.setTextColor(mTextViewIMDbLink.getResources().getColor(R.color.colorCyanAccent700));
             mTextViewIMDbLink.setOnClickListener(this);
         } else {
-            mImageButtonTrailer.setColorFilter(mImageButtonTrailer.getResources().getColor(R.color.colorBlack), PorterDuff.Mode.SRC_ATOP);
+            mImageButtonTrailer.setEnabled(false);
 
+            mTextViewIMDbLink.setEnabled(false);
             mTextViewIMDbLink.setText(mTextViewIMDbLink.getResources().getString(R.string.imdb));
-            mTextViewIMDbLink.setTextColor(mTextViewIMDbLink.getResources().getColor(R.color.colorBlack));
         }
         mTextViewEpgEventStartTime.setText(epgEvent.getStartTime());
         mTextViewEpgEventEndTime.setText(epgEvent.getEndTime());

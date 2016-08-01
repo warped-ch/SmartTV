@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="accent">@color/colorCyanAccent400</color>
+
     <!-- Cyan primary -->
-    <color name="colorCyan500">#00BCD4</color>
     <color name="colorCyan100">#B2EBF2</color>
+    <color name="colorCyan500">#00BCD4</color>
     <color name="colorCyan700">#0097A7</color>
     <color name="colorCyan900">#006064</color>
     <!-- Cyan accent -->
+    <color name="colorCyanAccent200">#18FFFF</color>
+    <color name="colorCyanAccent400">#00E5FF</color>
     <color name="colorCyanAccent700">#00b8d4</color>
 
     <!-- Grey primary -->
-    <color name="colorGrey500">#9E9E9E</color>
     <color name="colorGrey100">#f5f5f5</color>
     <color name="colorGrey300">#e0e0e0</color>
+    <color name="colorGrey500">#9E9E9E</color>
     <color name="colorGrey700">#616161</color>
     <color name="colorGrey800">#424242</color>
     <color name="colorGrey850">#303030</color>

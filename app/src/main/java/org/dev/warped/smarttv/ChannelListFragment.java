@@ -84,7 +84,7 @@ public class ChannelListFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_channel_list, container, false);
 
         mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshChannelList);
-        mSwipeRefresh.setColorSchemeResources(R.color.colorCyanAccent700);
+        mSwipeRefresh.setColorSchemeResources(R.color.accent);
         mSwipeRefresh.setOnRefreshListener(this);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewChannelList);

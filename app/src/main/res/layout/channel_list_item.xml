@@ -54,7 +54,7 @@
                 android:scaleType="fitEnd"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
-                android:tint="@color/colorCyanAccent700"
+                android:tint="@color/image_button_state_list"
                 android:layout_alignRight="@+id/textViewEpgEventTitle"
                 android:layout_alignEnd="@+id/textViewEpgEventTitle"
                 android:paddingTop="6dp"
@@ -91,7 +91,7 @@
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:background="@android:color/transparent"
-                    android:tint="@color/colorBlack"
+                    android:tint="@color/image_button_state_list"
                     app:srcCompat="@drawable/ic_movie"/>
 
                 <TextView
@@ -101,9 +101,9 @@
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/image_button_state_list"
                     android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp" />
+                    android:layout_marginLeft="24dp"/>
 
             </LinearLayout>
 
@@ -134,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/progressBarEpgEventDuration"
-                android:progressTint="@color/colorCyanAccent700"
+                android:progressTint="@color/accent"
                 android:layout_alignLeft="@+id/textViewEpgEventStartTime"
                 android:layout_alignStart="@+id/textViewEpgEventStartTime"
                 android:layout_alignRight="@+id/textViewEpgEventEndTime"
