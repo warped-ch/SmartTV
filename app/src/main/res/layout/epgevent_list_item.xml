@@ -53,7 +53,8 @@
                     android:adjustViewBounds="true"
                     android:background="@android:color/transparent"
                     android:tint="@color/image_button_state_list"
-                    app:srcCompat="@drawable/ic_movie"/>
+                    app:srcCompat="@drawable/ic_movie"
+                    android:clickable="true" />
 
                 <TextView
                     android:id="@+id/textViewIMDbLink"
@@ -64,7 +65,8 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/image_button_state_list"
                     android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp" />
+                    android:layout_marginLeft="24dp"
+                    android:clickable="true" />
 
             </LinearLayout>
 

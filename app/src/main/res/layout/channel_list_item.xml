@@ -58,7 +58,8 @@
                 android:layout_alignRight="@+id/textViewEpgEventTitle"
                 android:layout_alignEnd="@+id/textViewEpgEventTitle"
                 android:paddingTop="6dp"
-                app:srcCompat="@drawable/ic_play_circle_filled"/>
+                app:srcCompat="@drawable/ic_play_circle_filled"
+                android:clickable="true" />
 
             <TextView
                 android:id="@+id/textViewEpgEventTitle"
@@ -92,7 +93,8 @@
                     android:adjustViewBounds="true"
                     android:background="@android:color/transparent"
                     android:tint="@color/image_button_state_list"
-                    app:srcCompat="@drawable/ic_movie"/>
+                    app:srcCompat="@drawable/ic_movie"
+                    android:clickable="true" />
 
                 <TextView
                     android:id="@+id/textViewIMDbLink"
@@ -103,7 +105,8 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/image_button_state_list"
                     android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"/>
+                    android:layout_marginLeft="24dp"
+                    android:clickable="true" />
 
             </LinearLayout>
 
