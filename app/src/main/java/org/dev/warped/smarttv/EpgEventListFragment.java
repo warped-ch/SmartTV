@@ -60,6 +60,8 @@ public class EpgEventListFragment extends Fragment implements
             mChannel = getArguments().getParcelable(ARG_CHANNEL);
         }
 
+        mAdapter = new EpgEventListAdapter(this);
+
         setHasOptionsMenu(true);
     }
 
@@ -75,7 +77,6 @@ public class EpgEventListFragment extends Fragment implements
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewEpgEventList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        mAdapter = new EpgEventListAdapter(this);
         recyclerView.setAdapter(mAdapter);
 
         if(null != mChannel) {

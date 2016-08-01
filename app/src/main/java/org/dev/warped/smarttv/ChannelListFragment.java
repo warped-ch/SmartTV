@@ -62,6 +62,8 @@ public class ChannelListFragment extends Fragment implements
             mBouquet = getArguments().getParcelable(ARG_BOUQUET);
         }
 
+        mAdapter = new ChannelListAdapter(this);
+
         setHasOptionsMenu(true);
     }
 
@@ -77,7 +79,6 @@ public class ChannelListFragment extends Fragment implements
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewChannelList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        mAdapter = new ChannelListAdapter(this);
         recyclerView.setAdapter(mAdapter);
 
         if(null != mBouquet) {
