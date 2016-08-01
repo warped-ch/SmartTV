@@ -92,6 +92,7 @@
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:background="@android:color/transparent"
+                    android:tint="@color/colorBlack"
                     app:srcCompat="@drawable/ic_movie"/>
 
                 <TextView
