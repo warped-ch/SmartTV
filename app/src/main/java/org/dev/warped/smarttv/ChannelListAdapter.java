@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import org.dev.warped.smarttv.ChannelListFragment.OnChannelListFragmentInteractionListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import timber.log.Timber;
 
