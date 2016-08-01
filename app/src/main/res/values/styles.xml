@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="SmartTvTheme" parent="Theme.AppCompat.NoActionBar" >
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorGrey900</item>
-        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <item name="colorPrimary">@color/grey900</item>
+        <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/accent</item>
     </style>
 

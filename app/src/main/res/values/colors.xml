@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="accent">@color/colorCyanAccent400</color>
+    <color name="accent">@color/cyanAccent400</color>
 
     <!-- Cyan primary -->
-    <color name="colorCyan100">#B2EBF2</color>
-    <color name="colorCyan500">#00BCD4</color>
-    <color name="colorCyan700">#0097A7</color>
-    <color name="colorCyan900">#006064</color>
+    <color name="cyan100">#B2EBF2</color>
+    <color name="cyan500">#00BCD4</color>
+    <color name="cyan700">#0097A7</color>
+    <color name="cyan900">#006064</color>
     <!-- Cyan accent -->
-    <color name="colorCyanAccent200">#18FFFF</color>
-    <color name="colorCyanAccent400">#00E5FF</color>
-    <color name="colorCyanAccent700">#00b8d4</color>
+    <color name="cyanAccent200">#18FFFF</color>
+    <color name="cyanAccent400">#00E5FF</color>
+    <color name="cyanAccent700">#00b8d4</color>
 
     <!-- Grey primary -->
-    <color name="colorGrey100">#f5f5f5</color>
-    <color name="colorGrey300">#e0e0e0</color>
-    <color name="colorGrey500">#9E9E9E</color>
-    <color name="colorGrey700">#616161</color>
-    <color name="colorGrey800">#424242</color>
-    <color name="colorGrey850">#303030</color>
-    <color name="colorGrey900">#212121</color>
+    <color name="grey100">#f5f5f5</color>
+    <color name="grey300">#e0e0e0</color>
+    <color name="grey500">#9E9E9E</color>
+    <color name="grey700">#616161</color>
+    <color name="grey800">#424242</color>
+    <color name="grey850">#303030</color>
+    <color name="grey900">#212121</color>
 
-    <color name="colorBlack">#000000</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
     <!-- Toolbar -->
-    <color name="ToolbarIcon">#B3FFFFFF</color>
+    <color name="toolbarIcon">#B3FFFFFF</color>
 </resources>
