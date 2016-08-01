@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<android.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <android.preference.PreferenceCategory
         android:title="@string/receiver"
         android:key="pref_key_receiver">
+        <android.preference.SwitchPreference
+            android:key="pref_key_receiver_auto_discovery"
+            android:title="@string/auto_discovery"
+            android:defaultValue="true"
+            android:disableDependentsState="true" />
         <android.preference.ListPreference
             android:key="pref_key_receiver_type"
             android:title="@string/receiver_type"
+            android:dependency="pref_key_receiver_auto_discovery"
             android:entries="@array/receiver_types"
             android:entryValues="@array/receiver_type_values" />
         <android.preference.EditTextPreference
             android:key="pref_key_receiver_address"
             android:title="@string/hostname_or_ip"
-            android:inputType="text"/>
+            android:dependency="pref_key_receiver_auto_discovery"
+            android:inputType="text" />
     </android.preference.PreferenceCategory>
 </android.preference.PreferenceScreen>
