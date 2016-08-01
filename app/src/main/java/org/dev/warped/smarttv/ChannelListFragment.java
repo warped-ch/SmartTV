@@ -20,6 +20,8 @@ import org.dev.warped.smarttv.events.ZapEvent;
 import org.dev.warped.smarttv.events.ZapEventDone;
 import org.dev.warped.smarttv.events.ZapEventError;
 
+import java.util.ArrayList;
+
 import timber.log.Timber;
 
 /**
@@ -33,10 +35,15 @@ public class ChannelListFragment extends Fragment implements
         OnChannelClickedListener {
 
     private static final String ARG_BOUQUET = "arg-bouquet";
+    private static final String STATE_CHANNELS = "state-channels";
+    private static final String STATE_POSITIONINDEX = "state-positionindex";
+    private static final String STATE_POSITIONOFFSET = "state-positionoffset";
 
     private SwipeRefreshLayout mSwipeRefresh;
     private Bouquet mBouquet;
     private ChannelListAdapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView;
     private OnChannelListFragmentInteractionListener mListener;
 
     /**
@@ -62,7 +69,11 @@ public class ChannelListFragment extends Fragment implements
             mBouquet = getArguments().getParcelable(ARG_BOUQUET);
         }
 
-        mAdapter = new ChannelListAdapter(this);
+        ArrayList<Channel> channels = new ArrayList<>();
+        if (savedInstanceState != null) {
+            channels = savedInstanceState.getParcelableArrayList(STATE_CHANNELS);
+        }
+        mAdapter = new ChannelListAdapter(channels, this);
 
         setHasOptionsMenu(true);
     }
@@ -76,10 +87,16 @@ public class ChannelListFragment extends Fragment implements
         mSwipeRefresh.setColorSchemeResources(R.color.colorCyanAccent700);
         mSwipeRefresh.setOnRefreshListener(this);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewChannelList);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(mAdapter);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewChannelList);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(view.getContext());
+        if (savedInstanceState != null) {
+            int positionIndex = savedInstanceState.getInt(STATE_POSITIONINDEX, 0);
+            int positionOffset = savedInstanceState.getInt(STATE_POSITIONOFFSET, 0);
+            mLayoutManager.scrollToPositionWithOffset(positionIndex, positionOffset);
+        }
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
         if(null != mBouquet) {
             ((MainActivity) getActivity()).setActionBarTitle(mBouquet.getName());
@@ -146,6 +163,21 @@ public class ChannelListFragment extends Fragment implements
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelableArrayList(STATE_CHANNELS, mAdapter.getChannels());
+
+        if(mLayoutManager != null && mLayoutManager instanceof LinearLayoutManager && mRecyclerView != null){
+            int positionIndex = mLayoutManager.findFirstVisibleItemPosition();
+            View view = mRecyclerView.getChildAt(positionIndex);
+            int positionOffset = (view != null) ? (view.getTop() - mRecyclerView.getPaddingTop()) : 0;
+            outState.putInt(STATE_POSITIONINDEX, positionIndex);
+            outState.putInt(STATE_POSITIONOFFSET, positionOffset);
+        }
+    }
+
+    @Override
     public void onClick(Channel channel) {
         mListener.onShowChannel(channel);
     }
@@ -187,6 +219,7 @@ public class ChannelListFragment extends Fragment implements
 
     @Subscribe
     public void onLoadEpgNowEventError(LoadEpgNowEventError event) {
+        mAdapter.setChannels(new ArrayList<Channel>());
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_channels_failed);
     }

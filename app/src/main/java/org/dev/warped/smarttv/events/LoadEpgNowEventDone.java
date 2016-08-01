@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class LoadEpgNowEventDone {
 
-    private final List<Channel> mChannels;
+    private final ArrayList<Channel> mChannels;
 
     public LoadEpgNowEventDone(List<E2Event> e2Events) {
         mChannels = new ArrayList<>();
@@ -20,7 +20,7 @@ public class LoadEpgNowEventDone {
         }
     }
 
-    public List<Channel> getChannels() {
+    public ArrayList<Channel> getChannels() {
         return  mChannels;
     }
 }
