@@ -53,6 +53,7 @@ public class BouquetListFragment extends Fragment implements
 
         mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshBouquetList);
         mSwipeRefresh.setColorSchemeResources(R.color.accent);
+        mSwipeRefresh.setProgressBackgroundColorSchemeResource(R.color.grey900);
         mSwipeRefresh.setOnRefreshListener(this);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewBouquets);
