@@ -6,6 +6,8 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,6 +37,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
+        setHasOptionsMenu(true);
+
         // Set preference summaries
         setPreferenceSummary(SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE);
         setPreferenceSummary(SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS);
@@ -55,6 +59,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onPause() {
         super.onPause();
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        try {
+            menu.findItem(R.id.action_refresh).setVisible(false);
+        } catch (NullPointerException e) {
+            Timber.e("onPrepareOptionsMenu: menu item action_refresh is null.");
+        }
     }
 
     @Override
