@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity
         ChannelListFragment.OnChannelListFragmentInteractionListener,
         EpgEventListFragment.OnEpgEventListFragmentInteractionListener {
 
+    private DeviceDiscovery mDeviceDiscovery;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,10 @@ public class MainActivity extends AppCompatActivity
                 SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
             }
         }
+
+        mDeviceDiscovery = new DeviceDiscovery(this);
+        mDeviceDiscovery.initialize();
+        mDeviceDiscovery.startDiscovery();
     }
 
     @Override
@@ -113,6 +119,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onPause() {
+        if (mDeviceDiscovery != null) {
+            mDeviceDiscovery.stopDiscovery();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mDeviceDiscovery != null) {
+            mDeviceDiscovery.startDiscovery();
+        }
+    }
+
+    @Override
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
         replaceFragment(ChannelListFragment.newInstance(bouquet));
@@ -122,6 +144,19 @@ public class MainActivity extends AppCompatActivity
     public void onShowChannel(Channel channel) {
         Timber.d("onShowChannel: \"%s\".", channel.getName());
         replaceFragment(EpgEventListFragment.newInstance(channel));
+    }
+
+    @Override
+    protected void onStop() {
+        if (mDeviceDiscovery != null) {
+            try {
+                mDeviceDiscovery.tearDown();
+            } finally {
+            }
+            mDeviceDiscovery = null;
+        }
+
+        super.onStop();
     }
 
     public void setActionBarTitle(String title) {
