@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         mDeviceDiscovery = new DeviceDiscovery(this);
-        mDeviceDiscovery.initialize();
         mDeviceDiscovery.startDiscovery();
     }
 
@@ -144,19 +143,6 @@ public class MainActivity extends AppCompatActivity
     public void onShowChannel(Channel channel) {
         Timber.d("onShowChannel: \"%s\".", channel.getName());
         replaceFragment(EpgEventListFragment.newInstance(channel));
-    }
-
-    @Override
-    protected void onStop() {
-        if (mDeviceDiscovery != null) {
-            try {
-                mDeviceDiscovery.tearDown();
-            } finally {
-            }
-            mDeviceDiscovery = null;
-        }
-
-        super.onStop();
     }
 
     public void setActionBarTitle(String title) {
