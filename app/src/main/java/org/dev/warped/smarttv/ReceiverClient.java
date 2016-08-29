@@ -64,7 +64,7 @@ class ReceiverClient {
                 return;
         }
 
-        final Call<E2Volume> call = mEnigma2Client.getApiService().getVolume(set);
+        final Call<E2Volume> call = mEnigma2Client.getApiService().postVolume(set);
         call.enqueue(new Callback<E2Volume>() {
             @Override
             public void onResponse(Call<E2Volume> call, Response<E2Volume> response) {
@@ -152,7 +152,7 @@ class ReceiverClient {
 
     @Subscribe
     public void onZapEvent(ZapEvent event) {
-        final Call<E2SimpleXmlResult> call = mEnigma2Client.getApiService().getZap(event.getChannel().getReference());
+        final Call<E2SimpleXmlResult> call = mEnigma2Client.getApiService().postZap(event.getChannel().getReference());
         call.enqueue(new Callback<E2SimpleXmlResult>() {
             @Override
             public void onResponse(Call<E2SimpleXmlResult> call, Response<E2SimpleXmlResult> response) {

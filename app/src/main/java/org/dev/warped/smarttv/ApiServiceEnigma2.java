@@ -7,6 +7,7 @@ import org.dev.warped.smarttv.model.E2Volume;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -29,8 +30,10 @@ public interface ApiServiceEnigma2 {
     Call<E2EventList> getEpgService(@Query("sRef") String sRef);
 
     @GET("web/vol")
-    Call<E2Volume> getVolume(@Query("set") String set);
+    Call<E2Volume> getVolume();
+    @POST("web/vol")
+    Call<E2Volume> postVolume(@Query("set") String set);
 
-    @GET("web/zap")
-    Call<E2SimpleXmlResult> getZap(@Query("sRef") String sRef);
+    @POST("web/zap")
+    Call<E2SimpleXmlResult> postZap(@Query("sRef") String sRef);
 }
