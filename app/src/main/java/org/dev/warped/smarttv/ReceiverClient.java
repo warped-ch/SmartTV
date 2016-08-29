@@ -3,6 +3,9 @@ package org.dev.warped.smarttv;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
+import org.dev.warped.smarttv.events.ControlVolumeEvent;
+import org.dev.warped.smarttv.events.ControlVolumeEventDone;
+import org.dev.warped.smarttv.events.ControlVolumeEventError;
 import org.dev.warped.smarttv.events.LoadBouquetsEvent;
 import org.dev.warped.smarttv.events.LoadBouquetsEventDone;
 import org.dev.warped.smarttv.events.LoadBouquetsEventError;
@@ -18,6 +21,7 @@ import org.dev.warped.smarttv.events.ZapEventError;
 import org.dev.warped.smarttv.model.E2EventList;
 import org.dev.warped.smarttv.model.E2ServiceList;
 import org.dev.warped.smarttv.model.E2SimpleXmlResult;
+import org.dev.warped.smarttv.model.E2Volume;
 
 import java.net.InetAddress;
 
@@ -46,22 +50,57 @@ class ReceiverClient {
     }
 
     @Subscribe
+    public void onControlVolumeEvent(ControlVolumeEvent event) {
+        String set;
+        switch (event.getVolumeControlType()) {
+            case eDown:
+                set = "down";
+                break;
+            case eUp:
+                set = "up";
+                break;
+            default:
+                Timber.w("onControlVolumeEvent: invalid volume control type: %s", event.getVolumeControlType().toString());
+                return;
+        }
+
+        final Call<E2Volume> call = mEnigma2Client.getApiService().getVolume(set);
+        call.enqueue(new Callback<E2Volume>() {
+            @Override
+            public void onResponse(Call<E2Volume> call, Response<E2Volume> response) {
+                if (null != response.body()) {
+                    Timber.d("onControlVolumeEvent: onResponse: \"%s\".", response.body());
+                    mBus.post(new ControlVolumeEventDone(response.body()));
+                } else {
+                    Timber.w("onControlVolumeEvent: onResponse: response body is null.");
+                    mBus.post(new ControlVolumeEventError(new NullPointerException()));
+                }
+            }
+            @Override
+            public void onFailure(Call<E2Volume> call, Throwable t) {
+                Timber.w("onControlVolumeEvent: onFailure: something went wrong.");
+                mBus.post(new ControlVolumeEventError(t));
+            }
+        });
+    }
+
+    @Subscribe
     public void onLoadBouquetsEvent(LoadBouquetsEvent event) {
         final Call<E2ServiceList> call = mEnigma2Client.getApiService().getServices();
         call.enqueue(new Callback<E2ServiceList>() {
             @Override
             public void onResponse(Call<E2ServiceList> call, Response<E2ServiceList> response) {
                 if (null != response.body()) {
-                    Timber.d("onLoadBouquets: onResponse: \"%s\".", response.body());
+                    Timber.d("onLoadBouquetsEvent: onResponse: \"%s\".", response.body());
                     mBus.post(new LoadBouquetsEventDone(response.body().getServiceList()));
                 } else {
-                    Timber.w("onLoadBouquets: onResponse: response body is null.");
+                    Timber.w("onLoadBouquetsEvent: onResponse: response body is null.");
                     mBus.post(new LoadBouquetsEventError(new NullPointerException()));
                 }
             }
             @Override
             public void onFailure(Call<E2ServiceList> call, Throwable t) {
-                Timber.w("onLoadBouquets: onFailure: something went wrong.");
+                Timber.w("onLoadBouquetsEvent: onFailure: something went wrong.");
                 mBus.post(new LoadBouquetsEventError(t));
             }
         });
@@ -74,16 +113,16 @@ class ReceiverClient {
             @Override
             public void onResponse(Call<E2EventList> call, Response<E2EventList> response) {
                 if (null != response.body()) {
-                    Timber.d("onLoadEpgNow: onResponse: \"%s\".", response.body());
+                    Timber.d("onLoadEpgNowEvent: onResponse: \"%s\".", response.body());
                     mBus.post(new LoadEpgNowEventDone(response.body().getEventList()));
                 } else {
-                    Timber.w("onLoadEpgNow: onResponse: response body is null.");
+                    Timber.w("onLoadEpgNowEvent: onResponse: response body is null.");
                     mBus.post(new LoadEpgNowEventError(new NullPointerException()));
                 }
             }
             @Override
             public void onFailure(Call<E2EventList> call, Throwable t) {
-                Timber.w("onLoadEpgNow: onFailure: something went wrong.");
+                Timber.w("onLoadEpgNowEvent: onFailure: something went wrong.");
                 mBus.post(new LoadEpgNowEventError(t));
             }
         });
@@ -96,16 +135,16 @@ class ReceiverClient {
             @Override
             public void onResponse(Call<E2EventList> call, Response<E2EventList> response) {
                 if (null != response.body()) {
-                    Timber.d("onLoadEpgEvents: onResponse: \"%s\".", response.body());
+                    Timber.d("onLoadEpgEventsEvent: onResponse: \"%s\".", response.body());
                     mBus.post(new LoadEpgEventsEventDone(response.body().getEventList()));
                 } else {
-                    Timber.w("onLoadEpgEvents: onResponse: response body is null.");
+                    Timber.w("onLoadEpgEventsEvent: onResponse: response body is null.");
                     mBus.post(new LoadEpgEventsEventError(new NullPointerException()));
                 }
             }
             @Override
             public void onFailure(Call<E2EventList> call, Throwable t) {
-                Timber.w("onLoadEpgEvents: onFailure: something went wrong.");
+                Timber.w("onLoadEpgEventsEvent: onFailure: something went wrong.");
                 mBus.post(new LoadEpgEventsEventError(t));
             }
         });
@@ -118,16 +157,16 @@ class ReceiverClient {
             @Override
             public void onResponse(Call<E2SimpleXmlResult> call, Response<E2SimpleXmlResult> response) {
                 if (null != response.body()) {
-                    Timber.d("onZap: onResponse: \"%s\".", response.body());
+                    Timber.d("onZapEvent: onResponse: \"%s\".", response.body());
                     mBus.post(new ZapEventDone(response.body()));
                 } else {
-                    Timber.w("onZap: onResponse: response body is null.");
+                    Timber.w("onZapEvent: onResponse: response body is null.");
                     mBus.post(new ZapEventError(new NullPointerException()));
                 }
             }
             @Override
             public void onFailure(Call<E2SimpleXmlResult> call, Throwable t) {
-                Timber.w("onZap: onFailure: something went wrong.");
+                Timber.w("onZapEvent: onFailure: something went wrong.");
                 mBus.post(new ZapEventError(t));
             }
         });

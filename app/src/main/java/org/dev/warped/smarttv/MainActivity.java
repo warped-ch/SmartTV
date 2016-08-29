@@ -11,8 +11,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.squareup.otto.Subscribe;
+
+import org.dev.warped.smarttv.events.ControlVolumeEvent;
+import org.dev.warped.smarttv.events.ControlVolumeEventDone;
+import org.dev.warped.smarttv.events.ControlVolumeEventError;
 
 import timber.log.Timber;
 
@@ -93,6 +100,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                Timber.d("onKeyDown: %s", event);
+                BusProvider.getBus().post(new ControlVolumeEvent(ControlVolumeEvent.EVolumeControlType.eDown));
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                Timber.d("onKeyDown: %s", event);
+                BusProvider.getBus().post(new ControlVolumeEvent(ControlVolumeEvent.EVolumeControlType.eUp));
+                return true;
+            default:
+                return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -113,6 +136,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        BusProvider.getBus().unregister(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        BusProvider.getBus().register(this);
+    }
+
+    @Override
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
         replaceFragment(ChannelListFragment.newInstance(bouquet));
@@ -122,6 +159,16 @@ public class MainActivity extends AppCompatActivity
     public void onShowChannel(Channel channel) {
         Timber.d("onShowChannel: \"%s\".", channel.getName());
         replaceFragment(EpgEventListFragment.newInstance(channel));
+    }
+
+    @Subscribe
+    public void onControlVolumeEventDone(ControlVolumeEventDone event) {
+        Timber.d("onControlVolumeEventDone: current volume = %d", event.getCurrentVolume());
+    }
+
+    @Subscribe
+    public void onControlVolumeEventError(ControlVolumeEventError event) {
+        SnackBarFactory.showSnackBar(this, R.string.snackbar_control_volume_failed);
     }
 
     public void setActionBarTitle(String title) {
