@@ -10,8 +10,6 @@ import timber.log.Timber;
  */
 public class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
 
-    public static final String SERVICE_TYPE = "_workstation._tcp.";
-
     private final DeviceDiscovery mDeviceDiscovery;
     private final NsdManager mNsdManager;
 
@@ -28,10 +26,10 @@ public class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
     @Override
     public void onServiceFound(NsdServiceInfo serviceInfo) {
         Timber.d("onServiceFound: %s", serviceInfo);
-        // TODO: extend for other Enigma2 devices
-        if (serviceInfo.getServiceType().equals(SERVICE_TYPE) && serviceInfo.getServiceName().contains("dm800se")) {
+
+        if (isSupportedDevice(serviceInfo)) {
             Timber.d("onServiceFound: Enigma2 device found: %s", serviceInfo);
-            mNsdManager.resolveService(serviceInfo, new DeviceResolveListener(mDeviceDiscovery));
+            mNsdManager.resolveService(serviceInfo, new Enigma2ResolveListener(mDeviceDiscovery));
         }
     }
 
@@ -57,6 +55,19 @@ public class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
     }
 
     public String getServiceType() {
-        return SERVICE_TYPE;
+        return "_workstation._tcp";
+    }
+
+    public boolean isSupportedDevice(NsdServiceInfo serviceInfo) {
+        // MAC address Organizationally Unique Identifier
+        final String DreamMultimediaOUI = "00:09:34";
+
+        if (serviceInfo.getServiceType().contains(getServiceType()) && serviceInfo.getServiceName().contains(DreamMultimediaOUI)) {
+            Timber.d("isSupportedDevice: device supported: %s", serviceInfo);
+            return true;
+        } else {
+            Timber.d("isSupportedDevice: device not supported: %s", serviceInfo);
+            return false;
+        }
     }
 }

@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.net.InetAddress;
+
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView.OnNavigationItemSelectedListener,
         BouquetListFragment.OnBouquetListFragmentInteractionListener,
         ChannelListFragment.OnChannelListFragmentInteractionListener,
+        DeviceDiscoveryCallback,
         EpgEventListFragment.OnEpgEventListFragmentInteractionListener {
 
     private DeviceDiscovery mDeviceDiscovery;
@@ -48,6 +51,9 @@ public class MainActivity extends AppCompatActivity
             // Ensures that the application is properly initialized with default settings
             PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
+            mDeviceDiscovery = new DeviceDiscovery(this, getApplicationContext());
+            mDeviceDiscovery.startDiscovery();
+
             // show bouquet list fragment on initial startup
             navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
             BouquetListFragment fragment = new BouquetListFragment();
@@ -60,9 +66,6 @@ public class MainActivity extends AppCompatActivity
                 SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
             }
         }
-
-        mDeviceDiscovery = new DeviceDiscovery(this);
-        mDeviceDiscovery.startDiscovery();
     }
 
     @Override
@@ -143,6 +146,21 @@ public class MainActivity extends AppCompatActivity
     public void onShowChannel(Channel channel) {
         Timber.d("onShowChannel: \"%s\".", channel.getName());
         replaceFragment(EpgEventListFragment.newInstance(channel));
+    }
+
+    @Override
+    public void onReceiverDiscovered(ReceiverClient.EReceiverType receiverType, InetAddress address) {
+        Timber.d("onReceiverDiscovered: receiverType=%s, address=%s",receiverType.toString(), address);
+
+        if (SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getApplicationContext())) != address) {
+            Timber.d("onReceiverDiscovered: %s, set receiver address in shared preferences", address);
+            SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()), address);
+        }
+
+        if (SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(getApplicationContext())) != receiverType) {
+            Timber.d("onReceiverDiscovered: %s, set receiver type in shared preferences", receiverType);
+            SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()), receiverType);
+        }
     }
 
     public void setActionBarTitle(String title) {

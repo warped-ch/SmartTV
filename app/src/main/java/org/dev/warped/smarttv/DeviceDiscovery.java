@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.nsd.NsdManager;
 import android.net.nsd.NsdServiceInfo;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +14,13 @@ import timber.log.Timber;
  * Created by Andreas Wiedmer on 11.08.2016.
  */
 public class DeviceDiscovery {
-    private NsdManager mNsdManager;
+    private  final DeviceDiscoveryCallback mCallback;
+    private final NsdManager mNsdManager;
     private Enigma2DiscoveryListener mEnigma2DiscoveryListener;
     private List<NsdServiceInfo> mServices = new ArrayList<>();
 
-    public DeviceDiscovery(Context context) {
+    public DeviceDiscovery(DeviceDiscoveryCallback callback, Context context) {
+        mCallback = callback;
         mNsdManager = (NsdManager) context.getSystemService(Context.NSD_SERVICE);
     }
 
@@ -42,16 +45,25 @@ public class DeviceDiscovery {
             }
             mEnigma2DiscoveryListener = null;
         }
-        // TODO: clear mServices here?
+        mServices.clear();
     }
 
-    public void addService(NsdServiceInfo serviceInfo) {
+    public void addReceiver(ReceiverClient.EReceiverType receiverType, NsdServiceInfo serviceInfo) {
         if (!mServices.contains(serviceInfo)) {
             mServices.add(serviceInfo);
+            mCallback.onReceiverDiscovered(receiverType, serviceInfo.getHost());
         }
     }
 
     public void removeService(NsdServiceInfo serviceInfo) {
         mServices.remove(serviceInfo);
+    }
+
+    public List<InetAddress> getDevices() {
+        List<InetAddress> devices = new ArrayList<>();
+        for (NsdServiceInfo s : mServices) {
+            devices.add(s.getHost());
+        }
+        return devices;
     }
 }

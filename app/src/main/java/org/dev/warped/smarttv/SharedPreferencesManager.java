@@ -55,4 +55,16 @@ class SharedPreferencesManager {
         }
         return address;
     }
+
+    public static void setReceiverAddress(SharedPreferences sharedPreferences, InetAddress address) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PREF_KEY_RECEIVER_ADDRESS, address.getHostAddress());
+        editor.apply();
+    }
+
+    public static void setReceiverType(SharedPreferences sharedPreferences, ReceiverClient.EReceiverType receiverType) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PREF_KEY_RECEIVER_TYPE, ResourceUtil.getReceiverTypeValue(receiverType));
+        editor.apply();
+    }
 }
