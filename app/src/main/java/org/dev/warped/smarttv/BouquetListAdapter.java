@@ -19,11 +19,11 @@ import timber.log.Timber;
 class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> {
 
     private final OnBouquetListFragmentInteractionListener mListener;
-    private List<Bouquet> mBouquets;
+    private ArrayList<Bouquet> mBouquets;
 
-    public BouquetListAdapter(OnBouquetListFragmentInteractionListener listener) {
+    public BouquetListAdapter(ArrayList<Bouquet> bouquets, OnBouquetListFragmentInteractionListener listener) {
+        mBouquets = bouquets;
         mListener = listener;
-        mBouquets = new ArrayList<>();
     }
 
     @Override
@@ -45,7 +45,11 @@ class BouquetListAdapter extends RecyclerView.Adapter<BouquetViewHolder> {
         return mBouquets.size();
     }
 
-    public void setBouquets(List<Bouquet> bouquets) {
+    public ArrayList<Bouquet> getBouquets() {
+        return mBouquets;
+    }
+
+    public void setBouquets(ArrayList<Bouquet> bouquets) {
         mBouquets = bouquets;
         notifyDataSetChanged();
     }

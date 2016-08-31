@@ -17,6 +17,8 @@ import org.dev.warped.smarttv.events.LoadBouquetsEvent;
 import org.dev.warped.smarttv.events.LoadBouquetsEventDone;
 import org.dev.warped.smarttv.events.LoadBouquetsEventError;
 
+import java.util.ArrayList;
+
 import timber.log.Timber;
 
 /**
@@ -28,9 +30,15 @@ import timber.log.Timber;
 public class BouquetListFragment extends Fragment implements
         SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String STATE_BOUQUETS = "state-bouquets";
+    private static final String STATE_POSITIONINDEX = "state-positionindex";
+    private static final String STATE_POSITIONOFFSET = "state-positionoffset";
+
     private SwipeRefreshLayout mSwipeRefresh;
     private OnBouquetListFragmentInteractionListener mListener;
     private BouquetListAdapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -42,6 +50,12 @@ public class BouquetListFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ArrayList<Bouquet> bouquets = new ArrayList<>();
+        if (savedInstanceState != null) {
+            bouquets = savedInstanceState.getParcelableArrayList(STATE_BOUQUETS);
+        }
+        mAdapter = new BouquetListAdapter(bouquets, mListener);
 
         setHasOptionsMenu(true);
     }
@@ -56,11 +70,16 @@ public class BouquetListFragment extends Fragment implements
         mSwipeRefresh.setProgressBackgroundColorSchemeResource(R.color.grey900);
         mSwipeRefresh.setOnRefreshListener(this);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewBouquets);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        mAdapter =  new BouquetListAdapter(mListener);
-        recyclerView.setAdapter(mAdapter);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewBouquets);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(view.getContext());
+        if (savedInstanceState != null) {
+            int positionIndex = savedInstanceState.getInt(STATE_POSITIONINDEX, 0);
+            int positionOffset = savedInstanceState.getInt(STATE_POSITIONOFFSET, 0);
+            mLayoutManager.scrollToPositionWithOffset(positionIndex, positionOffset);
+        }
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
         ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.bouquets));
 
@@ -119,6 +138,21 @@ public class BouquetListFragment extends Fragment implements
     @Override
     public void onRefresh() {
         BusProvider.getBus().post(new LoadBouquetsEvent());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelableArrayList(STATE_BOUQUETS, mAdapter.getBouquets());
+
+        if(mLayoutManager != null && mLayoutManager instanceof LinearLayoutManager && mRecyclerView != null){
+            int positionIndex = mLayoutManager.findFirstVisibleItemPosition();
+            View view = mRecyclerView.getChildAt(positionIndex);
+            int positionOffset = (view != null) ? (view.getTop() - mRecyclerView.getPaddingTop()) : 0;
+            outState.putInt(STATE_POSITIONINDEX, positionIndex);
+            outState.putInt(STATE_POSITIONOFFSET, positionOffset);
+        }
     }
 
     @Subscribe

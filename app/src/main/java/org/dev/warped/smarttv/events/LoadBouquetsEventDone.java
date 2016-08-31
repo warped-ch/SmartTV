@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class LoadBouquetsEventDone {
 
-    private final List<Bouquet> mBouquets;
+    private final ArrayList<Bouquet> mBouquets;
 
     public LoadBouquetsEventDone(List<E2Service> e2Services) {
         mBouquets = new ArrayList<>();
@@ -20,7 +20,7 @@ public class LoadBouquetsEventDone {
         }
     }
 
-    public List<Bouquet> getBouquets() {
+    public ArrayList<Bouquet> getBouquets() {
         return mBouquets;
     }
 }
