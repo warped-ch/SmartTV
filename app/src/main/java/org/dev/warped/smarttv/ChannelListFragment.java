@@ -218,7 +218,6 @@ public class ChannelListFragment extends Fragment implements
 
     @Subscribe
     public void onLoadEpgNowEventError(LoadEpgNowEventError event) {
-        mAdapter.setChannels(new ArrayList<Channel>());
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_channels_failed);
     }
