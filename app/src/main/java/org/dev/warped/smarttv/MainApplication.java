@@ -3,6 +3,7 @@ package org.dev.warped.smarttv;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.squareup.otto.Bus;
 
@@ -14,6 +15,10 @@ import timber.log.Timber;
  * Created by Andreas Wiedmer on 20.07.2016.
  */
 public class MainApplication extends Application implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+    static {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    }
 
     private final Bus mBus = BusProvider.getBus();
     private ReceiverClient mReceiverClient;
