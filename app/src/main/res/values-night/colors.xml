@@ -2,6 +2,6 @@
 <resources>
 
     <color name="accent">@color/cyanAccent700</color>
-    <color name="accentPressed">@color/cyan700</color>
+    <color name="accentPressed">@color/cyan900</color>
 
 </resources>
