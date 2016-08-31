@@ -90,7 +90,7 @@ public class EpgEvent implements Parcelable {
     }
 
     public String getDescriptionExtended() {
-        return mDescriptionExtended;
+        return (mDescriptionExtended != null) ? mDescriptionExtended : "";
     }
 
     public int calcProgress() {
