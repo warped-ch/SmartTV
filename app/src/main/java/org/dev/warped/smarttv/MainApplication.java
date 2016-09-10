@@ -34,7 +34,7 @@ public class MainApplication extends Application implements SharedPreferences.On
 
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).registerOnSharedPreferenceChangeListener(this);
 
-        createReceiverClient(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+        createReceiverClient();
     }
 
     @Override
@@ -42,6 +42,8 @@ public class MainApplication extends Application implements SharedPreferences.On
         if (null != mReceiverClient) {
             BusProvider.getBus().unregister(mReceiverClient);
         }
+
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).unregisterOnSharedPreferenceChangeListener(this);
 
         super.onTerminate();
     }
@@ -51,19 +53,22 @@ public class MainApplication extends Application implements SharedPreferences.On
         switch (key) {
             case SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE:
             case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
-                createReceiverClient(sharedPreferences);
+                createReceiverClient();
                 break;
         }
     }
 
-    private void createReceiverClient(SharedPreferences sharedPreferences) {
+    private void createReceiverClient() {
+        Timber.d("createReceiverClient: called");
         if (null != mReceiverClient) {
             BusProvider.getBus().unregister(mReceiverClient);
             mReceiverClient = null;
         }
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         ReceiverClient.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
         InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
         if (null != receiverType && null != receiverAddress) {
+            Timber.d("createReceiverClient: receiverType=%s, receiverAddress=%s", receiverType, receiverAddress);
             mReceiverClient = new ReceiverClient(mBus, receiverType, receiverAddress);
             BusProvider.getBus().register(mReceiverClient);
         }

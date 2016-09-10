@@ -58,13 +58,17 @@ class SharedPreferencesManager {
 
     public static void setReceiverAddress(SharedPreferences sharedPreferences, InetAddress address) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(PREF_KEY_RECEIVER_ADDRESS, address.getHostAddress());
+        String hostAddress = address.getHostAddress();
+        Timber.d("setReceiverAddress: hostAddress=%s", hostAddress);
+        editor.putString(PREF_KEY_RECEIVER_ADDRESS, hostAddress);
         editor.apply();
     }
 
     public static void setReceiverType(SharedPreferences sharedPreferences, ReceiverClient.EReceiverType receiverType) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(PREF_KEY_RECEIVER_TYPE, ResourceUtil.getReceiverTypeValue(receiverType));
+        String receiverTypeValue = ResourceUtil.getReceiverTypeValue(receiverType);
+        Timber.d("setReceiverType: receiverTypeValue=%s", receiverTypeValue);
+        editor.putString(PREF_KEY_RECEIVER_TYPE, receiverTypeValue);
         editor.apply();
     }
 }
