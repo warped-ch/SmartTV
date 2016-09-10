@@ -1,6 +1,5 @@
 package org.dev.warped.smarttv;
 
-import android.graphics.PorterDuff;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

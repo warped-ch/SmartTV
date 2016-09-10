@@ -1,9 +1,9 @@
 package org.dev.warped.smarttv;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
