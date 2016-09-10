@@ -2,10 +2,12 @@
     <string name="app_name">Smart TV</string>
 
     <!-- Generic -->
+    <string name="auto_discovery">Auto discovery</string>
     <string name="bouquet">Bouquet</string>
     <string name="bouquets">Bouquets</string>
     <string name="channel">Channel</string>
     <string name="description">Description</string>
+    <string name="device_discovery">Device discovery</string>
     <string name="epg_events">EPG events</string>
     <string name="empty">Empty</string>
     <string name="event">Event</string>

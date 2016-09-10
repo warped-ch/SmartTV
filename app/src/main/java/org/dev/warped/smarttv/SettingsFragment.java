@@ -79,6 +79,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        // TODO, anwi: check for valid IPv4, IPv6 or hostname and deny otherwise?
         setPreferenceSummary(key);
     }
 
@@ -96,7 +97,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 break;
             case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
                 EditTextPreference prefReceiverAddress = (EditTextPreference) findPreference(key);
-                // TODO, anwi: check for valid IPv4, IPv6 or hostname and deny otherwise
                 String receiverAddress = prefReceiverAddress.getText();
                 if (null != receiverAddress && !receiverAddress.isEmpty()) {
                     prefReceiverAddress.setSummary(receiverAddress);
@@ -104,6 +104,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                     prefReceiverAddress.setSummary(getString(R.string.empty));
                 }
                 Timber.v("setPreferenceSummary: set summary for key \"%s\" to \"%s\".", SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS, (null != receiverAddress) ? receiverAddress : "null");
+                break;
+            case SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY:
+                // nop
                 break;
             default:
                 Timber.e("setPreferenceSummary: switch to default for key \"%s\".)", key);

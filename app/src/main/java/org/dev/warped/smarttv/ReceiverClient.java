@@ -36,7 +36,14 @@ import timber.log.Timber;
 class ReceiverClient {
     public enum EReceiverType {
         eUnknown,
-        eEnigma2
+        eDM500HD,
+        eDM500HDV2,
+        eDM800,
+        eDM800SE,
+        eDM800SEV2,
+        eDM7020HD,
+        eDM7020HDV2,
+        eDM8000
     }
 
     private final Bus mBus;

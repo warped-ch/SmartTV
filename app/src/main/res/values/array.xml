@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    // Enigma2: https://github.com/oe-alliance/enigma2-plugins/blob/master/configure.ac
+
     <string-array name="receiver_types">
-        <item>Dreambox 7025(+)</item>
-        <item>Dreambox 500 HD (v2)</item>
-        <item>Dreambox 800 HD PVR</item>
-        <item>Dreambox 800 HD se (v2)</item>
-        <item>Dreambox 820 HD</item>
-        <item>Dreambox 8000 HD PVR</item>
-        <item>Dreambox 7020 HD (v2)</item>
-        <item>Dreambox 7080 HD</item>
+        <item>DM500HD</item>
+        <item>DM500HDV2</item>
+        <item>DM800</item>
+        <item>DM800SE</item>
+        <item>DM800SEV2</item>
+        <item>DM7020HD</item>
+        <item>DM7020HDV2</item>
+        <item>DM8000</item>
     </string-array>
 
     <string-array name="receiver_type_values">
-        <item>Dreambox7025</item>
-        <item>Dreambox500HD</item>
-        <item>Dreambox800HDPVR</item>
-        <item>Dreambox800HDse</item>
-        <item>Dreambox820HD</item>
-        <item>Dreambox8000HDPVR</item>
-        <item>Dreambox7020HD</item>
-        <item>Dreambox7080HD</item>
+        <item>dm500hd</item>
+        <item>dm500hdv2</item>
+        <item>dm800</item>
+        <item>dm800se</item>
+        <item>dm800sev2</item>
+        <item>dm7020hd</item>
+        <item>dm7020hdv2</item>
+        <item>dm8000</item>
     </string-array>
 </resources>

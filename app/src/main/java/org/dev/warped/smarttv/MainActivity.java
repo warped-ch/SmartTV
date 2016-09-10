@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView.OnNavigationItemSelectedListener,
         BouquetListFragment.OnBouquetListFragmentInteractionListener,
         ChannelListFragment.OnChannelListFragmentInteractionListener,
+        DeviceDiscoveryFragment.OnDeviceDiscoveryFragmentInteractionListener,
         EpgEventListFragment.OnEpgEventListFragmentInteractionListener {
 
     @Override
@@ -53,16 +54,24 @@ public class MainActivity extends AppCompatActivity
             // Ensures that the application is properly initialized with default settings
             PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-            // show bouquet list fragment on initial startup
-            navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-            BouquetListFragment fragment = new BouquetListFragment();
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
-            transaction.commit();
+            if (SharedPreferencesManager.getReceiverAutoDiscovery(PreferenceManager.getDefaultSharedPreferences(this))) {
+                // show device discovery fragment on initial startup
+                DeviceDiscoveryFragment fragment = new DeviceDiscoveryFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
+                transaction.commit();
+            } else {
+                // show bouquet list fragment on initial startup
+                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+                BouquetListFragment fragment = new BouquetListFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
+                transaction.commit();
 
-            if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
-                replaceFragment(new SettingsFragment());
-                SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
+                if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
+                    replaceFragment(new SettingsFragment());
+                    SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
+                }
             }
         }
     }
@@ -79,23 +88,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (null != navigationView) {
-            BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(BouquetListFragment.class.getName());
-            if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
-                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-            }
-            SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(SettingsFragment.class.getName());
-            if (null != settingsFragment && settingsFragment.isVisible()) {
-                navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
-            }
-        }
+        updateNavigationView();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -161,6 +160,12 @@ public class MainActivity extends AppCompatActivity
         replaceFragment(EpgEventListFragment.newInstance(channel));
     }
 
+    @Override
+    public void onDeviceDiscoveryFinished() {
+        Timber.d("onDeviceDiscoveryFinished:");
+        replaceFragmentWithoutBackstack(new BouquetListFragment());
+    }
+
     @Subscribe
     public void onControlVolumeEventDone(ControlVolumeEventDone event) {
         Timber.d("onControlVolumeEventDone: current volume = %d", event.getCurrentVolume());
@@ -188,6 +193,43 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.fragment_container, fragment, fragmentTag);
             ft.addToBackStack(fragmentTag);
             ft.commit();
+        }
+    }
+
+    private void replaceFragmentWithoutBackstack(Fragment fragment) {
+        String fragmentTag = fragment.getClass().getName();
+        boolean fragmentPopped = getFragmentManager().popBackStackImmediate(fragmentTag, 0);
+        if (!fragmentPopped) {
+            // Fragment not in back stack, create it
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, fragment, fragmentTag);
+            ft.commit();
+        }
+        updateNavigationView(fragment);
+    }
+
+    private void updateNavigationView() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (null != navigationView) {
+            BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(BouquetListFragment.class.getName());
+            if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
+                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+            }
+            SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(SettingsFragment.class.getName());
+            if (null != settingsFragment && settingsFragment.isVisible()) {
+                navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
+            }
+        }
+    }
+
+    private void updateNavigationView(Fragment fragment) {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (null != navigationView) {
+            if (fragment instanceof BouquetListFragment) {
+                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+            } else if (fragment instanceof SettingsFragment) {
+                navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
+            }
         }
     }
 }
