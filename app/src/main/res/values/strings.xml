@@ -7,6 +7,7 @@
     <string name="bouquets">Bouquets</string>
     <string name="channel">Channel</string>
     <string name="description">Description</string>
+    <string name="devices">Devices</string>
     <string name="device_discovery">Device discovery</string>
     <string name="epg_events">EPG events</string>
     <string name="empty">Empty</string>

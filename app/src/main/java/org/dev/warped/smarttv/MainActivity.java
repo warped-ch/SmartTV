@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.squareup.otto.Subscribe;
 
 import org.dev.warped.smarttv.events.ControlVolumeEvent;
 import org.dev.warped.smarttv.events.ControlVolumeEventDone;
 import org.dev.warped.smarttv.events.ControlVolumeEventError;
+
+import java.util.ArrayList;
 
 import timber.log.Timber;
 
@@ -54,25 +59,29 @@ public class MainActivity extends AppCompatActivity
             // Ensures that the application is properly initialized with default settings
             PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-            if (SharedPreferencesManager.getReceiverAutoDiscovery(PreferenceManager.getDefaultSharedPreferences(this))) {
-                // show device discovery fragment on initial startup
-                DeviceDiscoveryFragment fragment = new DeviceDiscoveryFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
-                transaction.commit();
-            } else {
-                // show bouquet list fragment on initial startup
-                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-                BouquetListFragment fragment = new BouquetListFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
-                transaction.commit();
+            // show device discovery fragment on initial startup
+            DeviceDiscoveryFragment fragment = new DeviceDiscoveryFragment();
+            fragment.show(getFragmentManager(), fragment.getClass().getName());
 
-                if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
-                    replaceFragment(new SettingsFragment());
-                    SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
-                }
-            }
+//            if (SharedPreferencesManager.getReceiverAutoDiscovery(PreferenceManager.getDefaultSharedPreferences(this))) {
+//                // show device discovery fragment on initial startup
+//                DeviceDiscoveryFragment fragment = new DeviceDiscoveryFragment();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
+//                transaction.commit();
+//            } else {
+//                // show bouquet list fragment on initial startup
+//                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+//                BouquetListFragment fragment = new BouquetListFragment();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
+//                transaction.commit();
+//
+//                if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
+//                    replaceFragment(new SettingsFragment());
+//                    SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
+//                }
+//            }
         }
     }
 
@@ -95,7 +104,27 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_devices);
+        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
+        ArrayList<String> spinnerArray = new ArrayList<>();
+        spinnerArray.add("no device");
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerArrayAdapter);
+
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        try {
+            menu.findItem(R.id.action_refresh).setVisible(false);
+        } catch (NullPointerException e) {
+            Timber.e("onPrepareOptionsMenu: menu item action_refresh is null.");
+        }
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -163,7 +192,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onDeviceDiscoveryFinished() {
         Timber.d("onDeviceDiscoveryFinished:");
-        replaceFragmentWithoutBackstack(new BouquetListFragment());
+        //replaceFragmentWithoutBackstack(new BouquetListFragment());
     }
 
     @Subscribe

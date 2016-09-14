@@ -1,15 +1,53 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:name="org.dev.warped.smarttv.DeviceDiscoveryFragment"
+    tools:context="org.dev.warped.smarttv.DeviceDiscoveryFragment"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="org.dev.warped.smarttv.DeviceDiscoveryFragment"
-    tools:context="org.dev.warped.smarttv.DeviceDiscoveryFragment">
+    android:gravity="center">
 
-    <ProgressBar
-        style="@style/Widget.AppCompat.ProgressBar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_gravity="center" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <ImageButton
+            android:layout_width="@dimen/abc_action_button_min_width_material"
+            android:layout_height="@dimen/abc_action_button_min_height_material"
+            android:id="@+id/imageButtonCloseDeviceDiscovery"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="@string/device_discovery"
+            android:id="@+id/textView"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/imageButtonCloseDeviceDiscovery"
+            android:layout_alignBottom="@+id/imageButtonCloseDeviceDiscovery"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_alignTop="@+id/imageButtonCloseDeviceDiscovery"
+            android:gravity="center" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewDevices"
+            android:layout_below="@+id/imageButtonCloseDeviceDiscovery"
+            android:paddingTop="6dp" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"
+            android:layout_below="@+id/imageButtonCloseDeviceDiscovery"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

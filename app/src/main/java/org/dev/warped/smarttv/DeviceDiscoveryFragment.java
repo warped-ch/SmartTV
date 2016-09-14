@@ -1,27 +1,30 @@
 package org.dev.warped.smarttv;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-import java.net.InetAddress;
+import java.util.ArrayList;
 
 import timber.log.Timber;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link DialogFragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link OnDeviceDiscoveryFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class DeviceDiscoveryFragment extends Fragment implements DeviceDiscoveryCallback {
+public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDiscoveryCallback {
 
+    private ListView mListViewDevices;
     private DeviceDiscovery mDeviceDiscovery;
     private OnDeviceDiscoveryFragmentInteractionListener mListener;
 
@@ -41,7 +44,7 @@ public class DeviceDiscoveryFragment extends Fragment implements DeviceDiscovery
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_device_discovery, container, false);
 
-        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.device_discovery));
+        mListViewDevices = (ListView) view.findViewById(R.id.listViewDevices);
 
         return view;
     }
@@ -95,17 +98,23 @@ public class DeviceDiscoveryFragment extends Fragment implements DeviceDiscovery
     }
 
     @Override
-    public void onReceiverDiscovered(ReceiverClient.EReceiverType receiverType, InetAddress address) {
-        Timber.d("onReceiverDiscovered: receiverType=%s, address=%s",receiverType.toString(), address);
+    public void onReceiverDiscovered(Enigma2Receiver receiver) {
+        Timber.d("onReceiverDiscovered: address=%s, receiverType=%s", receiver.getAddress(), receiver.getReceiverType());
 
-        if (SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity())) != address) {
-            Timber.d("onReceiverDiscovered: %s, set receiver address in shared preferences", address);
-            SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), address);
+        ArrayList<String> devices = new ArrayList<>();
+        devices.add(receiver.getAddress().getHostName() + ", " + receiver.getAddress().getHostAddress());
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mDeviceDiscovery.getDevices());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, devices);
+        mListViewDevices.setAdapter(adapter);
+
+        if (SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity())) != receiver.getAddress()) {
+            Timber.d("onReceiverDiscovered: %s, set receiver address in shared preferences", receiver.getAddress());
+            SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), receiver.getAddress());
         }
 
-        if (SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity())) != receiverType) {
-            Timber.d("onReceiverDiscovered: %s, set receiver type in shared preferences", receiverType);
-            SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity()), receiverType);
+        if (SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity())) != receiver.getReceiverType()) {
+            Timber.d("onReceiverDiscovered: %s, set receiver type in shared preferences", receiver.getReceiverType());
+            SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity()), receiver.getReceiverType());
         }
 
         mListener.onDeviceDiscoveryFinished();

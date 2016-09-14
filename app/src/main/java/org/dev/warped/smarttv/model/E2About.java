@@ -12,6 +12,12 @@ public class E2About {
         return mModel;
     }
 
+    public String getIPAddress() {
+        return mIPAddress;
+    }
+
     @Element(name = "e2model")
     private String mModel;
+    @Element(name = "e2lanip")
+    private String mIPAddress;
 }

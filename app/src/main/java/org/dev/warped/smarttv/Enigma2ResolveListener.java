@@ -16,9 +16,11 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 11.08.2016.
  */
-public class Enigma2ResolveListener implements NsdManager.ResolveListener {
+public class Enigma2ResolveListener implements NsdManager.ResolveListener, AsyncTaskGetHostName.AsyncResponseDelegateHostName {
 
     private final DeviceDiscovery mDeviceDiscovery;
+    private NsdServiceInfo mServiceInfo = null;
+    private E2About mE2About = null;
 
     public Enigma2ResolveListener(DeviceDiscovery deviceDiscovery) {
         mDeviceDiscovery = deviceDiscovery;
@@ -33,6 +35,8 @@ public class Enigma2ResolveListener implements NsdManager.ResolveListener {
     public void onServiceResolved(final NsdServiceInfo serviceInfo) {
         Timber.d("onServiceResolved: %s", serviceInfo);
 
+        mServiceInfo = serviceInfo;
+
         Enigma2Client e2Client = new Enigma2Client(serviceInfo.getHost());
         final Call<E2Abouts> call = e2Client.getApiService().getAbouts();
         call.enqueue(new Callback<E2Abouts>() {
@@ -42,7 +46,11 @@ public class Enigma2ResolveListener implements NsdManager.ResolveListener {
                     Timber.d("onServiceResolved: onResponse: \"%s\".", response.body());
                     List<E2About> abouts = response.body().getAboutList();
                     if (!abouts.isEmpty()) {
-                        mDeviceDiscovery.addReceiver(ResourceUtil.getReceiverType(abouts.get(0).getModel()), serviceInfo);
+                        mE2About = abouts.get(0);
+
+                        // Resolve the host name before propagating new receiver to avoid NetworkOnMainThreadException if anyone gets the host name later on.
+                        AsyncTaskGetHostName task = new AsyncTaskGetHostName(Enigma2ResolveListener.this);
+                        task.execute(serviceInfo.getHost());
                     }
                 } else {
                     Timber.w("onServiceResolved: onResponse: response body is null.");
@@ -53,5 +61,11 @@ public class Enigma2ResolveListener implements NsdManager.ResolveListener {
                 Timber.w("onServiceResolved: onFailure: something went wrong.");
             }
         });
+    }
+
+    @Override
+    public void onPostExecuteGetHostName(String hostName) {
+        // Host name resolved, no NetworkOnMainThreadException should occur for any InetAddress calls on this receiver.
+        mDeviceDiscovery.addReceiver(new Enigma2Receiver(mServiceInfo, mE2About));
     }
 }

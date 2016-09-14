@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.nsd.NsdManager;
 import android.net.nsd.NsdServiceInfo;
 
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class DeviceDiscovery {
     private  final DeviceDiscoveryCallback mCallback;
     private final NsdManager mNsdManager;
     private Enigma2DiscoveryListener mEnigma2DiscoveryListener;
-    private List<NsdServiceInfo> mServices = new ArrayList<>();
+    private List<Enigma2Receiver> mReceivers = new ArrayList<>();
 
     public DeviceDiscovery(DeviceDiscoveryCallback callback, Context context) {
         mCallback = callback;
@@ -45,25 +44,25 @@ public class DeviceDiscovery {
             }
             mEnigma2DiscoveryListener = null;
         }
-        mServices.clear();
+        mReceivers.clear();
     }
 
-    public void addReceiver(ReceiverClient.EReceiverType receiverType, NsdServiceInfo serviceInfo) {
-        if (!mServices.contains(serviceInfo)) {
-            mServices.add(serviceInfo);
-            mCallback.onReceiverDiscovered(receiverType, serviceInfo.getHost());
+    public void addReceiver(Enigma2Receiver receiver) {
+        if (!mReceivers.contains(receiver)) {
+            mReceivers.add(receiver);
+            mCallback.onReceiverDiscovered(receiver);
         }
     }
 
-    public void removeService(NsdServiceInfo serviceInfo) {
-        mServices.remove(serviceInfo);
+    public void removeReceiver(final NsdServiceInfo serviceInfo) {
+        for (Enigma2Receiver r : mReceivers) {
+            if (r.getServiceInfo() == serviceInfo) {
+                mReceivers.remove(r);
+            }
+        }
     }
 
-    public List<InetAddress> getDevices() {
-        List<InetAddress> devices = new ArrayList<>();
-        for (NsdServiceInfo s : mServices) {
-            devices.add(s.getHost());
-        }
-        return devices;
+    public List<Enigma2Receiver> getReceivers() {
+        return mReceivers;
     }
 }
