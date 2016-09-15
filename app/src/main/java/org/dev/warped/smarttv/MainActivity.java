@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.squareup.otto.Subscribe;
 
@@ -26,7 +21,6 @@ import org.dev.warped.smarttv.events.ControlVolumeEvent;
 import org.dev.warped.smarttv.events.ControlVolumeEventDone;
 import org.dev.warped.smarttv.events.ControlVolumeEventError;
 
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -84,25 +78,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        MenuItem item = menu.findItem(R.id.action_devices);
-        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
-        spinner.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    Timber.d("onTouch: device spinner touched.");
-                    DeviceListFragment fragment = new DeviceListFragment();
-                    fragment.show(getFragmentManager(), fragment.getClass().getName());
-                }
-                return true;
-            }
-        });
-        ArrayList<String> spinnerArray = new ArrayList<>();
-        spinnerArray.add("no device");
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerArray);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerArrayAdapter);
-
         return true;
     }
 
@@ -135,19 +110,20 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_bouquets) {
-            Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.bouquets));
-            replaceFragment(new BouquetListFragment());
-        } else if (id == R.id.nav_settings) {
-            Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.settings));
-            replaceFragment(new SettingsFragment());
-        } else {
-            Timber.w("onNavigationItemSelected: invalid item %d selected.", id);
+        switch(item.getItemId()) {
+            case R.id.nav_bouquets:
+                Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.bouquets));
+                showFragment(new BouquetListFragment());
+                break;
+            case R.id.nav_devices:
+                Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.devices));
+                showFragment(new DeviceListFragment());
+                break;
+            case R.id.nav_settings:
+                Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.settings));
+                showFragment(new SettingsFragment());
+                break;
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -170,13 +146,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onShowBouquet(Bouquet bouquet) {
         Timber.d("onShowBouquet: \"%s\".", bouquet.getName());
-        replaceFragment(ChannelListFragment.newInstance(bouquet));
+        showFragment(ChannelListFragment.newInstance(bouquet));
     }
 
     @Override
     public void onShowChannel(Channel channel) {
         Timber.d("onShowChannel: \"%s\".", channel.getName());
-        replaceFragment(EpgEventListFragment.newInstance(channel));
+        showFragment(EpgEventListFragment.newInstance(channel));
     }
 
     @Subscribe
@@ -223,7 +199,8 @@ public class MainActivity extends AppCompatActivity
             } else {
                 // show device list fragment on initial startup in case receiver is not reachable
                 DeviceListFragment fragment = new DeviceListFragment();
-                fragment.show(getFragmentManager(), fragment.getClass().getName());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                fragment.show(transaction, fragment.getClass().getName());
             }
         } else {
             // show bouquet list fragment on initial startup
@@ -234,34 +211,27 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
 
             if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
-                replaceFragment(new SettingsFragment());
+                showFragment(new SettingsFragment());
                 SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
             }
         }
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void showFragment(Fragment fragment) {
         String fragmentTag = fragment.getClass().getName();
         boolean fragmentPopped = getFragmentManager().popBackStackImmediate(fragmentTag, 0);
         if (!fragmentPopped) {
             // Fragment not in back stack, create it
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, fragment, fragmentTag);
-            ft.addToBackStack(fragmentTag);
-            ft.commit();
+            if (fragment instanceof DeviceListFragment) {
+                ft.addToBackStack(fragmentTag);
+                ((DeviceListFragment) fragment).show(ft, fragmentTag);
+            } else {
+                ft.replace(R.id.fragment_container, fragment, fragmentTag);
+                ft.addToBackStack(fragmentTag);
+                ft.commit();
+            }
         }
-    }
-
-    private void replaceFragmentWithoutBackstack(Fragment fragment) {
-        String fragmentTag = fragment.getClass().getName();
-        boolean fragmentPopped = getFragmentManager().popBackStackImmediate(fragmentTag, 0);
-        if (!fragmentPopped) {
-            // Fragment not in back stack, create it
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, fragment, fragmentTag);
-            ft.commit();
-        }
-        updateNavigationView(fragment);
     }
 
     private void updateNavigationView() {
@@ -273,17 +243,6 @@ public class MainActivity extends AppCompatActivity
             }
             SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(SettingsFragment.class.getName());
             if (null != settingsFragment && settingsFragment.isVisible()) {
-                navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
-            }
-        }
-    }
-
-    private void updateNavigationView(Fragment fragment) {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (null != navigationView) {
-            if (fragment instanceof BouquetListFragment) {
-                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-            } else if (fragment instanceof SettingsFragment) {
                 navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
             }
         }

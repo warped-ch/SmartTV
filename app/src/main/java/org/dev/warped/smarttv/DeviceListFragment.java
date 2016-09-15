@@ -22,7 +22,7 @@ import timber.log.Timber;
  * {@link OnDeviceListFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class DeviceListFragment extends DialogFragment implements DeviceDiscoveryCallback, OnDeviceClickListener {
+public class DeviceListFragment extends DialogFragment implements DeviceDiscoveryCallback, OnDeviceClickListener, View.OnClickListener {
 
     private DeviceDiscovery mDeviceDiscovery;
     private OnDeviceListFragmentInteractionListener mListener;
@@ -48,6 +48,8 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_device_list, container, false);
+
+        view.findViewById(R.id.imageButtonCloseDeviceList).setOnClickListener(this);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDevices);
         mRecyclerView.setHasFixedSize(true);
@@ -118,6 +120,17 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     public void onClick(Device device) {
         SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getAddress());
         SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getReceiverType());
+        dismiss();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imageButtonCloseDeviceList:
+                Timber.d("onClick: close button clicked.");
+                dismiss();
+                break;
+        }
     }
 
     /**
