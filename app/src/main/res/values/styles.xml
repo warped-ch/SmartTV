@@ -15,4 +15,6 @@
 
     <style name="SmartTvTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="SmartTvTheme.Dialog" parent="Theme.AppCompat.DayNight.Dialog" />
+
 </resources>
