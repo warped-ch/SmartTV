@@ -20,13 +20,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="@string/device_discovery"
+            android:text="@string/devices"
             android:id="@+id/textView"
             android:layout_gravity="center"
             android:layout_toEndOf="@id/imageButtonCloseDeviceDiscovery"
             android:layout_alignBottom="@+id/imageButtonCloseDeviceDiscovery"
             android:layout_alignTop="@+id/imageButtonCloseDeviceDiscovery"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_toRightOf="@+id/imageButtonCloseDeviceDiscovery"
+            android:layout_toLeftOf="@+id/progressBar" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/imageButtonCloseDeviceDiscovery"
+            android:layout_alignBottom="@+id/imageButtonCloseDeviceDiscovery"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+            android:layout_marginRight="8dp" />
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
