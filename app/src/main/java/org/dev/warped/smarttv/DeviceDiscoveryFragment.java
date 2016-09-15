@@ -116,15 +116,8 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
 
     @Override
     public void onClick(Device device) {
-        if (SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity())) != device.getAddress()) {
-            Timber.d("onClick: %s, set receiver address in shared preferences", device.getAddress());
-            SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getAddress());
-        }
-
-        if (SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity())) != device.getReceiverType()) {
-            Timber.d("onClick: %s, set receiver type in shared preferences", device.getReceiverType());
-            SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getReceiverType());
-        }
+        SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getAddress());
+        SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getReceiverType());
     }
 
     /**

@@ -57,18 +57,22 @@ class SharedPreferencesManager {
     }
 
     public static void setReceiverAddress(SharedPreferences sharedPreferences, InetAddress address) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         String hostAddress = address.getHostAddress();
-        Timber.d("setReceiverAddress: hostAddress=%s", hostAddress);
-        editor.putString(PREF_KEY_RECEIVER_ADDRESS, hostAddress);
-        editor.apply();
+        if (!getReceiverAddress(sharedPreferences).getHostAddress().equals(hostAddress)) {
+            Timber.d("setReceiverAddress: hostAddress=%s", hostAddress);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(PREF_KEY_RECEIVER_ADDRESS, hostAddress);
+            editor.apply();
+        }
     }
 
     public static void setReceiverType(SharedPreferences sharedPreferences, ReceiverClient.EReceiverType receiverType) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        String receiverTypeValue = ResourceUtil.getReceiverTypeValue(receiverType);
-        Timber.d("setReceiverType: receiverTypeValue=%s", receiverTypeValue);
-        editor.putString(PREF_KEY_RECEIVER_TYPE, receiverTypeValue);
-        editor.apply();
+        if (getReceiverType(sharedPreferences) != receiverType) {
+            String receiverTypeValue = ResourceUtil.getReceiverTypeValue(receiverType);
+            Timber.d("setReceiverType: receiverTypeValue=%s", receiverTypeValue);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(PREF_KEY_RECEIVER_TYPE, receiverTypeValue);
+            editor.apply();
+        }
     }
 }
