@@ -21,6 +21,10 @@ public class Enigma2Receiver {
         mE2About = e2About;
     }
 
+    public String getName() {
+        return mServiceInfo.getHost().getHostName();
+    }
+
     public ReceiverClient.EReceiverType getReceiverType() {
         return mReceiverType;
     }

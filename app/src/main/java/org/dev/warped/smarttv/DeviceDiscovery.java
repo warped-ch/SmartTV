@@ -16,7 +16,7 @@ public class DeviceDiscovery {
     private  final DeviceDiscoveryCallback mCallback;
     private final NsdManager mNsdManager;
     private Enigma2DiscoveryListener mEnigma2DiscoveryListener;
-    private List<Enigma2Receiver> mReceivers = new ArrayList<>();
+    private ArrayList<Enigma2Receiver> mReceivers = new ArrayList<>();
 
     public DeviceDiscovery(DeviceDiscoveryCallback callback, Context context) {
         mCallback = callback;
@@ -62,7 +62,7 @@ public class DeviceDiscovery {
         }
     }
 
-    public List<Enigma2Receiver> getReceivers() {
+    public ArrayList<Enigma2Receiver> getReceivers() {
         return mReceivers;
     }
 }

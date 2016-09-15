@@ -189,12 +189,6 @@ public class MainActivity extends AppCompatActivity
         replaceFragment(EpgEventListFragment.newInstance(channel));
     }
 
-    @Override
-    public void onDeviceDiscoveryFinished() {
-        Timber.d("onDeviceDiscoveryFinished:");
-        //replaceFragmentWithoutBackstack(new BouquetListFragment());
-    }
-
     @Subscribe
     public void onControlVolumeEventDone(ControlVolumeEventDone event) {
         Timber.d("onControlVolumeEventDone: current volume = %d", event.getCurrentVolume());

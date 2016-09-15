@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -22,11 +22,13 @@ import timber.log.Timber;
  * {@link OnDeviceDiscoveryFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDiscoveryCallback {
+public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDiscoveryCallback, OnDeviceClickListener {
 
-    private ListView mListViewDevices;
     private DeviceDiscovery mDeviceDiscovery;
     private OnDeviceDiscoveryFragmentInteractionListener mListener;
+    private DeviceListAdapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView;
 
     public DeviceDiscoveryFragment() {
         // Required empty public constructor
@@ -36,6 +38,9 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ArrayList<Enigma2Receiver> devices = new ArrayList<>();
+        mAdapter = new DeviceListAdapter(devices, this);
+
         setHasOptionsMenu(true);
     }
 
@@ -44,7 +49,11 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_device_discovery, container, false);
 
-        mListViewDevices = (ListView) view.findViewById(R.id.listViewDevices);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDevices);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(view.getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
         return view;
     }
@@ -95,29 +104,27 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
 
         mDeviceDiscovery = null;
         mListener = null;
+        mAdapter = null;
+        mListener = null;
     }
 
     @Override
     public void onReceiverDiscovered(Enigma2Receiver receiver) {
         Timber.d("onReceiverDiscovered: address=%s, receiverType=%s", receiver.getAddress(), receiver.getReceiverType());
+        mAdapter.setDevices(mDeviceDiscovery.getReceivers());
+    }
 
-        ArrayList<String> devices = new ArrayList<>();
-        devices.add(receiver.getAddress().getHostName() + ", " + receiver.getAddress().getHostAddress());
-        //ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mDeviceDiscovery.getDevices());
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, devices);
-        mListViewDevices.setAdapter(adapter);
-
-        if (SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity())) != receiver.getAddress()) {
-            Timber.d("onReceiverDiscovered: %s, set receiver address in shared preferences", receiver.getAddress());
-            SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), receiver.getAddress());
+    @Override
+    public void onClick(Enigma2Receiver device) {
+        if (SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity())) != device.getAddress()) {
+            Timber.d("onClick: %s, set receiver address in shared preferences", device.getAddress());
+            SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getAddress());
         }
 
-        if (SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity())) != receiver.getReceiverType()) {
-            Timber.d("onReceiverDiscovered: %s, set receiver type in shared preferences", receiver.getReceiverType());
-            SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity()), receiver.getReceiverType());
+        if (SharedPreferencesManager.getReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity())) != device.getReceiverType()) {
+            Timber.d("onClick: %s, set receiver type in shared preferences", device.getReceiverType());
+            SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getReceiverType());
         }
-
-        mListener.onDeviceDiscoveryFinished();
     }
 
     /**
@@ -131,6 +138,5 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnDeviceDiscoveryFragmentInteractionListener {
-        void onDeviceDiscoveryFinished();
     }
 }
