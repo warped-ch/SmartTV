@@ -13,7 +13,8 @@
             android:layout_height="48dp"
             android:id="@+id/imageButtonCloseDeviceDiscovery"
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
-            android:background="@android:color/transparent" />
+            android:background="@android:color/transparent"
+            android:layout_margin="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +25,6 @@
             android:layout_gravity="center"
             android:layout_toEndOf="@id/imageButtonCloseDeviceDiscovery"
             android:layout_alignBottom="@+id/imageButtonCloseDeviceDiscovery"
-            android:layout_marginLeft="@dimen/text_margin"
             android:layout_alignTop="@+id/imageButtonCloseDeviceDiscovery"
             android:gravity="center" />
 
@@ -33,11 +33,11 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/recyclerViewDevices"
             android:layout_below="@+id/imageButtonCloseDeviceDiscovery"
-            android:paddingTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/device_list_item" />
+            tools:listitem="@layout/device_list_item"
+            android:layout_marginTop="8dp" />
 
 </RelativeLayout>
