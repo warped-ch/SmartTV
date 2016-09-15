@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -107,6 +109,16 @@ public class MainActivity extends AppCompatActivity
 
         MenuItem item = menu.findItem(R.id.action_devices);
         Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
+        spinner.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Timber.d("onTouch: device spinner touched.");
+                    DeviceListFragment fragment = new DeviceListFragment();
+                    fragment.show(getFragmentManager(), fragment.getClass().getName());
+                }
+                return true;
+            }
+        });
         ArrayList<String> spinnerArray = new ArrayList<>();
         spinnerArray.add("no device");
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerArray);
