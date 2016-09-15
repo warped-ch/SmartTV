@@ -26,7 +26,9 @@ import org.dev.warped.smarttv.events.ControlVolumeEvent;
 import org.dev.warped.smarttv.events.ControlVolumeEventDone;
 import org.dev.warped.smarttv.events.ControlVolumeEventError;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import timber.log.Timber;
 
@@ -58,29 +60,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
-            // show device list fragment on initial startup
-            DeviceListFragment fragment = new DeviceListFragment();
-            fragment.show(getFragmentManager(), fragment.getClass().getName());
-
-//            if (SharedPreferencesManager.getReceiverAutoDiscovery(PreferenceManager.getDefaultSharedPreferences(this))) {
-//                // show device list fragment on initial startup
-//                DeviceListFragment fragment = new DeviceListFragment();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
-//                transaction.commit();
-//            } else {
-//                // show bouquet list fragment on initial startup
-//                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-//                BouquetListFragment fragment = new BouquetListFragment();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
-//                transaction.commit();
-//
-//                if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
-//                    replaceFragment(new SettingsFragment());
-//                    SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
-//                }
-//            }
+            createInitialFragment(navigationView);
         }
     }
 
@@ -213,6 +193,47 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setTitle(title);
         } catch (NullPointerException e) {
             Timber.e("setActionBarTitle: getSupportActionBar returned null.");
+        }
+    }
+
+    private void createInitialFragment(NavigationView navigationView) {
+        if (SharedPreferencesManager.getReceiverAutoDiscovery(PreferenceManager.getDefaultSharedPreferences(this))) {
+            Boolean receiverReachable = false;
+            InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(this));
+            if (null != receiverAddress) {
+                try {
+                    receiverReachable = new AsyncTaskIsReachable().execute(receiverAddress).get();
+                } catch (ExecutionException e) {
+                    Timber.e(e, "onCreate: ExecutionException exception caught.");
+                } catch (InterruptedException e) {
+                    Timber.e(e, "onCreate: IllegalStateException exception caught.");
+                }
+            }
+
+            if (receiverReachable) {
+                // show bouquet list fragment on initial startup in case receiver is reachable
+                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+                BouquetListFragment fragment = new BouquetListFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
+                transaction.commit();
+            } else {
+                // show device list fragment on initial startup in case receiver is not reachable
+                DeviceListFragment fragment = new DeviceListFragment();
+                fragment.show(getFragmentManager(), fragment.getClass().getName());
+            }
+        } else {
+            // show bouquet list fragment on initial startup
+            navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+            BouquetListFragment fragment = new BouquetListFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
+            transaction.commit();
+
+            if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
+                replaceFragment(new SettingsFragment());
+                SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
+            }
         }
     }
 
