@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView.OnNavigationItemSelectedListener,
         BouquetListFragment.OnBouquetListFragmentInteractionListener,
         ChannelListFragment.OnChannelListFragmentInteractionListener,
-        DeviceDiscoveryFragment.OnDeviceDiscoveryFragmentInteractionListener,
+        DeviceListFragment.OnDeviceListFragmentInteractionListener,
         EpgEventListFragment.OnEpgEventListFragmentInteractionListener {
 
     @Override
@@ -59,13 +59,13 @@ public class MainActivity extends AppCompatActivity
             // Ensures that the application is properly initialized with default settings
             PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-            // show device discovery fragment on initial startup
-            DeviceDiscoveryFragment fragment = new DeviceDiscoveryFragment();
+            // show device list fragment on initial startup
+            DeviceListFragment fragment = new DeviceListFragment();
             fragment.show(getFragmentManager(), fragment.getClass().getName());
 
 //            if (SharedPreferencesManager.getReceiverAutoDiscovery(PreferenceManager.getDefaultSharedPreferences(this))) {
-//                // show device discovery fragment on initial startup
-//                DeviceDiscoveryFragment fragment = new DeviceDiscoveryFragment();
+//                // show device list fragment on initial startup
+//                DeviceListFragment fragment = new DeviceListFragment();
 //                FragmentTransaction transaction = getFragmentManager().beginTransaction();
 //                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
 //                transaction.commit();

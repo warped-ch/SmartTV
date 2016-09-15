@@ -19,18 +19,18 @@ import timber.log.Timber;
 /**
  * A simple {@link DialogFragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OnDeviceDiscoveryFragmentInteractionListener} interface
+ * {@link OnDeviceListFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDiscoveryCallback, OnDeviceClickListener {
+public class DeviceListFragment extends DialogFragment implements DeviceDiscoveryCallback, OnDeviceClickListener {
 
     private DeviceDiscovery mDeviceDiscovery;
-    private OnDeviceDiscoveryFragmentInteractionListener mListener;
+    private OnDeviceListFragmentInteractionListener mListener;
     private DeviceListAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
 
-    public DeviceDiscoveryFragment() {
+    public DeviceListFragment() {
         // Required empty public constructor
     }
 
@@ -47,7 +47,7 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_device_discovery, container, false);
+        View view = inflater.inflate(R.layout.fragment_device_list, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDevices);
         mRecyclerView.setHasFixedSize(true);
@@ -71,12 +71,12 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof OnDeviceDiscoveryFragmentInteractionListener) {
-            mListener = (OnDeviceDiscoveryFragmentInteractionListener) activity;
+        if (activity instanceof OnDeviceListFragmentInteractionListener) {
+            mListener = (OnDeviceListFragmentInteractionListener) activity;
         } else {
-            Timber.e("onAttach: %s must implement OnDeviceDiscoveryFragmentInteractionListener.", activity.toString());
+            Timber.e("onAttach: %s must implement OnDeviceListFragmentInteractionListener.", activity.toString());
             throw new RuntimeException(activity.toString()
-                    + " must implement OnDeviceDiscoveryFragmentInteractionListener");
+                    + " must implement OnDeviceListFragmentInteractionListener");
         }
 
         mDeviceDiscovery = new DeviceDiscovery(this, activity);
@@ -130,6 +130,6 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnDeviceDiscoveryFragmentInteractionListener {
+    public interface OnDeviceListFragmentInteractionListener {
     }
 }
