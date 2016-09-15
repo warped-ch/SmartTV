@@ -26,9 +26,10 @@ import org.dev.warped.smarttv.events.ControlVolumeEvent;
 import org.dev.warped.smarttv.events.ControlVolumeEventDone;
 import org.dev.warped.smarttv.events.ControlVolumeEventError;
 
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import timber.log.Timber;
 
@@ -199,14 +200,16 @@ public class MainActivity extends AppCompatActivity
     private void createInitialFragment(NavigationView navigationView) {
         if (SharedPreferencesManager.getReceiverAutoDiscovery(PreferenceManager.getDefaultSharedPreferences(this))) {
             Boolean receiverReachable = false;
-            InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(this));
-            if (null != receiverAddress) {
+            String receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(this));
+            if (null != receiverAddress && !receiverAddress.isEmpty()) {
                 try {
-                    receiverReachable = new AsyncTaskIsReachable().execute(receiverAddress).get();
+                    receiverReachable = new AsyncTaskIsReachable().execute(receiverAddress).get(100, TimeUnit.MILLISECONDS);
                 } catch (ExecutionException e) {
                     Timber.e(e, "onCreate: ExecutionException exception caught.");
                 } catch (InterruptedException e) {
                     Timber.e(e, "onCreate: IllegalStateException exception caught.");
+                } catch (TimeoutException e) {
+                    Timber.e(e, "onCreate: InterruptedException exception caught.");
                 }
             }
 

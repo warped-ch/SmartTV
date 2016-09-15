@@ -10,7 +10,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 15.09.2016.
  */
-public class AsyncTaskIsReachable extends AsyncTask<InetAddress, Void, Boolean> {
+public class AsyncTaskIsReachable extends AsyncTask<String, Void, Boolean> {
 
     private AsyncResponseDelegateReachable mDelegate;
 
@@ -21,10 +21,11 @@ public class AsyncTaskIsReachable extends AsyncTask<InetAddress, Void, Boolean> 
     }
 
     @Override
-    protected Boolean doInBackground(InetAddress... params) {
-        InetAddress address = params[0];
+    protected Boolean doInBackground(String... params) {
+        String address = params[0];
         try {
-            return address.isReachable(3000);
+            InetAddress inetAddress = InetAddress.getByName(address);
+            return inetAddress.isReachable(1000);
         } catch (IOException e) {
             Timber.e("doInBackground: IOException caught.");
         } catch (SecurityException e) {

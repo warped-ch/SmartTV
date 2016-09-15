@@ -37,7 +37,7 @@ public class Enigma2ResolveListener implements NsdManager.ResolveListener, Async
 
         mServiceInfo = serviceInfo;
 
-        Enigma2Client e2Client = new Enigma2Client(serviceInfo.getHost());
+        Enigma2Client e2Client = new Enigma2Client(serviceInfo.getHost().getHostAddress());
         final Call<E2Abouts> call = e2Client.getApiService().getAbouts();
         call.enqueue(new Callback<E2Abouts>() {
             @Override

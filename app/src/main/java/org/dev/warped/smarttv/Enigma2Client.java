@@ -14,9 +14,9 @@ class Enigma2Client {
 
     private final ApiServiceEnigma2 mApiService;
 
-    public Enigma2Client(InetAddress address)
+    public Enigma2Client(String address)
     {
-        String baseUrl = "http://" + address.getHostAddress() + "/";
+        String baseUrl = "http://" + address + "/";
 
         Retrofit retrofit;
         if (BuildConfig.DEBUG) {

@@ -68,8 +68,8 @@ public class MainApplication extends Application implements SharedPreferences.On
         }
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         ReceiverClient.EReceiverType receiverType = SharedPreferencesManager.getReceiverType(sharedPreferences);
-        InetAddress receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
-        if (null != receiverType && null != receiverAddress) {
+        String receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
+        if (null != receiverType && null != receiverAddress && !receiverAddress.isEmpty()) {
             Timber.d("createReceiverClient: receiverType=%s, receiverAddress=%s", receiverType, receiverAddress);
             mReceiverClient = new ReceiverClient(mBus, receiverType, receiverAddress);
             BusProvider.getBus().register(mReceiverClient);

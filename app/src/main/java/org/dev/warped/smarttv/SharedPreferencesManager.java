@@ -37,28 +37,19 @@ class SharedPreferencesManager {
         return receiverType;
     }
 
-    public static InetAddress getReceiverAddress(SharedPreferences sharedPreferences) {
-        InetAddress address = null;
+    public static String getReceiverAddress(SharedPreferences sharedPreferences) {
+        String address = null;
         if (sharedPreferences.contains(PREF_KEY_RECEIVER_ADDRESS)) {
-            String prefAddress = sharedPreferences.getString(PREF_KEY_RECEIVER_ADDRESS, "");
-            if (!prefAddress.isEmpty()) {
-                try {
-                    address = new InetAddressTask().execute(prefAddress).get();
-                } catch (ExecutionException e) {
-                    Timber.e(e, "getReceiverAddress: ExecutionException exception caught.");
-                } catch (InterruptedException e) {
-                    Timber.e(e, "getReceiverAddress: IllegalStateException exception caught.");
-                }
-            }
+            address = sharedPreferences.getString(PREF_KEY_RECEIVER_ADDRESS, "");
         } else {
-            Timber.e("getReceiverType: SharedPreferences do not contain \"%s\".", PREF_KEY_RECEIVER_ADDRESS);
+            Timber.e("getReceiverAddress: SharedPreferences do not contain \"%s\".", PREF_KEY_RECEIVER_ADDRESS);
         }
         return address;
     }
 
     public static void setReceiverAddress(SharedPreferences sharedPreferences, InetAddress address) {
         String hostAddress = address.getHostAddress();
-        if (!getReceiverAddress(sharedPreferences).getHostAddress().equals(hostAddress)) {
+        if (!getReceiverAddress(sharedPreferences).equals(hostAddress)) {
             Timber.d("setReceiverAddress: hostAddress=%s", hostAddress);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(PREF_KEY_RECEIVER_ADDRESS, hostAddress);
