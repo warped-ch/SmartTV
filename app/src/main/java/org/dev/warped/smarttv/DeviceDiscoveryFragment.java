@@ -38,7 +38,7 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList<Enigma2Receiver> devices = new ArrayList<>();
+        ArrayList<Device> devices = new ArrayList<>();
         mAdapter = new DeviceListAdapter(devices, this);
 
         setHasOptionsMenu(true);
@@ -109,13 +109,13 @@ public class DeviceDiscoveryFragment extends DialogFragment implements DeviceDis
     }
 
     @Override
-    public void onReceiverDiscovered(Enigma2Receiver receiver) {
-        Timber.d("onReceiverDiscovered: address=%s, receiverType=%s", receiver.getAddress(), receiver.getReceiverType());
-        mAdapter.setDevices(mDeviceDiscovery.getReceivers());
+    public void onDeviceDiscovered(Device device) {
+        Timber.d("onDeviceDiscovered: receiverType=%s, address=%s", device.getReceiverType(), device.getAddress());
+        mAdapter.setDevices(mDeviceDiscovery.getDevices());
     }
 
     @Override
-    public void onClick(Enigma2Receiver device) {
+    public void onClick(Device device) {
         if (SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity())) != device.getAddress()) {
             Timber.d("onClick: %s, set receiver address in shared preferences", device.getAddress());
             SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getAddress());

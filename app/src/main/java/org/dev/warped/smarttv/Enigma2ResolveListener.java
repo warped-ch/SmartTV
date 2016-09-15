@@ -48,7 +48,7 @@ public class Enigma2ResolveListener implements NsdManager.ResolveListener, Async
                     if (!abouts.isEmpty()) {
                         mE2About = abouts.get(0);
 
-                        // Resolve the host name before propagating new receiver to avoid NetworkOnMainThreadException if anyone gets the host name later on.
+                        // Resolve the host name before propagating new device to avoid NetworkOnMainThreadException if anyone gets the host name later on.
                         AsyncTaskGetHostName task = new AsyncTaskGetHostName(Enigma2ResolveListener.this);
                         task.execute(serviceInfo.getHost());
                     }
@@ -65,7 +65,7 @@ public class Enigma2ResolveListener implements NsdManager.ResolveListener, Async
 
     @Override
     public void onPostExecuteGetHostName(String hostName) {
-        // Host name resolved, no NetworkOnMainThreadException should occur for any InetAddress calls on this receiver.
-        mDeviceDiscovery.addReceiver(new Enigma2Receiver(mServiceInfo, mE2About));
+        // Host name resolved, no NetworkOnMainThreadException should occur for any InetAddress calls on this device.
+        mDeviceDiscovery.addDevice(new Device(ResourceUtil.getReceiverType(mE2About.getModel()), mServiceInfo));
     }
 }

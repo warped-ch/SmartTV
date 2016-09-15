@@ -15,9 +15,9 @@ import timber.log.Timber;
 public class DeviceListAdapter extends RecyclerView.Adapter<DeviceViewHolder> {
 
     private final OnDeviceClickListener mListener;
-    private ArrayList<Enigma2Receiver> mDevices;
+    private ArrayList<Device> mDevices;
 
-    public DeviceListAdapter(ArrayList<Enigma2Receiver> devices, OnDeviceClickListener listener) {
+    public DeviceListAdapter(ArrayList<Device> devices, OnDeviceClickListener listener) {
         mDevices = devices;
         mListener = listener;
     }
@@ -39,16 +39,16 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceViewHolder> {
         return mDevices.size();
     }
 
-    public void addDevices(Enigma2Receiver device) {
+    public void addDevices(Device device) {
         mDevices.add(device);
         notifyDataSetChanged();
     }
 
-    public ArrayList<Enigma2Receiver> getDevices() {
+    public ArrayList<Device> getDevices() {
         return mDevices;
     }
 
-    public void setDevices(ArrayList<Enigma2Receiver> devices) {
+    public void setDevices(ArrayList<Device> devices) {
         mDevices = devices;
         notifyDataSetChanged();
     }

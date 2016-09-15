@@ -14,7 +14,7 @@ public class DeviceViewHolder extends RecyclerView.ViewHolder implements View.On
     private final OnDeviceClickListener mListener;
     private final TextView mTextViewTitle;
 
-    private Enigma2Receiver mDevice;
+    private Device mDevice;
 
     public DeviceViewHolder(View v, OnDeviceClickListener listener) {
         super(v);
@@ -27,7 +27,7 @@ public class DeviceViewHolder extends RecyclerView.ViewHolder implements View.On
         mTextViewTitle = (TextView) v.findViewById(R.id.textViewDeviceTitle);
     }
 
-    public void bindDevice(Enigma2Receiver device) {
+    public void bindDevice(Device device) {
         mDevice = device;
 
         mTextViewTitle.setText(device.getName());
