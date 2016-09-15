@@ -32,6 +32,8 @@ public class MainApplication extends Application implements SharedPreferences.On
             Timber.plant(new Timber.DebugTree());
         }
 
+        // Ensures that the application is properly initialized with default settings
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).registerOnSharedPreferenceChangeListener(this);
 
         createReceiverClient();

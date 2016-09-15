@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
-            // Ensures that the application is properly initialized with default settings
-            PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-
             // show device list fragment on initial startup
             DeviceListFragment fragment = new DeviceListFragment();
             fragment.show(getFragmentManager(), fragment.getClass().getName());
