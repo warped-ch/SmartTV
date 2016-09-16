@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:background="?android:attr/selectableItemBackground"
     android:focusable="true"
-    android:clickable="true">
+    android:clickable="true"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <ImageView
         android:layout_width="48dp"
@@ -12,8 +14,7 @@
         android:id="@+id/imageView"
         android:src="@drawable/ic_tv"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,6 +26,5 @@
         android:layout_toEndOf="@+id/imageView"
         android:layout_alignTop="@+id/imageView"
         android:layout_alignBottom="@+id/imageView"
-        android:gravity="center"
-        android:password="false" />
+        android:gravity="center" />
 </RelativeLayout>

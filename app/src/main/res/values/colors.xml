@@ -30,5 +30,5 @@
     <color name="white">#FFFFFF</color>
 
     <!-- Toolbar -->
-    <color name="toolbarIcon">#B3FFFFFF</color>
+    <color name="toolbarIcon">#FFFFFFFF</color>
 </resources>

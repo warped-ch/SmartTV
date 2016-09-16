@@ -115,8 +115,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         try {
             menu.findItem(R.id.action_refresh).setVisible(false);
+            menu.findItem(R.id.action_close).setVisible(false);
         } catch (NullPointerException e) {
-            Timber.e("onPrepareOptionsMenu: menu item action_refresh is null.");
+            Timber.e("onPrepareOptionsMenu: menu item is null.");
         }
 
         return super.onPrepareOptionsMenu(menu);
