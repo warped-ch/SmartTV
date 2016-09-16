@@ -3,6 +3,7 @@ package org.dev.warped.smarttv;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.squareup.otto.Subscribe;
 
@@ -35,6 +37,10 @@ public class MainActivity extends AppCompatActivity
         DeviceListFragment.OnDeviceListFragmentInteractionListener,
         EpgEventListFragment.OnEpgEventListFragmentInteractionListener {
 
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,21 +48,38 @@ public class MainActivity extends AppCompatActivity
         getFragmentManager().addOnBackStackChangedListener(this);
 
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mDrawerToggle.isDrawerIndicatorEnabled()) {
+                    onBackPressed();
+                }
+            }
+        });
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
-            createInitialFragment(navigationView);
+            createInitialFragment(mNavigationView);
         }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
     }
 
     @Override
@@ -71,6 +94,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
+        updateDrawerIndicator();
         updateNavigationView();
     }
 
@@ -82,6 +106,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         try {
             menu.findItem(R.id.action_refresh).setVisible(false);
@@ -90,6 +120,23 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        // Handle your other action bar items...
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -223,17 +270,26 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void updateDrawerIndicator() {
+        BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(BouquetListFragment.class.getName());
+        if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            mDrawerToggle.setDrawerIndicatorEnabled(true);
+        } else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mDrawerToggle.setDrawerIndicatorEnabled(false);
+        }
+    }
+
     private void updateNavigationView() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (null != navigationView) {
-            BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(BouquetListFragment.class.getName());
-            if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
-                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-            }
-            SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(SettingsFragment.class.getName());
-            if (null != settingsFragment && settingsFragment.isVisible()) {
-                navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
-            }
+        BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(BouquetListFragment.class.getName());
+        if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
+            mNavigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+        }
+
+        SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(SettingsFragment.class.getName());
+        if (null != settingsFragment && settingsFragment.isVisible()) {
+            mNavigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
         }
     }
 }
