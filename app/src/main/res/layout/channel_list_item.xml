@@ -50,17 +50,18 @@
                 android:text="@string/zap"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_above="@+id/textViewEpgEventTitle"
                 android:layout_alignParentTop="true"
                 android:scaleType="fitEnd"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:tint="@color/image_button_state_list"
-                android:layout_alignRight="@+id/textViewEpgEventTitle"
-                android:layout_alignEnd="@+id/textViewEpgEventTitle"
-                android:paddingTop="6dp"
                 app:srcCompat="@drawable/ic_play_circle_filled"
-                android:clickable="true" />
+                android:clickable="true"
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_marginRight="@dimen/text_margin"
+                android:layout_marginEnd="@dimen/text_margin"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
 
             <TextView
                 android:id="@+id/textViewEpgEventTitle"
@@ -70,10 +71,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/imageViewPicon"
-                android:layout_marginLeft="@dimen/text_margin"
-                android:layout_marginTop="@dimen/text_margin"
-                android:layout_marginRight="@dimen/text_margin"
-                android:layout_marginBottom="6dp" />
+                android:layout_margin="@dimen/text_margin" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutAdditionalContent"
@@ -83,13 +81,14 @@
                 android:layout_below="@+id/textViewEpgEventTitle"
                 android:layout_alignParentTop="false"
                 android:layout_alignParentBottom="false"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="6dp">
 
                 <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/imageButtonTrailer"
                     android:text="@string/trailer"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:background="@android:color/transparent"
@@ -102,11 +101,11 @@
                     android:text="@string/imdb"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:gravity="center_vertical"
                     android:textColor="@color/image_button_state_list"
                     android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
+                    android:layout_marginLeft="32dp"
                     android:clickable="true" />
 
             </LinearLayout>
@@ -157,7 +156,8 @@
                 android:layout_alignStart="@+id/textViewEpgEventTitle"
                 android:layout_alignRight="@+id/textViewEpgEventTitle"
                 android:layout_alignEnd="@+id/textViewEpgEventTitle"
-                android:layout_marginBottom="@dimen/text_margin" />
+                android:layout_marginBottom="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin" />
 
         </RelativeLayout>
 
