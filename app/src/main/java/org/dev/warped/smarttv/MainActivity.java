@@ -174,6 +174,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void createInitialFragment(NavigationView navigationView) {
+        // show bouquet list fragment on initial startup
+        navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
+        BouquetListFragment bouquetListFragment = new BouquetListFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, bouquetListFragment, bouquetListFragment.getClass().getName());
+        transaction.commit();
+
         if (SharedPreferencesManager.getReceiverAutoDiscovery(PreferenceManager.getDefaultSharedPreferences(this))) {
             Boolean receiverReachable = false;
             String receiverAddress = SharedPreferencesManager.getReceiverAddress(PreferenceManager.getDefaultSharedPreferences(this));
@@ -188,28 +195,10 @@ public class MainActivity extends AppCompatActivity
                     Timber.e(e, "onCreate: InterruptedException exception caught.");
                 }
             }
-
-            if (receiverReachable) {
-                // show bouquet list fragment on initial startup in case receiver is reachable
-                navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-                BouquetListFragment fragment = new BouquetListFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
-                transaction.commit();
-            } else {
-                // show device list fragment on initial startup in case receiver is not reachable
-                DeviceListFragment fragment = new DeviceListFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                fragment.show(transaction, fragment.getClass().getName());
+            if (!receiverReachable) {
+                showFragment(new DeviceListFragment());
             }
         } else {
-            // show bouquet list fragment on initial startup
-            navigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-            BouquetListFragment fragment = new BouquetListFragment();
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
-            transaction.commit();
-
             if (!SharedPreferencesManager.areSettingsDefined(PreferenceManager.getDefaultSharedPreferences(this))) {
                 showFragment(new SettingsFragment());
                 SnackBarFactory.showSnackBar(this, R.string.snackbar_please_define_settings);
