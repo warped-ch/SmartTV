@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,7 +23,7 @@ import timber.log.Timber;
  * {@link OnDeviceListFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class DeviceListFragment extends DialogFragment implements DeviceDiscoveryCallback, OnDeviceClickListener, View.OnClickListener {
+public class DeviceListFragment extends DialogFragment implements DeviceDiscoveryCallback, OnDeviceClickListener {
 
     private DeviceDiscovery mDeviceDiscovery;
     private OnDeviceListFragmentInteractionListener mListener;
@@ -46,7 +48,22 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_device_list, container, false);
 
-        view.findViewById(R.id.imageButtonCloseDeviceList).setOnClickListener(this);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.devices);
+        toolbar.inflateMenu(R.menu.menu_main);
+        toolbar.getMenu().findItem(R.id.action_refresh).setVisible(false);
+        toolbar.getMenu().findItem(R.id.action_close).setVisible(true);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (R.id.action_close == item.getItemId()) {
+                    Timber.d("onMenuItemClick: item \"%s\" selected.", getResources().getString(R.string.close));
+                    dismiss();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDevices);
         mRecyclerView.setHasFixedSize(true);
@@ -108,16 +125,6 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
         SharedPreferencesManager.setReceiverAddress(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getAddress());
         SharedPreferencesManager.setReceiverType(PreferenceManager.getDefaultSharedPreferences(getActivity()), device.getReceiverType());
         dismiss();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.imageButtonCloseDeviceList:
-                Timber.d("onClick: close button clicked.");
-                dismiss();
-                break;
-        }
     }
 
     /**
