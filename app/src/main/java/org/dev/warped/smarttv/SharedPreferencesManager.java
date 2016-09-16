@@ -16,11 +16,21 @@ class SharedPreferencesManager {
     public static final String PREF_KEY_RECEIVER_ADDRESS = "pref_key_receiver_address";
 
     public static boolean areSettingsDefined(SharedPreferences sharedPreferences) {
-        return ((null != getReceiverType(sharedPreferences)) && (null != getReceiverAddress(sharedPreferences)));
+        return (isReceiverAddressDefined(sharedPreferences) && isReceiverTypeDefined(sharedPreferences));
     }
 
     public static boolean getReceiverAutoDiscovery(SharedPreferences sharedPreferences) {
         return sharedPreferences.getBoolean(PREF_KEY_RECEIVER_AUTO_DISCOVERY, true);
+    }
+
+    public static String getReceiverAddress(SharedPreferences sharedPreferences) {
+        String address = null;
+        if (sharedPreferences.contains(PREF_KEY_RECEIVER_ADDRESS)) {
+            address = sharedPreferences.getString(PREF_KEY_RECEIVER_ADDRESS, "");
+        } else {
+            Timber.e("getReceiverAddress: SharedPreferences do not contain \"%s\".", PREF_KEY_RECEIVER_ADDRESS);
+        }
+        return address;
     }
 
     public static ReceiverClient.EReceiverType getReceiverType(SharedPreferences sharedPreferences) {
@@ -37,14 +47,14 @@ class SharedPreferencesManager {
         return receiverType;
     }
 
-    public static String getReceiverAddress(SharedPreferences sharedPreferences) {
-        String address = null;
-        if (sharedPreferences.contains(PREF_KEY_RECEIVER_ADDRESS)) {
-            address = sharedPreferences.getString(PREF_KEY_RECEIVER_ADDRESS, "");
-        } else {
-            Timber.e("getReceiverAddress: SharedPreferences do not contain \"%s\".", PREF_KEY_RECEIVER_ADDRESS);
-        }
-        return address;
+    public static boolean isReceiverAddressDefined(SharedPreferences sharedPreferences) {
+        String receiverAddress = getReceiverAddress(sharedPreferences);
+        return (null != receiverAddress && !receiverAddress.isEmpty());
+    }
+
+    public static boolean isReceiverTypeDefined(SharedPreferences sharedPreferences) {
+        ReceiverClient.EReceiverType receiverType = getReceiverType(sharedPreferences);
+        return (null != receiverType && ReceiverClient.EReceiverType.eUnknown != receiverType);
     }
 
     public static void setReceiverAddress(SharedPreferences sharedPreferences, InetAddress address) {
