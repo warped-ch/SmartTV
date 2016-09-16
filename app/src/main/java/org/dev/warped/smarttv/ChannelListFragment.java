@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,6 +107,16 @@ public class ChannelListFragment extends Fragment implements
         }
 
         return view;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        try {
+            menu.findItem(R.id.action_refresh).setVisible(true);
+        } catch (NullPointerException e) {
+            Timber.e("onPrepareOptionsMenu: menu item action_refresh is null.");
+        }
     }
 
     @Override

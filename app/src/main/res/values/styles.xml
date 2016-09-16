@@ -4,6 +4,7 @@
     <style name="SmartTvTheme" parent="Theme.AppCompat.DayNight.DarkActionBar" >
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/background</item>
     </style>
 
     <style name="SmartTvTheme.DarkActionBar">
@@ -14,5 +15,7 @@
     <style name="SmartTvTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="SmartTvTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SmartTvTheme.Dialog" parent="Theme.AppCompat.DayNight.Dialog" />
 
 </resources>

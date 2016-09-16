@@ -11,6 +11,15 @@
     </group>
 
     <group
+        android:id="@+id/menu_middle"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_devices"
+            android:icon="@drawable/ic_tv"
+            android:title="@string/devices" />
+    </group>
+
+    <group
         android:id="@+id/menu_bottom"
         android:checkableBehavior="single">
             <item

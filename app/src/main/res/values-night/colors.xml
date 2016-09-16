@@ -3,5 +3,6 @@
 
     <color name="accent">@color/cyanAccent700</color>
     <color name="accentPressed">@color/cyan900</color>
+    <color name="background">@color/grey850</color>
 
 </resources>

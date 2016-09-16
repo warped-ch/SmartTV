@@ -50,7 +50,7 @@ class ReceiverClient {
     // TODO handle multiple clients
     private Enigma2Client mEnigma2Client;
 
-    public ReceiverClient(Bus bus, EReceiverType type, InetAddress address) {
+    public ReceiverClient(Bus bus, EReceiverType type, String address) {
         mBus = bus;
 
         mEnigma2Client = new Enigma2Client(address);

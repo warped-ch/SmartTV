@@ -36,7 +36,7 @@ public class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
     @Override
     public void onServiceLost(NsdServiceInfo serviceInfo) {
         Timber.w("onServiceLost: %s", serviceInfo);
-        mDeviceDiscovery.removeService(serviceInfo);
+        mDeviceDiscovery.removeDevice(serviceInfo);
     }
 
     @Override

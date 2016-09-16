@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:name="org.dev.warped.smarttv.DeviceListFragment"
+    tools:context=".DeviceListFragment"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:theme="@style/SmartTvTheme.Dialog">
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/imageButtonCloseDeviceList"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="@android:color/transparent"
+            android:layout_margin="16dp"
+            android:clickable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="@string/devices"
+            android:id="@+id/textView"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/imageButtonCloseDeviceList"
+            android:layout_alignBottom="@+id/imageButtonCloseDeviceList"
+            android:layout_alignTop="@+id/imageButtonCloseDeviceList"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/imageButtonCloseDeviceList"
+            android:layout_toLeftOf="@+id/progressBar" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/imageButtonCloseDeviceList"
+            android:layout_alignBottom="@+id/imageButtonCloseDeviceList"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+            android:layout_marginRight="8dp"
+            android:progressTint="@color/accent" />
+
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/recyclerViewDevices"
+            android:layout_below="@+id/imageButtonCloseDeviceList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/device_list_item"
+            android:layout_marginTop="8dp"
+            android:clickable="false" />
+
+</RelativeLayout>
