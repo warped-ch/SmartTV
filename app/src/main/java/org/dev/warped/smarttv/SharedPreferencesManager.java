@@ -3,7 +3,6 @@ package org.dev.warped.smarttv;
 import android.content.SharedPreferences;
 
 import java.net.InetAddress;
-import java.util.concurrent.ExecutionException;
 
 import timber.log.Timber;
 

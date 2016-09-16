@@ -1,7 +1,5 @@
 package org.dev.warped.smarttv;
 
-import java.net.InetAddress;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

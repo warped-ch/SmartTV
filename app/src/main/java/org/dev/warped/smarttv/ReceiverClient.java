@@ -23,8 +23,6 @@ import org.dev.warped.smarttv.model.E2ServiceList;
 import org.dev.warped.smarttv.model.E2SimpleXmlResult;
 import org.dev.warped.smarttv.model.E2Volume;
 
-import java.net.InetAddress;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

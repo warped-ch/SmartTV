@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatDelegate;
 
 import com.squareup.otto.Bus;
 
-import java.net.InetAddress;
-
 import timber.log.Timber;
 
 /**
