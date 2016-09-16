@@ -3,7 +3,7 @@
 
     <color name="accent">@color/cyanAccent700</color>
     <color name="accentPressed">@color/cyan900</color>
-    <color name="background">@color/grey50</color>
+    <color name="background">@color/grey850</color>
 
     <!-- Cyan primary -->
     <color name="cyan100">#B2EBF2</color>
