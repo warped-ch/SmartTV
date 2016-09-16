@@ -26,6 +26,5 @@
         android:layout_toEndOf="@+id/imageView"
         android:layout_alignTop="@+id/imageView"
         android:layout_alignBottom="@+id/imageView"
-        android:gravity="center"
-        android:password="false" />
+        android:gravity="center" />
 </RelativeLayout>
