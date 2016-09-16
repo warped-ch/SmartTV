@@ -24,25 +24,25 @@
             <ImageView
                 android:id="@+id/imageViewPicon"
                 android:contentDescription="@string/picon"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
                 android:scaleType="fitCenter"
-                android:padding="6dp"
-                app:srcCompat="@drawable/ic_tv"/>
+                app:srcCompat="@drawable/ic_tv"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="@dimen/text_margin" />
 
             <TextView
                 android:id="@+id/textViewChannelTitle"
                 android:text="@string/channel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:gravity="bottom|start"
                 android:layout_toLeftOf="@+id/imageButtonZap"
                 android:layout_toRightOf="@+id/imageViewPicon"
                 android:layout_toEndOf="@+id/imageViewPicon"
                 android:layout_toStartOf="@+id/imageButtonZap"
-                android:layout_marginStart="@dimen/text_margin"
-                android:layout_marginLeft="@dimen/text_margin"
                 android:layout_above="@+id/includeEPGItems" />
 
             <android.support.v7.widget.AppCompatImageButton
@@ -57,18 +57,17 @@
                 android:tint="@color/image_button_state_list"
                 app:srcCompat="@drawable/ic_play_circle_filled"
                 android:clickable="true"
-                android:layout_marginTop="@dimen/text_margin"
-                android:layout_marginRight="@dimen/text_margin"
-                android:layout_marginEnd="@dimen/text_margin"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/text_margin" />
 
             <include
                 layout="@layout/epg_items"
                 android:id="@+id/includeEPGItems"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageViewPicon" />
+                android:layout_below="@+id/imageViewPicon"
+                android:layout_marginTop="@dimen/text_margin" />
 
         </RelativeLayout>
 
