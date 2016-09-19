@@ -45,7 +45,7 @@ public class NavigationDrawerTest {
         onView(withId(R.id.drawer_layout))
                 .check(matches(isClosed()))
                 .perform(open())
-                .check(matches(isOpen(Gravity.LEFT)));
+                .check(matches(isOpen(Gravity.START)));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class NavigationDrawerTest {
         onView(withId(R.id.drawer_layout))
                 .check(matches(isClosed()))
                 .perform(open())
-                .check(matches(isOpen(Gravity.LEFT)))
+                .check(matches(isOpen(Gravity.START)))
                 .perform(close())
                 .check(matches(isClosed()));
     }

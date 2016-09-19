@@ -14,7 +14,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 /**
  * Created by Andreas Wiedmer on 19.09.2016.
  */
-public class IntegrationTestHelper {
+class IntegrationTestHelper {
 
     private IntegrationTestHelper() {
     }

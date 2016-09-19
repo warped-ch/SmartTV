@@ -10,7 +10,7 @@ import android.support.v7.widget.AppCompatImageButton;
 /**
  * Created by Andreas Wiedmer on 19.09.2016.
  */
-public class VectorDrawableSupport {
+class VectorDrawableSupport {
 
     private VectorDrawableSupport() {
     }
