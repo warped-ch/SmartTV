@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     private DeviceDiscovery mDeviceDiscovery;
     private OnDeviceListFragmentInteractionListener mListener;
     private DeviceListAdapter mAdapter;
+    private ProgressBar mProgressBar;
 
     public DeviceListFragment() {
         // Required empty public constructor
@@ -68,6 +70,8 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
+
+        mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
         return view;
     }
@@ -115,7 +119,9 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     @Override
     public void onDeviceDiscovered(Device device) {
         Timber.d("onDeviceDiscovered: receiverType=%s, address=%s", device.getReceiverType(), device.getAddress());
-        mAdapter.setDevices(mDeviceDiscovery.getDevices());
+        ArrayList<Device> devices = mDeviceDiscovery.getDevices();
+        mProgressBar.setVisibility(devices.isEmpty() ? View.VISIBLE : View.GONE);
+        mAdapter.setDevices(devices);
     }
 
     @Override
