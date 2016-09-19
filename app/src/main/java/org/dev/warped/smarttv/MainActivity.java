@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mDrawerToggle.isDrawerIndicatorEnabled()) {
+                if (!mDrawerToggle.isDrawerIndicatorEnabled()) {
                     onBackPressed();
                 }
             }
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.nav_bouquets:
                 Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.bouquets));
                 showFragment(new BouquetListFragment());

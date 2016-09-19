@@ -9,14 +9,14 @@ public class BusProvider {
     private static final BusProvider mInstance = new BusProvider();
     private static final Bus mBus = new Bus();
 
+    private BusProvider() {
+    }
+
     public static BusProvider getInstance() {
         return mInstance;
     }
 
     public static Bus getBus() {
         return mBus;
-    }
-
-    private BusProvider() {
     }
 }

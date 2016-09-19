@@ -56,6 +56,7 @@ public class Enigma2ResolveListener implements NsdManager.ResolveListener, Async
                     Timber.w("onServiceResolved: onResponse: response body is null.");
                 }
             }
+
             @Override
             public void onFailure(Call<E2Abouts> call, Throwable t) {
                 Timber.w("onServiceResolved: onFailure: something went wrong.");

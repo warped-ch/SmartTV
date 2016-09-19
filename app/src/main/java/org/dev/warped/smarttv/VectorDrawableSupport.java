@@ -12,14 +12,14 @@ import android.support.v7.widget.AppCompatImageButton;
  */
 public class VectorDrawableSupport {
 
+    private VectorDrawableSupport() {
+    }
+
     static void setTintList(AppCompatImageButton imageButton, @ColorRes int id) {
         ColorStateList tint = ContextCompat.getColorStateList(imageButton.getContext(), id);
         Drawable drawable = DrawableCompat.wrap(imageButton.getDrawable());
         DrawableCompat.setTintList(drawable, tint);
         drawable.mutate();
         imageButton.setImageDrawable(drawable);
-    }
-
-    private VectorDrawableSupport() {
     }
 }

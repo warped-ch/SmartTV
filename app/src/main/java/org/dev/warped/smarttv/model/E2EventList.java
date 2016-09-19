@@ -10,10 +10,10 @@ import java.util.List;
  */
 @Root(name = "e2eventlist")
 public class E2EventList {
+    @ElementList(inline = true)
+    private List<E2Event> mEventList;
+
     public List<E2Event> getEventList() {
         return mEventList;
     }
-
-    @ElementList(inline = true)
-    private List<E2Event> mEventList;
 }

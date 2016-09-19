@@ -35,6 +35,7 @@ public interface ApiServiceEnigma2 {
 
     @GET("web/vol")
     Call<E2Volume> getVolume();
+
     @POST("web/vol")
     Call<E2Volume> postVolume(@Query("set") String set);
 

@@ -12,7 +12,7 @@ import timber.log.Timber;
  * Created by Andreas Wiedmer on 11.08.2016.
  */
 class DeviceDiscovery {
-    private  final DeviceDiscoveryCallback mCallback;
+    private final DeviceDiscoveryCallback mCallback;
     private final NsdManager mNsdManager;
     private Enigma2DiscoveryListener mEnigma2DiscoveryListener;
     private ArrayList<Device> mDevices = new ArrayList<>();

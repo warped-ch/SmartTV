@@ -16,6 +16,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
  */
 public class IntegrationTestHelper {
 
+    private IntegrationTestHelper() {
+    }
+
     public static void navigateBackHome() {
         navigateBackFromChannelListFragment();
         navigateBackFromDeviceListFragment();
@@ -63,7 +66,7 @@ public class IntegrationTestHelper {
         }
     }
 
-    public static void clearSharedPreferences(){
+    public static void clearSharedPreferences() {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(getInstrumentation().getTargetContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -71,14 +74,11 @@ public class IntegrationTestHelper {
         editor.apply();
     }
 
-    public static void setReceiverAutoDiscovery(boolean enabled){
+    public static void setReceiverAutoDiscovery(boolean enabled) {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(getInstrumentation().getTargetContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY, enabled);
         editor.apply();
-    }
-
-    private IntegrationTestHelper() {
     }
 }

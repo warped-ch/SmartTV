@@ -10,64 +10,8 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 07.07.2016.
  */
-@Root(name="e2event")
+@Root(name = "e2event")
 public class E2Event {
-
-    public int getEventId() {
-        try {
-            return Integer.parseInt(mEventId);
-        } catch (NumberFormatException e) {
-            Timber.w("getEventId: NumberFormatException caught, returning 0.");
-            return 0;
-        }
-    }
-
-    public Date getEventStart() {
-        try {
-            return new Date(1000 * (long)Integer.parseInt(mEventStart));
-        } catch (NumberFormatException e) {
-            Timber.w("getEventStart: NumberFormatException caught, returning 0.");
-            return new Date();
-        }
-    }
-
-    public int getEventDuration() {
-        try {
-            return Integer.parseInt(mEventDuration);
-        } catch (NumberFormatException e) {
-            Timber.w("getEventDuration: NumberFormatException caught, returning 0.");
-            return 0;
-        }
-    }
-
-    public Date getEventCurrentTime() {
-        try {
-            return new Date(1000 * (long)Integer.parseInt(mEventCurrentTime));
-        } catch (NumberFormatException e) {
-            Timber.w("getEventCurrentTime: NumberFormatException caught, returning 0.");
-            return new Date();
-        }
-    }
-
-    public String getEventTitle() {
-        return mEventTitle;
-    }
-
-    public String getEventDescription() {
-        return mEventDescription;
-    }
-
-    public String getEventDescriptionExtended() {
-        return mEventDescriptionExtended;
-    }
-
-    public String getEventServiceReference() {
-        return mEventServiceReference;
-    }
-
-    public String getEventServiceName() {
-        return mEventServiceName;
-    }
 
     /**
      * The event id.
@@ -103,4 +47,60 @@ public class E2Event {
     private String mEventServiceReference;
     @Element(name = "e2eventservicename")
     private String mEventServiceName;
+
+    public int getEventId() {
+        try {
+            return Integer.parseInt(mEventId);
+        } catch (NumberFormatException e) {
+            Timber.w("getEventId: NumberFormatException caught, returning 0.");
+            return 0;
+        }
+    }
+
+    public Date getEventStart() {
+        try {
+            return new Date(1000 * (long) Integer.parseInt(mEventStart));
+        } catch (NumberFormatException e) {
+            Timber.w("getEventStart: NumberFormatException caught, returning 0.");
+            return new Date();
+        }
+    }
+
+    public int getEventDuration() {
+        try {
+            return Integer.parseInt(mEventDuration);
+        } catch (NumberFormatException e) {
+            Timber.w("getEventDuration: NumberFormatException caught, returning 0.");
+            return 0;
+        }
+    }
+
+    public Date getEventCurrentTime() {
+        try {
+            return new Date(1000 * (long) Integer.parseInt(mEventCurrentTime));
+        } catch (NumberFormatException e) {
+            Timber.w("getEventCurrentTime: NumberFormatException caught, returning 0.");
+            return new Date();
+        }
+    }
+
+    public String getEventTitle() {
+        return mEventTitle;
+    }
+
+    public String getEventDescription() {
+        return mEventDescription;
+    }
+
+    public String getEventDescriptionExtended() {
+        return mEventDescriptionExtended;
+    }
+
+    public String getEventServiceReference() {
+        return mEventServiceReference;
+    }
+
+    public String getEventServiceName() {
+        return mEventServiceName;
+    }
 }

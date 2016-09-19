@@ -12,8 +12,7 @@ class Enigma2Client {
 
     private final ApiServiceEnigma2 mApiService;
 
-    public Enigma2Client(String address)
-    {
+    public Enigma2Client(String address) {
         String baseUrl = "http://" + address + "/";
 
         Retrofit retrofit;
@@ -37,8 +36,7 @@ class Enigma2Client {
         mApiService = retrofit.create(ApiServiceEnigma2.class);
     }
 
-    public ApiServiceEnigma2 getApiService()
-    {
+    public ApiServiceEnigma2 getApiService() {
         return mApiService;
     }
 }

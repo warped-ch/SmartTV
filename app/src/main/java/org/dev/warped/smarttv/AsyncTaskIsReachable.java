@@ -14,7 +14,8 @@ class AsyncTaskIsReachable extends AsyncTask<String, Void, Boolean> {
 
     private AsyncResponseDelegateReachable mDelegate;
 
-    public AsyncTaskIsReachable() {}
+    public AsyncTaskIsReachable() {
+    }
 
     public AsyncTaskIsReachable(AsyncResponseDelegateReachable delegate) {
         mDelegate = delegate;

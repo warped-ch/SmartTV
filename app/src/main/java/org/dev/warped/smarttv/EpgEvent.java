@@ -14,14 +14,6 @@ import java.util.TimeZone;
  */
 public class EpgEvent implements Parcelable {
 
-    private final int mId;
-    private final Date mStartTime;
-    private final Date mEndTime;
-    private final Date mCurrentTime;
-    private final String mTitle;
-    private final String mDescription;
-    private final String mDescriptionExtended;
-
     public static final Parcelable.Creator<EpgEvent> CREATOR = new Parcelable.Creator<EpgEvent>() {
         public EpgEvent createFromParcel(Parcel in) {
             return new EpgEvent(in);
@@ -31,6 +23,13 @@ public class EpgEvent implements Parcelable {
             return new EpgEvent[size];
         }
     };
+    private final int mId;
+    private final Date mStartTime;
+    private final Date mEndTime;
+    private final Date mCurrentTime;
+    private final String mTitle;
+    private final String mDescription;
+    private final String mDescriptionExtended;
 
     public EpgEvent(E2Event event) {
         mId = event.getEventId();
@@ -40,6 +39,16 @@ public class EpgEvent implements Parcelable {
         mTitle = event.getEventTitle();
         mDescription = event.getEventDescription();
         mDescriptionExtended = event.getEventDescriptionExtended();
+    }
+
+    private EpgEvent(Parcel in) {
+        mId = in.readInt();
+        mStartTime = new Date(in.readLong());
+        mEndTime = new Date(in.readLong());
+        mCurrentTime = new Date(in.readLong());
+        mTitle = in.readString();
+        mDescription = in.readString();
+        mDescriptionExtended = in.readString();
     }
 
     @Override
@@ -95,15 +104,5 @@ public class EpgEvent implements Parcelable {
 
     public int calcProgress() {
         return (int) ((100.0 / (mEndTime.getTime() - mStartTime.getTime())) * (mCurrentTime.getTime() - mStartTime.getTime()));
-    }
-
-    private EpgEvent(Parcel in) {
-        mId = in.readInt();
-        mStartTime = new Date(in.readLong());
-        mEndTime = new Date(in.readLong());
-        mCurrentTime = new Date(in.readLong());
-        mTitle = in.readString();
-        mDescription = in.readString();
-        mDescriptionExtended = in.readString();
     }
 }

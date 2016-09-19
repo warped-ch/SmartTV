@@ -17,6 +17,9 @@ class AsyncTaskGetHostName extends AsyncTask<InetAddress, Void, String> {
         mDelegate = delegate;
     }
 
+    private AsyncTaskGetHostName() {
+    }
+
     @Override
     protected String doInBackground(InetAddress... params) {
         InetAddress address = params[0];
@@ -36,6 +39,4 @@ class AsyncTaskGetHostName extends AsyncTask<InetAddress, Void, String> {
     public interface AsyncResponseDelegateHostName {
         void onPostExecuteGetHostName(String hostName);
     }
-
-    private AsyncTaskGetHostName() {}
 }

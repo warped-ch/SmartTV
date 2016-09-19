@@ -120,8 +120,7 @@ public class BouquetListFragment extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.action_refresh:
                 Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.refresh));
                 onRefresh();
@@ -157,7 +156,7 @@ public class BouquetListFragment extends Fragment implements
 
         outState.putParcelableArrayList(STATE_BOUQUETS, mAdapter.getBouquets());
 
-        if(mLayoutManager != null && mRecyclerView != null){
+        if (mLayoutManager != null && mRecyclerView != null) {
             int positionIndex = mLayoutManager.findFirstVisibleItemPosition();
             View view = mRecyclerView.getChildAt(positionIndex);
             int positionOffset = (view != null) ? (view.getTop() - mRecyclerView.getPaddingTop()) : 0;

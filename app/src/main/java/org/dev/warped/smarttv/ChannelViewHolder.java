@@ -56,7 +56,7 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
 
         mImageViewPicon.setImageResource(PiconManager.getPiconResourceId(channel.getName()));
         mTextViewChannelName.setText(channel.getName());
-        if(!channel.getEpgEvents().isEmpty()) {
+        if (!channel.getEpgEvents().isEmpty()) {
             EpgEvent epgEvent = channel.getEpgEvents().get(0);
             mTextViewEpgEventTitle.setText(epgEvent.getTitle());
             if (epgEvent.getDescriptionExtended().toLowerCase().contains("imdb")) {

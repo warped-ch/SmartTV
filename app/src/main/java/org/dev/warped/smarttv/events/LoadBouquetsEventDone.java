@@ -15,7 +15,7 @@ public class LoadBouquetsEventDone {
 
     public LoadBouquetsEventDone(List<E2Service> e2Services) {
         mBouquets = new ArrayList<>();
-        for(E2Service s : e2Services) {
+        for (E2Service s : e2Services) {
             mBouquets.add(new Bouquet(s));
         }
     }

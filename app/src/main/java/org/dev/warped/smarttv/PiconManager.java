@@ -12,6 +12,7 @@ import java.util.Map;
 class PiconManager {
 
     private static final Map<String, Integer> mPiconResourceIdHashMap;
+
     static {
         HashMap<String, Integer> HashMapUPC = new HashMap<>();
         HashMapUPC.put("3+ HD", R.drawable.picon_3plushd);

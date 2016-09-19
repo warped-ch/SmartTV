@@ -15,12 +15,12 @@ public class LoadEpgEventsEventDone {
 
     public LoadEpgEventsEventDone(List<E2Event> e2Events) {
         mEpgEvents = new ArrayList<>();
-        for(E2Event e : e2Events) {
+        for (E2Event e : e2Events) {
             mEpgEvents.add(new EpgEvent(e));
         }
     }
 
     public ArrayList<EpgEvent> getEpgEvents() {
-        return  mEpgEvents;
+        return mEpgEvents;
     }
 }

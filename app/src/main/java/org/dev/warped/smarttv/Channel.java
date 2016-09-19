@@ -14,10 +14,6 @@ import java.util.List;
  */
 public class Channel implements Parcelable {
 
-    private final String mName;
-    private final String mReference;
-    private final List<EpgEvent> mEpgEvents;
-
     public static final Parcelable.Creator<Channel> CREATOR = new Parcelable.Creator<Channel>() {
         public Channel createFromParcel(Parcel in) {
             return new Channel(in);
@@ -27,6 +23,9 @@ public class Channel implements Parcelable {
             return new Channel[size];
         }
     };
+    private final String mName;
+    private final String mReference;
+    private final List<EpgEvent> mEpgEvents;
 
     public Channel(E2Service e2Service) {
         mName = e2Service.getServiceName();
@@ -39,6 +38,13 @@ public class Channel implements Parcelable {
         mReference = e2Event.getEventServiceReference();
         mEpgEvents = new ArrayList<>();
         mEpgEvents.add(new EpgEvent(e2Event));
+    }
+
+    private Channel(Parcel in) {
+        mName = in.readString();
+        mReference = in.readString();
+        mEpgEvents = new ArrayList<>();
+        in.readList(mEpgEvents, List.class.getClassLoader());
     }
 
     @Override
@@ -63,12 +69,5 @@ public class Channel implements Parcelable {
 
     public List<EpgEvent> getEpgEvents() {
         return mEpgEvents;
-    }
-
-    private Channel(Parcel in) {
-        mName = in.readString();
-        mReference = in.readString();
-        mEpgEvents = new ArrayList<>();
-        in.readList(mEpgEvents, List.class.getClassLoader());
     }
 }

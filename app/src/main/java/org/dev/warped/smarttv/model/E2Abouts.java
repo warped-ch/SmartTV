@@ -10,10 +10,10 @@ import java.util.List;
  */
 @Root(name = "e2abouts")
 public class E2Abouts {
+    @ElementList(inline = true)
+    private List<E2About> mAboutList;
+
     public List<E2About> getAboutList() {
         return mAboutList;
     }
-
-    @ElementList(inline = true)
-    private List<E2About> mAboutList;
 }

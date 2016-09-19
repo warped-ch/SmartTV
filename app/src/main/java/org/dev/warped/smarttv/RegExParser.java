@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
  */
 class RegExParser {
 
+    private RegExParser() {
+    }
+
     static String getIMDbRating(String string, String prefix) {
         if (null != string) {
             Pattern pattern = Pattern.compile("(?i)imdb[: rating]+([0-9]*\\.[0-9]+|[0-9]+)");
@@ -15,8 +18,5 @@ class RegExParser {
             return matcher.find() ? prefix + ": " + matcher.group(1) : prefix;
         }
         return prefix;
-    }
-
-    private RegExParser() {
     }
 }

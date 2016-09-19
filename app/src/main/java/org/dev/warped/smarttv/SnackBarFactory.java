@@ -13,6 +13,9 @@ import timber.log.Timber;
  */
 class SnackBarFactory {
 
+    private SnackBarFactory() {
+    }
+
     public static void showSnackBar(Activity activity, @StringRes int resId) {
         showSnackBar(activity.findViewById(android.R.id.content), resId);
     }
@@ -28,8 +31,5 @@ class SnackBarFactory {
         } else {
             Timber.w("showSnackBar: view is null.");
         }
-    }
-
-    private SnackBarFactory() {
     }
 }

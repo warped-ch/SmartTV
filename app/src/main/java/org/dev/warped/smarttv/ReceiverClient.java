@@ -32,22 +32,9 @@ import timber.log.Timber;
  * Created by Andreas Wiedmer on 20.07.2016.
  */
 class ReceiverClient {
-    public enum EReceiverType {
-        eUnknown,
-        eDM500HD,
-        eDM500HDV2,
-        eDM800,
-        eDM800SE,
-        eDM800SEV2,
-        eDM7020HD,
-        eDM7020HDV2,
-        eDM8000
-    }
-
     private final Bus mBus;
     // TODO handle multiple clients
     private Enigma2Client mEnigma2Client;
-
     public ReceiverClient(Bus bus, EReceiverType type, String address) {
         mBus = bus;
 
@@ -81,6 +68,7 @@ class ReceiverClient {
                     mBus.post(new ControlVolumeEventError(new NullPointerException()));
                 }
             }
+
             @Override
             public void onFailure(Call<E2Volume> call, Throwable t) {
                 Timber.w("onControlVolumeEvent: onFailure: something went wrong.");
@@ -103,6 +91,7 @@ class ReceiverClient {
                     mBus.post(new LoadBouquetsEventError(new NullPointerException()));
                 }
             }
+
             @Override
             public void onFailure(Call<E2ServiceList> call, Throwable t) {
                 Timber.w("onLoadBouquetsEvent: onFailure: something went wrong.");
@@ -125,6 +114,7 @@ class ReceiverClient {
                     mBus.post(new LoadEpgNowEventError(new NullPointerException()));
                 }
             }
+
             @Override
             public void onFailure(Call<E2EventList> call, Throwable t) {
                 Timber.w("onLoadEpgNowEvent: onFailure: something went wrong.");
@@ -147,6 +137,7 @@ class ReceiverClient {
                     mBus.post(new LoadEpgEventsEventError(new NullPointerException()));
                 }
             }
+
             @Override
             public void onFailure(Call<E2EventList> call, Throwable t) {
                 Timber.w("onLoadEpgEventsEvent: onFailure: something went wrong.");
@@ -169,11 +160,24 @@ class ReceiverClient {
                     mBus.post(new ZapEventError(new NullPointerException()));
                 }
             }
+
             @Override
             public void onFailure(Call<E2SimpleXmlResult> call, Throwable t) {
                 Timber.w("onZapEvent: onFailure: something went wrong.");
                 mBus.post(new ZapEventError(t));
             }
         });
+    }
+
+    public enum EReceiverType {
+        eUnknown,
+        eDM500HD,
+        eDM500HDV2,
+        eDM800,
+        eDM800SE,
+        eDM800SEV2,
+        eDM7020HD,
+        eDM7020HDV2,
+        eDM8000
     }
 }

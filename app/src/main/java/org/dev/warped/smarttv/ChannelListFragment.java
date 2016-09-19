@@ -100,7 +100,7 @@ public class ChannelListFragment extends Fragment implements
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        if(null != mBouquet) {
+        if (null != mBouquet) {
             ((MainActivity) getActivity()).setActionBarTitle(mBouquet.getName());
         } else {
             ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.bouquet));
@@ -143,8 +143,7 @@ public class ChannelListFragment extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.action_refresh:
                 Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.refresh));
                 onRefresh();
@@ -180,7 +179,7 @@ public class ChannelListFragment extends Fragment implements
 
         outState.putParcelableArrayList(STATE_CHANNELS, mAdapter.getChannels());
 
-        if(mLayoutManager != null && mRecyclerView != null){
+        if (mLayoutManager != null && mRecyclerView != null) {
             int positionIndex = mLayoutManager.findFirstVisibleItemPosition();
             View view = mRecyclerView.getChildAt(positionIndex);
             int positionOffset = (view != null) ? (view.getTop() - mRecyclerView.getPaddingTop()) : 0;

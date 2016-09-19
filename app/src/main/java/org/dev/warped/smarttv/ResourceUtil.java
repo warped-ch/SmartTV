@@ -5,6 +5,9 @@ package org.dev.warped.smarttv;
  */
 class ResourceUtil {
 
+    private ResourceUtil() {
+    }
+
     public static ReceiverClient.EReceiverType getReceiverType(String receiverTypeValue) {
         if (null != receiverTypeValue) {
             // TODO, anwi: make this safer, values defined in array.receiver_type_values
@@ -51,8 +54,5 @@ class ResourceUtil {
             default:
                 return "";
         }
-    }
-
-    private ResourceUtil() {
     }
 }

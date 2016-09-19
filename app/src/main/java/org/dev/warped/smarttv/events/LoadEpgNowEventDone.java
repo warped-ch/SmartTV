@@ -15,12 +15,12 @@ public class LoadEpgNowEventDone {
 
     public LoadEpgNowEventDone(List<E2Event> e2Events) {
         mChannels = new ArrayList<>();
-        for(E2Event e : e2Events) {
+        for (E2Event e : e2Events) {
             mChannels.add(new Channel(e));
         }
     }
 
     public ArrayList<Channel> getChannels() {
-        return  mChannels;
+        return mChannels;
     }
 }

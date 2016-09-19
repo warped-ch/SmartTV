@@ -14,6 +14,9 @@ import timber.log.Timber;
  */
 class IntentFactory {
 
+    private IntentFactory() {
+    }
+
     public static void createIMDbFindIntent(Context context, View view, EpgEvent epgEvent) {
         PackageManager packageManager = context.getPackageManager();
         try {
@@ -56,8 +59,5 @@ class IntentFactory {
             Timber.w("createYouTubeQueryIntent: YouTube app not available.");
             SnackBarFactory.showSnackBar(view, R.string.snackbar_app_not_available_youtube);
         }
-    }
-
-    private IntentFactory() {
     }
 }

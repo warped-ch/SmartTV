@@ -10,9 +10,6 @@ import org.dev.warped.smarttv.model.E2Service;
  */
 public class Bouquet implements Parcelable {
 
-    private final String mName;
-    private final String mReference;
-
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Bouquet createFromParcel(Parcel parcel) {
             return new Bouquet(parcel);
@@ -22,10 +19,17 @@ public class Bouquet implements Parcelable {
             return new Bouquet[size];
         }
     };
+    private final String mName;
+    private final String mReference;
 
     public Bouquet(E2Service e2Service) {
         mName = e2Service.getServiceName();
         mReference = e2Service.getServiceReference();
+    }
+
+    private Bouquet(Parcel parcel) {
+        mName = parcel.readString();
+        mReference = parcel.readString();
     }
 
     @Override
@@ -45,10 +49,5 @@ public class Bouquet implements Parcelable {
 
     String getReference() {
         return mReference;
-    }
-
-    private Bouquet(Parcel parcel) {
-        mName = parcel.readString();
-        mReference = parcel.readString();
     }
 }
