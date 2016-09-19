@@ -39,9 +39,11 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
         mImageViewPicon = (ImageView) v.findViewById(R.id.imageViewPicon);
         mTextViewChannelName = (TextView) v.findViewById(R.id.textViewChannelTitle);
         mImageButtonZap = (AppCompatImageButton) v.findViewById(R.id.imageButtonZap);
+        VectorDrawableSupport.setTintList(mImageButtonZap, R.color.image_button_state_list);
         mImageButtonZap.setOnClickListener(this);
         mTextViewEpgEventTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
         mImageButtonTrailer = (AppCompatImageButton) v.findViewById(R.id.imageButtonTrailer);
+        VectorDrawableSupport.setTintList(mImageButtonTrailer, R.color.image_button_state_list);
         mTextViewIMDbLink = (TextView) v.findViewById(R.id.textViewIMDbLink);
         mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
         mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);

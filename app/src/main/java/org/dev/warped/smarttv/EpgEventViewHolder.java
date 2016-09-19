@@ -34,6 +34,7 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
 
         mTextViewEpgEventTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
         mImageButtonTrailer = (AppCompatImageButton) v.findViewById(R.id.imageButtonTrailer);
+        VectorDrawableSupport.setTintList(mImageButtonTrailer, R.color.image_button_state_list);
         mTextViewIMDbLink = (TextView) v.findViewById(R.id.textViewIMDbLink);
         mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
         mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);
