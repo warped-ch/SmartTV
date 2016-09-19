@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.widget.TextView;
 
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,12 @@ public class NavigationDrawerTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
+
+    @Before
+    public void setUp() {
+        IntegrationTestHelper.clearSharedPreferences();
+        IntegrationTestHelper.navigateBackHome();
+    }
 
     @Test
     public void openNavigationDrawer() {

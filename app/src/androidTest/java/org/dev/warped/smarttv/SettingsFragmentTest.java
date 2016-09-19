@@ -44,18 +44,18 @@ public class SettingsFragmentTest {
 
     @Before
     public void setUp() {
-        clearSharedPreferences();
+        IntegrationTestHelper.clearSharedPreferences();
         navigateToSettingsFragment();
     }
 
     @After
     public void tearDown() {
-        clearSharedPreferences();
+        IntegrationTestHelper.clearSharedPreferences();
     }
 
     @Test
     public void SetReceiverAutoDiscoveryOn() {
-        // Receiver auto discovery is enabled in default shared preferences, so leave it enabled for this test
+        // Receiver auto discovery is enabled by default in shared preferences, so leave it enabled for this test
         onData(allOf(is(instanceOf(Preference.class)), withKey(SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY)))
                 .onChildView(withClassName(is(Switch.class.getName())))
                 .check(matches(isChecked()));
@@ -70,7 +70,7 @@ public class SettingsFragmentTest {
 
     @Test
     public void SetReceiverAutoDiscoveryOff() {
-        // Receiver auto discovery is enabled in default shared preferences, so disable it for this test
+        // Receiver auto discovery is enabled by default in shared preferences, so disable it for this test
         onData(allOf(is(instanceOf(Preference.class)), withKey(SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY)))
                 .onChildView(withClassName(is(Switch.class.getName())))
                 .perform(click())
@@ -84,16 +84,8 @@ public class SettingsFragmentTest {
                 .check(matches(isEnabled()));
     }
 
-    private void clearSharedPreferences(){
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(getInstrumentation().getTargetContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-    }
-
     private void navigateToSettingsFragment() {
-        pressBack(); // close the open DeviceListFragment, receiver auto discovery is on by default
+        pressBack(); // close the open DeviceListFragment, receiver auto discovery is enabled by default shared preferences
         onView(withId(R.id.drawer_layout))
                 .perform(open());
         onView(withId(R.id.nav_view))
