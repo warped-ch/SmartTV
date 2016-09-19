@@ -23,7 +23,7 @@ class SharedPreferencesManager {
     }
 
     public static String getReceiverAddress(SharedPreferences sharedPreferences) {
-        String address = null;
+        String address = "";
         if (sharedPreferences.contains(PREF_KEY_RECEIVER_ADDRESS)) {
             address = sharedPreferences.getString(PREF_KEY_RECEIVER_ADDRESS, "");
         } else {
@@ -33,7 +33,7 @@ class SharedPreferencesManager {
     }
 
     public static ReceiverClient.EReceiverType getReceiverType(SharedPreferences sharedPreferences) {
-        ReceiverClient.EReceiverType receiverType = null;
+        ReceiverClient.EReceiverType receiverType = ReceiverClient.EReceiverType.eUnknown;
         if (sharedPreferences.contains(PREF_KEY_RECEIVER_TYPE)) {
             String receiverTypeValue = sharedPreferences.getString(PREF_KEY_RECEIVER_TYPE, "");
             receiverType = ResourceUtil.getReceiverType(receiverTypeValue);
