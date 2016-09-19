@@ -12,7 +12,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 15.09.2016.
  */
-public class DeviceListAdapter extends RecyclerView.Adapter<DeviceViewHolder> {
+class DeviceListAdapter extends RecyclerView.Adapter<DeviceViewHolder> {
 
     private final OnDeviceClickListener mListener;
     private ArrayList<Device> mDevices;

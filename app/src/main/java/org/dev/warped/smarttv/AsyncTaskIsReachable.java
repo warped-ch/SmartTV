@@ -10,7 +10,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 15.09.2016.
  */
-public class AsyncTaskIsReachable extends AsyncTask<String, Void, Boolean> {
+class AsyncTaskIsReachable extends AsyncTask<String, Void, Boolean> {
 
     private AsyncResponseDelegateReachable mDelegate;
 

@@ -8,7 +8,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 11.08.2016.
  */
-public class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
+class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
 
     private final DeviceDiscovery mDeviceDiscovery;
     private final NsdManager mNsdManager;
@@ -58,7 +58,7 @@ public class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
         return "_workstation._tcp";
     }
 
-    public boolean isSupportedDevice(NsdServiceInfo serviceInfo) {
+    private boolean isSupportedDevice(NsdServiceInfo serviceInfo) {
         // MAC address Organizationally Unique Identifier
         final String DreamMultimediaOUI = "00:09:34";
 

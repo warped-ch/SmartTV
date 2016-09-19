@@ -11,7 +11,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 11.08.2016.
  */
-public class DeviceDiscovery {
+class DeviceDiscovery {
     private  final DeviceDiscoveryCallback mCallback;
     private final NsdManager mNsdManager;
     private Enigma2DiscoveryListener mEnigma2DiscoveryListener;
@@ -20,10 +20,6 @@ public class DeviceDiscovery {
     public DeviceDiscovery(DeviceDiscoveryCallback callback, Context context) {
         mCallback = callback;
         mNsdManager = (NsdManager) context.getSystemService(Context.NSD_SERVICE);
-    }
-
-    public void initializeDiscoveryListener() {
-        mEnigma2DiscoveryListener = new Enigma2DiscoveryListener(this, mNsdManager);
     }
 
     public void startDiscovery() {
@@ -40,8 +36,8 @@ public class DeviceDiscovery {
             try {
                 mNsdManager.stopServiceDiscovery(mEnigma2DiscoveryListener);
             } finally {
+                mEnigma2DiscoveryListener = null;
             }
-            mEnigma2DiscoveryListener = null;
         }
         mDevices.clear();
     }
@@ -63,5 +59,9 @@ public class DeviceDiscovery {
 
     public ArrayList<Device> getDevices() {
         return mDevices;
+    }
+
+    private void initializeDiscoveryListener() {
+        mEnigma2DiscoveryListener = new Enigma2DiscoveryListener(this, mNsdManager);
     }
 }

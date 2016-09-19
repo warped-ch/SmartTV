@@ -7,7 +7,7 @@ import java.net.InetAddress;
 /**
  * Created by Andreas Wiedmer on 15.09.2016.
  */
-public class Device {
+class Device {
 
     private final ReceiverClient.EReceiverType mReceiverType;
     private final NsdServiceInfo mServiceInfo;

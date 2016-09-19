@@ -180,7 +180,7 @@ public class ChannelListFragment extends Fragment implements
 
         outState.putParcelableArrayList(STATE_CHANNELS, mAdapter.getChannels());
 
-        if(mLayoutManager != null && mLayoutManager instanceof LinearLayoutManager && mRecyclerView != null){
+        if(mLayoutManager != null && mRecyclerView != null){
             int positionIndex = mLayoutManager.findFirstVisibleItemPosition();
             View view = mRecyclerView.getChildAt(positionIndex);
             int positionOffset = (view != null) ? (view.getTop() - mRecyclerView.getPaddingTop()) : 0;

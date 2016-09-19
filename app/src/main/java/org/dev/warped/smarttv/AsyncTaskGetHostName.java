@@ -9,7 +9,7 @@ import timber.log.Timber;
 /**
  * Created by Andreas Wiedmer on 15.09.2016.
  */
-public class AsyncTaskGetHostName extends AsyncTask<InetAddress, Void, String> {
+class AsyncTaskGetHostName extends AsyncTask<InetAddress, Void, String> {
 
     private AsyncResponseDelegateHostName mDelegate;
 

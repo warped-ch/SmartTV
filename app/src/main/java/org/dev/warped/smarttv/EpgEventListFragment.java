@@ -178,7 +178,7 @@ public class EpgEventListFragment extends Fragment implements
 
         outState.putParcelableArrayList(STATE_EPGEVENTS, mAdapter.getEpgEvents());
 
-        if(mLayoutManager != null && mLayoutManager instanceof LinearLayoutManager && mRecyclerView != null){
+        if(mLayoutManager != null && mRecyclerView != null){
             int positionIndex = mLayoutManager.findFirstVisibleItemPosition();
             View view = mRecyclerView.getChildAt(positionIndex);
             int positionOffset = (view != null) ? (view.getTop() - mRecyclerView.getPaddingTop()) : 0;

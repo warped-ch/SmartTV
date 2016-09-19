@@ -28,8 +28,6 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     private DeviceDiscovery mDeviceDiscovery;
     private OnDeviceListFragmentInteractionListener mListener;
     private DeviceListAdapter mAdapter;
-    private LinearLayoutManager mLayoutManager;
-    private RecyclerView mRecyclerView;
 
     public DeviceListFragment() {
         // Required empty public constructor
@@ -65,11 +63,11 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
             }
         });
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDevices);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(view.getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDevices);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
 
         return view;
     }

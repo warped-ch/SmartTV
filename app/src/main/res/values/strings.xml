@@ -8,6 +8,7 @@
     <string name="channel">Channel</string>
     <string name="close">Close</string>
     <string name="description">Description</string>
+    <string name="device">Device</string>
     <string name="devices">Devices</string>
     <string name="device_name">Device name</string>
     <string name="epg_events">EPG events</string>

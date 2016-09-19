@@ -15,6 +15,7 @@
         android:layout_height="48dp"
         android:id="@+id/imageView"
         app:srcCompat="@drawable/ic_tv"
+        android:contentDescription="@string/device"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp" />
 
