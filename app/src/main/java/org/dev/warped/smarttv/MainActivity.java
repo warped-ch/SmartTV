@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         DeviceListFragment.OnDeviceListFragmentInteractionListener,
         EpgEventListFragment.OnEpgEventListFragmentInteractionListener {
 
+    private ActionBar mActionBar;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -53,14 +54,7 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (null != actionBar) {
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        } else {
-            Timber.e("onCreate: getSupportActionBar returned null.");
-        }
-
+        mActionBar = getSupportActionBar();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -80,6 +74,8 @@ public class MainActivity extends AppCompatActivity
 
         if (null == savedInstanceState) {
             createInitialFragment(mNavigationView);
+        } else {
+            updateDrawerIndicator();
         }
     }
 
@@ -222,11 +218,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setActionBarTitle(String title) {
-        ActionBar actionBar = getSupportActionBar();
-        if (null != actionBar) {
-            actionBar.setTitle(title);
+        if (null != mActionBar) {
+            mActionBar.setTitle(title);
         } else {
-            Timber.e("setActionBarTitle: getSupportActionBar returned null.");
+            Timber.e("setActionBarTitle: mActionBar is null.");
         }
     }
 
@@ -281,13 +276,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void updateDrawerIndicator() {
-        BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(BouquetListFragment.class.getName());
-        if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
-            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-            mDrawerToggle.setDrawerIndicatorEnabled(true);
+        // Note: the order in which views are enabled and disabled is important.
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            if (!(getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName().equals(DeviceListFragment.class.getName()))) {
+                // Show home as up navigation
+                mDrawerToggle.setDrawerIndicatorEnabled(false);
+                mActionBar.setDisplayHomeAsUpEnabled(true);
+            }
         } else {
-            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-            mDrawerToggle.setDrawerIndicatorEnabled(false);
+            // Show navigation drawer toggle
+            mActionBar.setDisplayHomeAsUpEnabled(false);
+            mDrawerToggle.setDrawerIndicatorEnabled(true);
         }
     }
 
