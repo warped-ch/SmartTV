@@ -35,6 +35,7 @@ class ReceiverClient {
     private final Bus mBus;
     // TODO handle multiple clients
     private Enigma2Client mEnigma2Client;
+
     public ReceiverClient(Bus bus, EReceiverType type, String address) {
         mBus = bus;
 
