@@ -69,8 +69,12 @@ public class MainApplication extends Application implements SharedPreferences.On
         String receiverAddress = SharedPreferencesManager.getReceiverAddress(sharedPreferences);
         if (null != receiverType && null != receiverAddress && !receiverAddress.isEmpty()) {
             Timber.d("createReceiverClient: receiverType=%s, receiverAddress=%s", receiverType, receiverAddress);
-            mReceiverClient = new ReceiverClient(mBus, receiverType, receiverAddress);
-            BusProvider.getBus().register(mReceiverClient);
+            try {
+                mReceiverClient = new ReceiverClient(mBus, receiverType, receiverAddress);
+                BusProvider.getBus().register(mReceiverClient);
+            } catch (IllegalArgumentException e) {
+                Timber.w("createReceiverClient: IllegalArgumentException caught.");
+            }
         }
     }
 }
