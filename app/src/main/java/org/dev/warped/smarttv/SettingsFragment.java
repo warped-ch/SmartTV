@@ -4,11 +4,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import timber.log.Timber;
 
@@ -20,10 +24,10 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     // Accurate regex to check for an IPv4 address:
     // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
-    private static final String RegEx_Matches_IPv4Address = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
-    // Accurate regex to check for an IPv6 address:s
+    private static final Pattern RegEx_Matches_IPv4Address = Pattern.compile("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+    // Accurate regex to check for an IPv6 address:
     // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s17.html
-    private static final String RegEx_Matches_IPv6Address = "^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$";
+    private static final Pattern RegEx_Matches_IPv6Address = Pattern.compile("^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$");
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -35,6 +39,20 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
+
+        Preference prefReceiverAddress = findPreference(SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS);
+        prefReceiverAddress.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                // check for valid IPv4 or IPv6 address, deny change otherwise
+                if(isValidIPAddress(newValue.toString())) {
+                    return true;
+                } else {
+                    SnackBarFactory.showSnackBar(SettingsFragment.this, R.string.snackbar_invalid_ip_address);
+                    return false;
+                }
+            }
+        });
 
         setHasOptionsMenu(true);
 
@@ -78,8 +96,13 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        // TODO, anwi: check for valid IPv4, IPv6 or hostname and deny otherwise?
         setPreferenceSummary(key);
+    }
+
+    private boolean isValidIPAddress(String string) {
+        Matcher matcherIPv4 = RegEx_Matches_IPv4Address.matcher(string);
+        Matcher matcherIPv6 = RegEx_Matches_IPv6Address.matcher(string);
+        return (matcherIPv4.matches() || matcherIPv6.matches());
     }
 
     private void setPreferenceSummary(String key) {

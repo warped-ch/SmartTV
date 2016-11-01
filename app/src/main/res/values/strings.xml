@@ -37,6 +37,7 @@
     <string name="snackbar_load_channels_failed">Loading channels failed.</string>
     <string name="snackbar_load_epg_events_failed">Loading EPG events failed.</string>
     <string name="snackbar_please_define_settings">Please define settings.</string>
+    <string name="snackbar_invalid_ip_address">Invalid IP address.</string>
     <string name="snackbar_zap_failed">Zap failed.</string>
 
     <!-- Package names -->
