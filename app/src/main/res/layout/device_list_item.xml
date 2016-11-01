@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/selectableItemBackground"
-    android:focusable="true"
     android:clickable="true"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp">
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:id="@+id/imageView"
-        app:srcCompat="@drawable/ic_tv"
-        android:contentDescription="@string/device"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/device"
+        app:srcCompat="@drawable/ic_tv" />
 
     <TextView
+        android:id="@+id/textViewDeviceTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="@string/device_name"
-        android:id="@+id/textViewDeviceTitle"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView"
-        android:layout_alignTop="@+id/imageView"
         android:layout_alignBottom="@+id/imageView"
-        android:gravity="center" />
+        android:layout_alignTop="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        android:gravity="center"
+        android:text="@string/device_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 </RelativeLayout>

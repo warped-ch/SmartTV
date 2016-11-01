@@ -1,103 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewEpgEventTitle"
-        android:text="@string/event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/text_margin" />
+        android:layout_margin="@dimen/text_margin"
+        android:text="@string/event"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <LinearLayout
         android:id="@+id/linearLayoutAdditionalContent"
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewEpgEventTitle"
-        android:layout_alignParentTop="false"
         android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/textViewEpgEventTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="6dp">
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/imageButtonTrailer"
-            android:text="@string/trailer"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:srcCompat="@drawable/ic_movie"
-            android:clickable="true" />
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            android:text="@string/trailer"
+            app:srcCompat="@drawable/ic_movie" />
 
         <TextView
             android:id="@+id/textViewIMDbLink"
-            android:text="@string/imdb"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:gravity="center_vertical"
-            android:textColor="@color/image_button_state_list"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"/>
+            android:gravity="center_vertical"
+            android:text="@string/imdb"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/image_button_state_list" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/textViewEpgEventStartTime"
-        android:text="HH:MM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/linearLayoutAdditionalContent"
         android:layout_alignLeft="@+id/textViewEpgEventTitle"
-        android:layout_alignStart="@+id/textViewEpgEventTitle"/>
+        android:layout_alignStart="@+id/textViewEpgEventTitle"
+        android:layout_below="@+id/linearLayoutAdditionalContent"
+        android:layout_centerHorizontal="true"
+        android:text="HH:MM"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
     <TextView
         android:id="@+id/textViewEpgEventEndTime"
-        android:text="HH:MM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/linearLayoutAdditionalContent"
+        android:layout_alignEnd="@+id/textViewEpgEventTitle"
         android:layout_alignRight="@+id/textViewEpgEventTitle"
-        android:layout_alignEnd="@+id/textViewEpgEventTitle"/>
+        android:layout_below="@+id/linearLayoutAdditionalContent"
+        android:layout_centerHorizontal="true"
+        android:text="HH:MM"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
     <ProgressBar
+        android:id="@+id/progressBarEpgEventDuration"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBarEpgEventDuration"
-        android:progressTint="@color/accent"
-        android:layout_alignLeft="@+id/textViewEpgEventStartTime"
-        android:layout_alignStart="@+id/textViewEpgEventStartTime"
-        android:layout_alignRight="@+id/textViewEpgEventEndTime"
         android:layout_alignEnd="@+id/textViewEpgEventEndTime"
-        android:layout_below="@+id/textViewEpgEventStartTime" />
+        android:layout_alignLeft="@+id/textViewEpgEventStartTime"
+        android:layout_alignRight="@+id/textViewEpgEventEndTime"
+        android:layout_alignStart="@+id/textViewEpgEventStartTime"
+        android:layout_below="@+id/textViewEpgEventStartTime"
+        android:progressTint="@color/accent" />
 
     <TextView
         android:id="@+id/textViewEpgEventDescription"
-        android:text="@string/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/progressBarEpgEventDuration"
-        android:layout_alignLeft="@+id/textViewEpgEventTitle"
-        android:layout_alignStart="@+id/textViewEpgEventTitle"
-        android:layout_alignRight="@+id/textViewEpgEventTitle"
         android:layout_alignEnd="@+id/textViewEpgEventTitle"
+        android:layout_alignLeft="@+id/textViewEpgEventTitle"
+        android:layout_alignRight="@+id/textViewEpgEventTitle"
+        android:layout_alignStart="@+id/textViewEpgEventTitle"
+        android:layout_below="@+id/progressBarEpgEventDuration"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/text_margin"
-        android:layout_marginTop="@dimen/text_margin" />
+        android:layout_marginTop="@dimen/text_margin"
+        android:text="@string/description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 </RelativeLayout>

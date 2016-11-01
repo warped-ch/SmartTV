@@ -2,15 +2,15 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragmentChannelList"
+    android:name="org.dev.warped.smarttv.ChannelListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="org.dev.warped.smarttv.ChannelListFragment"
     tools:context="org.dev.warped.smarttv.ChannelListFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeRefreshChannelList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
