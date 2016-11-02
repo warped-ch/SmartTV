@@ -18,6 +18,8 @@
     <string name="event_next">Event next</string>
     <string name="hostname_or_ip">Hostname or IP</string>
     <string name="imdb">IMDb</string>
+    <string name="next">Next</string>
+    <string name="now">Now</string>
     <string name="picon">Picon</string>
     <string name="receiver">Receiver</string>
     <string name="receiver_type">Receiver type</string>
