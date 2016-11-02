@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 /**
  * Created by Andreas Wiedmer on 29.06.2016.
  */
-public interface ApiServiceEnigma2 {
+interface ApiServiceEnigma2 {
     @GET("web/about")
     Call<E2Abouts> getAbouts();
 
@@ -29,6 +29,9 @@ public interface ApiServiceEnigma2 {
 
     @GET("web/epgnow")
     Call<E2EventList> getEpgNow(@Query("bRef") String bRef);
+
+    @GET("web/epgnownext")
+    Call<E2EventList> getEpgNowNext(@Query("bRef") String bRef);
 
     @GET("web/epgservice")
     Call<E2EventList> getEpgService(@Query("sRef") String sRef);

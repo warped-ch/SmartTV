@@ -14,6 +14,8 @@
     <string name="epg_events">EPG events</string>
     <string name="empty">Empty</string>
     <string name="event">Event</string>
+    <string name="event_now">Event now</string>
+    <string name="event_next">Event next</string>
     <string name="hostname_or_ip">Hostname or IP</string>
     <string name="imdb">IMDb</string>
     <string name="picon">Picon</string>

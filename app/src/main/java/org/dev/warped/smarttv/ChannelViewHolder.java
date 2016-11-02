@@ -18,13 +18,13 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
     private final ImageView mImageViewPicon;
     private final TextView mTextViewChannelName;
     private final AppCompatImageButton mImageButtonZap;
-    private final TextView mTextViewEpgEventTitle;
+    private final TextView mTextViewEpgEventNowTitle;
     private final AppCompatImageButton mImageButtonTrailer;
     private final TextView mTextViewIMDbLink;
     private final TextView mTextViewEpgEventStartTime;
     private final TextView mTextViewEpgEventEndTime;
     private final ProgressBar mProgressBarEpgEventDuration;
-    private final TextView mTextViewEpgEventDescription;
+    private final TextView mTextViewEpgEventNextTitle;
 
     private Channel mChannel;
 
@@ -41,14 +41,14 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
         mImageButtonZap = (AppCompatImageButton) v.findViewById(R.id.imageButtonZap);
         VectorDrawableSupport.setTintList(mImageButtonZap, R.color.image_button_state_list);
         mImageButtonZap.setOnClickListener(this);
-        mTextViewEpgEventTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
+        mTextViewEpgEventNowTitle = (TextView) v.findViewById(R.id.textViewEpgEventNowTitle);
         mImageButtonTrailer = (AppCompatImageButton) v.findViewById(R.id.imageButtonTrailer);
         VectorDrawableSupport.setTintList(mImageButtonTrailer, R.color.image_button_state_list);
         mTextViewIMDbLink = (TextView) v.findViewById(R.id.textViewIMDbLink);
         mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
         mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);
         mProgressBarEpgEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEpgEventDuration);
-        mTextViewEpgEventDescription = (TextView) v.findViewById(R.id.textViewEpgEventDescription);
+        mTextViewEpgEventNextTitle = (TextView) v.findViewById(R.id.textViewEpgEventNextTitle);
     }
 
     public void bindChannel(Channel channel) {
@@ -56,15 +56,16 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
 
         mImageViewPicon.setImageResource(PiconManager.getPiconResourceId(channel.getName()));
         mTextViewChannelName.setText(channel.getName());
+
         if (!channel.getEpgEvents().isEmpty()) {
-            EpgEvent epgEvent = channel.getEpgEvents().get(0);
-            mTextViewEpgEventTitle.setText(epgEvent.getTitle());
-            if (epgEvent.getDescriptionExtended().toLowerCase().contains("imdb")) {
+            EpgEvent epgEventNow = channel.getEpgEvents().get(0);
+            mTextViewEpgEventNowTitle.setText(epgEventNow.getTitle());
+            if (epgEventNow.getDescriptionExtended().toLowerCase().contains("imdb")) {
                 mImageButtonTrailer.setEnabled(true);
                 mImageButtonTrailer.setOnClickListener(this);
 
                 mTextViewIMDbLink.setEnabled(true);
-                mTextViewIMDbLink.setText(RegExParser.getIMDbRating(epgEvent.getDescriptionExtended(), mTextViewIMDbLink.getResources().getString(R.string.imdb)));
+                mTextViewIMDbLink.setText(RegExParser.getIMDbRating(epgEventNow.getDescriptionExtended(), mTextViewIMDbLink.getResources().getString(R.string.imdb)));
                 mTextViewIMDbLink.setOnClickListener(this);
             } else {
                 mImageButtonTrailer.setEnabled(false);
@@ -72,12 +73,18 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
                 mTextViewIMDbLink.setEnabled(false);
                 mTextViewIMDbLink.setText(mTextViewIMDbLink.getResources().getString(R.string.imdb));
             }
-            mTextViewEpgEventStartTime.setText(epgEvent.getStartTime());
-            mTextViewEpgEventEndTime.setText(epgEvent.getEndTime());
-            mProgressBarEpgEventDuration.setProgress(epgEvent.calcProgress());
-            mTextViewEpgEventDescription.setText(epgEvent.getDescriptionExtended());
+            mTextViewEpgEventStartTime.setText(epgEventNow.getStartTime());
+            mTextViewEpgEventEndTime.setText(epgEventNow.getEndTime());
+            mProgressBarEpgEventDuration.setProgress(epgEventNow.calcProgress());
         } else {
-            Timber.d("bindChannel: epg event list for channel \"%s\" is empty.", channel.getName());
+            Timber.d("bindChannel: epg event now for channel \"%s\" is not available.", channel.getName());
+        }
+
+        if (channel.getEpgEvents().size() >= 2) {
+            EpgEvent epgEventNext = channel.getEpgEvents().get(1);
+            mTextViewEpgEventNextTitle.setText(epgEventNext.getTitle());
+        } else {
+            Timber.d("bindChannel: epg event next for channel \"%s\" is not available.", channel.getName());
         }
     }
 
