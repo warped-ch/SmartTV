@@ -54,11 +54,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:layout_marginLeft="@dimen/text_margin"
-                android:layout_marginRight="@dimen/text_margin"
-                android:layout_marginStart="@dimen/text_margin"
-                android:layout_marginTop="@dimen/text_margin"
+                android:layout_margin="@dimen/text_margin"
                 android:adjustViewBounds="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
@@ -80,18 +76,9 @@
                 android:paddingStart="@dimen/text_margin">
 
                 <TextView
-                    android:id="@+id/textViewNow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/now"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                <TextView
                     android:id="@+id/textViewEpgEventNowTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textViewNow"
                     android:layout_centerHorizontal="true"
                     android:text="@string/event_now"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -176,7 +163,7 @@
                     android:layout_centerHorizontal="true"
                     android:paddingTop="@dimen/text_margin"
                     android:text="@string/next"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <TextView
                     android:id="@+id/textViewEpgEventNextTitle"
@@ -185,7 +172,7 @@
                     android:layout_below="@+id/textViewNext"
                     android:layout_centerHorizontal="true"
                     android:text="@string/event_next"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </RelativeLayout>
 
