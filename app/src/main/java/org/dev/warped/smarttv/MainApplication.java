@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatDelegate;
 
 import com.squareup.otto.Bus;
 
+import org.dev.warped.smarttv.events.ReceiverClientChangedEvent;
+
 import timber.log.Timber;
 
 /**
@@ -54,6 +56,7 @@ public class MainApplication extends Application implements SharedPreferences.On
             case SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE:
             case SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS:
                 createReceiverClient();
+                BusProvider.getBus().post(new ReceiverClientChangedEvent());
                 break;
         }
     }

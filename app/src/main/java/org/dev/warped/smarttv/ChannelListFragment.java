@@ -17,6 +17,7 @@ import com.squareup.otto.Subscribe;
 import org.dev.warped.smarttv.events.LoadEpgNowNextEvent;
 import org.dev.warped.smarttv.events.LoadEpgNowNextEventDone;
 import org.dev.warped.smarttv.events.LoadEpgNowNextEventError;
+import org.dev.warped.smarttv.events.ReceiverClientChangedEvent;
 import org.dev.warped.smarttv.events.ZapEvent;
 import org.dev.warped.smarttv.events.ZapEventDone;
 import org.dev.warped.smarttv.events.ZapEventError;
@@ -231,6 +232,11 @@ public class ChannelListFragment extends Fragment implements
     public void onLoadEpgNowNextEventError(LoadEpgNowNextEventError event) {
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_channels_failed);
+    }
+
+    @Subscribe
+    public void onReceiverClientChangedEvent(ReceiverClientChangedEvent event) {
+        onRefresh();
     }
 
     @Subscribe

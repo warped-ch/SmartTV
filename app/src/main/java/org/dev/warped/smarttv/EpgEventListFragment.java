@@ -17,6 +17,7 @@ import com.squareup.otto.Subscribe;
 import org.dev.warped.smarttv.events.LoadEpgEventsEvent;
 import org.dev.warped.smarttv.events.LoadEpgEventsEventDone;
 import org.dev.warped.smarttv.events.LoadEpgEventsEventError;
+import org.dev.warped.smarttv.events.ReceiverClientChangedEvent;
 
 import java.util.ArrayList;
 
@@ -208,6 +209,11 @@ public class EpgEventListFragment extends Fragment implements
     public void onLoadEpgEventsEventError(LoadEpgEventsEventError event) {
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_epg_events_failed);
+    }
+
+    @Subscribe
+    public void onReceiverClientChangedEvent(ReceiverClientChangedEvent event) {
+        onRefresh();
     }
 
     /**
