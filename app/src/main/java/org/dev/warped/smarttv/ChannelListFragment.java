@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 
 import com.squareup.otto.Subscribe;
 
-import org.dev.warped.smarttv.events.LoadEpgNowEvent;
-import org.dev.warped.smarttv.events.LoadEpgNowEventDone;
-import org.dev.warped.smarttv.events.LoadEpgNowEventError;
+import org.dev.warped.smarttv.events.LoadEpgNowNextEvent;
+import org.dev.warped.smarttv.events.LoadEpgNowNextEventDone;
+import org.dev.warped.smarttv.events.LoadEpgNowNextEventError;
 import org.dev.warped.smarttv.events.ZapEvent;
 import org.dev.warped.smarttv.events.ZapEventDone;
 import org.dev.warped.smarttv.events.ZapEventError;
@@ -170,7 +170,7 @@ public class ChannelListFragment extends Fragment implements
 
     @Override
     public void onRefresh() {
-        BusProvider.getBus().post(new LoadEpgNowEvent(mBouquet));
+        BusProvider.getBus().post(new LoadEpgNowNextEvent(mBouquet));
     }
 
     @Override
@@ -222,13 +222,13 @@ public class ChannelListFragment extends Fragment implements
     }
 
     @Subscribe
-    public void onLoadEpgNowEventDone(LoadEpgNowEventDone event) {
+    public void onLoadEpgNowNextEventDone(LoadEpgNowNextEventDone event) {
         mAdapter.setChannels(event.getChannels());
         mSwipeRefresh.setRefreshing(false);
     }
 
     @Subscribe
-    public void onLoadEpgNowEventError(LoadEpgNowEventError event) {
+    public void onLoadEpgNowNextEventError(LoadEpgNowNextEventError event) {
         mSwipeRefresh.setRefreshing(false);
         SnackBarFactory.showSnackBar(this, R.string.snackbar_load_channels_failed);
     }

@@ -15,6 +15,9 @@ import org.dev.warped.smarttv.events.LoadEpgEventsEventError;
 import org.dev.warped.smarttv.events.LoadEpgNowEvent;
 import org.dev.warped.smarttv.events.LoadEpgNowEventDone;
 import org.dev.warped.smarttv.events.LoadEpgNowEventError;
+import org.dev.warped.smarttv.events.LoadEpgNowNextEvent;
+import org.dev.warped.smarttv.events.LoadEpgNowNextEventDone;
+import org.dev.warped.smarttv.events.LoadEpgNowNextEventError;
 import org.dev.warped.smarttv.events.ZapEvent;
 import org.dev.warped.smarttv.events.ZapEventDone;
 import org.dev.warped.smarttv.events.ZapEventError;
@@ -120,6 +123,29 @@ class ReceiverClient {
             public void onFailure(Call<E2EventList> call, Throwable t) {
                 Timber.w("onLoadEpgNowEvent: onFailure: something went wrong.");
                 mBus.post(new LoadEpgNowEventError(t));
+            }
+        });
+    }
+
+    @Subscribe
+    public void onLoadEpgNowNextEvent(LoadEpgNowNextEvent event) {
+        final Call<E2EventList> call = mEnigma2Client.getApiService().getEpgNowNext(event.getBouquet().getReference());
+        call.enqueue(new Callback<E2EventList>() {
+            @Override
+            public void onResponse(Call<E2EventList> call, Response<E2EventList> response) {
+                if (null != response.body()) {
+                    Timber.d("onLoadEpgNowNextEvent: onResponse: \"%s\".", response.body());
+                    mBus.post(new LoadEpgNowNextEventDone(response.body().getEventList()));
+                } else {
+                    Timber.w("onLoadEpgNowNextEvent: onResponse: response body is null.");
+                    mBus.post(new LoadEpgNowNextEventError(new NullPointerException()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<E2EventList> call, Throwable t) {
+                Timber.w("onLoadEpgNowNextEvent: onFailure: something went wrong.");
+                mBus.post(new LoadEpgNowNextEventError(t));
             }
         });
     }

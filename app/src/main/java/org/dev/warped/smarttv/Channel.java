@@ -40,6 +40,17 @@ public class Channel implements Parcelable {
         mEpgEvents.add(new EpgEvent(e2Event));
     }
 
+    public Channel(List<E2Event> e2Events) {
+        // TODO: validate that all the E2Event have the same event service reference?
+        E2Event e2Event = e2Events.get(0);
+        mName = e2Event.getEventServiceName();
+        mReference = e2Event.getEventServiceReference();
+        mEpgEvents = new ArrayList<>();
+        for (E2Event e : e2Events) {
+            mEpgEvents.add(new EpgEvent(e));
+        }
+    }
+
     private Channel(Parcel in) {
         mName = in.readString();
         mReference = in.readString();
