@@ -14,13 +14,13 @@ import timber.log.Timber;
 public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final OnEpgEventClickedListener mListener;
-    private final TextView mTextViewEpgEventTitle;
+    private final TextView mTextViewEpgEventNowTitle;
     private final AppCompatImageButton mImageButtonTrailer;
     private final TextView mTextViewIMDbLink;
     private final TextView mTextViewEpgEventStartTime;
     private final TextView mTextViewEpgEventEndTime;
     private final ProgressBar mProgressBarEpgEventDuration;
-    private final TextView mTextViewEpgEventDescription;
+    private final TextView mTextViewEpgEventNowDescription;
 
     private EpgEvent mEpgEvent;
 
@@ -32,20 +32,20 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         // Define click listener for the ViewHolder's View.
         v.setOnClickListener(this);
 
-        mTextViewEpgEventTitle = (TextView) v.findViewById(R.id.textViewEpgEventTitle);
+        mTextViewEpgEventNowTitle = (TextView) v.findViewById(R.id.textViewEpgEventNowTitle);
         mImageButtonTrailer = (AppCompatImageButton) v.findViewById(R.id.imageButtonTrailer);
         VectorDrawableSupport.setTintList(mImageButtonTrailer, R.color.image_button_state_list);
         mTextViewIMDbLink = (TextView) v.findViewById(R.id.textViewIMDbLink);
         mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
         mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);
         mProgressBarEpgEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEpgEventDuration);
-        mTextViewEpgEventDescription = (TextView) v.findViewById(R.id.textViewEpgEventDescription);
+        mTextViewEpgEventNowDescription = (TextView) v.findViewById(R.id.textViewEpgEventNowDescription);
     }
 
     public void bindEpgEvent(EpgEvent epgEvent) {
         mEpgEvent = epgEvent;
 
-        mTextViewEpgEventTitle.setText(epgEvent.getTitle());
+        mTextViewEpgEventNowTitle.setText(epgEvent.getTitle());
         if (epgEvent.getDescriptionExtended().toLowerCase().contains("imdb")) {
             mImageButtonTrailer.setEnabled(true);
             mImageButtonTrailer.setOnClickListener(this);
@@ -62,7 +62,7 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         mTextViewEpgEventStartTime.setText(epgEvent.getStartTime());
         mTextViewEpgEventEndTime.setText(epgEvent.getEndTime());
         mProgressBarEpgEventDuration.setProgress(epgEvent.calcProgress());
-        mTextViewEpgEventDescription.setText(epgEvent.getDescriptionExtended());
+        mTextViewEpgEventNowDescription.setText(epgEvent.getDescriptionExtended());
     }
 
     @Override

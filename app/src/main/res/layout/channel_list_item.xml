@@ -83,83 +83,18 @@
                     android:text="@string/event_now"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayoutAdditionalContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="false"
-                    android:layout_alignParentTop="false"
-                    android:layout_below="@+id/textViewEpgEventNowTitle"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="6dp"
-                    android:layout_marginTop="6dp"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.AppCompatImageButton
-                        android:id="@+id/imageButtonTrailer"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:adjustViewBounds="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:scaleType="fitCenter"
-                        android:text="@string/trailer"
-                        app:srcCompat="@drawable/ic_movie" />
-
-                    <TextView
-                        android:id="@+id/textViewIMDbLink"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginStart="32dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:gravity="center_vertical"
-                        android:text="@string/imdb"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/image_button_state_list" />
-
-                </LinearLayout>
-
-                <ProgressBar
-                    android:id="@+id/progressBarEpgEventDuration"
-                    style="?android:attr/progressBarStyleHorizontal"
+                <include
+                    android:id="@+id/includeEPGInfoItems"
+                    layout="@layout/epg_info_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/textViewEpgEventEndTime"
-                    android:layout_alignLeft="@+id/textViewEpgEventStartTime"
-                    android:layout_alignRight="@+id/textViewEpgEventEndTime"
-                    android:layout_alignStart="@+id/textViewEpgEventStartTime"
-                    android:layout_below="@id/linearLayoutAdditionalContent"
-                    android:progressTint="@color/accent" />
-
-                <TextView
-                    android:id="@+id/textViewEpgEventStartTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@id/progressBarEpgEventDuration"
-                    android:layout_alignLeft="@+id/textViewEpgEventNowTitle"
-                    android:layout_alignStart="@+id/textViewEpgEventNowTitle"
-                    android:layout_centerHorizontal="true"
-                    android:text="HH:MM"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-                <TextView
-                    android:id="@+id/textViewEpgEventEndTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@id/progressBarEpgEventDuration"
-                    android:layout_alignEnd="@+id/textViewEpgEventNowTitle"
-                    android:layout_alignRight="@+id/textViewEpgEventNowTitle"
-                    android:layout_centerHorizontal="true"
-                    android:text="HH:MM"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                    android:layout_below="@+id/textViewEpgEventNowTitle" />
 
                 <TextView
                     android:id="@+id/textViewNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/progressBarEpgEventDuration"
+                    android:layout_below="@+id/includeEPGInfoItems"
                     android:layout_centerHorizontal="true"
                     android:paddingTop="@dimen/text_margin"
                     android:text="@string/next"
