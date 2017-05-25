@@ -45,7 +45,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 // check for valid IPv4 or IPv6 address, deny change otherwise
-                if(isValidIPAddress(newValue.toString())) {
+                if (isValidIPAddress(newValue.toString())) {
                     return true;
                 } else {
                     SnackBarFactory.showSnackBar(SettingsFragment.this, R.string.snackbar_invalid_ip_address);
