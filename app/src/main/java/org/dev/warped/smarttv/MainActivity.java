@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity
 
     private ActionBar mActionBar;
     private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
 
     @Override
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         mActionBar = getSupportActionBar();
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
