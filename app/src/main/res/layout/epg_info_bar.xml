@@ -24,7 +24,8 @@
             android:clickable="true"
             android:scaleType="fitCenter"
             android:text="@string/trailer"
-            app:srcCompat="@drawable/ic_movie" />
+            app:srcCompat="@drawable/ic_movie"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/textViewIMDbLink"
@@ -37,7 +38,8 @@
             android:gravity="center_vertical"
             android:text="@string/imdb"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/image_button_state_list" />
+            android:textColor="@color/image_button_state_list"
+            android:focusable="true" />
 
     </LinearLayout>
 
