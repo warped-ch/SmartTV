@@ -48,7 +48,7 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_device_list, container, false);
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.devices);
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.getMenu().findItem(R.id.action_refresh).setVisible(false);
@@ -65,13 +65,13 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
             }
         });
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDevices);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewDevices);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
 
-        mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        mProgressBar = view.findViewById(R.id.progressBar);
 
         return view;
     }

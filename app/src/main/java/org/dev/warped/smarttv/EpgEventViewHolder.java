@@ -29,14 +29,14 @@ public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.
         // Define click listener for the ViewHolder's View.
         v.setOnClickListener(this);
 
-        mTextViewEpgEventNowTitle = (TextView) v.findViewById(R.id.textViewEpgEventNowTitle);
-        mImageButtonTrailer = (AppCompatImageButton) v.findViewById(R.id.imageButtonTrailer);
+        mTextViewEpgEventNowTitle = v.findViewById(R.id.textViewEpgEventNowTitle);
+        mImageButtonTrailer = v.findViewById(R.id.imageButtonTrailer);
         VectorDrawableSupport.setTintList(mImageButtonTrailer, R.color.image_button_state_list);
-        mTextViewIMDbLink = (TextView) v.findViewById(R.id.textViewIMDbLink);
-        mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
-        mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);
-        mProgressBarEpgEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEpgEventDuration);
-        mTextViewEpgEventNowDescription = (TextView) v.findViewById(R.id.textViewEpgEventNowDescription);
+        mTextViewIMDbLink = v.findViewById(R.id.textViewIMDbLink);
+        mTextViewEpgEventStartTime = v.findViewById(R.id.textViewEpgEventStartTime);
+        mTextViewEpgEventEndTime = v.findViewById(R.id.textViewEpgEventEndTime);
+        mProgressBarEpgEventDuration = v.findViewById(R.id.progressBarEpgEventDuration);
+        mTextViewEpgEventNowDescription = v.findViewById(R.id.textViewEpgEventNowDescription);
     }
 
     public void bindEpgEvent(EpgEvent epgEvent) {

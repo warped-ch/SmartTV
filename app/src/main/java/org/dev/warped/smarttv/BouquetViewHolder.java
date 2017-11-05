@@ -23,7 +23,7 @@ public class BouquetViewHolder extends RecyclerView.ViewHolder implements View.O
         // Define click listener for the ViewHolder's View.
         v.setOnClickListener(this);
 
-        mTextViewTitle = (TextView) v.findViewById(R.id.textViewBouquetTitle);
+        mTextViewTitle = v.findViewById(R.id.textViewBouquetTitle);
     }
 
     public void bindBouquet(Bouquet bouquet) {

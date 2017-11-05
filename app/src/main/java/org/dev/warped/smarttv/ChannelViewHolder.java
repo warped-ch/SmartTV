@@ -33,19 +33,19 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.O
         // Define click listener for the ViewHolder's View.
         v.setOnClickListener(this);
 
-        mImageViewPicon = (ImageView) v.findViewById(R.id.imageViewPicon);
-        mTextViewChannelName = (TextView) v.findViewById(R.id.textViewChannelTitle);
-        mImageButtonZap = (AppCompatImageButton) v.findViewById(R.id.imageButtonZap);
+        mImageViewPicon = v.findViewById(R.id.imageViewPicon);
+        mTextViewChannelName = v.findViewById(R.id.textViewChannelTitle);
+        mImageButtonZap = v.findViewById(R.id.imageButtonZap);
         VectorDrawableSupport.setTintList(mImageButtonZap, R.color.image_button_state_list);
         mImageButtonZap.setOnClickListener(this);
-        mTextViewEpgEventNowTitle = (TextView) v.findViewById(R.id.textViewEpgEventNowTitle);
-        mImageButtonTrailer = (AppCompatImageButton) v.findViewById(R.id.imageButtonTrailer);
+        mTextViewEpgEventNowTitle = v.findViewById(R.id.textViewEpgEventNowTitle);
+        mImageButtonTrailer = v.findViewById(R.id.imageButtonTrailer);
         VectorDrawableSupport.setTintList(mImageButtonTrailer, R.color.image_button_state_list);
-        mTextViewIMDbLink = (TextView) v.findViewById(R.id.textViewIMDbLink);
-        mTextViewEpgEventStartTime = (TextView) v.findViewById(R.id.textViewEpgEventStartTime);
-        mTextViewEpgEventEndTime = (TextView) v.findViewById(R.id.textViewEpgEventEndTime);
-        mProgressBarEpgEventDuration = (ProgressBar) v.findViewById(R.id.progressBarEpgEventDuration);
-        mTextViewEpgEventNextTitle = (TextView) v.findViewById(R.id.textViewEpgEventNextTitle);
+        mTextViewIMDbLink = v.findViewById(R.id.textViewIMDbLink);
+        mTextViewEpgEventStartTime = v.findViewById(R.id.textViewEpgEventStartTime);
+        mTextViewEpgEventEndTime = v.findViewById(R.id.textViewEpgEventEndTime);
+        mProgressBarEpgEventDuration = v.findViewById(R.id.progressBarEpgEventDuration);
+        mTextViewEpgEventNextTitle = v.findViewById(R.id.textViewEpgEventNextTitle);
     }
 
     public void bindChannel(Channel channel) {

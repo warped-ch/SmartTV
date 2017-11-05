@@ -85,12 +85,12 @@ public class ChannelListFragment extends Fragment implements
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_channel_list, container, false);
 
-        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshChannelList);
+        mSwipeRefresh = view.findViewById(R.id.swipeRefreshChannelList);
         mSwipeRefresh.setColorSchemeResources(R.color.accent);
         mSwipeRefresh.setProgressBackgroundColorSchemeResource(R.color.grey900);
         mSwipeRefresh.setOnRefreshListener(this);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewChannelList);
+        mRecyclerView = view.findViewById(R.id.recyclerViewChannelList);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(view.getContext());
         if (savedInstanceState != null) {

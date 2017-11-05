@@ -83,12 +83,12 @@ public class EpgEventListFragment extends Fragment implements
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_epgevent_list, container, false);
 
-        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshEpgEventList);
+        mSwipeRefresh = view.findViewById(R.id.swipeRefreshEpgEventList);
         mSwipeRefresh.setColorSchemeResources(R.color.accent);
         mSwipeRefresh.setProgressBackgroundColorSchemeResource(R.color.grey900);
         mSwipeRefresh.setOnRefreshListener(this);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewEpgEventList);
+        mRecyclerView = view.findViewById(R.id.recyclerViewEpgEventList);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(view.getContext());
         if (savedInstanceState != null) {

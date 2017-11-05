@@ -21,7 +21,7 @@ public class DeviceViewHolder extends RecyclerView.ViewHolder implements View.On
         // Define click listener for the ViewHolder's View.
         v.setOnClickListener(this);
 
-        mTextViewTitle = (TextView) v.findViewById(R.id.textViewDeviceTitle);
+        mTextViewTitle = v.findViewById(R.id.textViewDeviceTitle);
     }
 
     public void bindDevice(Device device) {
