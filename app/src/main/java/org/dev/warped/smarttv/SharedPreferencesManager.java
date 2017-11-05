@@ -6,9 +6,6 @@ import java.net.InetAddress;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 22.06.2016.
- */
 class SharedPreferencesManager {
     public static final String PREF_KEY_RECEIVER_AUTO_DISCOVERY = "pref_key_receiver_auto_discovery";
     public static final String PREF_KEY_RECEIVER_TYPE = "pref_key_receiver_type";

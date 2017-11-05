@@ -9,9 +9,6 @@ import org.dev.warped.smarttv.model.E2Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Andreas Wiedmer on 05.07.2016.
- */
 public class Channel implements Parcelable {
 
     public static final Parcelable.Creator<Channel> CREATOR = new Parcelable.Creator<Channel>() {

@@ -11,9 +11,6 @@ import org.dev.warped.smarttv.events.ReceiverClientChangedEvent;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 20.07.2016.
- */
 public class MainApplication extends Application implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     static {

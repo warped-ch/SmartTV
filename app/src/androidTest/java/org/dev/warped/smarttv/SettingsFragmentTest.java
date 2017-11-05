@@ -33,9 +33,6 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by Andreas Wiedmer on 19.09.2016.
- */
 @RunWith(AndroidJUnit4.class)
 public class SettingsFragmentTest {
     @Rule

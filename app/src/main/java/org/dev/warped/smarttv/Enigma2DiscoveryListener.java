@@ -5,9 +5,6 @@ import android.net.nsd.NsdServiceInfo;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 11.08.2016.
- */
 class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
 
     private final DeviceDiscovery mDeviceDiscovery;

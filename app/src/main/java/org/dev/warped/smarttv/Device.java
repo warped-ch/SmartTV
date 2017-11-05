@@ -4,9 +4,6 @@ import android.net.nsd.NsdServiceInfo;
 
 import java.net.InetAddress;
 
-/**
- * Created by Andreas Wiedmer on 15.09.2016.
- */
 class Device {
 
     private final ReceiverClient.EReceiverType mReceiverType;

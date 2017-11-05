@@ -13,9 +13,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 11.08.2016.
- */
 public class Enigma2ResolveListener implements NsdManager.ResolveListener, AsyncTaskGetHostName.AsyncResponseDelegateHostName {
 
     private final DeviceDiscovery mDeviceDiscovery;

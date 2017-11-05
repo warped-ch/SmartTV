@@ -11,9 +11,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-/**
- * Created by Andreas Wiedmer on 29.06.2016.
- */
 interface ApiServiceEnigma2 {
     @GET("web/about")
     Call<E2Abouts> getAbouts();

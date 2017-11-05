@@ -7,9 +7,6 @@ import java.net.InetAddress;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 15.09.2016.
- */
 class AsyncTaskIsReachable extends AsyncTask<String, Void, Boolean> {
 
     private AsyncResponseDelegateReachable mDelegate;

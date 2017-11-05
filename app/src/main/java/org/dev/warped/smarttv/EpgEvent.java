@@ -9,9 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by Andreas Wiedmer on 07.07.2016.
- */
 public class EpgEvent implements Parcelable {
 
     public static final Parcelable.Creator<EpgEvent> CREATOR = new Parcelable.Creator<EpgEvent>() {

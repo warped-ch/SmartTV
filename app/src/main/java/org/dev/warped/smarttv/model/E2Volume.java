@@ -2,9 +2,6 @@ package org.dev.warped.smarttv.model;
 
 import org.simpleframework.xml.Element;
 
-/**
- * Created by Andreas Wiedmer on 29.08.2016.
- */
 public class E2Volume {
 
     @Element(name = "e2result")

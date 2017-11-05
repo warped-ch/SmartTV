@@ -6,9 +6,6 @@ import org.dev.warped.smarttv.model.E2Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Andreas Wiedmer on 20.07.2016.
- */
 public class LoadBouquetsEventDone {
 
     private final ArrayList<Bouquet> mBouquets;

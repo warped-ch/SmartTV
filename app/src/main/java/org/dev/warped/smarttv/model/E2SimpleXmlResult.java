@@ -3,9 +3,6 @@ package org.dev.warped.smarttv.model;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-/**
- * Created by Andreas Wiedmer on 12.07.2016.
- */
 @Root(name = "e2simplexmlresult")
 public class E2SimpleXmlResult {
 

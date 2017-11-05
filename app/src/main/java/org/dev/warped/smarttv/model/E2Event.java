@@ -7,9 +7,6 @@ import java.util.Date;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 07.07.2016.
- */
 @Root(name = "e2event")
 public class E2Event {
 

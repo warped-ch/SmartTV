@@ -31,9 +31,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 20.07.2016.
- */
 class ReceiverClient {
     private final Bus mBus;
     // TODO handle multiple clients

@@ -9,9 +9,6 @@ import java.util.ArrayList;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 15.09.2016.
- */
 class DeviceListAdapter extends RecyclerView.Adapter<DeviceViewHolder> {
 
     private final OnDeviceClickListener mListener;

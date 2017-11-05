@@ -5,9 +5,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-/**
- * Created by Andreas Wiedmer on 29.06.2016.
- */
 class Enigma2Client {
 
     private final ApiServiceEnigma2 mApiService;

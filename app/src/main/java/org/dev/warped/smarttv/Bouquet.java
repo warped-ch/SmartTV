@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import org.dev.warped.smarttv.model.E2Service;
 
-/**
- * Created by Andreas Wiedmer on 22.06.2016.
- */
 public class Bouquet implements Parcelable {
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

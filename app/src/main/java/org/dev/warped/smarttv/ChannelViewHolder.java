@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 05.07.2016.
- */
 public class ChannelViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final OnChannelClickedListener mListener;

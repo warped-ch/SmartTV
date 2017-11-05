@@ -3,9 +3,6 @@ package org.dev.warped.smarttv;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Andreas Wiedmer on 29.07.2016.
- */
 class RegExParser {
 
     private RegExParser() {

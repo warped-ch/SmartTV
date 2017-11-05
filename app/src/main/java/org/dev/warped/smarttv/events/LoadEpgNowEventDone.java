@@ -6,9 +6,6 @@ import org.dev.warped.smarttv.model.E2Event;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Andreas Wiedmer on 20.07.2016.
- */
 public class LoadEpgNowEventDone {
 
     private final ArrayList<Channel> mChannels;

@@ -1,8 +1,5 @@
 package org.dev.warped.smarttv;
 
-/**
- * Created by Andreas Wiedmer on 25.07.2016.
- */
 class ResourceUtil {
 
     private ResourceUtil() {

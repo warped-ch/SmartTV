@@ -5,9 +5,6 @@ import org.simpleframework.xml.Root;
 
 import java.util.List;
 
-/**
- * Created by Andreas Wiedmer on 29.06.2016.
- */
 @Root(name = "e2servicelist")
 public class E2ServiceList {
     @ElementList(inline = true)

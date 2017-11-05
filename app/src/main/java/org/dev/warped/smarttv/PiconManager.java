@@ -6,9 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Andreas Wiedmer on 05.07.2016.
- */
 class PiconManager {
 
     private static final Map<String, Integer> mPiconResourceIdHashMap;

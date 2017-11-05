@@ -9,9 +9,6 @@ import android.view.View;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 27.07.2016.
- */
 class IntentFactory {
 
     private IntentFactory() {

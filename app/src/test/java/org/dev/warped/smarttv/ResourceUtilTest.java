@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by Andreas Wiedmer on 25.07.2016.
- */
 public class ResourceUtilTest {
 
     @Test

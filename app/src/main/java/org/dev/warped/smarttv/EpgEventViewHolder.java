@@ -8,9 +8,6 @@ import android.widget.TextView;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 26.07.2016.
- */
 public class EpgEventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final OnEpgEventClickedListener mListener;

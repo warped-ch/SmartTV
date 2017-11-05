@@ -6,9 +6,6 @@ import android.widget.TextView;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 15.09.2016.
- */
 public class DeviceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final OnDeviceClickListener mListener;

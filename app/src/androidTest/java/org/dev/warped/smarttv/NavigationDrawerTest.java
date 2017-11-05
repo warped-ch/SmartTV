@@ -24,9 +24,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 
-/**
- * Created by Andreas Wiedmer on 19.09.2016.
- */
 @RunWith(AndroidJUnit4.class)
 public class NavigationDrawerTest {
 

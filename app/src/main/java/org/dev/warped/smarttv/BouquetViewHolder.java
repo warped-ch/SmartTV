@@ -8,9 +8,6 @@ import org.dev.warped.smarttv.BouquetListFragment.OnBouquetListFragmentInteracti
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 27.06.2016.
- */
 public class BouquetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final BouquetListFragment.OnBouquetListFragmentInteractionListener mListener;

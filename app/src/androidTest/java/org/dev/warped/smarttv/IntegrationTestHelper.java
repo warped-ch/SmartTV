@@ -11,9 +11,6 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-/**
- * Created by Andreas Wiedmer on 19.09.2016.
- */
 class IntegrationTestHelper {
 
     private IntegrationTestHelper() {

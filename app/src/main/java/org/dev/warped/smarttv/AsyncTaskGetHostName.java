@@ -6,9 +6,6 @@ import java.net.InetAddress;
 
 import timber.log.Timber;
 
-/**
- * Created by Andreas Wiedmer on 15.09.2016.
- */
 class AsyncTaskGetHostName extends AsyncTask<InetAddress, Void, String> {
 
     private AsyncResponseDelegateHostName mDelegate;
