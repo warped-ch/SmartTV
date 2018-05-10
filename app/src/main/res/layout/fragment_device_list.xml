@@ -34,7 +34,7 @@
         android:layout_below="@+id/progressBar"
         android:clickable="false"
         android:scrollbars="vertical"
-        app:layoutManager="LinearLayoutManager"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/device_list_item" />
 
 </RelativeLayout>
