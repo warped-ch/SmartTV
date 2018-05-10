@@ -58,10 +58,10 @@
                 android:adjustViewBounds="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:focusable="true"
                 android:scaleType="fitEnd"
                 android:text="@string/zap"
-                app:srcCompat="@drawable/ic_play_circle_filled"
-                android:focusable="true" />
+                app:srcCompat="@drawable/ic_play_circle_filled" />
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"

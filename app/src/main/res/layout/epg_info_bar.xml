@@ -22,10 +22,10 @@
             android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
+            android:focusable="true"
             android:scaleType="fitCenter"
             android:text="@string/trailer"
-            app:srcCompat="@drawable/ic_movie"
-            android:focusable="true" />
+            app:srcCompat="@drawable/ic_movie" />
 
         <TextView
             android:id="@+id/textViewIMDbLink"
@@ -35,11 +35,11 @@
             android:layout_marginStart="32dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical"
             android:text="@string/imdb"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/image_button_state_list"
-            android:focusable="true" />
+            android:textColor="@color/image_button_state_list" />
 
     </LinearLayout>
 
