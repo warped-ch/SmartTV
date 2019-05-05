@@ -3,11 +3,12 @@ package org.dev.warped.smarttv;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class RegExParserTest {
     @Test
     public void getIMDbRating() throws Exception {
-        assertEquals(null, RegExParser.getIMDbRating(null, null));
+        assertNull(RegExParser.getIMDbRating(null, null));
         assertEquals("", RegExParser.getIMDbRating(null, ""));
         assertEquals("", RegExParser.getIMDbRating("", ""));
         assertEquals("IMDb", RegExParser.getIMDbRating(null, "IMDb"));
