@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.squareup.otto.Subscribe;
 
 import org.dev.warped.smarttv.events.ControlVolumeEvent;
@@ -174,6 +175,11 @@ public class MainActivity extends AppCompatActivity
                 Timber.d("onNavigationItemSelected: item %s selected.", getResources().getString(R.string.settings));
                 showFragment(new SettingsFragment());
                 break;
+            case R.id.nav_about:
+                Timber.d("onNavigationItemSelected: item %s selected", getResources().getString(R.string.about));
+                getSupportActionBar().setTitle(R.string.about);
+                showFragment(new LibsBuilder().withAboutIconShown(true).withAboutVersionShown(true).fragment());
+                break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -291,13 +297,7 @@ public class MainActivity extends AppCompatActivity
 
     private void updateNavigationView() {
         BouquetListFragment bouquetListFragment = (BouquetListFragment) getFragmentManager().findFragmentByTag(BouquetListFragment.class.getName());
-        if (null != bouquetListFragment && bouquetListFragment.isVisible()) {
-            mNavigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(true);
-        }
-
-        SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager().findFragmentByTag(SettingsFragment.class.getName());
-        if (null != settingsFragment && settingsFragment.isVisible()) {
-            mNavigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
-        }
+        boolean bouquetsChecked = (null != bouquetListFragment && bouquetListFragment.isVisible());
+        mNavigationView.getMenu().findItem(R.id.nav_bouquets).setChecked(bouquetsChecked);
     }
 }

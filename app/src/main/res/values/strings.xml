@@ -2,6 +2,7 @@
     <string name="app_name">Smart TV</string>
 
     <!-- Generic -->
+    <string name="about">About</string>
     <string name="auto_discovery">Auto discovery</string>
     <string name="bouquet">Bouquet</string>
     <string name="bouquets">Bouquets</string>
