@@ -115,9 +115,11 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     @Override
     public void onDeviceDiscovered(Device device) {
         Timber.d("onDeviceDiscovered: receiverType=%s, address=%s", device.getReceiverType(), device.getAddress());
-        ArrayList<Device> devices = mDeviceDiscovery.getDevices();
-        mProgressBar.setVisibility(devices.isEmpty() ? View.VISIBLE : View.GONE);
-        mAdapter.setDevices(devices);
+        if (mDeviceDiscovery != null) {
+            ArrayList<Device> devices = mDeviceDiscovery.getDevices();
+            mProgressBar.setVisibility(devices.isEmpty() ? View.VISIBLE : View.GONE);
+            mAdapter.setDevices(devices);
+        }
     }
 
     @Override
