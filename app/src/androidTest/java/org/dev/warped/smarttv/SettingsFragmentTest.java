@@ -8,50 +8,50 @@ import android.support.test.runner.AndroidJUnit4;
 import android.widget.Switch;
 
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.DrawerActions.open;
-import static android.support.test.espresso.contrib.NavigationViewActions.navigateTo;
 import static android.support.test.espresso.matcher.PreferenceMatchers.withKey;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 @RunWith(AndroidJUnit4.class)
 public class SettingsFragmentTest {
+
+    @BeforeClass
+    public static void setUpClass() {
+        IntegrationTestHelper.clearSharedPreferences();
+        IntegrationTestHelper.disableAutoDiscovery();
+    }
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
 
-    @Before
-    public void setUp() {
-        IntegrationTestHelper.clearSharedPreferences();
-        navigateToSettingsFragment();
-    }
-
     @After
     public void tearDown() {
         IntegrationTestHelper.clearSharedPreferences();
+        IntegrationTestHelper.disableAutoDiscovery();
     }
 
     @Test
-    public void SetReceiverAutoDiscoveryOn() {
-        // Receiver auto discovery is enabled by default in shared preferences, so leave it enabled for this test
+    public void ReceiverAutoDiscoveryOn() {
         onData(allOf(is(instanceOf(Preference.class)), withKey(SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY)))
                 .onChildView(withClassName(is(Switch.class.getName())))
+                .perform(click())
                 .check(matches(isChecked()));
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getInstrumentation().getTargetContext());
         assertThat(preferences.getBoolean(SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY, false), is(true));
@@ -63,11 +63,9 @@ public class SettingsFragmentTest {
     }
 
     @Test
-    public void SetReceiverAutoDiscoveryOff() {
-        // Receiver auto discovery is enabled by default in shared preferences, so disable it for this test
+    public void ReceiverAutoDiscoveryOff() {
         onData(allOf(is(instanceOf(Preference.class)), withKey(SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY)))
                 .onChildView(withClassName(is(Switch.class.getName())))
-                .perform(click())
                 .check(matches(isNotChecked()));
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getInstrumentation().getTargetContext());
         assertThat(preferences.getBoolean(SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY, true), is(false));
@@ -76,13 +74,5 @@ public class SettingsFragmentTest {
                 .check(matches(isEnabled()));
         onData(allOf(is(instanceOf(Preference.class)), withKey(SharedPreferencesManager.PREF_KEY_RECEIVER_TYPE)))
                 .check(matches(isEnabled()));
-    }
-
-    private void navigateToSettingsFragment() {
-        pressBack(); // close the open DeviceListFragment, receiver auto discovery is enabled by default shared preferences
-        onView(withId(R.id.drawer_layout))
-                .perform(open());
-        onView(withId(R.id.nav_view))
-                .perform(navigateTo(R.id.nav_settings));
     }
 }

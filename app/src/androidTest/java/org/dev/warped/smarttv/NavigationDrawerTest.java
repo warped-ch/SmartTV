@@ -5,7 +5,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,15 +27,15 @@ import static org.hamcrest.Matchers.instanceOf;
 @RunWith(AndroidJUnit4.class)
 public class NavigationDrawerTest {
 
+    @BeforeClass
+    public static void setUpClass() {
+        IntegrationTestHelper.clearSharedPreferences();
+        IntegrationTestHelper.disableAutoDiscovery();
+    }
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
-
-    @Before
-    public void setUp() {
-        IntegrationTestHelper.clearSharedPreferences();
-        IntegrationTestHelper.navigateBackHome();
-    }
 
     @Test
     public void openNavigationDrawer() {
