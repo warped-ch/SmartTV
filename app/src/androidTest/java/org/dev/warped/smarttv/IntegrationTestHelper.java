@@ -3,7 +3,7 @@ package org.dev.warped.smarttv;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.InstrumentationRegistry.getInstrumentation;
 import static org.dev.warped.smarttv.SharedPreferencesManager.PREF_KEY_RECEIVER_AUTO_DISCOVERY;
 
 class IntegrationTestHelper {

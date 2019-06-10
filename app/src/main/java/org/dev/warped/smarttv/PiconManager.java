@@ -1,6 +1,6 @@
 package org.dev.warped.smarttv;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 import java.util.Collections;
 import java.util.HashMap;
