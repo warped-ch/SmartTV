@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.squareup.otto.Subscribe;
@@ -59,12 +58,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mDrawerToggle.isDrawerIndicatorEnabled()) {
-                    onBackPressed();
-                }
+        mDrawerToggle.setToolbarNavigationClickListener(v -> {
+            if (!mDrawerToggle.isDrawerIndicatorEnabled()) {
+                onBackPressed();
             }
         });
         mDrawerLayout.addDrawerListener(mDrawerToggle);

@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -53,16 +52,13 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.getMenu().findItem(R.id.action_refresh).setVisible(false);
         toolbar.getMenu().findItem(R.id.action_close).setVisible(true);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (R.id.action_close == item.getItemId()) {
-                    Timber.d("onMenuItemClick: item \"%s\" selected.", getResources().getString(R.string.close));
-                    dismiss();
-                    return true;
-                }
-                return false;
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (R.id.action_close == item.getItemId()) {
+                Timber.d("onMenuItemClick: item \"%s\" selected.", getResources().getString(R.string.close));
+                dismiss();
+                return true;
             }
+            return false;
         });
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewDevices);

@@ -41,16 +41,13 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         addPreferencesFromResource(R.xml.preferences);
 
         Preference prefReceiverAddress = findPreference(SharedPreferencesManager.PREF_KEY_RECEIVER_ADDRESS);
-        prefReceiverAddress.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                // check for valid IPv4 or IPv6 address, deny change otherwise
-                if (isValidIPAddress(newValue.toString())) {
-                    return true;
-                } else {
-                    SnackBarFactory.showSnackBar(SettingsFragment.this, R.string.snackbar_invalid_ip_address);
-                    return false;
-                }
+        prefReceiverAddress.setOnPreferenceChangeListener((preference, newValue) -> {
+            // check for valid IPv4 or IPv6 address, deny change otherwise
+            if (isValidIPAddress(newValue.toString())) {
+                return true;
+            } else {
+                SnackBarFactory.showSnackBar(SettingsFragment.this, R.string.snackbar_invalid_ip_address);
+                return false;
             }
         });
 
