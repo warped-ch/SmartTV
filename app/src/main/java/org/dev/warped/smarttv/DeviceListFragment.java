@@ -27,19 +27,11 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
 
     private DeviceDiscovery mDeviceDiscovery;
     private OnDeviceListFragmentInteractionListener mListener;
-    private DeviceListAdapter mAdapter;
+    private DeviceListAdapter mAdapter = new DeviceListAdapter(new ArrayList<Device>(), this);
     private ProgressBar mProgressBar;
 
     public DeviceListFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        ArrayList<Device> devices = new ArrayList<>();
-        mAdapter = new DeviceListAdapter(devices, this);
     }
 
     @Override
@@ -73,6 +65,12 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     }
 
     @Override
+    public void onDestroyView() {
+        mProgressBar = null;
+        super.onDestroyView();
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if (activity instanceof OnDeviceListFragmentInteractionListener) {
@@ -87,11 +85,10 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     }
 
     @Override
-    public void onPause() {
-        if (mDeviceDiscovery != null) {
-            mDeviceDiscovery.stopDiscovery();
-        }
-        super.onPause();
+    public void onDetach() {
+        mListener = null;
+        mDeviceDiscovery = null;
+        super.onDetach();
     }
 
     @Override
@@ -103,13 +100,11 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-
-        mDeviceDiscovery = null;
-        mListener = null;
-        mAdapter = null;
-        mListener = null;
+    public void onPause() {
+        if (mDeviceDiscovery != null) {
+            mDeviceDiscovery.stopDiscovery();
+        }
+        super.onPause();
     }
 
     @Override

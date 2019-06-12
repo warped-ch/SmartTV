@@ -11,31 +11,24 @@ import timber.log.Timber;
 class DeviceDiscovery {
     private final DeviceDiscoveryCallback mCallback;
     private final NsdManager mNsdManager;
-    private Enigma2DiscoveryListener mEnigma2DiscoveryListener;
-    private ArrayList<Device> mDevices = new ArrayList<>();
+    private final Enigma2DiscoveryListener mEnigma2DiscoveryListener;
+    private final ArrayList<Device> mDevices = new ArrayList<>();
 
     public DeviceDiscovery(DeviceDiscoveryCallback callback, Context context) {
         mCallback = callback;
         mNsdManager = (NsdManager) context.getSystemService(Context.NSD_SERVICE);
+        mEnigma2DiscoveryListener = new Enigma2DiscoveryListener(this, mNsdManager);
     }
 
     public void startDiscovery() {
         Timber.d("startDiscovery: ");
-        stopDiscovery();  // Cancel any existing discovery request
-        initializeDiscoveryListener();
         mNsdManager.discoverServices(
                 mEnigma2DiscoveryListener.getServiceType(), NsdManager.PROTOCOL_DNS_SD, mEnigma2DiscoveryListener);
     }
 
     public void stopDiscovery() {
         Timber.d("stopDiscovery: ");
-        if (mEnigma2DiscoveryListener != null) {
-            try {
-                mNsdManager.stopServiceDiscovery(mEnigma2DiscoveryListener);
-            } finally {
-                mEnigma2DiscoveryListener = null;
-            }
-        }
+        mNsdManager.stopServiceDiscovery(mEnigma2DiscoveryListener);
         mDevices.clear();
     }
 
@@ -56,9 +49,5 @@ class DeviceDiscovery {
 
     public ArrayList<Device> getDevices() {
         return mDevices;
-    }
-
-    private void initializeDiscoveryListener() {
-        mEnigma2DiscoveryListener = new Enigma2DiscoveryListener(this, mNsdManager);
     }
 }

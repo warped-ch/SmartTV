@@ -23,7 +23,6 @@ class Enigma2DiscoveryListener implements NsdManager.DiscoveryListener {
     @Override
     public void onServiceFound(NsdServiceInfo serviceInfo) {
         Timber.d("onServiceFound: %s", serviceInfo);
-
         if (isSupportedDevice(serviceInfo)) {
             Timber.d("onServiceFound: Enigma2 device found: %s", serviceInfo);
             mNsdManager.resolveService(serviceInfo, new Enigma2ResolveListener(mDeviceDiscovery));
