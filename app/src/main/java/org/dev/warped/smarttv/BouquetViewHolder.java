@@ -1,8 +1,9 @@
 package org.dev.warped.smarttv;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.dev.warped.smarttv.BouquetListFragment.OnBouquetListFragmentInteractionListener;
 

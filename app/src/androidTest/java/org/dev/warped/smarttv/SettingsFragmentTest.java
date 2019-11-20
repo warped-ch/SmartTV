@@ -3,9 +3,10 @@ package org.dev.warped.smarttv;
 import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.widget.Switch;
+
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
-import android.widget.Switch;
 
 import org.junit.After;
 import org.junit.BeforeClass;

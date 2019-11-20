@@ -3,6 +3,7 @@ package org.dev.warped.smarttv;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.squareup.otto.Bus;

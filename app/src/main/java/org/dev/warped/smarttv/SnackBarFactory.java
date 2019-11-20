@@ -2,9 +2,11 @@ package org.dev.warped.smarttv;
 
 import android.app.Activity;
 import android.app.Fragment;
-import androidx.annotation.StringRes;
-import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
+
+import androidx.annotation.StringRes;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import timber.log.Timber;
 
