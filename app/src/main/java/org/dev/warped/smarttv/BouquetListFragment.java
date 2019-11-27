@@ -122,14 +122,12 @@ public class BouquetListFragment extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_refresh:
-                Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.refresh));
-                onRefresh();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_refresh) {
+            Timber.d("onOptionsItemSelected: item \"%s\" selected.", getResources().getString(R.string.refresh));
+            onRefresh();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

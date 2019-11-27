@@ -28,7 +28,7 @@ public class DeviceListFragment extends DialogFragment implements DeviceDiscover
 
     private DeviceDiscovery mDeviceDiscovery;
     private OnDeviceListFragmentInteractionListener mListener;
-    private DeviceListAdapter mAdapter = new DeviceListAdapter(new ArrayList<Device>(), this);
+    private DeviceListAdapter mAdapter = new DeviceListAdapter(new ArrayList<>(), this);
     private ProgressBar mProgressBar;
 
     public DeviceListFragment() {

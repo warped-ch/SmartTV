@@ -133,10 +133,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         // Handle your other action bar items...
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
